@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.108.0">
+  <title>StoCus</title>
+
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/login.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+  <main class="form-signin w-100 m-auto">
+    <form action="/login/userlogin" method="POST">
+      <img class="mb-4" src="/images/logo.png" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal" style="color: aliceblue;">Please sign in</h1>
+
+      <div class="form-floating">
+        <input type="text" class="form-control" required="true" id="floatingInput" name="username" placeholder="name@example.com">
+        <label for="floatingInput">帳號</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" required="true" id="floatingPassword" name="password" placeholder="Password">
+        <label for="floatingPassword" >密碼</label>
+      </div>
+
+      <p style="color: aliceblue;"><%= loginstatus %></p>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">登入</button>
+    </form>
+  </main>
+
+
+
+</body>
+
+</html>
