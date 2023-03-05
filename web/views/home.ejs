@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
-<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <html>
 	<!--head-->
 	<head>
 		<title>food●首頁</title>
+		<link rel="stylesheet" href="../static/css/main.css" rel="stylesheet">
+	    <script src="http://code.jquery.com/jquery-latest.js"></script>
 	</head>
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
@@ -35,27 +37,21 @@
 											<section class="books">
 												<a href="/home" class="image featured">
 													<div class="photo1">
-														<img class="imgsrc" src="../static/images/food1.jpg"  style="width:195px;height:310px;font-size:8px;" />
+														<img class="imgsrc" src="../static/images/food1.jpeg"  style="width:200px;height:150px;font-size:8px;" />
 													</div>
 												</a>
 												<h3><p href="/home" class="name" id="name"> %=food_name %> </p></h3>
 												<div class="display-flex">
-													<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+													<p>
 														價錢：</p>	
 													<p class="price" id="price">%= food_price%></p>
 												</div>			
 												
 												<ul class="actions">
 													<li>
-														<div class="display-flex">
-															<div id="addcollect" class="col-8 col-12-medium imp-medium">
-																<a href="/home " class="button style1 large" style="width:120px;height:40px;font-size:8px;">加入收藏</a>
-															</div>
-															<a>&nbsp</a>
 															<div id="addcart" class="col-8 col-12-medium imp-medium">
 																<a href="/home" class="button style2 large" style="width:120px;height:40px;font-size:8px;">加入購物車</a>
 															</div>
-														</div>
 													</li>
 												</ul>
 											</section>
@@ -64,85 +60,7 @@
 								</table>
 							</div>
 						</article>
-						<!-- books2 -->
-						<p> </p>
-						<h3>學習暢銷書</h3><br>
-						<div class="container">
-							<div class="row aln-center">
-								<table>
-									<% for (var i=0 ; i < (6) ; i++) { %>
-										<div class="col-2 col-10-medium">
-											<section class="books">
-												<div class="photo1">
-														<a href="/home" class="image featured" ><img class="imgsrc" src="../static/images/food1.jpg" alt="" style="width:145px;height:200px;font-size:6px;">
-														</a>
-												</div>
-												<h3><a href="/home" class="name" id="name"> %=food_name %> </a></h3>
-												<div class="display-flex">
-													<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-														價錢：</p>	
-													<p class="price" id="price">%=food_price%></p>
-												</div>			
-												
-												<ul class="actions">
-													<li>
-														<div class="display-flex">
-															<div id="addcollect" class="col-8 col-12-medium imp-medium">
-																<a href="/home" class="button style1 large" style="width:80px;height:26px;font-size:3px;"><img src="/static/images/food1.jpg" href="/collect" style="width:20px;height:20px;" alt="我的收藏"></a>
-															</div>
-															<a>&nbsp</a>
-															<div id="addcart" class="col-8 col-12-medium imp-medium">
-																<a href="/home" class="button style2 large" style="width:80px;height:26px;font-size:2px;"><img src="/static/images/food1.jpg" href="/collect" style="width:20px;height:20px;" alt="我的收藏"></a>
-															</div>
-														</div>
-													</li>
-												</ul>
-											</section>
-										</div>
-									<% } %>
-								</table>
-							</div>
-						</div>
-
-						<!-- books3 -->
-						<p> </p>
-						<h3>熱門商品</h3><br>
-						<div class="container">
-							<div class="row aln-center">
-								<table>
-									<% for (var i=0 ; i < 6 ; i++) { %>
-										<div class="col-2 col-10-medium">
-											<section class="books">
-												<div class="photo1">
-														<a href="/home" class="image featured" ><img class="imgsrc" src="/static/images/food1.jpg" alt="" style="width:145px;height:200px;font-size:6px;">
-														</a>
-												</div>
-												<h3><a href="/home" class="name" id="name"> %=food_name %> </a></h3>
-												<div class="display-flex">
-													<p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-														價錢：</p>	
-													<p class="price" id="price">%=food_price%></p>
-												</div>			
-												
-												<ul class="actions">
-													<li>
-														<div class="display-flex">
-															<div id="addcollect" class="col-8 col-12-medium imp-medium">
-																<a href="/home" class="button style1 large" style="width:80px;height:26px;font-size:3px;"><img src="../static/images/collect1.png" href="/home" style="width:20px;height:20px;" alt="我的收藏"></a>
-															</div>
-															<a>&nbsp</a>
-															<div id="addcart" class="col-8 col-12-medium imp-medium">
-																<a href="/home" class="button style2 large" style="width:80px;height:26px;font-size:2px;"><img src="../static/images/cart1.png" href="/home" style="width:20px;height:20px;" alt="我的收藏"></a>
-															</div>
-														</div>
-													</li>
-												</ul>
-											</section>
-										</div>
-									<% } %>
-								</table>
-							</div>
-						</div>
+					
 					</div>		
 						
 				</section>
