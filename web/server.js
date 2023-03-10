@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 
 
 
+
 var favicon      = require('serve-favicon');
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
@@ -40,6 +41,7 @@ app.use(express.static('static')); //讀取靜態檔案
 app.use('*/js'        ,express.static(path.join(__dirname, 'static/js')));
 app.use('*/css'       ,express.static(path.join(__dirname, 'static/css')));
 app.use('*/images'    ,express.static(path.join(__dirname, 'static/images')));
+app.use('*/ssl'       ,express.static(path.join(__dirname, 'static/ssl')));
 // app.use('*/webfonts'  ,express.static(path.join(__dirname, 'static/webfonts')));
 // app.use('*/model'     ,express.static(path.join(__dirname, 'static/model')));
 // app.use('*/js_static' ,express.static(path.join(__dirname, 'static/model/js_static')));
@@ -59,6 +61,22 @@ app.use((err, req, res, next) => {
   }
 })
 
+//if https:
+// const https = require('https');
+// const fs = require('fs');
+// const options = {
+//   key: fs.readFileSync('./static/ssl/private.key'),
+//   cert: fs.readFileSync('./static/ssl/certificate.crt')
+// };
+
+// https.createServer(options, app).listen(7000,function(){
+//   console.log("listen on https://liuming.ddns.net")
+//   console.log("listen on https://localhost:7000")
+// });
+
+
+
+// else: (http)
 
 app.listen(7000,function(){ //7000這個port
   console.log("listen on http://localhost:7000")
