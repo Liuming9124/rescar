@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="js/bootstrap.min.js"></script>
 <html>
 	<!--head-->
 	<head>
@@ -32,7 +34,7 @@
 						<h2><strong>商品頁面</strong></h2>
 					</header>
 					<div class="container">
-						<!-- books1 -->
+						<!-- food1 -->
 						<article class="pricing-item">
 							<h3>熱門商品</h3><br>
 							<div class="row aln-center">
@@ -60,13 +62,47 @@
 											</section>
 										</div>
 									<% } %>
+
 								</table>
 							</div>
+						
+
 						</article>
+						<!-- food2 -->	
+						<article class="pricing-item">
+							<h3>壽司</h3><br>
+							<div class="row aln-center">
+								<table>
+									<% for (var i=0 ; i < 4 ; i++) { %>
+										<div class="col-3 col-6-medium col-12-small">
+											<section class="books">
+												<a href="/home" >
+													<div class="photo1">
+														<img class="image featured" src="../static/images/food1.jpeg"  style="width:200px;height:150px;font-size:8px;" />
+													</div>
+												</a>
+												<h3><p href="/home" class="name" id="name"> %=food_name %> </p></h3>
+												<div class="display-flex">
+												<p class="price" id="price">價錢：%= food_price%></p>
+												</div>			
+												
+												<ul class="actions">
+													<li>
+															<div id="addcart" class="col-8 col-12-medium imp-medium">
+																<a href="/home" class="button style2 large" style="width:120px;height:40px;font-size:8px;">加入購物車</a>
+															</div>
+													</li>
+												</ul>
+											</section>
+										</div>
+									<% } %>
+
+								</table>
+							</div>
 					</div>
 				</section>
-				<a href="/home" >
-						<img plain='true' href="/home" class="circle" src="../static/images/cart.png" style="width:80px;height:80px;" ></image> 
+				<a href="/cart" >
+						<img plain='true' class="circle" src="../static/images/cart.png" style="width:80px;height:80px;" ></image> 
 				</a>
 				
 			<!-- Scripts -->
