@@ -3016,19 +3016,20 @@ button,
 	border: none; 
 }
 .nav-scroller {
+	display:flex;
 	position: relative;
 	z-index: 2;
-	height: 2.75rem;
+	height: 3.5rem;
 	overflow-y: hidden;
+	justify-content: center;
 	
   }
   .nav-scroller .nav {
-	display: flex;
+	display:flex;
 	flex-wrap: nowrap;
-	padding-bottom: 1rem;
+	padding-bottom: 1.5rem;
 	margin-top: -1px;
 	overflow-x: auto;
-	text-align: center;
 	white-space: nowrap;
 	-webkit-overflow-scrolling: touch;
 	padding-right: 10px; /* 設定每個連結之間的間距 */
