@@ -4,97 +4,67 @@ const db = require("../route/modules/db");
 const homeController = {
 
     homePage: (req, res) => {
+        
+        // 需要印出的變數->menu
+        var menu = []
 
-        res.render('home',{
-            'cusname': '',
-            'carid'  : '',
-            'phone'  : ''
-        })
-
-        // if (req.session.userName){
-        //     res.render('home',{
-        //         'cusname': '',
-        //         'carid'  : '',
-        //         'phone'  : ''
-        //     })
-        // }
-        // else{
-        //     res.redirect('/login')
-        // }
-        // var show
-        // session = db.session()
-        // session
-        // .run('MERGE (james:Person {name : $nameParam}) RETURN james.name AS name', {
-        //     nameParam: 'James'
-        // })
-        // .then(result => {
-        //     result.records.forEach(record => {
-        //         // console.log(record.get('name'))
-        //         show = record.get('name')
-        //     })
-        // })
-        // .catch(error => {
-        //     console.log(error)
-        // })
-        // .then(()=>{
-        //     res.render('home',{
-        //         'show': req.session.userName
-        //     });
-        // })
-        // .then(() => session.close())
-    },
-    findcar: (req, res) => {
-        if (req.session.userName){
-            var find = req.body;
-            var show
-            session = db.session()
-            session
-            .run('match (n:cus{carid:$car}) return n', {
-                car:find.find
-            })
+        session = db.session()
+        session
+            .run('match (n:type) return n.name')
             .then(result => {
-                console.log(result.records)
-                const singleRecord = result.records[0]
-                const node = singleRecord.get(0)
-
-                res.render('home',{
-                    'cusname': node.properties.name,
-                    'carid'  : node.properties.carid,
-                    'phone'  : node.properties.phone
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    menu.push({ tname: `${record.get('n.name')}` })
                 })
-                // result.records.forEach(record => {
-                    // console.log(record.get('phone'))
-                    // show = record.get('car')
-                // })
-                
-                // show = node.properties.account
-                // console.log(node.properties.account)
-                
+            })
+            .then(async () => {
+                // 使用第二個db連接查詢下一層資料
+                const session2 = db.session()
+                for (var i = 0; i < menu.length; i++) {
+                    var tname = menu[i].tname;
+                    var itemsarr = []
+                    // 查詢特定類別的商品並新增至itemsarr
+                    try {
+                        const results = await session2.run(`MATCH (t:type{name:'${tname}'})-[:own]->(i:item) RETURN i`);
+                        results.records.forEach(record => {
+                            itemsarr.push(record.get('i').properties);
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    // add items to menu
+                    // 為了避免直接修改原始的 menu 數組，先創建一個副本
+                    const menuCopy = menu.slice();
+
+                    // 使用 flatMap() 方法更新 menu 數組，將新數據添加到舊數據的末尾
+                    menu = menuCopy.flatMap(item => {
+                        if (item.tname === tname) {
+                            return {
+                                name: item.tname,
+                                items: itemsarr
+                            };
+                        } else {
+                            return item;
+                        }
+                    });
+                }
+                session2.close();
+                return menu;
+            })
+            .then(menu => {
+                console.log(menu);
+                res.render('home', {
+                    'menu': menu
+                });
             })
             .catch(error => {
-                console.log('find error')
-                
-                res.render('home',{
-                    'cusname': '查無此人',
-                    'carid'  : '',
-                    'phone'  : ''
-                })
+                console.log('home type error:')
+                console.log(error)
             })
-            .then(() => session.close())
-            // .then(() => res.redirect('/home'))
-            // res.redirect('/home')
-            
-        }
-        else{
-            res.redirect('/login')
-        }
+            .finally(() => {
+                session.close();
+            });
     }
 }
 
 module.exports = homeController
-
-
-// 換機油
-// match (c:cus{carid:'MEF-3811'})
-// create (o:event{time:'2023/01/10',reason:'換機油',solution:'機油100cc',price:'150',distance:'23456'})
-// create (c)-[:fix]->(o)
