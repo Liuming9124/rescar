@@ -53,6 +53,12 @@ const homeController = {
             })
             .then(menu => {
                 console.log(menu);
+                console.log(menu.find(item => item.name === '刺身').items)
+                console.log(menu.find(item => item.name === '刺身').items.length)
+                console.log(menu.find(item => item.name === '刺身').items[0])
+                console.log(menu.find(item => item.name === '刺身').items[0].price.low)
+                console.log(menu.find(item => item.name === '刺身').items[0].data)
+                console.log(menu.find(item => item.name === '刺身').items[0].name)
                 res.render('home', {
                     'menu': menu
                 });
