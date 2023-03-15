@@ -52,6 +52,7 @@ const homeController = {
                 return menu;
             })
             .then(menu => {
+                console.log('----------------------------')
                 console.log(menu);
                 console.log(menu.length)
                 console.log(menu[0].name)
