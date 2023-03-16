@@ -37,28 +37,30 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 		<br>
-		<% for (var i=0 ; i < menu.length ; i++) { %>
-			<a class="p-2 link-secondary" href="#a">
-				<%= menu[i].name %>
-			</a>
-		<!--
-			<div class="owl-carousel owl-theme fixtop">
-			<a href="#item1"><div class="item"><h4>壽司</h4></div></a>
-			<a href="#item2"><div class="item"><h4>拉麵</h4></div></a>
-			<a href="#item3"><div class="item"><h4>刺身</h4></div></a>
-			<a href="#item4"><div class="item"><h4>定食</h4></div></a>
-			<a href="#item4"><div class="item"><h4>甜點</h4></div></a>
-		</div>
-		<div class="fixtop2 text-right">
-			<a href="order.html"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>&nbsp;
-			<a href="order2.html"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a>&nbsp;
-			<a href="order3.html"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></a>
-		</div>-->
-		<% } %>
 	</nav>
 	
 <img src="images/home.jpeg"width="100%" >
-<div class="container" style="margin-top: 80px;padding-bottom: 50px">
+<h3><div  class="navbar-fixed-topmid" style="text-align: center ;margin-top: 30px" width="80%">
+<% for (var i=0 ; i < menu.length ; i++) { %>
+	<a class="navbar-center " href="#a">
+		&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;
+	</a>
+<!--
+	<div class="owl-carousel owl-theme fixtop">
+	<a href="#item1"><div class="item"><h4>壽司</h4></div></a>
+	<a href="#item2"><div class="item"><h4>拉麵</h4></div></a>
+	<a href="#item3"><div class="item"><h4>刺身</h4></div></a>
+	<a href="#item4"><div class="item"><h4>定食</h4></div></a>
+	<a href="#item4"><div class="item"><h4>甜點</h4></div></a>
+</div>
+<div class="fixtop2 text-right">
+	<a href="order.html"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>&nbsp;
+	<a href="order2.html"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a>&nbsp;
+	<a href="order3.html"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></a>
+</div>-->
+<% } %>
+</div></h3>
+<div class="container" style="margin-top: 30px;padding-bottom: 50px">
 	
 	<div id="item1" class="menuclass">
 		<div style="text-align: center">
@@ -81,9 +83,10 @@
 				</div>
 			</div>
 			<% } %>
-			
 		</div>
 	</div>
+	<A Name="a"></A>
+
 <% for (var i=0 ; i < menu.length ; i++) { %>
 <div class="container" style="margin-top: 20px;padding-bottom: 50px">
 	
