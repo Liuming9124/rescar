@@ -3041,3 +3041,10 @@ button,
 	.homebar:focus,
 	.homebar:hover{color:#565e64!important}
   .p-2{padding:1rem!important}
+
+  .keeptop{
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+  }
