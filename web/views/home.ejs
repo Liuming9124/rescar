@@ -12,40 +12,7 @@
 <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-clientcolor navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/home">
-					<img src="images/logo.png" height="50px" >
-				</a>
-			</div>
-	
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse keeptop" id="bs-example-navbar-collapse-1" >
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/home"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
-					<li><a href="/cart"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-						<span>&nbsp;&nbsp;確認餐點</span>
-						<span id="tag">(5)</span></a>
-					</li>
-					<li><a href="/orderrecord">
-						<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-						<span>&nbsp;&nbsp;訂單狀態</span>
-						<span id="tag">(2)</span></a>
-					</li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-		<br>
-	</nav>
-	
+	<%- include('./partials/header.ejs') %>
 <img src="images/home.jpeg" href="/home" width="100%" >
 <h4><div  class="navbar-fixed-topmid" style="text-align: center ;margin-top: 40px" width="50%">
 <% for (var i=0 ; i < menu.length ; i++) { %>
@@ -85,7 +52,7 @@
 						</h3>
 						<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
 							menu[0].name).items[i].price.low %></p>
-						<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary" role="button">點餐</a></p>
+							<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary" role="button">點餐</a></p>
 					</div>
 				</div>
 			</div>
@@ -119,7 +86,8 @@
 			</a>
 			<% } %>
 		</div>
-		<!--Model加在這-->
+			<!-- Modal -->
+		<%- include('./partials/modal.ejs') %>
 	</div><!--row end-->
 </div><!--container end-->
 <% } %>

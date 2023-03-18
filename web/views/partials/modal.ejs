@@ -1,0 +1,113 @@
+	
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title itemname" id="myModalLabel">拉麵</h4>
+							<p class="itemprice">NT$240</p>
+						</div>
+						<div class="modal-body">
+							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingOne">
+										<h4 class="panel-title">
+											<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+												<div class="row">
+													<div class="col-xs-6">
+														<p class="text-left">麵體選擇</p>
+													</div>
+													<div class="col-xs-6">
+														<p class="text-right" style="color:crimson">必選1個&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
+													</div>
+												</div>
+											</a>
+										</h4>
+									</div>
+									<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+										<div class="panel-body">
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature1" value="temperature1" checked>細麵
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="temperature" id="temperature2" value="temperature2">粗麵
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingThree">
+										<h4 class="panel-title">
+											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+												<div class="row">
+													<div class="col-xs-6">
+														<p class="text-left">加價購</p>
+													</div>
+													<div class="col-xs-6">
+														<p class="text-right" style="color:silver">可選擇填寫&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
+													</div>
+												</div>
+											</a>
+										</h4>
+									</div>
+									<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+										<div class="panel-body">
+											<div class="radio">
+												<label>
+													<input type="radio" name="otherselect" id="otherselect1" value="otherselect1" checked>
+													叉燒(+NT$30)
+												</label>
+											</div>
+											<div class="radio">
+												<label>
+													<input type="radio" name="otherselect" id="otherselect2" value="otherselect2">
+													糖心蛋(+NT$20)
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="heading4">
+										<h4 class="panel-title">
+											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+												<div class="row">
+													<div class="col-xs-6">
+														<p class="text-left">特別指示</p>
+													</div>
+													<div class="col-xs-6">
+														<p class="text-right" style="color:silver">可選擇填寫&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
+													</div>
+												</div>
+											</a>
+										</h4>
+									</div>
+									<div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+										<div class="panel-body">
+											<textarea class="form-control" rows="3" placeholder="例如：不加蔥花、不加麵，請寫下會讓您過敏或不想包括的食材"></textarea>
+										</div>
+									</div>
+								</div>
+								<div style="margin-top: 10px">
+									<p>購買數量</p>
+									<input type="number" class="form-control" name="points" min="0" value="0">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary">放入購物車</button>
+						</div>
+					</form>
+				</div><!--modal-content end-->
+			</div>
+		</div>
