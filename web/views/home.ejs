@@ -71,7 +71,7 @@
 				<h4><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;<span class="glyphicon glyphicon-glass" aria-hidden="true"></span></h4>
 			</div>
 			<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
-			<a href="#" data-toggle="modal" data-target="#myModal<%=j%>">
+			<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
 				<div class="row itemlist">
 					<div class="col-xs-6 image-text-container">
 						<img src="images/item1.jpeg" width="40%" alt="...">
@@ -85,7 +85,7 @@
 				<br>
 			</a>
 				
-			<div class="modal fade" id="myModal<%=j%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal fade" id="myModal<%=i%><%=j%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<form>
