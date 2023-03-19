@@ -62,24 +62,24 @@ app.use((err, req, res, next) => {
 })
 
 //if https:
-// const https = require('https');
-// const fs = require('fs');
-// const options = {
-//   key: fs.readFileSync('./static/ssl/private.key'),
-//   cert: fs.readFileSync('./static/ssl/certificate.crt')
-// };
+const https = require('https');
+const fs = require('fs');
+const options = {
+  key: fs.readFileSync('./static/ssl/private.key'),
+  cert: fs.readFileSync('./static/ssl/certificate.crt')
+};
 
-// https.createServer(options, app).listen(7000,function(){
-//   console.log("listen on https://liuming.ddns.net")
-//   console.log("listen on https://localhost:7000")
-// });
+https.createServer(options, app).listen(7000,function(){
+  console.log("listen on https://liuming.ddns.net")
+  console.log("listen on https://localhost:7000")
+});
 
 
 
 // else: (http)
 
-app.listen(7000,function(){ //7000這個port
-  console.log("listen on http://localhost:7000")
-})
+// app.listen(7000,function(){ //7000這個port
+//   console.log("listen on http://localhost:7000")
+// })
 
 

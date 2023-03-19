@@ -19,7 +19,11 @@
                 <li><a href="/home"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
                 <li><a href="/cart"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                     <span>&nbsp;&nbsp;確認餐點</span>
-                    <span id="tag">(5)</span></a>
+                    <% if (session.cart) { %>
+                        <span id="tag">(<%= session.cart.length %>)</span></a>
+                    <% } else { %>
+                        <span id="tag">(0)</span></a>
+                    <%} %>
                 </li>
                 <li><a href="/orderrecord">
                     <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>

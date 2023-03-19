@@ -88,7 +88,7 @@
 			<div class="modal fade" id="myModal<%=i%><%=j%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
-						<form>
+						<form action="/home/addcart" method="post">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
@@ -191,7 +191,9 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-								<button type="button" class="btn btn-primary">放入購物車</button>
+								<!-- 將商品資訊用隱藏的方式傳到後端可防止竄改 input type用hidden -->
+								<input type="hidden" name="token" value="<%=JSON.stringify(menu.find(item=> item.name === menu[i].name).items[j])%>">
+								<button type="submit" class="btn btn-primary">放入購物車</button>
 							</div>
 						</form>
 					</div><!--modal-content end-->

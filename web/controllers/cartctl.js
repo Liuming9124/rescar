@@ -4,12 +4,10 @@ const db = require("../route/modules/db");
 const cartController = {
 
     cartPage: (req, res) => {
-
         res.render('cart',{
             'cusname': '',
-            
+            'session': req.session
         })
-
     }
 }
 
