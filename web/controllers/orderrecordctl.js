@@ -7,7 +7,7 @@ const orderrecordController = {
 
         res.render('orderrecord',{
             'cusname': '',
-            
+            'session': req.session
         })
 
     }
