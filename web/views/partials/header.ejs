@@ -20,7 +20,8 @@
                 <li><a href="/cart"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                     <span>&nbsp;&nbsp;確認餐點</span>
                     <% if (session.cart) { %>
-                        <span id="tag">(<%= session.cart.length %>)</span></a>
+                        <% let totalAmt=0;for (let i = 0; i < session.cart.length; i++) totalAmt += parseInt(session.cart[i].amt); %>
+                        <span id="tag">(<%= totalAmt %>)</span></a>
                     <% } else { %>
                         <span id="tag">(0)</span></a>
                     <%} %>
