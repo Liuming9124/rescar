@@ -27,6 +27,7 @@ const homeController = {
                     valid = 2
                 } catch (error) {
                     console.error('Error checking session seed:', error);
+                    valid = 3
                 }
             } else {
                 valid = 3
