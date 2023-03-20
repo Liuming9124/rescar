@@ -6,6 +6,7 @@ const homeCtl = require('../../controllers/homectl')
 
 
 router.get('/', homeCtl.homePage)
+router.get('/:url', homeCtl.homePage)
 router.post('/addcart', (req, res) => {
     // get product data
     // console.log('token'+ JSON.parse(req.body.token))
