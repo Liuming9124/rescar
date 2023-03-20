@@ -62,16 +62,6 @@ app.use('*/qr'        ,express.static(path.join(__dirname, 'static/qr')))
 // app.use('*/js_static' ,express.static(path.join(__dirname, 'static/model/js_static')));
 
 
-
-// get QR code
-app.get('/qr', async (req, res) => {
-  const url = generateRandomUrl(); // generate random URL
-  const qrCode = await qrcode.toFile('./static/qr/' + url + '.png', url); // 将 URL 转换为 QR 码，并保存到本地磁盘
-  res.send(`<img src="${qrCode}">`); // 将 QR 码发送给客户端
-});
-  
-
-
 //require routes
 require('./route')(app)
 // error handling
