@@ -7,9 +7,10 @@ const merchantController = {
 
         res.render('merchant',{
             'cusname': '',
-            
         })
-
+    },
+    qrgenerate: (req,res) => {
+        
     }
 }
 

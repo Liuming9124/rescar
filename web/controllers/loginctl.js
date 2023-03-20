@@ -32,7 +32,7 @@ const loginController = {
             console.log(node.properties.account)
             if (user.username==node.properties.account) {
                 req.session.userName = user.username; // 登入成功，設定 session
-                res.redirect('/home')
+                res.redirect('/merchant')
             }
             
         })

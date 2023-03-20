@@ -5,7 +5,8 @@ const merchantCtl = require('../../controllers/merchantctl')
 
 
 
-router.get('/', merchantCtl.merchantPage)
+router.get('/',  merchantCtl.merchantPage)
+router.get('/qr',merchantCtl.qrgenerate)
 
 
 
