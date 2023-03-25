@@ -61,7 +61,7 @@
 			<%totalmoney=totalmoney+item.price.low*citem.amt%>
 		</div>
 		<div class="col-xs-1 orderlistpt15"> <!--  刪除購物車商品 -->
-			<a href="/cart/delcart/<%= i %>"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+			<a href="/cart/delcart/<%= i %>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 		</div>
 	</div>
 	<% } %>
@@ -79,11 +79,61 @@
 				<option>現金付款</option>
 			</select>
 		</div>
-		<button class="buttonnext" id="checkout"><span>結帳 </span></button>
+		<a href="#" data-toggle="modal" data-target="#Modalcheckout">		
+			<button class="buttonnext" id="checkout"><span>結帳 </span></button>
+		</a>
 	</div>
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="Modalcheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title itemname" id="myModalLabel">餐點確認</h4>
+                    <p>訂單日期：2023年03月18日</p>
+                </div>
+				
+                <div class="modal-body">
+                    <table class="table table-striped text-center">
+                        <tr>
+                            <td>項次</td>
+                            <td>品名</td>
+                            <td>數量</td>
+                            <td>單價</td>
+                            <td>金額</td>
+                        </tr>
+						<% for (var i=0 ; i < session.cart.length ; i++) { %>
+							<% var item = JSON.parse(session.cart[i].token)
+							   var citem = session.cart[i]
+							%>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%= item.name %></td>
+                            <td><%= citem.amt %></td>
+                            <td><%= item.price.low %></td>
+                            <td><%= item.price.low*citem.amt %></td>
+                        </tr>
+						<% } %>
+                        <tr>
+                            <td colspan="4">訂單金額總計</td>
+                            <td style="color: crimson;font-size: 18px"><%=totalmoney%></td>
+                        </tr>
+                    </table>
+                </div>
+				
 
+                <div class="modal-footer">
+					<button type="button" class="btn btn-default">取消</button>
+					<button type="button" class="btn btn-primary">確認</button>
+				</div>
+            </form>
+        </div><!--modal-content end-->
+    </div><!-- Modal end-->
 </body>
 </html>
