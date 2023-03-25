@@ -50,7 +50,10 @@ const merchantController = {
             })
             .finally(() => {
                 session.close();
-                res.send(`<img src="/static/qr/${seed}.png"><br><a href=${url}>前往</a><br> <a href="/merchant">上一頁</a>`); // 将 QR 码发送给客户端
+                res.render('qrcode',{
+                    'qr':`/static/qr/${seed}.png`
+                })
+                // res.send(`<img src="/static/qr/${seed}.png"><br><a href=${url}>前往</a><br> <a href="/merchant">上一頁</a>`); // 将 QR 码发送给客户端
             });
     }
 }
