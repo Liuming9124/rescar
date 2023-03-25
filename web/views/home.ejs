@@ -12,28 +12,30 @@
 <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
+	<nav class="navbar navbar-clientcolor navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/home">
+					<img src="images/桌號1.jpg" height="50px" >
+				</a>
+			</div>
 	<%- include('./partials/header.ejs') %>
 <img src="images/home.jpeg" href="/home" width="100%" >
-<h4><div  class="navbar-fixed-topmid" style="text-align: center ;margin-top: 40px" width="50%">
-<% for (var i=0 ; i < menu.length ; i++) { %>
-	<a class="navbar-center " href="#a">
-		&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;
-	</a>
+<h5><div  class="navbar-fixed-topmid"  style="text-align: center ;margin-top: 40px" width="50%">
+	<% for (var i=0 ; i < menu.length ; i++) { %>
+		<a class="navbar-center " href="#a<%=i%>">
+			&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;
+		</a>
 <!--
-	<div class="owl-carousel owl-theme fixtop">
-	<a href="#item1"><div class="item"><h4>壽司</h4></div></a>
-	<a href="#item2"><div class="item"><h4>拉麵</h4></div></a>
-	<a href="#item3"><div class="item"><h4>刺身</h4></div></a>
-	<a href="#item4"><div class="item"><h4>定食</h4></div></a>
-	<a href="#item4"><div class="item"><h4>甜點</h4></div></a>
-</div>
+	
 <div class="fixtop2 text-right">
 	<a href="order.html"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>&nbsp;
 	<a href="order2.html"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a>&nbsp;
 	<a href="order3.html"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></a>
 </div>-->
 <% } %>
-</div></h3>
+</div></h5>
 <div class="container" style="margin-top: 30px;padding-bottom: 50px">
 	
 	<div id="item1" class="menuclass">
@@ -52,26 +54,26 @@
 						</h3>
 						<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
 							menu[0].name).items[i].price.low %></p>
-							<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-primary" role="button">點餐</a></p>
+							<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal<%=i%>" class="btn btn-primary" role="button">點餐</a></p>
 					</div>
 				</div>
 			</div>
+			
 			<% } %>
 		</div>
 	</div>
-	<A Name="a"></A>
 
 <% for (var i=0 ; i < menu.length ; i++) { %>
+<A Name="a<%=i%>"></A>
 <div class="container" style="margin-top: 20px;padding-bottom: 50px">
-	
-
 	<div class="row">
 		<div id="item1" class="menuclass">
 			<div style="text-align: center">
 				<h4><span class="glyphicon glyphicon-glass" aria-hidden="true"></span>&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;<span class="glyphicon glyphicon-glass" aria-hidden="true"></span></h4>
 			</div>
 			<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
-			<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
+				<A Name="a<%=i%><%=j%>"></A><!--每個餐點-->
+				<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
 				<div class="row itemlist">
 					<div class="col-xs-6 image-text-container">
 						<img src="images/item1.jpeg" width="40%" alt="...">
@@ -103,8 +105,14 @@
 											<h4 class="panel-title">
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 													<div class="row">
+														<%var a;%>
+														<%if (i===0){a='飯硬度選擇',a1='軟',a2='適中',a3='硬'}%>
+														<%if (i===1){a='麵體選擇',a1='軟',a2='適中',a3='硬'} %>
+														<%if (i===2){a='是否炙燒',a1='是',a2='否',a3='考慮'}%>
+														<%if (i===3){a='飯硬度選擇',a1='軟',a2='適中',a3='硬'} %>
+														<%if (i===4){a='冰度選擇',a1='正常',a2='少冰',a3='去冰'}%>
 														<div class="col-xs-6">
-															<p class="text-left">麵體選擇</p>	
+															<p class="text-left"><%=a%></p>	
 														</div>
 														<div class="col-xs-6">
 															<p class="text-right" style="color:crimson">必選1個&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
@@ -117,12 +125,17 @@
 											<div class="panel-body">
 												<div class="radio">
 													<label>
-														<input type="radio" name="temperature" id="temperature1" value="temperature1" checked>細麵
+														<input type="radio" name="temperature" id="a1" value="a1" checked><%=a1%>
 													</label>
 												</div>
 												<div class="radio">
 													<label>
-														<input type="radio" name="temperature" id="temperature2" value="temperature2">粗麵
+														<input type="radio" name="temperature" id="a2" value="a2"><%=a2%>
+													</label>
+												</div>
+												<div class="radio">
+													<label>
+														<input type="radio" name="temperature" id="a3" value="a3"><%=a3%>
 													</label>
 												</div>
 											</div>
@@ -179,7 +192,7 @@
 										</div>
 										<div id="collapse4<%=i%><%=j%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" placeholder="例如：不加蔥花、不加麵，請寫下會讓您過敏或不想包括的食材" name="remark"></textarea>
+												<textarea id="noadd" class=" form-control " rows="3" placeholder="例如：不加蔥花、飯少一點，或不想包括的食材" name="remark"></textarea>
 											</div>
 										</div>
 									</div>
