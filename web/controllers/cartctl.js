@@ -1,5 +1,4 @@
 const db = require("../route/modules/db");
-var session = db.session()
 
 const cartController = {
 
@@ -45,10 +44,22 @@ const cartController = {
         CREATE (o)-[:orders]->(c)
         RETURN o,c
         `
-        
-        console.log('cmd:',command)
+        // console.log('cmd:',command)
 
-        res.redirect('/cart')
+        //  command to db
+        session = db.session()
+            session
+                .run(`${command}`)
+                .catch(error => {
+                    console.log('order error: ',error)
+                })
+                .then(() => {
+                    //  點完餐後將購物車清空
+                    req.session.cart=''
+                    session.close();
+                    //  重新導向至訂單畫面
+                    res.redirect('/orderrecord')
+                })
     }
 }
 
