@@ -9,18 +9,14 @@ const cartController = {
         })
     },
     confirmCart:async (req, res) => {
-        // console.log(req.body)
         cart = req.session.cart
-        console.log(cart)
-
+        // console.log(cart)
         
         async function buildcmd(){
             let cmd = '';
             //  處理購物車內的資料，將每筆資料組合成string
             for (let i = 0; i < cart.length; i++) {
                 let item = JSON.parse(cart[i].token)    //  商品詳細資料
-                console.log('item:',item)
-                console.log('name', cart[i].token.name)
                 cmd+=`{name: '${item.name}',price: '${item.price.low}', amt:'${cart[i].amt}'}`
                 if (i!=cart.length-1)
                     cmd+=','
