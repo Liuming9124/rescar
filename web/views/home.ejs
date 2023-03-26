@@ -44,6 +44,7 @@
 			<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;熱門商品&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
 		</div>
 		<% for (var i=0 ; i < menu.find(item=> item.name === menu[0].name).items.length ; i++) { %>
+		<a href="#" data-target="#myModal<%=i%>">
 		<div class="row">
 			<div class="col-xs-6 col-sm-3">
 				<div class="thumbnail">
@@ -54,11 +55,11 @@
 						</h3>
 						<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
 							menu[0].name).items[i].price.low %></p>
-							<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal<%=i%>" class="btn btn-primary" role="button">點餐</a></p>
+							<p class="text-center"><a href="#" data-toggle="modal"  class="btn btn-primary" role="button">點餐</a></p>
 					</div>
 				</div>
 			</div>
-			
+		</a>
 			<% } %>
 		</div>
 	</div>

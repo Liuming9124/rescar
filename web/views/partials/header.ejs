@@ -3,9 +3,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse keeptop" id="bs-example-navbar-collapse-1" >
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/home"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
-                <li><a href="/cart"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-                    <span>&nbsp;&nbsp;確認餐點</span>
+                <li><a href="/home">&nbsp;&nbsp;<span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    <span>&nbsp;&nbsp;</span>
                     <% if (session.cart) { %>
                         <% let totalAmt=0;for (let i = 0; i < session.cart.length; i++) totalAmt += parseInt(session.cart[i].amt); %>
                         <span id="tag">(<%= totalAmt %>)</span></a>
@@ -14,10 +14,11 @@
                     <%} %>
                 </li>
                 <li><a href="/orderrecord">
-                    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-                    <span>&nbsp;&nbsp;訂單狀態</span>
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                    <span>&nbsp;&nbsp;</span>
                     <span id="tag">(2)</span></a>
                 </li>
+                <li><a href="/home">&nbsp;&nbsp;<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
