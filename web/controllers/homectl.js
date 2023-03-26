@@ -35,9 +35,9 @@ const homeController = {
             return valid;
         }
 
-        const valid = await checkSessionSeed(req);
+        const valids = await checkSessionSeed(req);
 
-        if (valid==1){  // if valid
+        if (valids==1){  // if valid
             // 需要印出的變數->menu
             var menu = []
             if (!req.session.cart) {
