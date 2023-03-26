@@ -25,11 +25,11 @@ const homeController = {
                     session.close();
                     valid = 1   //  get session seed
                 } catch (error) {
-                    console.error('Error checking session seed');
+                    console.log('Error checking session seed');
                     res.redirect('/menu')
                 }
             } else {
-                console.error('Error checking session seed');
+                console.log('Error checking session seed');
                 res.redirect('/menu')
             }
             return valid;
@@ -87,20 +87,28 @@ const homeController = {
                     return menu;
                 })
                 .catch(error => {
-                    console.log('home type error:')
-                    console.log(error)
+                    console.log('home type error:', error)
+                })
+                .then(async () => {
+                    // 使用第三個db查詢訂單有幾個
+                    const session3 = db.session()
+                    for (var i = 0; i < menu.length; i++) {
+                        if (req.session.seed){
+                            seed = req.session.seed
+                        }else {
+                            seed = req.session.url
+                        }
+                        try {
+                            const results = await session3.run(`match(u:url{link:'${seed}'})-[:order]->(o:order) return (o)`);
+                            req.session.orderamt = results.records.length
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                    session3.close();
+                    return menu;
                 })
                 .then(menu => {
-                    // console.log('----------------------------')
-                    // console.log(menu);
-                    // console.log(menu.length)
-                    // console.log(menu[0].name)
-                    // console.log(menu.find(item => item.name === menu[0].name).items)
-                    // console.log(menu.find(item => item.name === menu[0].name).items.length)
-                    // console.log(menu.find(item => item.name === menu[0].name).items[0])
-                    // console.log(menu.find(item => item.name === menu[0].name).items[0].price.low)
-                    // console.log(menu.find(item => item.name === menu[0].name).items[0].data)
-                    // console.log(menu.find(item => item.name === menu[0].name).items[0].name)
                     session.close();
                     res.render(`home`, {
                         'menu': menu,

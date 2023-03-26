@@ -44,18 +44,19 @@ const cartController = {
 
         //  command to db
         session = db.session()
-            session
-                .run(`${command}`)
-                .catch(error => {
-                    console.log('order error: ',error)
-                })
-                .then(() => {
-                    //  點完餐後將購物車清空
-                    req.session.cart=''
-                    session.close();
-                    //  重新導向至訂單畫面
-                    res.redirect('/orderrecord')
-                })
+        session
+            .run(`${command}`)
+            .catch(error => {
+                console.log('order error: ',error)
+            })
+            .then(() => {
+                //  點完餐後將購物車清空並將訂單數量加一
+                req.session.orderamt += 1
+                req.session.cart=''
+                session.close();
+                //  重新導向至訂單畫面
+                res.redirect('/orderrecord')
+            })
     }
 }
 
