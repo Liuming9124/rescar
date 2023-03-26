@@ -113,3 +113,17 @@ return y
         // else {
         //     res.status(404).send('Page not found');
         // }
+
+
+`
+console.log('----------------------------')
+console.log(menu);
+console.log(menu.length)
+console.log(menu[0].name)
+console.log(menu.find(item => item.name === menu[0].name).items)
+console.log(menu.find(item => item.name === menu[0].name).items.length)
+console.log(menu.find(item => item.name === menu[0].name).items[0])
+console.log(menu.find(item => item.name === menu[0].name).items[0].price.low)
+console.log(menu.find(item => item.name === menu[0].name).items[0].data)
+console.log(menu.find(item => item.name === menu[0].name).items[0].name)
+`
