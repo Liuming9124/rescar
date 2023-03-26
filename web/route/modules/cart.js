@@ -20,5 +20,7 @@ router.get('/delcart/:id', (req, res) => {
     res.redirect('/cart')
 });
 
+router.post('/confirm',cartCtl.confirmCart)
+
 
 module.exports = router
