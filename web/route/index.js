@@ -19,5 +19,5 @@ module.exports = app => {
     req.session.destroy();
     res.redirect('/login');
   })
-  app.use('/', (req, res) => { return res.redirect('/home') })
+  app.use('/', (req, res) => { return res.redirect('/menu') })
 }

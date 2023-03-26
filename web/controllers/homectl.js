@@ -6,8 +6,7 @@ const homeController = {
     homePage: async (req, res) => {
         // 使用async(非同步)function來確保執行完此function後才可以往下做
         async function checkSessionSeed(req) {
-            var valid
-
+            var valid = 0
             // 先找出是否為合法URL，若合法才給予進入
             if (req.session.seed) {  //  get session seed
                 valid = 1;
@@ -24,28 +23,21 @@ const homeController = {
                     valid = true;
                     req.session.seed = req.params.url;
                     session.close();
-                    valid = 2
+                    valid = 1   //  get session seed
                 } catch (error) {
-                    console.error('Error checking session seed:', error);
-                    valid = 3
+                    console.error('Error checking session seed');
+                    res.redirect('/menu')
                 }
             } else {
-                valid = 3
-                res.status(404).send('Page not found');
+                console.error('Error checking session seed');
+                res.redirect('/menu')
             }
-
             return valid;
         }
 
         const valid = await checkSessionSeed(req);
 
-        if (valid==3){  //  invalid url
-            res.status(404).send('Page not found');
-        }
-        else if (valid==2){ //  vaild but redirect home url
-            res.redirect('/home')
-        }
-        else if (valid==1){  // if valid
+        if (valid==1){  // if valid
             // 需要印出的變數->menu
             var menu = []
             if (!req.session.cart) {
@@ -94,6 +86,10 @@ const homeController = {
                     session2.close();
                     return menu;
                 })
+                .catch(error => {
+                    console.log('home type error:')
+                    console.log(error)
+                })
                 .then(menu => {
                     // console.log('----------------------------')
                     // console.log(menu);
@@ -105,18 +101,12 @@ const homeController = {
                     // console.log(menu.find(item => item.name === menu[0].name).items[0].price.low)
                     // console.log(menu.find(item => item.name === menu[0].name).items[0].data)
                     // console.log(menu.find(item => item.name === menu[0].name).items[0].name)
-                    res.render('home', {
+                    session.close();
+                    res.render(`home`, {
                         'menu': menu,
                         'session': req.session
                     });
                 })
-                .catch(error => {
-                    console.log('home type error:')
-                    console.log(error)
-                })
-                .finally(() => {
-                    session.close();
-                });
         }
     }
 }
