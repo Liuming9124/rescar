@@ -17,7 +17,7 @@ const cartController = {
             //  處理購物車內的資料，將每筆資料組合成string
             for (let i = 0; i < cart.length; i++) {
                 let item = JSON.parse(cart[i].token)    //  商品詳細資料
-                cmd+=`{name: '${item.name}',price: '${item.price.low}', amt:'${cart[i].amt}'}`
+                cmd+=`{name: '${item.name}',price: '${item.price.low}', amt:'${cart[i].amt}', status:'0'}`
                 if (i!=cart.length-1)
                     cmd+=','
             }
@@ -30,7 +30,7 @@ const cartController = {
         let command = 
         `
         match (n:url{link:'${req.session.seed}'})
-        create(o:order{time:'${new Date()}'})
+        create(o:order{time:'${new Date()}', status:'0'})
         create (n) -[:order]-> (o)
         with o
         UNWIND [
