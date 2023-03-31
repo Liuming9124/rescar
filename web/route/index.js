@@ -5,6 +5,7 @@ const cart       = require('./modules/cart')
 const orderrecord   = require('./modules/orderrecord')
 const merchant       = require('./modules/merchant')
 const qrcode       = require('./modules/qrcode')
+const robot   = require('./modules/robot')
 
 
 module.exports = app => {
@@ -15,6 +16,8 @@ module.exports = app => {
   app.use('/orderrecord', orderrecord)
   app.use('/merchant',    merchant)
   app.use('/qrcode',      qrcode)
+  app.use('/robot', robot)
+
   app.use('/logout',(req, res) => {
     req.session.destroy();
     res.redirect('/login');
