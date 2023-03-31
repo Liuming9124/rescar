@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>food●點餐系統</title>
+<!-- Bootstrap css-->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/main1.css" />
+<!-- Bootstrap js-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<%- include('./partials/headermerch.ejs') %>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul class="nav navbar-nav navbar-right">
+		<li><a href="order.html"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
+		<li><a href="mycart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;&nbsp;我的購物車</a></li>
+		<li>
+			<a href="orderrecord.html">
+				<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+				<span>&nbsp;&nbsp;訂單狀態</span>
+				<span id="tag">2</span>
+			</a>
+		</li>
+		
+	</ul>
+</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container" style="margin-top:50px;padding-bottom: 30px">
+<h2 class="h2">機器人狀態：運送中/已抵達</h2>
+<div class="col-4 col-6-medium col-12-small">
+<!-- Features -->
+				<section id="features">
+					<div class="container">
+						<div class="row aln-center">
+                            <% for (var i=0 ; i < 6 ; i++) { %> 
+                                <div class="col-4 col-6-medium col-12-small">
+                                  <!-- Feature -->
+                                    <section>
+                                        <a href="#"><img src="images/table.jpg" alt="" /></a>
+                                        <header>
+                                            <button type="button" class="btn">??</button></button>
+                                            <button type="button" class="btn">送餐</button></button>
+                                            <a href="#"><h5>未送餐/已送餐</h5></a>
+                                        </header>
+                                    </section>
+                                </div>
+                            <% }%>
+							
+						</div>
+					</div>
+				</section>
+            </div>
+</body>
+</html>
