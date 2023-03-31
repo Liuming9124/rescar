@@ -62,12 +62,12 @@ const orderrecordController = {
         })
         .then(() => {
             console.log('orders:',ordershow)
-            console.log('ordertime:'  ,JSON.parse(ordershow[0].info.replace(/'/g, "\"")).time)
-            console.log('orderstatus:',JSON.parse(ordershow[0].info.replace(/'/g, "\"")).status)
-            console.log(ordershow[3].cart[0])
-            console.log(ordershow[3].cart[0].price)
-            console.log(ordershow[3].cart[0].name)
-            console.log(ordershow[3].cart[0].amt)
+            // console.log('ordertime:'  ,JSON.parse(ordershow[0].info.replace(/'/g, "\"")).time)
+            // console.log('orderstatus:',JSON.parse(ordershow[0].info.replace(/'/g, "\"")).status)
+            // console.log(ordershow[3].cart[0])
+            // console.log(ordershow[3].cart[0].price)
+            // console.log(ordershow[3].cart[0].name)
+            // console.log(ordershow[3].cart[0].amt)
 
             session.close()
             res.render('orderrecord',{
