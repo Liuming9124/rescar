@@ -33,13 +33,22 @@
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
 					</tr>
-					<tr>
-						<th class="text-center">1</th>
-						<td>2023年3月17日</td>
-						<td>16:30</td>
-						<td>1750</td>
-						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-					</tr>
+					<%if (1){%>
+						<% for (var j=0 ; j < 3 ; j++) { %>	
+						<tr>
+							<th class="text-center"><%=j+1%></th>
+							<td>2023年3月17日</td>
+							<td>16:30</td>
+							<td>1750</td>
+							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+						</tr>
+						<%} %>
+					<%} %>
+					<%if (0){%>
+						<tr>
+							<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+						</tr>
+					<%}%>
 				</table>
 			</div>
 			<div class="tab-pane fade" id="making">
@@ -67,13 +76,22 @@
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
 					</tr>
-					<tr>
-						<th class="text-center">1</th>
-						<td>ABCD123401</td>
-						<td>16:30</td>
-						<td>1750</td>
-						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-					</tr>
+					<%if (1){%>
+						<% for (var j=0 ; j < 3 ; j++) { %>	
+						<tr>
+							<th class="text-center"><%=j+1%></th>
+							<td>2023年3月17日</td>
+							<td>16:30</td>
+							<td>1750</td>
+							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+						</tr>
+						<%} %>
+					<%} %>
+					<%if (0){%>
+						<tr>
+							<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+						</tr>
+					<%}%>
 				</table>
 			</div>
 			<div class="tab-pane fade" id="record">
@@ -86,20 +104,28 @@
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
-				<tr>
-					<th class="text-center">1</th>
-					<td>ABCD123401</td>
-					<td>16:30</td>
-					<td>1750</td>
-					<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-				</tr>
-				
+				<%if (1){%>
+					<% for (var j=0 ; j < 3 ; j++) { %>	
+					<tr>
+						<th class="text-center"><%=j+1%></th>
+						<td>2023年3月17日</td>
+						<td>16:30</td>
+						<td>1750</td>
+						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+					</tr>
+					<%} %>
+				<%} %>
+				<%if (0){%>
+					<tr>
+						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+					</tr>
+				<%}%>
 			</table>
 			</div>
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="Modalrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<form>
@@ -119,13 +145,15 @@
 									<td>單價</td>
 									<td>金額</td>
 								</tr>
-								<tr>
-									<td>1</td>
-									<td>海陸豚骨拉麵</td>
-									<td>2</td>
-									<td>300</td>
-									<td>600</td>
-								</tr>
+								<% for (var j=0 ; j < 3 ; j++) { %>	
+									<tr>
+										<td><%=j+1%></td>
+										<td>=name[j] %></td>
+										<td>=count[j] %></td>
+										<td>=money[j] %></td>
+										<td>=money[j]*count[j] %></td>
+									</tr>
+								<%} %>
 								<tr>
 									<td colspan="4">訂單金額總計</td>
 									<td style="color: crimson;font-size: 18px">230</td>

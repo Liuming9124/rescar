@@ -151,13 +151,15 @@
 									<td>單價</td>
 									<td>金額</td>
 								</tr>
-								<tr>
-									<td>1</td>
-									<td>海陸豚骨拉麵</td>
-									<td>2</td>
-									<td>300</td>
-									<td>600</td>
-								</tr>
+								<% for (var j=0 ; j < 3 ; j++) { %>	
+									<tr>
+										<td><%=j+1%></td>
+										<td>=name[j] %></td>
+										<td>=count[j] %></td>
+										<td>=money[j] %></td>
+										<td>=money[j]*count[j] %></td>
+									</tr>
+								<%} %>
 								<tr>
 									<td colspan="4">訂單金額總計</td>
 									<td style="color: crimson;font-size: 18px">600</td>
