@@ -19,14 +19,13 @@
 				<hr/>
 				<form>
 					<div class="form-group">
-						<%var i=2%>
-						<label for="point">桌號：<%=i%></label>					
+						<label for="point">桌號：<%= table %></label>					
 					</div>
 					<a href="<%= qrurl %>">
-						<img src="<%=qr%>" width="250px" alt="">
+						<img src="<%= qr %>" width="250px" alt="">
 					</a>
 					<div class="form-group">
-						<label for="point">入場時間：16:00</label>
+						<label for="point">入場時間：<%= time %></label>
 					</div>
 					<div class="form-group">
 						<div style="text-align: center;margin-top: 5px;">
@@ -36,7 +35,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="gridSystemModalLabel">確認情除並重新產生？</h4>
+											<h4 class="modal-title" id="gridSystemModalLabel">確認清除並重新產生？</h4>
 										</div>
 										<div class="form-group">
 											<label for="acount">請輸入授權碼<span style="color:crimson"></span></label>

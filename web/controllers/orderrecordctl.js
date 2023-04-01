@@ -7,7 +7,7 @@ const orderrecordController = {
         let ordershow = []
         session = db.session()
         session
-            .run(`match(u:url{link:'${req.session.seed}'})-[:order]->(o:order) return (o)`)
+            .run(`match(u:url{link:'${req.session.seed}'})-[:order]->(o:order) return (o) order by o.time desc`)
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
@@ -25,31 +25,6 @@ const orderrecordController = {
             })
             .then(async () => {
                 // console.log(JSON.stringify(ordershow))   //上一層的所有訂單結果  
-                
-                // 解析 info 字符串中的 JSON 對象，並添加一個 timeObj 屬性代表時間對象
-                const parsedData = ordershow.map(item => { 
-                    const info = JSON.parse(item.info);
-                    return {
-                        ...item,
-                        timeObj: new Date(info.time)
-                    };
-                });
-
-                // 按照 timeObj 屬性進行遞減排序
-                const sortedData = parsedData.sort((a, b) => b.timeObj - a.timeObj);
-
-                // 移除 timeObj 屬性並返回排序後的結果
-                const result = sortedData.map(item => {
-                    const { timeObj, ...rest } = item;
-                    return {
-                        ...rest
-                    };
-                });
-                ordershow = result
-
-                console.log(ordershow);
-
-
                 // 使用第二個db連接查詢下一層訂單明細
                 var session2 = db.session()
                 const temp = ordershow.length

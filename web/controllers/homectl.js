@@ -20,6 +20,8 @@ const homeController = {
                     const singleRecord = result.records[0];
                     const node = singleRecord.get(0);
                     console.log(node.properties.link);
+                    // console.log('table',node.properties.table)
+                    req.session.table = node.properties.table
                     valid = true;
                     req.session.seed = req.params.url;
                     session.close();

@@ -26,11 +26,14 @@ const cartController = {
 
         const cartsCmd= await buildcmd()
         
+        const now = new Date();
+        const cdate = now.toISOString().replace('Z', '+0000').replace(/T|:/g, '-').slice(0, -5) + 'Z';
+        
         //  將所有購物車資料組合成完整的command
         let command = 
         `
         match (n:url{link:'${req.session.seed}'})
-        create(o:order{time:'${new Date()}', status:'0'})
+        create(o:order{time:'${cdate}', status:'0', table: '${req.session.table}'})
         create (n) -[:order]-> (o)
         with o
         UNWIND [

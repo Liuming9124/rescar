@@ -16,12 +16,67 @@ function generateRandomSeed() {
 const merchantController = {
 
     merchantPage: (req, res) => {
+        let morder = []
+        session = db.session()
+        session
+            .run(`match(u:url)-[:order]->(o:order) return (o) order by o.time desc`)
+            .then(result => {
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    // console.log(record.get('o').properties)
+                    let orders = record.get('o').properties //  抓取訂單資料
+                    let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
+                    morder.push({ id: `${eleID}`, info: `${JSON.stringify(orders)}` }) //  將訂單資訊push到morder裡面
+                })
+            })
+            .catch(error => {
+                console.log('orderRecord error:', error)
+            })
+            .then(async () => {
+                // console.log(JSON.stringify(morder))   //上一層的所有訂單結果  
+                // 使用第二個db連接查詢下一層訂單明細
+                var session2 = db.session()
+                const temp = morder.length
+                for (var i = 0; i < temp; i++) {
+                    var carts = []
+                    // 查詢特定類別的商品並新增至itemsarr
+                    try {
+                        const results = await session2.run(`match(o) where ID(o) = ${morder[i].id} match(o) -[:orders]-> (p:cart) return p`);
+                        results.records.forEach(record => {
+                            // console.log(record.get('p').properties)
+                            carts.push(record.get('p').properties);
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    // add items to morder
+                    // 為了避免直接修改原始的 morder 數組，先創建一個副本
+                    const ordersCp = morder.slice();
 
-        res.render('merchant', {
-            'cusname': '',
-        })
+                    // 使用 map() 方法更新 morder 數組，將新數據添加到舊數據的末尾
+                    morder = ordersCp.map((item, index) => {
+                        if (index === i) {
+                            return { ...item, cart: carts };
+                        } else {
+                            return item;
+                        }
+                    });
+                }
+                session2.close();
+                //  在此return將更新後的資料傳出
+                return morder;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            .then(() => {
+                session.close()
+                res.render('merchant', {
+                    'orders': morder
+                })
+            })
     },
-    qrgenerate: async (req, res) => {
+    qrgenerate: async (req, res) => {   
         // get QR code
         const seed = generateRandomSeed(); // generate random Seed
 
@@ -36,8 +91,10 @@ const merchantController = {
 
         // add seed to db
         var session = db.session()
+        const now = new Date();
+        const cdate = now.toISOString().replace('Z', '+0000').replace(/T|:/g, '-').slice(0, -5) + 'Z';
         session
-            .run(`create(n:url{link:'${seed}',time:'${new Date()}',table:'${req.params.table}'})`)
+            .run(`create(n:url{link:'${seed}',time:'${cdate}',table:'${req.params.table}'})`)
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
@@ -51,6 +108,8 @@ const merchantController = {
             .finally(() => {
                 session.close();
                 res.render('qrcode',{
+                    'table': req.params.table,
+                    'time': cdate,
                     'qr':`/static/qr/${seed}.png`,
                     'qrurl':`${url}`
                 })

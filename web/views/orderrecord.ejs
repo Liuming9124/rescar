@@ -56,11 +56,11 @@
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
-				<%if (orders){%>				
+				<%if (orders.length!=0){%>				
 					<% for (var j=0 ; j < orders.length ; j++) { %>	
 						<% //calculate time %>
-						<% const datestr = JSON.parse(orders[j].info.replace(/'/g, "\"")).time %>
-						<% const date = new Date(datestr); %>
+						<% const datestr = JSON.parse(orders[j].info).time %>
+						<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
 						<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
 						<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
 						<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
@@ -73,7 +73,7 @@
 						</tr>
 					<% } %>
 				<% } %>
-				<%if (0){%>
+				<% if (orders.length==0) { %>
 					<tr>
 						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
 					</tr>
@@ -158,18 +158,20 @@
 									<td>金額</td>
 								</tr>
 								<% // 要將order[0]的0改成i以顯示欲顯示的該筆訂單 %>
-								<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>	
-									<% // 透過status為0或1控制是否顯示已出貨的商品 %>
-									<% if (orders[0].cart[j].status == '0') { %>
-										<tr>
-											<td><%= j+1 %></td>
-											<td><%= orders[0].cart[j].name %></td>
-											<td><%= orders[0].cart[j].amt %></td>
-											<td><%= orders[0].cart[j].price %></td>
-											<td><%= orders[0].cart[j].amt*orders[0].cart[j].price %></td>
-										</tr>
-									<% } %>
-								<%} %>
+								<% if (orders.length!=0) { %>
+									<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>	
+										<% // 透過status為0或1控制是否顯示已出貨的商品 %>
+										<% if (orders[0].cart[j].status == '0') { %>
+											<tr>
+												<td><%= j+1 %></td>
+												<td><%= orders[0].cart[j].name %></td>
+												<td><%= orders[0].cart[j].amt %></td>
+												<td><%= orders[0].cart[j].price %></td>
+												<td><%= orders[0].cart[j].amt*orders[0].cart[j].price %></td>
+											</tr>
+										<% } %>
+									<%} %>
+								<% } %>
 								<tr>
 									<td colspan="4">訂單金額總計</td>
 									<td style="color: crimson;font-size: 18px">600</td>
