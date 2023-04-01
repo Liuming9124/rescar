@@ -46,7 +46,7 @@
 					<%} %>
 					<%if (0){%>
 						<tr>
-							<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+							<td colspan="5"><h4>無訂單</h4></td>
 						</tr>
 					<%}%>
 				</table>
@@ -61,9 +61,22 @@
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
 					</tr>
-					<tr>
-						<td colspan="5"><h4>無訂單</h4></td>
-					</tr>
+					<%if (1){%>
+						<% for (var j=0 ; j < 3 ; j++) { %>	
+						<tr>
+							<th class="text-center"><%=j+1%></th>
+							<td>2023年3月17日</td>
+							<td>16:30</td>
+							<td>1750</td>
+							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+						</tr>
+						<%} %>
+					<%} %>
+					<%if (0){%>
+						<tr>
+							<td colspan="5"><h4>無訂單</h4></td>
+						</tr>
+					<%}%>
 				</table>
 			</div>
 			<div class="tab-pane fade" id="done">
@@ -89,7 +102,7 @@
 					<%} %>
 					<%if (0){%>
 						<tr>
-							<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+							<td colspan="5"><h4>無訂單</h4></td>
 						</tr>
 					<%}%>
 				</table>
@@ -117,7 +130,7 @@
 				<%} %>
 				<%if (0){%>
 					<tr>
-						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+						<td colspan="5"><h4>無訂單</h4></td>
 					</tr>
 				<%}%>
 			</table>

@@ -30,13 +30,13 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse keeptop" id="bs-example-navbar-collapse-1" >
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/menu"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要訂位</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#Modalreserve"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要訂位</a></li>
 					<li class="dropdown">
 						<a href="/merchant" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;關於我們
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="/menu"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;開店理念</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#Modalopen"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;開店理念</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -95,7 +95,6 @@
 				<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
 			</div>
 			<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
-			
 				<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
 					<div class="row">
 						<div class="col-xs-6 col-sm-3">
@@ -109,11 +108,40 @@
 								</div>
 							</div>
 						</div>
-			</a>
+				</a>
 			<% } %>
 		</div>
-			<!-- Modal -->
-		<!-- %- include('./partials/modal.ejs') %> -->
+		<!-- Modal1 -->
+		<div class="modal fade" id="Modalopen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h2 class="text-center">開店理念</h2>
+							<p  class="text-center">融合科技●造福社會</p>
+						</div>
+						<div class="modal-body">
+							<img src="images/home.jpeg" href="/home" width="100%" >
+							<h4  class="text-center">
+								<br>
+								結合現有科技<br><br>
+								打造一套完美的點餐及自動送餐系統<br><br>
+								只為了讓人類有更便利的生活<br><br>
+								並且給予客戶最好的用餐體驗
+								<br><br><br>
+								by 主理人: 方祥全 劉恭銘 羅奕程 徐冠傑
+							</h4>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
+						</div>
+					</form>
+				</div><!--modal1-content end-->
+			</div><!-- Modal1 end-->
 	</div><!--row end-->
 </div><!--container end-->
 <% } %>
