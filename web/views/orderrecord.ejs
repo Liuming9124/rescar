@@ -56,17 +56,23 @@
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
-				<%if (1){%>				
-					<% for (var j=0 ; j < 3 ; j++) { %>	
+				<%if (orders){%>				
+					<% for (var j=0 ; j < orders.length ; j++) { %>	
+						<% //calculate time %>
+						<% const datestr = JSON.parse(orders[j].info.replace(/'/g, "\"")).time %>
+						<% const date = new Date(datestr); %>
+						<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+						<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+						<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 						<tr>
 							<th class="text-center"><%=j+1%></th>
-							<td>2023年3月17日</td>
-							<td>16:30</td>
-							<td>1750</td>
+							<td><%= day %></td>
+							<td><%= time %></td>
+							<td><%= total %></td>
 							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
 						</tr>
-					<%} %>
-				<%}%>
+					<% } %>
+				<% } %>
 				<%if (0){%>
 					<tr>
 						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
@@ -151,14 +157,18 @@
 									<td>單價</td>
 									<td>金額</td>
 								</tr>
-								<% for (var j=0 ; j < 3 ; j++) { %>	
-									<tr>
-										<td><%=j+1%></td>
-										<td>=name[j] %></td>
-										<td>=count[j] %></td>
-										<td>=money[j] %></td>
-										<td>=money[j]*count[j] %></td>
-									</tr>
+								<% // 要將order[0]的0改成i以顯示欲顯示的該筆訂單 %>
+								<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>	
+									<% // 透過status為0或1控制是否顯示已出貨的商品 %>
+									<% if (orders[0].cart[j].status == '0') { %>
+										<tr>
+											<td><%= j+1 %></td>
+											<td><%= orders[0].cart[j].name %></td>
+											<td><%= orders[0].cart[j].amt %></td>
+											<td><%= orders[0].cart[j].price %></td>
+											<td><%= orders[0].cart[j].amt*orders[0].cart[j].price %></td>
+										</tr>
+									<% } %>
 								<%} %>
 								<tr>
 									<td colspan="4">訂單金額總計</td>
