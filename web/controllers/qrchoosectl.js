@@ -4,10 +4,7 @@ const db = require("../route/modules/db");
 const qrchooseController = {
 
     qrchoosePage: (req, res) => {
-
-        res.render('qrchoose',{
-        })
-
+        res.render('qrchoose')
     }
 }
 

@@ -37,7 +37,7 @@ const merchantController = {
         // add seed to db
         var session = db.session()
         session
-            .run(`create(n:url{link:'${seed}',time:'${new Date()}',table:'桌號'})`)
+            .run(`create(n:url{link:'${seed}',time:'${new Date()}',table:'${req.params.table}'})`)
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
