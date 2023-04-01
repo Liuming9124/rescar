@@ -43,7 +43,7 @@ app.use('*/css'       ,express.static(path.join(__dirname, 'static/css')));
 app.use('*/images'    ,express.static(path.join(__dirname, 'static/images')));
 app.use('*/ssl'       ,express.static(path.join(__dirname, 'static/ssl')));
 app.use('*/qr'        ,express.static(path.join(__dirname, 'static/qr')))
-// app.use('*/webfonts'  ,express.static(path.join(__dirname, 'static/webfonts')));
+app.use('*/crypto'    ,express.static(path.join(__dirname, 'static/crypto')));
 // app.use('*/model'     ,express.static(path.join(__dirname, 'static/model')));
 // app.use('*/js_static' ,express.static(path.join(__dirname, 'static/model/js_static')));
 

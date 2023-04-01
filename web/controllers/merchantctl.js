@@ -1,16 +1,27 @@
 const db = require("../route/modules/db");
 const qrcode = require('qrcode');
-// var session = db.session()
-
+const crypto = require('crypto');
+const fs = require('fs');
 
 // generate random url
-function generateRandomSeed() {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let seed = '';
-    for (let i = 0; i < 10; i++) {
-        seed += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return seed;
+async function generateRandomSeed(data) {
+
+    // 要加密的資料
+    const plaintext = data;
+
+    // 使用公鑰進行加密
+    const ciphertext = crypto.publicEncrypt(
+        {
+            key: fs.readFileSync('./static/crypto/public-key.pem'),
+            padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+            oaepHash: 'sha256',
+        },
+        Buffer.from(plaintext)
+    );
+    // console.log(ciphertext.toString('base64'))
+    const seed = (ciphertext.toString('base64')).replace(/\//g, '-');
+    return seed
+
 }
 
 const merchantController = {
@@ -76,9 +87,16 @@ const merchantController = {
                 })
             })
     },
-    qrgenerate: async (req, res) => {   
+    qrgenerate: async (req, res) => {
+        // set time
+        const now = new Date();
+        const cdate = now.toISOString().replace('Z', '+0000').replace(/T|:/g, '-').slice(0, -5) + 'Z';
+
         // get QR code
-        const seed = generateRandomSeed(); // generate random Seed
+        const seedproto = now
+        // console.log('seedproto:', seedproto)
+
+        const seed = await generateRandomSeed(seedproto); // generate random Seed
 
         // http
         const url = 'http://localhost:7000/home/' + seed
@@ -86,32 +104,27 @@ const merchantController = {
         // const url = 'https://liuming.ddns.net/home/' + seed
 
         // turn url to qr code, save to local folder
-        await qrcode.toFile('./static/qr/' + seed + '.png', url)
+        await qrcode.toFile('./static/qr/' + cdate + '.png', url)
 
 
         // add seed to db
         var session = db.session()
-        const now = new Date();
-        const cdate = now.toISOString().replace('Z', '+0000').replace(/T|:/g, '-').slice(0, -5) + 'Z';
+
+        
+        console.log('seed:',seed)
         session
-            .run(`create(n:url{link:'${seed}',time:'${cdate}',table:'${req.params.table}'})`)
-            .then(result => {
-                // 依序抓取回傳的節點
-                result.records.forEach(record => {
-                    menu.push({ tname: `${record.get('n.name')}` })
-                })
-            })
+            .run(`create(n:url{link:'${seed}',time:'${cdate}',table:'${req.params.table}'}) return n`)
             .catch(error => {
                 console.log('add qrUrl error:')
                 console.log(error)
             })
             .finally(() => {
                 session.close();
-                res.render('qrcode',{
+                res.render('qrcode', {
                     'table': req.params.table,
                     'time': cdate,
-                    'qr':`/static/qr/${seed}.png`,
-                    'qrurl':`${url}`
+                    'qr': `/static/qr/${seed}.png`,
+                    'qrurl': `${url}`
                 })
                 // res.send(`<img src="/static/qr/${seed}.png"><br><a href=${url}>前往</a><br> <a href="/merchant">上一頁</a>`); // 将 QR 码发送给客户端
             });
