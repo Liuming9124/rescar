@@ -47,10 +47,11 @@
 	
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane fade in active" id="confirm">
-			<h3 class="text-center">訂單已送出-等待確認</h3>
+			<h3 class="text-center">所有訂單</h3>
 			<table class="table table-striped table-hover text-center">
 				<tr>
 					<th class="text-center">項次</th>
+					<th class="text-center">狀態</th>
 					<th class="text-center">日期</th>
 					<th class="text-center">時間</th>
 					<th class="text-center">訂單金額</th>
@@ -66,6 +67,7 @@
 						<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 						<tr>
 							<th class="text-center"><%=j+1%></th>
+							<th class="text-center">已送餐???</th>
 							<td><%= day %></td>
 							<td><%= time %></td>
 							<td><%= total %></td>
@@ -81,7 +83,7 @@
 			</table>
 		</div>
 		<div class="tab-pane fade" id="making">
-			<h3 class="text-center">訂單已確認-製作中</h3>
+			<h3 class="text-center">製作中</h3>
 			<table class="table table-striped table-hover text-center">
 					<tr>
 						<th class="text-center">項次</th>
@@ -109,7 +111,7 @@
 			</table>
 		</div>
 		<div class="tab-pane fade" id="done">
-			<h3 class="text-center">派送餐點</h3>
+			<h3 class="text-center">已送餐</h3>
 			<table class="table table-striped table-hover text-center">
 				<tr>
 					<th class="text-center">項次</th>

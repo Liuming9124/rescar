@@ -18,8 +18,9 @@
 		<ul id="myTab1" class="nav nav-tabs">
 			<li class="active"><a href="#confirm" data-toggle="tab">訂單已送出-等待確認&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
 			<li><a href="#making" data-toggle="tab">訂單已確認-製作中&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
-			<li><a href="#done" data-toggle="tab">製作完成-配送餐點</a></li>
-			<li><a href="#record" data-toggle="tab">結帳(訂單紀錄)</a></li>
+			<li><a href="#done" data-toggle="tab">製作完成-待配送餐點</a></li>
+			<li><a href="#finish" data-toggle="tab">結帳</a></li>
+			<li><a href="#record" data-toggle="tab">訂單紀錄</a></li>
 		</ul>
 		
 		<div id="myTabContent" class="tab-content">
@@ -27,12 +28,10 @@
 				<h3 class="text-center">訂單已送出-等待確認</h3>
 				<table class="table table-striped table-hover text-center">
 					<tr>
-						<th class="text-center">項次</th>
 						<th class="text-center">桌號</th>
 						<th class="text-center">日期</th>
 						<th class="text-center">時間</th>
-						<th class="text-center">訂單金額</th>
-						<th class="text-center">明細</th>
+						<th class="text-center">訂單金額</th>						<th class="text-center">開始製作餐點</th>
 					</tr>
 					<%if (orders.length!=0){ %>
 						<% for (var j=0 ; j < orders.length ; j++) { %>	
@@ -42,12 +41,11 @@
 							<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
 							<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 							<tr>
-								<th class="text-center"><%=j+1%></th>
-								<td><%= JSON.parse(orders[j].info).table %></td>
+								<th class="text-center"><%= JSON.parse(orders[j].info).table %></th>
 								<td><%= day %></td>
 								<td><%= time %></td>
 								<td><%= total %></td>
-								<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+								<td><a href="#" data-toggle="modal" data-target="#Modalrecord">編輯/開始製作餐點&nbsp; </a></td>
 							</tr>
 						<%} %>
 					<%} %>
@@ -62,20 +60,54 @@
 				<h3 class="text-center">訂單已確認-製作中</h3>
 				<table class="table table-striped table-hover text-center">
 					<tr>
-						<th class="text-center">項次</th>
-						<th class="text-center">編號</th>
+						<th class="text-center">桌號</th>
+						<th class="text-center">日期</th>
 						<th class="text-center">時間</th>
 						<th class="text-center">訂單金額</th>
-						<th class="text-center">明細</th>
+						<th class="text-center">餐點製作完成</th>
+					</tr>
+					<%if (orders.length!=0){ %>
+						<% for (var j=0 ; j < orders.length ; j++) { %>	
+							<% const datestr = JSON.parse(orders[j].info).time %>
+							<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
+							<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+							<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+							<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
+							<tr>
+								<th class="text-center"><%= JSON.parse(orders[j].info).table %></th>
+								<td><%= day %></td>
+								<td><%= time %></td>
+								<td><%= total %></td>
+								<td><a href="#"  data-toggle="modal" data-target="#Modalrecord">編輯/餐點製作完成&nbsp; </a></td>
+							</tr>
+						<%} %>
+					<%} %>
+					<%if (orders.length==0){%>
+						<tr>
+							<td colspan="5"><h4>無訂單</h4></td>
+						</tr>
+					<%}%>
+					
+				</table>
+			</div>
+			<div class="tab-pane fade" id="done">
+				<h3 class="text-center">待派送餐點</h3>
+				<table class="table table-striped table-hover text-center">
+					<tr>
+						<th class="text-center">桌號</th>
+						<th class="text-center">日期</th>
+						<th class="text-center">時間</th>
+						<th class="text-center">訂單金額</th>
+						<th class="text-center">更新狀態</th>
 					</tr>
 					<%if (1){%>
 						<% for (var j=0 ; j < 3 ; j++) { %>	
 						<tr>
-							<th class="text-center"><%=j+1%></th>
+							<th class="text-center"><%= JSON.parse(orders[j].info).table %></th>
 							<td>2023年3月17日</td>
 							<td>16:30</td>
 							<td>1750</td>
-							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+							<td><a href="#" data-toggle="modal" data-target="#Modalrecord">編輯/前往送餐&nbsp; </a></td>
 						</tr>
 						<%} %>
 					<%} %>
@@ -86,24 +118,28 @@
 					<%}%>
 				</table>
 			</div>
-			<div class="tab-pane fade" id="done">
-				<h3 class="text-center">派送餐點</h3>
+			<div class="tab-pane fade" id="finish">
+				<h3 class="text-center">已完成配送-待結帳</h3>
 				<table class="table table-striped table-hover text-center">
 					<tr>
-						<th class="text-center">項次</th>
+						<th class="text-center">桌號</th>
 						<th class="text-center">訂單編號</th>
+						<th class="text-center">日期</th>
 						<th class="text-center">時間</th>
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
+						<th class="text-center">更新狀態</th>
 					</tr>
 					<%if (1){%>
-						<% for (var j=0 ; j < 3 ; j++) { %>	
+						<% for (var j=0 ; j < 6 ; j++) { %>	
 						<tr>
 							<th class="text-center"><%=j+1%></th>
+							<td><%= JSON.parse(orders[j].info).table %></td>
 							<td>2023年3月17日</td>
 							<td>16:30</td>
 							<td>1750</td>
 							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+							<td><a href="#" >編輯/結帳&nbsp; </a></td>
 						</tr>
 						<%} %>
 					<%} %>
@@ -118,21 +154,20 @@
 				<h3 class="text-center">訂單紀錄(歷史紀錄)</h3>
 			<table class="table table-striped table-hover text-center">
 				<tr>
-					<th class="text-center">項次</th>
-					<th class="text-center">訂單編號</th>
+					<th class="text-center">日期</th>
 					<th class="text-center">時間</th>
+					<th class="text-center">桌號</th>
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
 				<%if (1){%>
 					<% for (var j=0 ; j < 3 ; j++) { %>	
 					<tr>
-						<th class="text-center"><%=j+1%></th>
 						<td>2023年3月17日</td>
 						<td>16:30</td>
+						<td><%= JSON.parse(orders[j].info).table %></td>
 						<td>1750</td>
 						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-					</tr>
 					<%} %>
 				<%} %>
 				<%if (0){%>
@@ -183,7 +218,8 @@
 							</table>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
+							<button type="button" class="btn btn-default">編輯訂單</button>
+							<button type="submit" class="btn btn-primary">更新狀態</button>
 						</div>
 					</form>
 				</div><!--modal-content end-->
