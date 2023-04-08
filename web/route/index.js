@@ -9,6 +9,7 @@ const robot        = require('./modules/robot')
 const ring         = require('./modules/ring')
 const qrchoose     = require('./modules/qrchoose')
 const upload       = require('./modules/upload')
+const merchinfo       = require('./modules/merchinfo')
 
 
 
@@ -24,6 +25,8 @@ module.exports = app => {
   app.use('/ring',        ring)
   app.use('/qrchoose',    qrchoose)
   app.use('/upload',        upload)
+  app.use('/merchinfo',        merchinfo)
+
 
   app.use('/logout',(req, res) => {
     req.session.destroy();
