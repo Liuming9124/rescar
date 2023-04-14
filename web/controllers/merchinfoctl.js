@@ -11,4 +11,6 @@ const merchinfoController = {
     }
 }
 
+
+
 module.exports = merchinfoController

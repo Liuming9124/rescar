@@ -22,19 +22,32 @@
 					<span>&nbsp;&nbsp;訂單狀態</span>
 					<span id="tag">(2)</span></a>
 				</li>
-				<li><a href="/robot"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>&nbsp;&nbsp;機器人狀態</a></li>
+				<%if (0){%>
+					<li><a href="/robot">
+						<span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+						<span id="tag" >&nbsp;&nbsp;機器人狀態(空閒中)</span>
+					</a></li>
+				<%}%>
+				<%if (1){%>
+					<li><a href="/robot" class="warning-text">
+						<span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+						<span id="tag" >&nbsp;&nbsp;機器人狀態(移動中)</span>
+					</a></li>
+				<%}%>
+				
 				<li><a href="/ring">
 					<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>&nbsp;&nbsp;服務鈴
 					<span id="tag">(2)</span>
 				</a></li>
-				<li><a href="/menu"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;菜單</a></li>
+				
 				<li class="dropdown">
 					<a href="/merchant" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;我的帳戶
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
+						<li><a href="/menu"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;菜單</a></li>
 						<li><a href="/merchinfo"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;我的資料</a></li>
-						<li><a href="/merchinfo"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>&nbsp;&nbsp;商家大數據分數</a></li>
+						<li><a href="/dataanalysis"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span>&nbsp;&nbsp;商家大數據分數</a></li>
 						<li><a href="/upload"><span class="glyphicon glyphicon-open" aria-hidden="true"></span>&nbsp;&nbsp;商品上架</a></li>
 						<li><a href="/login"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;登出</a></li>
 					</ul>
