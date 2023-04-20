@@ -43,26 +43,40 @@
 							<div class="col-4 col-6-medium col-12-small">
 								<!-- Feature -->
 								  <section>
-									  <div class="tablestyle warning-text">運送中</div>
-									  <header>
+									<%if (0){ %>
+										<div class="tablestyle">空閒中</div>
+									<%} %>
+									<%if (1){ %>
+										<div class="tablestyle warning-text">移動中</div>
+									<%} %>
+									<header>
 										  <br><br>
 										  <button type="button" class="btn" onclick="alert('已暫停')">緊急暫停</button></button><br><br>
 										  <button type="button" class="btn" onclick="alert('機器人回家中')">回到原位</button></button><br><br>
+										  <button type="button" class="btn" onclick="alert('??')">此訂單餐點</button></button><br><br>
 										  <button type="button" class="btn" onclick="alert('??')">??</button></button><br><br>
-										  <button type="button" class="btn" onclick="alert('??')">??</button></button><br><br>
-									  </header>
+									</header>
 								  </section>
 							  </div>
                             <% for (var i=0 ; i < 6 ; i++) { %> 
                                 <div class="col-4 col-6-medium col-12-small">
                                   <!-- Feature -->
                                     <section>
-										<div class="tablestyle">第 <%=i+1%> 桌</div>
+										<div class="tablestyle">第 <%=i+1%> 桌</div><br>
                                         <header>
-											<br><br>
-                                            <button type="button" class="btn">??</button></button>
+											<a href="#"><h5>
+												<%if (i%2==0){ %>
+													<div class=" warning-text">尚有未送餐</div>
+												<%} %>	
+												<%if (i%2==1){ %>
+													所有訂單皆已送餐
+												<%} %>
+											</h5></a><br>
+											<%if (i%2==0){ %> 
+												<button type="button" class="btn">未送餐餐點</button></button>
+											<%} %>	
                                             <button type="button" class="btn">送餐</button></button>
-                                            <a href="#"><h5>未送餐/已送餐</h5></a>
+                                            
                                         </header>
                                     </section>
                                 </div>
