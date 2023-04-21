@@ -18,7 +18,7 @@ async function generateRandomSeed(data) {
         },
         Buffer.from(plaintext)
     );
-    // console.log(ciphertext.toString('base64'))
+    //  將/換成-使網址有辦法解析
     const seed = (ciphertext.toString('base64')).replace(/\//g, '-');
     return seed
 
