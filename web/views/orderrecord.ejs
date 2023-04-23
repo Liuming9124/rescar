@@ -67,7 +67,15 @@
 						<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 						<tr>
 							<th class="text-center"><%=j+1%></th>
-							<th class="text-center">已送餐???</th>
+							<% if(JSON.parse(orders[j].info).status=='0'||JSON.parse(orders[j].info).status=='1') { %>
+								<th class="text-center">訂單確認中</th>
+							<% } %>
+							<% if(JSON.parse(orders[j].info).status=='2') { %>
+								<th class="text-center">製作中</th>
+							<% } %>
+							<% if(JSON.parse(orders[j].info).status=='3') { %>
+								<th class="text-center">已送餐</th>
+							<% } %>
 							<td><%= day %></td>
 							<td><%= time %></td>
 							<td><%= total %></td>
@@ -92,18 +100,37 @@
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
 					</tr>
-				<%if (1){%>				
-					<% for (var j=0 ; j < 3 ; j++) { %>	
+				<% let count = 0;
+				for (let i = 0; i < orders.length; i++) {
+				  const status = JSON.parse(orders[i].info).status;
+				  if (status === "") {
+					count++;
+				  }
+				}
+				const ordersmaking = orders.filter(order => {
+				const status = JSON.parse(order.info).status;
+					return status === "2";
+				});
+				// console.log(ordersmaking)
+				 %>
+				<%if (count){%>				
+					<% for (var i=0 ; i < ordersmaking.length ; i++) { %>	
+						<% //calculate time %>
+						<% const datestr = JSON.parse(ordersmaking[i].info).time %>
+						<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
+						<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+						<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+						<% const total = ordersmaking[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 					<tr>
-						<th class="text-center"><%=j+1%></th>
-						<td>2023年3月17日</td>
-						<td>16:30</td>
-						<td>1750</td>
+						<th class="text-center"><%=i+1%></th>
+						<td><%= day %></td>
+						<td><%= time %></td>
+						<td><%= total %></td>
 						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
 					</tr>
 					<%} %>
 				<%}%>
-				<%if (0){%>
+				<%if (!count){%>
 					<tr>
 						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
 					</tr>
@@ -120,18 +147,37 @@
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
-				<%if (1){%>
-					<% for (var j=0 ; j < 3 ; j++) { %>	
+				<% var count3 = 0;
+				for (let i = 0; i < orders.length; i++) {
+				  const status = JSON.parse(orders[i].info).status;
+				  if (status === "") {
+					count3++;
+				  }
+				}
+				const ordersmade = orders.filter(order => {
+				const status = JSON.parse(order.info).status;
+					return status === "3";
+				});
+				// console.log(ordersmade)
+				 %>
+				<%if (count3){%>				
+					<% for (var i=0 ; i < ordersmade.length ; i++) { %>	
+						<% //calculate time %>
+						<% const datestr = JSON.parse(ordersmade[i].info).time %>
+						<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
+						<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+						<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+						<% const total = ordersmade[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 					<tr>
-						<th class="text-center"><%=j+1%></th>
-						<td>2023年3月17日</td>
-						<td>16:30</td>
-						<td>1750</td>
+						<th class="text-center"><%=i+1%></th>
+						<td><%= day %></td>
+						<td><%= time %></td>
+						<td><%= total %></td>
 						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
 					</tr>
 					<%} %>
-				<%} %>
-				<%if (0){%>
+				<%}%>
+				<%if (!count3){%>
 					<tr>
 						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
 					</tr>
