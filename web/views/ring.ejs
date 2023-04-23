@@ -43,11 +43,11 @@
                                 <div class="col-4 col-6-medium col-12-small">
                                   <!-- Feature -->
                                     <section>
-										<%if (i%2==0){%> 
+										<%if (ringtable[i]==1){%> 
 											<div class="warning-text">本桌按服務鈴</div><br>
 											<% var ring=1 ; %> 
 										<%} %>
-										<%if (i%2!=0){%> 
+										<%if (ringtable[i==0]){%> 
 											<div style="color:rgb(255, 255, 255)">..</div><br>
 											<% var ring=0 ; %> 
 										<%} %>
