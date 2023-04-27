@@ -41,7 +41,7 @@
 				<th class="text-center">商品描述</th>
 				<th class="text-center">價錢</th>
 				<th class="text-center">選擇照片</th>
-				<th class="text-center">上架</th>
+				<th class="text-center">新增項目</th>
 			</tr>
 			<form action="/upload/uploadItem" method="post" enctype="multipart/form-data">
 				<!-- 這裡要改 -->
@@ -71,7 +71,7 @@
 						<input type="file" name="image" accept="image/png, image/jpeg">
 					</td>
 					<td>
-						<a id="add-field"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+						<a href="/upload"id="add-field"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 					</td>
 				</tr>
 				<%} %>
