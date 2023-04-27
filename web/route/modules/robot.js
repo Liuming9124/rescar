@@ -6,6 +6,7 @@ const robotCtl = require('../../controllers/robotctl')
 
 
 router.get('/', robotCtl.robotPage)
+router.post('/place', robotCtl.robotPlace)
 
 
 
