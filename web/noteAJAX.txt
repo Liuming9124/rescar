@@ -1,0 +1,62 @@
+// JS
+
+$(document).ready(() => {
+    $('#serarchOrderBtn').submit((event) => {
+        event.preventDefault();
+        console.log('getserarchOrderBtn');
+        const formData = {
+            sdate: $('input[name="startDate"]').val(),
+            stime: $('select[name="startTime"]').val(),
+            edate: $('input[name="endDate"]').val(),
+            etime: $('select[name="endTime"]').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/merchant/searchOrder',
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: (data) => {
+                $('#result').text(data);
+            },
+            error: (xhr, status, error) => {
+                alert(xhr.responseText);
+                res.status(500).send('Something broke!');
+            }
+        });
+    });
+});
+
+
+// EJS
+
+
+// <!-- JS for 查詢訂單紀錄: 結合ajax只發出請求; 用Ajax時需要載入jquery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/merchantAjax.js"></script>
+
+
+<form id="serarchOrderBtn">
+    <h3 class="text-center">訂單紀錄(歷史紀錄)</h3><br>
+    <label for="startDate">開始日期：</label>
+    <input type="date" id="startDate" name="startDate">
+    &nbsp&nbsp&nbsp
+    <label for="dataset">開始時段：</label>
+        <select id="dataset" name="startTime">
+            <option value="dataset1">整天</option>
+            <option value="dataset1">中午(11:00-16:00)</option>
+            <option value="dataset2">晚上(17:00-23:00)</option>
+        </select>&nbsp&nbsp&nbsp
+    <label for="endDate">結束日期：</label>
+    <input type="date" id="endDate" name="endDate">
+    &nbsp&nbsp&nbsp
+    <label for="dataset">結束時段：</label>
+        <select id="dataset" name="endTime">
+            <option value="dataset1">整天</option>
+            <option value="dataset1">中午(11:00-16:00)</option>
+            <option value="dataset2">晚上(17:00-23:00)</option>
+        </select>&nbsp&nbsp&nbsp
+    <a id="search" href="#" ><button type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></a>
+    <br><br>
+</form>
+
+

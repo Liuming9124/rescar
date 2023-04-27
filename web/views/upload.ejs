@@ -43,37 +43,41 @@
 				<th class="text-center">選擇照片</th>
 				<th class="text-center">新增項目</th>
 			</tr>
-			<%var k=1%>	
-			<% for (var i=0 ; i < k ; i++) { %>
-			<tr>
-				<th class="text-center"><%=i+1%></th>
+			<form action="/upload/uploadItem" method="post" enctype="multipart/form-data">
+				<!-- 這裡要改 -->
+				<%var k=1%>	
+				<% for (var i=0 ; i < k ; i++) { %>
+				<!-- 這要改這裡 -->
+					<tr>
+					<th class="text-center"><%=i+1%></th>
+					<td>
+						<input type="name" class="form-control" id="exampleInputPassword1" placeholder="商品名稱" name="name">
+					</td>
+					<td>
+						<select class="form-control" name="type">
+							<option>選擇要新增的種類</option>
+							<option>拉麵</option>
+							<option>壽司</option>
+							<option>甜點</option>
+						</select>
+					</td>
+					<td>	
+						<input type="description" class="form-control" id="exampleInputName" placeholder="商品描述" name="description">
+					</td>
 				<td>
-					<input type="name" class="form-control" id="exampleInputPassword1" placeholder="商品名稱">
-				</td>
-				<td>
-					<select class="form-control" name="district">
-						<option>選擇要新增的種類</option>
-						<option>拉麵</option>
-						<option>壽司</option>
-						<option>甜點</option>
-					</select>
-				</td>
-				<td>	
-					<input type="description" class="form-control" id="exampleInputName" placeholder="商品描述">
-				</td>
-			<td>
-					<input type="money" class="form-control" id="exampleInputName" placeholder="價錢">
-				</td>
-				<td>
-					<button type="button" onclick="alert('選擇照片阿！')">選擇照片</button>
-				</td>
-				<td>
-					<a href="/upload"id="add-field"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-				</td>
-			</tr>
-			<%} %>
-		</table>
-		<br><br><button class="buttonnext" id="upload"><span>確認上傳 </span></button>
+						<input type="money" class="form-control" id="exampleInputName" placeholder="價錢" name="price">
+					</td>
+					<td>
+						<input type="file" name="image" accept="image/png, image/jpeg">
+					</td>
+					<td>
+						<a href="/upload"id="add-field"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+					</td>
+				</tr>
+				<%} %>
+				</table>
+				<br><br><button class="buttonnext" id="upload"><span>確認上傳 </span></button>
+			</form>
 	</div>
 </div>
 </body>

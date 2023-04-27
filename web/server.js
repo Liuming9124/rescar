@@ -5,10 +5,16 @@ var db      = require('./route/modules/db.js');
 var app     = express();
 var cookieParser = require('cookie-parser');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 // set icon
 var favicon      = require('serve-favicon');
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
+
+
+// set body-parser to parse json request
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // set ejs engine

@@ -11,7 +11,7 @@ const orderrecordController = {
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
-                    console.log(record.get('o').properties)
+                    // console.log(record.get('o').properties)
                     let orders = record.get('o').properties //  抓取訂單資料
                     let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
                     ordershow.push({ id: `${eleID}`, info: `${JSON.stringify(orders)}` }) //  將訂單資訊push到ordershow裡面
@@ -61,7 +61,7 @@ const orderrecordController = {
                 console.log(error)
             })
             .then(() => {
-                // console.log('orders:',JSON.stringify(ordershow))
+                // console.log('orders:', JSON.stringify(ordershow))
                 // const total = ordershow[0].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
                 // console.log(total)
                 // console.log(ordershow[0].cart[0].status)    
@@ -71,6 +71,7 @@ const orderrecordController = {
                 // console.log(ordershow[0].cart[0].price)
                 // console.log(ordershow[0].cart[0].name)
                 // console.log(ordershow[0].cart[0].amt)
+                // console.log('ordershow:', ordershow)
 
                 session.close()
                 res.render('orderrecord', {
