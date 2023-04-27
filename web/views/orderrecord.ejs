@@ -58,15 +58,15 @@
 					<th class="text-center">明細</th>
 				</tr>
 				<%if (orders.length!=0){%>				
-					<% for (var j=0 ; j < orders.length ; j++) { %>	
+					<% for (var i=0 ; i < orders.length ; i++) { %>	
 						<% //calculate time %>
-						<% const datestr = JSON.parse(orders[j].info).time %>
+						<% const datestr = JSON.parse(orders[i].info).time %>
 						<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
 						<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
 						<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
-						<% const total = orders[j].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
+						<% const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 						<tr>
-							<th class="text-center"><%=j+1%></th>
+							<th class="text-center"><%=i+1%></th>
 							<th class="text-center">已送餐???</th>
 							<td><%= day %></td>
 							<td><%= time %></td>
@@ -93,9 +93,9 @@
 						<th class="text-center">明細</th>
 					</tr>
 				<%if (1){%>				
-					<% for (var j=0 ; j < 3 ; j++) { %>	
+					<% for (var i=0 ; i < 3 ; i++) { %>	
 					<tr>
-						<th class="text-center"><%=j+1%></th>
+						<th class="text-center"><%=i+1%></th>
 						<td>2023年3月17日</td>
 						<td>16:30</td>
 						<td>1750</td>
@@ -121,9 +121,9 @@
 					<th class="text-center">明細</th>
 				</tr>
 				<%if (1){%>
-					<% for (var j=0 ; j < 3 ; j++) { %>	
+					<% for (var i=0 ; i < 3 ; i++) { %>	
 					<tr>
-						<th class="text-center"><%=j+1%></th>
+						<th class="text-center"><%=i+1%></th>
 						<td>2023年3月17日</td>
 						<td>16:30</td>
 						<td>1750</td>
