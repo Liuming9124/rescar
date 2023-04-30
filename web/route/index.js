@@ -10,7 +10,8 @@ const ring         = require('./modules/ring')
 const qrchoose     = require('./modules/qrchoose')
 const upload       = require('./modules/upload')
 const merchinfo    = require('./modules/merchinfo')
-const dataanalysis    = require('./modules/dataanalysis')
+const dataanalysis = require('./modules/dataanalysis')
+const history      = require('./modules/history')
 
 
 
@@ -25,9 +26,10 @@ module.exports = app => {
   app.use('/robot',       robot)
   app.use('/ring',        ring)
   app.use('/qrchoose',    qrchoose)
-  app.use('/upload',        upload)
-  app.use('/merchinfo',        merchinfo)
-  app.use('/dataanalysis',        dataanalysis)
+  app.use('/upload',      upload)
+  app.use('/merchinfo',   merchinfo)
+  app.use('/dataanalysis',dataanalysis)
+  app.use('/history',     history)
 
 
   app.use('/logout',(req, res) => {
