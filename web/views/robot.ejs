@@ -30,14 +30,57 @@
 </div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
-<div class="container" style="margin-top:50px;padding-bottom: 30px">
-<h2 class="h2">機器人狀態：運送中/已抵達</h2>
-<div class="col-4 col-6-medium col-12-small">
+<div class="container" style="margin-top:0px;padding-bottom: 30px">
 <!-- Features -->
 				<section id="features">
 					<div class="container">
-						<div class="row aln-center">
-							<div class="col-8 col-1-left col-12-small">
+						<div class="row aln-left">
+							<% for (var i=0 ; i < 6 ; i++) { %> 
+                                <div class="col-2 col-6-left col-12-small">
+                                  <!-- Feature -->
+                                    <section>
+										<%if (i%2==0){%>
+											<a>&nbsp;</a><br><br>
+										<%}%>
+										<%if (i%2==1){%>
+											<a class="warning-text" data-toggle="modal" data-target=".bs-example-modal-sm">
+												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+											</a><br><br>
+										<%}%>
+										<div class="tablestyle3">第 <%=i+1%> 桌</div><br>
+											<a href="#"><h5>
+												<%if (i%2==0){ %>
+													<div class=" warning-text">尚有未送餐</div>
+												<%} %>	
+												<%if (i%2==1){ %>
+													訂單皆已送餐
+												<%} %>
+											</h5></a><br>
+                                            <button type="button" class="btn">送餐</button></button>     
+                                        
+                                    </section>
+                                </div>
+                            <% }%>
+						<!-- Modal -->
+							<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+								<div class="modal-dialog modal-sm" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="gridSystemModalLabel">已完成第n桌服務? <br>請在下方輸入員工服務碼</h4>           <!-- 員工可累積服務次數 也可從客人得知服務好壞 -->
+
+										</div>
+										<div class="modal-body">
+											<input type="password" class="form-control" id="exampleInputPhonenumber" placeholder="服務碼">
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+											<button id="ringok"type="button" class="btn btn-primary " href="">送出驗證</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-7 col-1-left col-12-small">
 								<img src="images/seat.jpg" width="100%" alt="...">
 							</div>	
 							<div class="col-4 col-6-medium col-12-small">
@@ -57,32 +100,9 @@
 										  <button type="button" class="btn" onclick="alert('??')">??</button></button><br><br>
 									</header>
 								  </section>
-							  </div>
-                            <% for (var i=0 ; i < 6 ; i++) { %> 
-                                <div class="col-2 col-6-medium col-12-small">
-                                  <!-- Feature -->
-                                    <section>
-										<div class="tablestyle3">第 <%=i+1%> 桌</div><br>
-                                        <header>
-											<a href="#"><h5>
-												<%if (i%2==0){ %>
-													<div class=" warning-text">尚有未送餐</div>
-												<%} %>	
-												<%if (i%2==1){ %>
-													訂單皆已送餐
-												<%} %>
-											</h5></a><br>
-										
-                                            <button type="button" class="btn">送餐</button></button>
-                                            
-                                        </header>
-                                    </section>
-                                </div>
-                            <% }%>
-							
+							  </div>						
 						</div>
 					</div>
 				</section>
-            </div>
 </body>
 </html>
