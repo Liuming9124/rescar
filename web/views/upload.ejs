@@ -81,12 +81,11 @@
 </body>
 
 <script>
-
+	var rowCount = 1;
     $(document).on("click", "#add-field", function () {
-		<%var num=1;%>
-		<%num=num+1%>
+		rowCount++; 
         var newField = '<tr>' +
-            '<th class="text-center">' +<%=num%> + '</th>' +
+            '<th class="text-center">' +rowCount + '</th>' +
             '<td><input type="name" class="form-control" id="exampleInputPassword1" placeholder="商品名稱" name="name"></td>' +
             '<td><select class="form-control" name="type">' +
             '<option>選擇要新增的種類</option>' +
