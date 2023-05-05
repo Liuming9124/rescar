@@ -1,20 +1,26 @@
 const express = require('express')
 const router = express.Router()
+
 const multer = require('multer');
-const path = require('path');
-const upload = multer({
-    dest: 'uploads/',
-    limits: { fileSize: 1024 * 1024 * 10 }, // 限制上传文件大小为10MB
+
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './static/uploads');
+    },
+    filename: function (req, file, callback) {
+        console.log(file);
+        callback(null, file.fieldname + '-' + Date.now() + file.originalname);
+
+    }
 });
-
-
+const upload = multer({ storage: storage });
 
 const uploadCtl = require('../../controllers/uploadctl')
 
 
 
 router.get('/', uploadCtl.uploadPage)
-router.post('/uploadItem', upload.single('image'), uploadCtl.uploadItem)
+router.post('/uploadItem', upload.fields([{name: 'image', maxCount: 10 }]), uploadCtl.uploadItem)
 
 
 
