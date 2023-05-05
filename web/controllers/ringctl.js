@@ -72,7 +72,7 @@ const ringController = {
         .then(() => {
             session.close()
             // console.log(ringtable)
-            console.log("ringupdate success")
+            // console.log("ringupdate success")
             res.send(ringtable)
         })
     }
