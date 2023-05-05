@@ -44,12 +44,12 @@ var session = db.session(session)
 
 
 app.use(express.static('static')); //讀取靜態檔案
-app.use('*/js'        ,express.static(path.join(__dirname, 'static/js')));
-app.use('*/css'       ,express.static(path.join(__dirname, 'static/css')));
-app.use('*/images'    ,express.static(path.join(__dirname, 'static/images')));
-app.use('*/ssl'       ,express.static(path.join(__dirname, 'static/ssl')));
-app.use('*/qr'        ,express.static(path.join(__dirname, 'static/qr')))
-app.use('*/crypto'    ,express.static(path.join(__dirname, 'static/crypto')));
+app.use('*/js'        ,express.static(path.join(__dirname, '/static/js')));
+app.use('*/css'       ,express.static(path.join(__dirname, '/static/css')));
+app.use('*/images'    ,express.static(path.join(__dirname, '/static/images')));
+app.use('*/ssl'       ,express.static(path.join(__dirname, '/static/ssl')));
+app.use('*/qr'        ,express.static(path.join(__dirname, '/static/qr')))
+app.use('*/crypto'    ,express.static(path.join(__dirname, '/static/crypto')));
 // app.use('*/model'     ,express.static(path.join(__dirname, 'static/model')));
 // app.use('*/js_static' ,express.static(path.join(__dirname, 'static/model/js_static')));
 
@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
   }
 })
 
-//if https:
+// if https:
 // const https = require('https');
 // const options = {
 //   key: fs.readFileSync('./static/ssl/private.key'),
