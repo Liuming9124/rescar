@@ -25,7 +25,7 @@ const homeController = {
                     valid = true;
                     req.session.seed = req.params.url;
                     session.close();
-                    valid = 1   //  get session seed
+                    valid = 2   //  get session seed
                 } catch (error) {
                     console.log('Error checking session seed');
                     res.redirect('/menu')
@@ -39,7 +39,10 @@ const homeController = {
 
         const valids = await checkSessionSeed(req);
 
-        if (valids==1){  // if valid
+        if (valids==2){
+            res.redirect('/home');
+        }
+        else if (valids==1){  // if valid
             // 需要印出的變數->menu
             var menu = []
             if (!req.session.cart) {

@@ -17,7 +17,7 @@ router.post('/addcart', (req, res) => {
         req.session.cart = [];
     }
     req.session.cart.push(product);
-    res.redirect(`/home/${req.session.seed}`)
+    res.redirect(`/home`)
 });
 
 

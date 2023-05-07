@@ -35,14 +35,17 @@
 				<section id="features">
 					<div class="container">
 						<div class="row aln-left">
+							<% var ring=0 ; %> 
 							<% for (var i=0 ; i < 6 ; i++) { %> 
-                                <div class="col-2 col-6-left col-12-small">
+                                <div class="col-2 col-6-left col-12-small" id="table<%=i%>">
                                   <!-- Feature -->
                                     <section>
-										<%if (i%2==0){%>
+										<!-- 有人按鈴 -->
+										<%if (ringtable[i]==0){%> 
 											<a>&nbsp;</a><br><br>
 										<%}%>
-										<%if (i%2==1){%>
+										<!-- 沒人按鈴 -->
+										<%if (ringtable[i]==1){%> 
 											<a class="warning-text" data-toggle="modal" data-target=".bs-example-modal-sm">
 												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
 											</a><br><br>
@@ -201,3 +204,6 @@
 				</section>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../static/js/ring.js"></script>
