@@ -40,16 +40,16 @@
                                 <div class="col-2 col-6-left col-12-small" id="table<%=i%>">
                                   <!-- Feature -->
                                     <section>
+										<a class="warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm">
 										<!-- 有人按鈴 -->
 										<%if (ringtable[i]==0){%> 
-											<a>&nbsp;</a><br><br>
+											&nbsp;</a><br>
 										<%}%>
 										<!-- 沒人按鈴 -->
 										<%if (ringtable[i]==1){%> 
-											<a class="warning-text" data-toggle="modal" data-target=".bs-example-modal-sm">
-												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-											</a><br><br>
+												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span><br>
 										<%}%>
+										</a>
 										<div class="tablestyle3">第 <%=i+1%> 桌</div><br>
 											<a href="#"><h5>
 												<%if (i%2==0){ %>
