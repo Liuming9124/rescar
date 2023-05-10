@@ -33,7 +33,7 @@ const cartController = {
         let command = 
         `
         match (n:url{link:'${req.session.seed}'})
-        create(o:order{time:'${cdate}', status:'0', table: '${req.session.table}'})
+        create(o:order{time:'${cdate}', status:0, table: '${req.session.table}'})
         create (n) -[:order]-> (o)
         with o
         UNWIND [

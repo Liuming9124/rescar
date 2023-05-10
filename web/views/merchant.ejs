@@ -43,49 +43,44 @@
 						</tr>
 						<!-- count status=0 -->
 						<% const orders0=orders.filter(order=> {
-							const status = JSON.parse(order.info).status;
-							return status === "0";
+							const status = JSON.parse(order.info).status.low;
+							return status === 0;
 							});
 							// console.log("orders0:",count0,":",orders0)
 							%>
 							<%if (orders0.length){ %>
 								<% for (var i=0 ; i < orders0.length ; i++) { %>
 									<% const datestr=JSON.parse(orders0[i].info).time %>
-										<% const date=new Date(datestr.replace("-", "/" ).replace("-", "/"
-											).replace("-", " " ).replace("-", ":" ).replace("-", ":" )); %>
-											<% const
-												day=`${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`; %>
-												<% const time=`${date.getHours()}:${date.getMinutes()}`; %>
-													<% const total=orders0[i].cart.reduce((acc, curr)=> acc +
-														Number(curr.price) * Number(curr.amt), 0); %>
-														<tr>
-															<th class="text-center">
-																<%= JSON.parse(orders0[i].info).table %>
-															</th>
-															<td>
-																<%= day %>
-															</td>
-															<td>
-																<%= time %>
-															</td>
-															<td>
-																<%= total %>
-															</td>
-															<td><a href="#" data-toggle="modal" data-target="#Modaledit"
-																	>編輯</a>
-															</td> <!-- Modal2 -->
-															<td><a href="#" data-toggle="modal"data-target="#Modalrecord"id="<%= i %>" onclick="detail('<%=i %>')">開始製作餐點</a></td>
-															<!-- Modal1 -->
-														</tr>
-														<%} %>
-															<%} %>
-																<%if (!orders0.length){%>
-																	<tr>
-																		<td colspan="5">
-																			<h4>無訂單</h4>
-																		</td>
-																	</tr>
-																	<%}%>
+									<% const date=new Date(datestr.replace("-", "/" ).replace("-", "/").replace("-", " " ).replace("-", ":" ).replace("-", ":" )); %>
+									<% const day=`${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`; %>
+									<% const time=`${date.getHours()}:${date.getMinutes()}`; %>
+									<% const total=orders0[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0); %>
+									<tr><th class="text-center">
+										<%= JSON.parse(orders0[i].info).table %>
+									</th>
+									<td>
+										<%= day %>
+									</td>
+									<td>
+										<%= time %>
+									</td>
+									<td>
+										<%= total %>
+									</td>
+									<td><a href="#" data-toggle="modal" data-target="#Modaledit">編輯</a>
+									</td> <!-- Modal2 -->
+									<td><a href="#" data-toggle="modal" data-target="#Modalrecord" id="<%= i %>" onclick="detail('<%=i %>')">開始製作餐點</a></td>
+									<!-- Modal1 -->
+									</tr>
+									<%} %>
+							<%} %>
+							<%if (!orders0.length){%>
+								<tr>
+									<td colspan="5">
+										<h4>無訂單</h4>
+									</td>
+								</tr>
+							<%}%>
 					</table>
 				</div>
 				<div class="tab-pane fade" id="making">
@@ -100,8 +95,8 @@
 						</tr>
 						<!-- count status=1 -->
 						<% const orders1=orders.filter(order=> {
-							const status = JSON.parse(order.info).status;
-							return status === "1";
+							const status = JSON.parse(order.info).status.low;
+							return status === 1;
 							});
 							// console.log(orders1)
 							%>
@@ -155,8 +150,8 @@
 						</tr>
 						<!-- count status=2 -->
 						<% const orders2=orders.filter(order=> {
-							const status = JSON.parse(order.info).status;
-							return status === "2";
+							const status = JSON.parse(order.info).status.low;
+							return status === 2;
 							});
 							// console.log(orders2)
 							%>
@@ -211,8 +206,8 @@
 						</tr>
 						<!-- count status=3 -->
 						<% const orders3=orders.filter(order=> {
-							const status = JSON.parse(order.info).status;
-							return status === "3";
+							const status = JSON.parse(order.info).status.low;
+							return status === 3;
 							});
 							// console.log(orders3)
 							%>
@@ -503,11 +498,44 @@
 
 
 </body>
-<!--<footer>
-	<p><%=JSON.stringify(orders)%></p>
-</footer>-->
+<footer>
+	<!-- <p><%=JSON.stringify(orders)%></p> -->
+	<!-- <p><%=JSON.stringify(orders2)%></p> -->
+</footer>
 <script>
+	var orders = JSON.parse(JSON.stringify('<%=JSON.stringify(orders)%>'))
 	function detail(i) {
+		var cart = '';
+		for (var j=0 ; j <  orders[0].cart.length; j++){
+			cart += `
+				<tr>
+					<td>
+						${j+1}
+					</td>
+					<td>
+						${orders[0].cart[j].name}
+					</td>
+					<td>
+						${orders[0].cart[j].amt}
+					</td>
+					<td>
+						${orders[0].cart[j].price}
+					</td>
+					<td>
+							${orders[0].cart[j].amt * orders[0].cart[j].price}
+					</td>
+				</tr>
+			`;
+			if (j==orders[0].cart.length-1){
+				cart += `
+					<tr>
+						<td colspan="4">訂單金額總計</td>
+						<td style="color: crimson;font-size: 18px">230</td>
+					</tr>
+					
+				`;
+			}
+		}
 		var html = `
 		<div class="modal fade" id="Modalrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -529,31 +557,7 @@
 									<td>單價</td>
 									<td>金額</td>
 								</tr>
-								<% if (orders.length!=0) { %>
-									<% for (var j=0 ; j <  ${orders[0].cart.length} ; j++) { %>
-										<tr>
-											<td>
-												<%= j+1 %>
-											</td>
-											<td>
-												${orders[0].cart[j].name}
-											</td>
-											<td>
-												${orders[0].cart[j].amt}
-											</td>
-											<td>
-												${orders[0].cart[j].price}
-											</td>
-											<td>
-												 ${orders[0].cart[j].amt*orders[0].cart[j].price}
-											</td>
-										</tr>
-										<%} %>
-											<% } %>
-												<tr>
-													<td colspan="4">訂單金額總計</td>
-													<td style="color: crimson;font-size: 18px">230</td>
-												</tr>
+								${cart}
 							</table>
 						</div>
 						<div class="modal-footer">
@@ -567,7 +571,7 @@
 		</div><!--row end-->
 		`
 		var element = document.getElementById('Modalrecord')
-		element.innerHTML = html ;
+		element.innerHTML = html;
 	}
 </script>
 <script>

@@ -193,6 +193,21 @@ const merchantController = {
                 // console.log(forder)
                 res.json(forder)
             })
+    },
+    updateOrder: (req, res) => {
+        // console.log(req.body)
+        console.log('merchant update order :',req.params.id)
+        // console.log(req.params.table)
+        var session = db.session()
+        session
+            .run(`MATCH (o:order) WHERE ID(o) = ${req.params.id} SET o.status = o.status+1 return o`)
+            .catch(error => {
+                console.log('updateOrder error:', error)
+            })
+            .finally(() => {
+                session.close();
+                res.redirect(`/merchant/${req.params.table}`)
+            });
     }
 }
 
