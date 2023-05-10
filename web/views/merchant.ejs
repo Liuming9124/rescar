@@ -503,8 +503,8 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	var orders = JSON.parse(JSON.stringify('<%=JSON.stringify(orders)%>'))
 	function detail(i) {
+		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
 		var cart = '';
 		for (var j=0 ; j <  orders[0].cart.length; j++){
 			cart += `
