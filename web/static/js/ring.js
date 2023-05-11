@@ -10,7 +10,7 @@ function fetchData() {
                             <!-- Feature -->
                             <section>
                                 <!-- 有人按鈴 -->
-                                    <a>&nbsp;</a><br><br>
+                                <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm">&nbsp;</a><br>
                                 <div class="tablestyle3">第 ${i + 1} 桌</div><br>
                                     <a href="#"><h5>
                                         <!-- if (i%2==0){  -->
@@ -29,9 +29,9 @@ function fetchData() {
                             <!-- Feature -->
                             <section>
                                 <!-- 沒人按鈴 -->
-                                    <a class="warning-text" data-toggle="modal" data-target=".bs-example-modal-sm">
+                                    <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm">
                                         <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-                                    </a><br><br>
+                                    </a><br>
                                 <div class="tablestyle3">第 ${i + 1} 桌</div><br>
                                     <a href="#"><h5>
                                         <!-- if (i%2==0){  -->
