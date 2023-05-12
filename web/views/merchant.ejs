@@ -503,7 +503,8 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	function detail(oid) {
+	function detail(i) {
+		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
 		var cart = '';
 		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
 		alert(` data: ${orders[oid]}`)  // 印出回傳的data
