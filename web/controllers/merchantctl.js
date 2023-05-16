@@ -206,7 +206,7 @@ const merchantController = {
             })
             .finally(() => {
                 session.close();
-                res.redirect(`/merchant/${req.params.table}`)
+                res.redirect(`/merchant`)
             });
     }
 }
