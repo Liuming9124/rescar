@@ -69,7 +69,7 @@
 									</td>
 									<td><a href="#" data-toggle="modal" data-target="#Modaledit">編輯</a>
 									</td> <!-- Modal2 -->
-									<td id="<%= i %>" onclick="detail(<%=i %>)"><a href="#" data-toggle="modal" data-target="#Modalrecord" >開始製作餐點</a></td>
+									<td><a href="#" data-toggle="modal" data-target="#Modalrecord" id="<%= i %>" onclick="detail('<%=i %>')">開始製作餐點</a></td>
 									<!-- Modal1 -->
 									</tr>
 									<%} %>
@@ -506,20 +506,24 @@
 	function detail(i) {
 		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
 		var cart = '';
-		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
-		alert(` data: ${orders[oid]}`)  // 印出回傳的data
-		const orders0=orders.filter(order=> {
-			const status = JSON.parse(order.info).status.low;
-			return status === 0;
-		});
-		for (var j=0 ; j <  orders[oid].cart.length; j++){
+		for (var j=0 ; j <  orders[0].cart.length; j++){
 			cart += `
 				<tr>
-					<td>${j+1}</td>
-					<td>${orders[oid].cart[j].name}</td>
-					<td>${orders[oid].cart[j].amt}</td>
-					<td>${orders[oid].cart[j].price}</td>
-					<td>${orders[oid].cart[j].amt * orders[oid].cart[j].price}</td>
+					<td>
+						${j+1}
+					</td>
+					<td>
+						${orders[0].cart[j].name}
+					</td>
+					<td>
+						${orders[0].cart[j].amt}
+					</td>
+					<td>
+						${orders[0].cart[j].price}
+					</td>
+					<td>
+							${orders[0].cart[j].amt * orders[0].cart[j].price}
+					</td>
 				</tr>
 			`;
 			if (j==orders[0].cart.length-1){
