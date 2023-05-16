@@ -69,7 +69,7 @@
 									</td>
 									<td><a href="#" data-toggle="modal" data-target="#Modaledit">編輯</a>
 									</td> <!-- Modal2 -->
-									<td><a href="#" data-toggle="modal" data-target="#Modalrecord" id="<%= i %>" onclick="detail('<%=i %>')">開始製作餐點</a></td>
+									<td><a href="#" data-toggle="modal" data-target="#Modalrecord" id="<%= i %>" onclick="detail(0,'<%=i %>')">開始製作餐點</a></td>
 									<!-- Modal1 -->
 									</tr>
 									<%} %>
@@ -123,8 +123,7 @@
 															<td>
 																<%= total %>
 															</td>
-															<td><a href="#" data-toggle="modal"
-																	data-target="#Modalrecord">編輯/餐點製作完成&nbsp; </a></td>
+															<td><a href="#" data-toggle="modal" data-target="#Modalrecord"  onclick="detail(1,'<%=j %>')">編輯/餐點製作完成&nbsp; </a></td>
 														</tr>
 														<%} %>
 															<%} %>
@@ -178,8 +177,7 @@
 															<td>
 																<%= total %>
 															</td>
-															<td><a href="#" data-toggle="modal"
-																	data-target="#Modalrecord">編輯/餐點製作完成&nbsp; </a></td>
+															<td><a href="#" data-toggle="modal"data-target="#Modalrecord"onclick="detail(2,'<%=j %>')">編輯/餐點製作完成&nbsp; </a></td>
 														</tr>
 														<%} %>
 															<%} %>
@@ -236,10 +234,9 @@
 															</td>
 															<td><a href="#" class="my-button" data-toggle="modal"
 																	data-target="#Modalcheckedit">編輯</a></td>
-															<!-- Modal4 -->
 															<td><a href="#" class="my-button" data-toggle="modal"
-																	data-target="#Modalcheckout"
-																	data-index="<%= i %>">開始製作餐點</a></td><!-- Modal3 -->
+																	data-target="#Modalrecord" 
+																	onclick="detail(2,'<%=j %>')">開始製作餐點</a></td><!-- Modal3 -->
 														</tr>
 														<%} %>
 															<%} %>
@@ -373,127 +370,6 @@
 					</div><!--modal-content end-->
 				</div><!-- Modal end-->
 			</div><!--row end-->
-
-			<!-- Modal3 -->
-			<div class="modal fade" id="Modalcheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
-								<p>訂單日期：2023年03月19日</p>
-							</div>
-							<div class="modal-body">
-								<table class="table table-striped text-center">
-									<tr>
-										<td>項次</td>
-										<td>品名</td>
-										<td>數量</td>
-										<td>單價</td>
-										<td>金額</td>
-									</tr>
-									<% if (orders.length!=0) { %>
-										<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>
-											<tr>
-												<td>
-													<%= j+1 %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].name %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].amt %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].price %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].amt*orders[0].cart[j].price %>
-												</td>
-											</tr>
-											<%} %>
-												<% } %>
-													<tr>
-														<td colspan="4">訂單金額總計</td>
-														<td style="color: crimson;font-size: 18px">230</td>
-													</tr>
-								</table>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal"
-									aria-label="Close">取消</button>
-								<button id="submit1" type="submit" class="btn btn-primary">開始製作</button>
-							</div>
-						</form>
-					</div><!--modal-content end-->
-				</div><!-- Modal end-->
-			</div><!--row end-->
-
-			<!-- Modal4 -->
-			<div class="modal fade" id="ModalcheckoutModalcheckedit" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<form>
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<h4 class="modal-title itemname" id="myModalLabel">桌號：</h4>
-								<p>訂單日期：2023年06月09日</p>
-							</div>
-							<div class="modal-body">
-								<table class="table table-striped text-center">
-									<tr>
-										<td>項次</td>
-										<td>品名</td>
-										<td>數量</td>
-										<td>單價</td>
-										<td>金額</td>
-										<td>刪除</td>
-									</tr>
-									<% if (orders.length!=0) { %>
-										<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>
-											<tr>
-												<td>
-													<%= j+1 %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].name %>
-												</td>
-												<td class="form-control" contenteditable="true"
-													onBlur="updateOrder(<%= j %>, 'amt', this.innerHTML)">
-													<%= orders[0].cart[j].amt %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].price %>
-												</td>
-												<td>
-													<%= orders[0].cart[j].amt*orders[0].cart[j].price %>
-												</td>
-												<td><a href=""><span class="glyphicon glyphicon-trash"
-															aria-hidden="true"></span></a></td>
-											</tr>
-											<%} %>
-												<% } %>
-													<tr>
-														<td colspan="4">訂單金額總計</td>
-														<td style="color: crimson;font-size: 18px">230</td>
-													</tr>
-								</table>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal"
-									aria-label="Close">取消</button>
-								<button id="submit1" type="submit" class="btn btn-primary">確認修改</button>
-							</div>
-						</form>
-					</div><!--modal-content end-->
-				</div><!-- Modal end-->
-			</div><!--row end-->
 		</div><!--container end-->
 
 
@@ -503,30 +379,42 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	function detail(i) {
-		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
+	function detail(status,i) {
+		if(status === 0){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders0)%>))
+		}
+		if(status === 1){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders1)%>))
+		}
+		if(status === 2){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders2)%>))
+		}
+		if(status === 3){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders3)%>))
+		}
+
 		var cart = '';
-		for (var j=0 ; j <  orders[0].cart.length; j++){
+		for (var j=0 ; j <  orders[i].cart.length; j++){
 			cart += `
 				<tr>
 					<td>
 						${j+1}
 					</td>
 					<td>
-						${orders[0].cart[j].name}
+						${orders[i].cart[j].name}
 					</td>
 					<td>
-						${orders[0].cart[j].amt}
+						${orders[i].cart[j].amt}
 					</td>
 					<td>
-						${orders[0].cart[j].price}
+						${orders[i].cart[j].price}
 					</td>
 					<td>
-							${orders[0].cart[j].amt * orders[0].cart[j].price}
+							${orders[i].cart[j].amt * orders[i].cart[j].price}
 					</td>
 				</tr>
 			`;
-			if (j==orders[0].cart.length-1){
+			if (j==orders[i].cart.length-1){
 				cart += `
 					<tr>
 						<td colspan="4">訂單金額總計</td>
@@ -537,7 +425,6 @@
 			}
 		}
 		var html = `
-		<div class="modal fade" id="Modalrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<form>
@@ -545,7 +432,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
+							<h4 class="modal-title itemname" id="myModalLabel">訂單明細# ${orders[i].id}</h4>
 							<p>訂單日期：2023年03月19日</p>
 						</div>
 						<div class="modal-body">
@@ -563,12 +450,13 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"
 								aria-label="Close">取消</button>
-							<button id="submit1" type="submit" class="btn btn-primary">開始製作</button>
+							<a href="/merchant/updateOrder/${orders[i].id}">
+							<button  id="submit1" type="submit" class="btn btn-primary">開始製作</button>
+						</a>
 						</div>
 					</form>
 				</div><!--modal-content end-->
 			</div><!-- Modal end-->
-		</div><!--row end-->
 		`
 		var element = document.getElementById('Modalrecord')
 		element.innerHTML = html;
