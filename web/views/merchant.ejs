@@ -224,7 +224,7 @@
 																<%= JSON.parse(orders3[j].info).table %>
 															</th>
 															<td>
-																<%= orders[i].id %>
+																<%= orders3[j].id %>
 															</td>
 															<td>
 																<%= day %>
@@ -459,9 +459,11 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"
 								aria-label="Close">取消</button>
-							<a href="/merchant/updateOrder/${orders[i].id}">
-							<button  id="submit1" type="submit" class="btn btn-primary">tagg</button>
-						</a>
+							
+							<button  id="submit1" type="submit" class="btn btn-primary">
+								<a href="/merchant/updateOrder/${orders[i].id}" style="color: white;">確認</a>
+							</button>
+						
 						</div>
 					</form>
 				</div><!--modal-content end-->
