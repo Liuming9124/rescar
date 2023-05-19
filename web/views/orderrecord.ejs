@@ -67,19 +67,16 @@
 						<% const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
 						<tr>
 							<th class="text-center"><%=i+1%></th>
-							<% if(JSON.parse(orders[i].info).status=='0'||JSON.parse(orders[i].info).status=='1') { %>
+							<% if(JSON.parse(orders[i].info).status.low== 0 ||JSON.parse(orders[i].info).status.low==1||JSON.parse(orders[i].info).status.low==2) { %>
 								<th class="text-center">訂單確認中</th>
 							<% } %>
-							<% if(JSON.parse(orders[i].info).status=='2') { %>
-								<th class="text-center">製作中</th>
-							<% } %>
-							<% if(JSON.parse(orders[i].info).status=='3') { %>
+							<% if(JSON.parse(orders[i].info).status.low==3) { %>
 								<th class="text-center">已送餐</th>
 							<% } %>
 							<td><%= day %></td>
 							<td><%= time %></td>
 							<td><%= total %></td>
-							<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+							<td onclick="detail('<%=i %>')">明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
 						</tr>
 					<% } %>
 				<% } %>
@@ -100,22 +97,30 @@
 						<th class="text-center">訂單金額</th>
 						<th class="text-center">明細</th>
 					</tr>
-				<%if (1){%>				
-					<% for (var j=0 ; j < 3 ; j++) { %>	
-					<tr>
-						<th class="text-center"><%=j+1%></th>
-						<td>2023年3月17日</td>
-						<td>16:30</td>
-						<td>1750</td>
-						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-					</tr>
-					<%} %>
-				<%}%>
-				<%if (0){%>
-					<tr>
-						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
-					</tr>
-				<%}%>
+					<%if (orders.length!=0){%>
+						<% for (var i=0 ; i < orders.length ; i++) { %>	
+							<% if(JSON.parse(orders[i].info).status.low== 0 ||JSON.parse(orders[i].info).status.low==1||JSON.parse(orders[i].info).status.low==2) { %>
+								<% //calculate time %>
+								<% const datestr = JSON.parse(orders[i].info).time %>
+								<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
+								<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+								<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+								<% const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
+								<tr>
+									<th class="text-center"><%=i+1%></th>
+									<td><%= day %></td>
+									<td><%= time %></td>
+									<td><%= total %></td>
+									<td onclick="detail('<%=i %>')">明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+								</tr>
+							<% } %>
+						<% } %>
+					<% } %>
+					<% if (orders.length==0) { %>
+						<tr>
+							<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
+						</tr>
+					<%}%>
 			</table>
 		</div>
 		<div class="tab-pane fade" id="done">
@@ -128,18 +133,27 @@
 					<th class="text-center">訂單金額</th>
 					<th class="text-center">明細</th>
 				</tr>
-				<%if (1){%>
-					<% for (var j=0 ; j < 3 ; j++) { %>	
-					<tr>
-						<th class="text-center"><%=j+1%></th>
-						<td>2023年3月17日</td>
-						<td>16:30</td>
-						<td>1750</td>
-						<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
-					</tr>
-					<%} %>
-				<%}%>
-				<%if (0){%>
+				
+				<%if (orders.length!=0){%>
+					<% for (var i=0 ; i < orders.length ; i++) { %>	
+						<% if(JSON.parse(orders[i].info).status.low== 3) { %>
+							<% //calculate time %>
+							<% const datestr = JSON.parse(orders[i].info).time %>
+							<% const date = new Date(datestr.replace("-", "/").replace("-", "/").replace("-", " ").replace("-", ":").replace("-", ":")); %>
+							<% const day = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`;	%>
+							<% const time = `${date.getHours()}:${date.getMinutes()}`; %>
+							<% const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0); %>
+							<tr>
+								<th class="text-center"><%=i+1%></th>
+								<td><%= day %></td>
+								<td><%= time %></td>
+								<td><%= total %></td>
+								<td onclick="detail('<%=i %>')">明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modalrecord"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+							</tr>
+						<% } %>
+					<% } %>
+				<% } %>
+				<% if (orders.length==0) { %>
 					<tr>
 						<td colspan="5"><h4>目前無訂單，快去點餐吧！！</h4></td>
 					</tr>
@@ -198,6 +212,83 @@
 </div>
 
 </body>
+
+<script>
+	function detail(i) {
+		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders)%>))
+		const datestr = JSON.parse(orders[i].info).time;
+		const total=orders[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0);
+		var cart = '';
+		for (var j=0 ; j <  orders[i].cart.length; j++){
+			cart += `
+				<tr>
+					<td>
+						${j+1}
+					</td>
+					<td>
+						${orders[i].cart[j].name}
+					</td>
+					<td>
+						${orders[i].cart[j].amt}
+					</td>
+					<td>
+						${orders[i].cart[j].price}
+					</td>
+					<td>
+							${orders[i].cart[j].amt * orders[i].cart[j].price}
+					</td>
+				</tr>
+			`;
+			if (j==orders[i].cart.length-1){
+				cart += `
+					<tr>
+						<td colspan="4">訂單金額總計</td>
+						<td style="color: crimson;font-size: 18px">${total}</td>
+					</tr>
+					
+				`;
+			}
+		}
+		var html = `
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title itemname" id="myModalLabel">訂單明細# ${orders[i].id}</h4>
+							<p>訂單日期：${datestr}</p>
+						</div>
+						<div class="modal-body">
+							<table class="table table-striped text-center">
+								<tr>
+									<td>項次</td>
+									<td>品名</td>
+									<td>數量</td>
+									<td>單價</td>
+									<td>金額</td>
+								</tr>
+								${cart}
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+								aria-label="Close">取消</button>
+							
+							<button  id="submit1" type="submit" class="btn btn-primary">
+								<a href="/merchant/updateOrder/${orders[i].id}" style="color: white;">確認</a>
+							</button>
+						
+						</div>
+					</form>
+				</div><!--modal-content end-->
+			</div><!-- Modal end-->
+		`
+		var element = document.getElementById('Modalrecord')
+		element.innerHTML = html;
+	}
+</script>
 </html>
 
 
