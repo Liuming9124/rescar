@@ -40,8 +40,8 @@ function historydetail(oid) {
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
-                                <p>訂單日期：希望可從html抓取</p>
+                                <h4 class="modal-title itemname" id="myModalLabel">訂單明細 ${oid}</h4>
+                                <p>訂單日期：</p>
                             </div>
                             <div class="modal-body">
                                 <table class="table table-striped text-center">
