@@ -100,10 +100,20 @@ const merchantController = {
 
         const seed = await generateRandomSeed(seedproto); // generate random Seed
 
-        // http
-        const url = 'http://localhost:7000/home/' + seed
-        // https:
-        // const url = 'https://liuming.ddns.net/home/' + seed
+        
+        //set http or https
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        var url =""
+        if (config.url=="0"){
+            // http
+            url = `${config.http}home/${seed}`
+        }
+        
+        if (config.url=="1"){
+            // https:
+            url = `${config.http}home/${seed}`
+        }
 
         // turn url to qr code, save to local folder
         await qrcode.toFile('./static/qr/' + cdate + '.png', url)
