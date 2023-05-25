@@ -1,5 +1,0 @@
-{
-  "dependencies": {
-    "lru-cache": "^9.1.1"
-  }
-}
