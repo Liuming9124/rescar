@@ -50,8 +50,7 @@ app.use('*/images'    ,express.static(path.join(__dirname, '/static/images')));
 app.use('*/ssl'       ,express.static(path.join(__dirname, '/static/ssl')));
 app.use('*/qr'        ,express.static(path.join(__dirname, '/static/qr')))
 app.use('*/crypto'    ,express.static(path.join(__dirname, '/static/crypto')));
-// app.use('*/model'     ,express.static(path.join(__dirname, 'static/model')));
-// app.use('*/js_static' ,express.static(path.join(__dirname, 'static/model/js_static')));
+// app.use('*/pki-validation',express.static(path.join(__dirname, '/static/ssl')));
 
 
 //require routes
@@ -66,24 +65,29 @@ app.use((err, req, res, next) => {
   }
 })
 
-// if https:
-// const https = require('https');
-// const options = {
-//   key: fs.readFileSync('./static/ssl/private.key'),
-//   cert: fs.readFileSync('./static/ssl/certificate.crt')
-// };
 
-// https.createServer(options, app).listen(7000,function(){
-//   console.log("listen on https://liuming.ddns.net")
-//   console.log("listen on https://localhost:7000")
-// });
+//set http or https
 
+// read config.json
+const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
+if (config.url=="0"){
+  app.listen(config.port,function(){ //7000這個port
+    console.log(`listen on ${config.http}`)
+  })
+}
+else if (config.url=="1"){
+  
+  // if https:
+  const https = require('https');
+  const options = {
+    key: fs.readFileSync('./static/ssl/private.key'),
+    cert: fs.readFileSync('./static/ssl/certificate.crt')
+  };
 
-// else: (http)
-
-app.listen(7000,function(){ //7000這個port
-  console.log("listen on http://localhost:7000")
-})
-
+  https.createServer(options, app).listen(config.port,function(){
+    console.log(`listen on ${config.https}`)
+    console.log(`listen on ${config.http}`)
+  });
+}
 

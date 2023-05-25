@@ -8,7 +8,7 @@ const ringCtl = require('../../controllers/ringctl')
 router.get('/', ringCtl.ringPage)
 router.get('/callRing', ringCtl.callRing)
 router.get('/ringupdate', ringCtl.ringupdate)
-router.get('/uncallring', ringCtl.uncallring)
+router.post('/uncallring', ringCtl.uncallring)
 
 
 

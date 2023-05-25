@@ -38,11 +38,12 @@ const ringController = {
         })
     },
     uncallring: (req, res) => {
-        var table = 2;
-        var pwd  = 111 // data.pwd
+        var data = req.body
+        var table = data.table // data.table
+        var pwd = 111 // data.pwd
         // if pwd is wrong, redirect to robot page
         console.log(data)
-        if (data.pwd!=111)
+        if (data.pwd!=pwd)
             res.redirect('/robot');
         else{
             var session = db.session()
