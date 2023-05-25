@@ -38,20 +38,22 @@ const ringController = {
         })
     },
     uncallring: (req, res) => {
-        var data = req.body
-        var table = 1 // data.table
-        var pwd = 111 // data.pwd
+        var table = 2;
+        var pwd  = 111 // data.pwd
         // if pwd is wrong, redirect to robot page
-        if (pwd!=111)
+        console.log(data)
+        if (data.pwd!=111)
             res.redirect('/robot');
-        var session = db.session()
-        session
-        .run(`MATCH (n:url{table:'${table}',alert:'1'}) set n.alert='0'`)
-        .catch(error => { console.log('uncallring error:', error) })
-        .then(() => {
-            session.close()
-            res.redirect('/ring')
-        })
+        else{
+            var session = db.session()
+            session
+            .run(`MATCH (n:url{table:'${table}',alert:'1'}) set n.alert=0`)
+            .catch(error => { console.log('uncallring error:', error) })
+            .then(() => {
+                session.close()
+                res.redirect('/robot')
+            })
+        }
     },
     ringupdate: (req, res) => {
         var session = db.session()
