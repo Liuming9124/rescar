@@ -1,6 +1,12 @@
 const db = require("../route/modules/db");
 // var session = db.session()
 
+const LRU = require('lru-cache');
+
+// 創建一個 LRU Cache，最大存儲 100 筆資料
+// const cache = new LRU(100);
+
+
 const homeController = {
 
     homePage: async (req, res) => {
