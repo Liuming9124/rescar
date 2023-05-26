@@ -112,7 +112,7 @@ const merchantController = {
         
         if (config.url=="1"){
             // https:
-            url = `${config.http}home/${seed}`
+            url = `${config.https}home/${seed}`
         }
 
         // turn url to qr code, save to local folder
