@@ -31,7 +31,7 @@
 				<input type="date" id="startDate" name="startDate">
 				&nbsp&nbsp&nbsp
 				<label for="dataset">開始時段：</label>
-				<select id="dataset" name="startTime">
+				<select id="dataset1" name="startTime">
 					<option value="00:00:00">整天</option>
 					<option value="11:00:00">中午(11:00-16:00)</option>
 					<option value="17:00:00">晚上(17:00-23:00)</option>
@@ -40,7 +40,7 @@
 				<input type="date" id="endDate" name="endDate">
 				&nbsp&nbsp&nbsp
 				<label for="dataset">結束時段：</label>
-				<select id="dataset" name="endTime">
+				<select id="dataset2" name="endTime">
 					<option value="23:59:59">整天</option>
 					<option value="16:00:00">中午(11:00-16:00)</option>
 					<option value="23:00:00">晚上(17:00-23:00)</option>
@@ -49,7 +49,7 @@
 							aria-hidden="true"></span></button></a>
 				<br><br>
 			</form>
-			<h4 class="text-center">目前顯示時間範圍：</h4><br>
+			<h4 id="display-range" class="text-center">目前顯示時間範圍：</h4><br>
 			<table class="table table-striped table-hover text-center">
 				<tr>
 					<th class="text-center">訂單ID</th>
@@ -78,7 +78,7 @@
 								<%} %>
 									<%if (!forder){%>
 						<tr>
-							<td colspan="5">
+							<td colspan="6">
 								<h4>無訂單</h4>
 							</td>
 						</tr>

@@ -1,3 +1,23 @@
+function updateDisplayRange(startDate, startTime, endDate, endTime, displayRange) {
+    const startValue = startDate.value;
+    const startTimeValue = startTime.value;
+    const endValue = endDate.value;
+    const endTimeValue = endTime.value;
+  
+    displayRange.textContent = `目前顯示時間範圍：${startValue} ${startTimeValue} ~ ${endValue} ${endTimeValue}`;
+  }
+  
+  const form = document.getElementById('serarchOrderBtn');
+  const startDate = document.getElementById('startDate');
+  const startTime = document.getElementById('dataset1');
+  const endDate = document.getElementById('endDate');
+  const endTime = document.getElementById('dataset2');
+  const displayRange = document.getElementById('display-range');
+  
+  form.addEventListener('submit', function(event) {
+    updateDisplayRange(startDate, startTime, endDate, endTime, displayRange);
+    
+  });
 function historydetail(oid) {
     // 在這裡執行您的代碼，根據ID區分不同的元素
     // JavaScript
@@ -61,7 +81,7 @@ function historydetail(oid) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default">編輯訂單</button>
-                                <button type="submit" class="btn btn-primary">更新狀態</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
                             </div>
                         </form>
                 </div><!--modal-content end-->
