@@ -5,7 +5,8 @@ const historyController = {
 
     historyPage: (req, res) => {
         res.render('history', {
-            'forder': ''
+            'forder': '',
+            'time' : '',
         })
     },
     historySearch: (req, res) => {
@@ -78,7 +79,8 @@ const historyController = {
                     session.close()
                     console.log(forder)
                     res.render('history', {
-                        'forder': forder
+                        'forder': forder,
+                        'time' : req.body,  //put searching time into html by variable 'time'
                     })
                 })
         }
