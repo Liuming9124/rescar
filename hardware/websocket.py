@@ -1,13 +1,15 @@
 import asyncio
 import websockets
 
-async def handler(websocket, path):
-    async for message in websocket:
-        print(f"received message from Node.js: {message}")
-        response = f"Python received message: {message}"
-        await websocket.send(response)
+async def connect_to_websocket():
+    async with websockets.connect('ws://localhost:8080') as websocket:
+        # Event handler for incoming messages
+        async for message in websocket:
+            print(f"Received message: {message}")
 
-start_server = websockets.serve(handler, "localhost", 8765)
+            # Send a response message back to the server
+            response = f"Received: {message}"
+            await websocket.send(response)
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+# Start the WebSocket client
+asyncio.get_event_loop().run_until_complete(connect_to_websocket())
