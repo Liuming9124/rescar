@@ -3,6 +3,7 @@ var session      = require('express-session');  //用來儲存登入狀態
 var path    = require('path');
 var db      = require('./route/modules/db.js');
 var app     = express();
+const expressWs = require('express-ws')(app);
 var cookieParser = require('cookie-parser');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -34,6 +35,17 @@ app.use(session({
 }))
 
 
+// WebSocket server
+app.ws('/', function (ws, req) {
+  // Event handler for incoming WebSocket messages
+  ws.on('message', function incoming(message) {
+    // Broadcast the received message to all connected clients
+    expressWs.getWss().clients.forEach(function each(client) {
+      client.send(message);
+    });
+  });
+});
+
 
 //建立 server
 
@@ -64,35 +76,6 @@ app.use((err, req, res, next) => {
     // return res.render('error', { err })
   }
 })
-
-
-
-const WebSocket = require('ws');
-
-// Create a WebSocket server instance
-const wss = new WebSocket.Server({ port: 8080 });
-
-// Event handler for new connections
-wss.on('connection', function connection(ws) {
-  // Event handler for incoming messages
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-
-    // Echo the received message back to the client
-    ws.send(`Echo: ${message}`);
-  });
-
-  // Event handler for connection close
-  ws.on('close', function close() {
-    console.log('Connection closed');
-  });
-
-  // Send a welcome message to the client
-  ws.send('Welcome to the WebSocket server!');
-});
-
-console.log('WebSocket server started on port 8080');
-
 
 
 //set http or https

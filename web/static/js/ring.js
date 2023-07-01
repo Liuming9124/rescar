@@ -57,6 +57,14 @@ function fetchData() {
             console.error('Request failed: ', error);
         });
 }
+var socket = new WebSocket('ws://' + window.location.hostname + ':8080');
+
+// Event handler for WebSocket messages
+socket.onmessage = function (event) {
+    var messagesDiv = document.getElementById('test');
+    messagesDiv.innerHTML += '<p>' + event.data + '</p>';
+};
+
 
 // set interval to call api every 1 seconds
 setInterval(fetchData, 1000);
