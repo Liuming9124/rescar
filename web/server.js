@@ -3,6 +3,7 @@ var session      = require('express-session');  //用來儲存登入狀態
 var path    = require('path');
 var db      = require('./route/modules/db.js');
 var app     = express();
+const expressWs = require('express-ws')(app);
 var cookieParser = require('cookie-parser');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -33,6 +34,17 @@ app.use(session({
   }
 }))
 
+
+// WebSocket server
+app.ws('/', function (ws, req) {
+  // Event handler for incoming WebSocket messages
+  ws.on('message', function incoming(message) {
+    // Broadcast the received message to all connected clients
+    expressWs.getWss().clients.forEach(function each(client) {
+      client.send(message);
+    });
+  });
+});
 
 
 //建立 server
