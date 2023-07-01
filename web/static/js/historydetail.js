@@ -1,24 +1,4 @@
-function updateDisplayRange(startDate, startTime, endDate, endTime, displayRange) {
-    const startValue = startDate.value;
-    const startTimeValue = startTime.value;
-    const endValue = endDate.value;
-    const endTimeValue = endTime.value;
-      // 定義時間變數
-    displayRange.textContent = `目前顯示時間範圍：${startValue} ${startTimeValue} ~ ${endValue} ${endTimeValue}`;
-     // 把時間範圍顯示在畫面上
-  }
-  
-  const form = document.getElementById('serarchOrderBtn');
-  const startDate = document.getElementById('startDate');
-  const startTime = document.getElementById('dataset1');
-  const endDate = document.getElementById('endDate');
-  const endTime = document.getElementById('dataset2');
-  const displayRange = document.getElementById('display-range');
-  
-  form.addEventListener('submit', function(event) {
-    updateDisplayRange(startDate, startTime, endDate, endTime, displayRange);
-   //執行函式
-  });
+
 function historydetail(oid) {
     // 在這裡執行您的代碼，根據ID區分不同的元素
     // JavaScript

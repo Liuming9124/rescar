@@ -5027,29 +5027,33 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .nav>li>a>img {
     max-width: none
 }
-
 .nav-tabs {
-    border-bottom: 1px solid #ddd
+    border-bottom: 1px solid #ddd;
 }
 
-.nav-tabs>li {
+.nav-tabs > li {
     float: left;
-    margin-bottom: -1px
+    margin-bottom: -1px;
 }
 
-.nav-tabs>li>a {
+.nav-tabs > li > a {
     margin-right: 2px;
-    line-height: 1.42857143;
+    line-height: 2.42857143;
     border: 1px solid transparent;
-    border-radius: 4px 4px 0 0
+    border-radius: 4px 4px 0 0;
+    color: #ed786a; /* 修改標籤文字顏色 */
+    background-color: #f8f8f8; /* 修改標籤背景顏色 */
+    padding: 8px 12px; /* 調整內邊距 */
+    transition: background-color 0.3s ease; /* 添加漸變過渡效果 */
 }
 
-.nav-tabs>li>a:hover {
-    border-color: #eee #eee #ddd
+.nav-tabs > li > a:hover {
+    border-color: #eee #eee #ddd;
+    background-color: #d6caca; /* 修改標籤懸停時的背景顏色 */
 }
 
-.nav-tabs>li.active>a,
-.nav-tabs>li.active>a:focus,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
 .nav-tabs>li.active>a:hover {
     color: #555;
     cursor: default;
@@ -5059,59 +5063,62 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 
 .nav-tabs.nav-justified {
-    width: 100%;
-    border-bottom: 0
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
 }
 
-.nav-tabs.nav-justified>li {
-    float: none
+.nav-tabs.nav-justified > li {
+    flex: 1; /* 平均分配寬度 */
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中 */
 }
 
-.nav-tabs.nav-justified>li>a {
+.nav-tabs.nav-justified > li > a {
     margin-bottom: 5px;
-    text-align: center
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
 }
 
-.nav-tabs.nav-justified>.dropdown .dropdown-menu {
-    top: auto;
-    left: auto
-}
 
-@media (min-width:380px) {
-    .nav-tabs.nav-justified>li {
+
+
+
+@media (min-width: 380px) {
+    .nav-tabs.nav-justified > li {
         display: table-cell;
-        width: 1%
+        width: 1%;
     }
 
-    .nav-tabs.nav-justified>li>a {
-        margin-bottom: 0
+    .nav-tabs.nav-justified > li > a {
+        margin-bottom: 0;
     }
 }
 
-.nav-tabs.nav-justified>li>a {
+.nav-tabs.nav-justified > li > a {
     margin-right: 0;
-    border-radius: 4px
+    border-radius: 4px;
 }
 
-.nav-tabs.nav-justified>.active>a,
-.nav-tabs.nav-justified>.active>a:focus,
-.nav-tabs.nav-justified>.active>a:hover {
-    border: 1px solid #ddd
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:focus,
+.nav-tabs.nav-justified > .active > a:hover {
+    border: 1px solid #ddd;
 }
 
-@media (min-width:380px) {
-    .nav-tabs.nav-justified>li>a {
+@media (min-width: 380px) {
+    .nav-tabs.nav-justified > li > a {
         border-bottom: 1px solid #ddd;
-        border-radius: 4px 4px 0 0
+        border-radius: 4px 4px 0 0;
     }
 
-    .nav-tabs.nav-justified>.active>a,
-    .nav-tabs.nav-justified>.active>a:focus,
-    .nav-tabs.nav-justified>.active>a:hover {
-        border-bottom-color: #fff
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:focus,
+    .nav-tabs.nav-justified > .active > a:hover {
+        border-bottom-color: #fff;
     }
 }
-
 .nav-pills>li {
     float: left
 }
@@ -8388,7 +8395,46 @@ button.close {
     opacity: 1;
     right: 0;
 }
+.buttonsearch {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    background-color: #ed786a;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: search;
+}
 
+.buttonsearch span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.buttonsearch span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.buttonsearch:hover span {
+    padding-right: 25px;
+}
+
+.buttonsearch:hover span:after {
+    opacity: 1;
+    right: 0;
+}
 .tablestyle {
     border-radius: 10px;
     width: 260px;
