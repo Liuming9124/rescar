@@ -57,7 +57,7 @@ function fetchData() {
             console.error('Request failed: ', error);
         });
 }
-var socket = new WebSocket('ws://' + window.location.hostname + ':8080');
+var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
 
 // Event handler for WebSocket messages
 socket.onmessage = function (event) {
