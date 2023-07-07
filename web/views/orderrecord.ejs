@@ -41,7 +41,7 @@
 	<h2 class="h2">訂單狀態</h2>
 	<ul id="myTab1" class="nav nav-tabs">
 		<li><a href="#confirm" data-toggle="tab">所有訂單</a></li>
-		<li><a href="#making" data-toggle="tab">製作中</a></li>
+		<li><a href="#making" data-toggle="tab">待送餐</a></li>
 		<li><a href="#done" data-toggle="tab">已送餐</a></li>
 	</ul>
 	
@@ -68,7 +68,7 @@
 						<tr>
 							<th class="text-center"><%=i+1%></th>
 							<% if(JSON.parse(orders[i].info).status.low== 0 ||JSON.parse(orders[i].info).status.low==1||JSON.parse(orders[i].info).status.low==2) { %>
-								<th class="text-center">訂單確認中</th>
+								<th class="text-center">待送餐</th>
 							<% } %>
 							<% if(JSON.parse(orders[i].info).status.low==3) { %>
 								<th class="text-center">已送餐</th>

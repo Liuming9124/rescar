@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>food</title>
+<title>food●點餐系統</title>
 <!-- Bootstrap css-->
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <!-- Bootstrap js-->
@@ -37,29 +37,29 @@
 <% } %>
 </div></h5>
 <div class="container" style="margin-top: 30px;padding-bottom: 50px">
-	
+	<div class="chat-button">Chat</div>
 	<div id="item1" class="menuclass">
 		<div style="text-align: center">
 			<h3>商品頁面</h3><br>
 			<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;熱門商品&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
 		</div>
-		<% for (var i=0 ; i < menu.find(item=> item.name === menu[0].name).items.length ; i++) { %>
-		<a href="#" data-target="#myModal<%=i%>">
+		<% for (var i=0 ; i < 4 ; i++) { %><!--menu.find(item=> item.name === menu[0].name).items.length-->
 		<div class="row">
 			<div class="col-xs-6 col-sm-3">
-				<div class="thumbnail">
-					<img src="images/food/<%=menu.find(item=> item.name === menu[0].name).items[i].image %>" width="100%" alt="...">
-					<div class="caption">
-						<h3 class="text-center">
-							<%=menu.find(item=> item.name === menu[0].name).items[i].name %>
-						</h3>
-						<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
-							menu[0].name).items[i].price.low %></p>
-							<p class="text-center"><a href="#" data-toggle="modal"  class="btn btn-primary" role="button">點餐</a></p>
+				<a href="#" data-toggle="modal" data-target="#myModal0<%=i%>">
+					<div class="thumbnail">
+						<img src="images/food/<%=menu.find(item=> item.name === menu[0].name).items[i].image %>" width="100%" alt="...">
+						<div class="caption">
+							<h3 class="text-center">
+								<%=menu.find(item=> item.name === menu[0].name).items[i].name %>
+							</h3>
+							<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
+								menu[0].name).items[i].price.low %></p>
+								<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal0<%=i%>"  class="btn btn-primary" role="button">點餐</a></p>
+						</div>
 					</div>
-				</div>
+				</a>
 			</div>
-		</a>
 			<% } %>
 		</div>
 	</div>
@@ -111,7 +111,7 @@
 														<%if (i===1){a='麵體選擇',a1='軟',a2='適中',a3='硬'} %>
 														<%if (i===2){a='是否炙燒',a1='是',a2='否',a3='考慮'}%>
 														<%if (i===3){a='飯硬度選擇',a1='軟',a2='適中',a3='硬'} %>
-														<%if (i===4){a='冰度選擇',a1='正常',a2='少冰',a3='去冰'}%>
+														<%if (i===4){a='甜度選擇',a1='正常',a2='少糖',a3='無糖'}%>
 														<div class="col-xs-6">
 															<p class="text-left"><%=a%></p>	
 														</div>
@@ -142,39 +142,6 @@
 											</div>
 										</div>
 									</div>
-								
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="headingThree">
-											<h4 class="panel-title">
-												<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree<%=i%><%=j%>" aria-expanded="false" aria-controls="collapseThree">
-													<div class="row">
-														<div class="col-xs-6">
-															<p class="text-left">加價購</p>
-														</div>
-														<div class="col-xs-6">
-															<p class="text-right" style="color:silver">可選擇填寫&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
-														</div>
-													</div>
-												</a>
-											</h4>
-										</div>
-										<div id="collapseThree<%=i%><%=j%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-											<div class="panel-body">
-												<div class="radio">
-													<label>
-														<input type="radio" name="otherselect" id="otherselect1" value="otherselect1" checked>
-														叉燒(+NT$30)
-													</label>
-												</div>
-												<div class="radio">
-													<label>
-														<input type="radio" name="otherselect" id="otherselect2" value="otherselect2">
-														糖心蛋(+NT$20)
-													</label>
-												</div>
-											</div>
-										</div>
-									</div>
 
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="heading4">
@@ -182,7 +149,7 @@
 												<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4<%=i%><%=j%>" aria-expanded="false" aria-controls="collapse4">
 													<div class="row">
 														<div class="col-xs-6">
-															<p class="text-left">特別指示</p>
+															<p class="text-left">備註</p>
 														</div>
 														<div class="col-xs-6">
 															<p class="text-right" style="color:silver">可選擇填寫&nbsp;&nbsp;<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>

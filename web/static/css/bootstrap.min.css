@@ -1427,7 +1427,7 @@ a {
 a:focus,
 a:hover {
     color: #ed786a;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 a:focus {
@@ -8515,5 +8515,89 @@ button.close {
     animation: pulse 1s infinite;
     font-size: 30px;
 }
+.chat-button {
+    position: fixed;
+    bottom: 20px; /* 距离底部的距离 */
+    right: 20px; /* 距离右侧的距离 */
+    background-color: #ed786a; /* 背景颜色 */
+    color: #fff; /* 文字颜色 */
+    padding: 20px 20px; /* 内边距 */
+    border: 2px solid #ed7861; 
+    border-radius: 100%; /* 圆角边框 */
+    z-index: 9999; /* 使按钮在其他元素之上 */
+}
 
+/* 添加一些鼠标悬停效果 */
+.chat-button:hover {
+    background-color:#ed786b;
+    cursor: pointer;
+}
+.buttonn-group {
+    display: flex;
+  }
+
+  .buttonn {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .buttonn:last-child {
+    margin-right: 0;
+  }
+
+  .buttonn a {
+    display: block;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    white-space: nowrap; /* 禁止文字換行 */
+
+  }
+  .buttonn a:active {
+    background-color: #fd887a; 
+    border-radius: 20px;
+  }
+  .buttonn.selected a {
+    background-color: #fd887a;
+  }
+.buttonn1-group {
+    display: flex;
+  }
+
+  .buttonn1 {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .buttonn1:last-child {
+    margin-right: 0;
+  }
+
+  .buttonn1 a {
+    display: block;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    white-space: nowrap; /* 禁止文字換行 */
+  }
+  .buttonn2 a {
+    display: block;
+    text-align: center;
+    border: none; /* 移除邊框 */
+    border-radius: 50%; /* 設置圓角半徑為50% */
+    width: 50px; /* 設置按鈕寬度 */
+    height: 50px; /* 設置按鈕高度 */
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    white-space: nowrap; /* 禁止文字換行 */
+  }
+
+  
 /*# sourceMappingURL=bootstrap.min.css.map */
