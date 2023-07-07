@@ -41,9 +41,11 @@ app.ws('/', function (ws, req) {
   ws.on('message', function incoming(message) {
     // Broadcast the received message to all connected clients
     expressWs.getWss().clients.forEach(function each(client) {
-      client.send(message);
+      client.send('{1:1,2:8}');
     });
+    console.log('Received message:', message);
   });
+  console.log('Socket connected. Testing:', req.testing);
 });
 
 
