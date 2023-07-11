@@ -8557,7 +8557,7 @@ button.close {
 
   }
   .buttonn a:active {
-    background-color: #fd887a; 
+    background-color: #f7a69c; 
     border-radius: 20px;
   }
   .buttonn.selected a {
@@ -8587,16 +8587,12 @@ button.close {
     white-space: nowrap; /* 禁止文字換行 */
   }
   .buttonn2 a {
-    display: block;
     text-align: center;
-    border: none; /* 移除邊框 */
+    border: 1px solid #ccc;
     border-radius: 50%; /* 設置圓角半徑為50% */
-    width: 50px; /* 設置按鈕寬度 */
-    height: 50px; /* 設置按鈕高度 */
     padding: 10px;
     text-decoration: none;
     color: #000;
-    white-space: nowrap; /* 禁止文字換行 */
   }
 
   
