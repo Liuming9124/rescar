@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const app = express();
 const multer = require('multer');
 const path = require('path');
 const upload = multer({
@@ -11,10 +12,10 @@ const upload = multer({
 
 const uploadCtl = require('../../controllers/uploadctl')
 
-
-
 router.get('/', uploadCtl.uploadPage)
 router.post('/uploadItem', upload.single('image'), uploadCtl.uploadItem)
+
+app.delete('/delete-item/:categoryName/:itemName', uploadController.deleteItem);
 
 
 
