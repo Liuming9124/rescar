@@ -125,9 +125,9 @@ const uploadController = {
         const categoryName = req.body.categoryName;
         const itemName = req.body.itemName;
       
-        const session = db.session();
-        console.log('Item deleted successfully');
-        session
+        const session3 = db.session();
+        console.log('Deleting item:', itemName);
+        session3
           .run(
             `
             MATCH (t:type {name: $categoryName})-[:own]->(i:item {name: $itemName})
@@ -136,14 +136,14 @@ const uploadController = {
             { categoryName, itemName }
           )
           .then(() => {
-            session.close();
-            console.log('Item deleted successfully');
+            session3.close();
+            console.log('Item deleted successfully:', itemName);
             res.redirect('/upload');
           })
           .catch((error) => {
-            session.close();
+            session3.close();
             console.error('Error deleting item:', error);
-            res.status(500).send('Error deleting item');
+            res.redirect('/upload');
           });
       }
 }

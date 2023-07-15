@@ -56,22 +56,28 @@
 								<div id="Element1" style="visibility: visible;">
 									<!-- 商品列表 -->
 									<h2>商品列表</h2>
-									<% for (var i=0 ; i < menu.length ; i++) { %>
-									<h4><%= menu[i].name %></h4>
-									<table class="table table-striped table-hover text-center">
-										<tr>
+									<% for (var i = 0; i < menu.length; i++) { %>
+										<h4><%= menu[i].name %></h4>
+										<table class="table table-striped table-hover text-center">
+										  <tr>
 											<th class="text-left">項次</th>
 											<th class="text-left">商品名稱</th>
 											<th class="text-left">商品描述</th>
 											<th class="text-left">價錢</th>
 											<th class="text-left">刪除</th>
-										</tr>
-										<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
+										  </tr>
+										  <% for (var j = 0; j < menu.find(item => item.name === menu[i].name).items.length; j++) { %>
 											<tr>
-											  <td class="text-left"><%= j+1 %></td>
-											  <td class="text-left"><p><%= menu.find(item => item.name === menu[i].name).items[j].name %></p></td>
-											  <td class="text-left"><p><%= menu.find(item => item.name === menu[i].name).items[j].description %></p></td>
-											  <td class="text-left"><p>NT$<%= menu.find(item => item.name === menu[i].name).items[j].price.low %></p></td>
+											  <td class="text-left"><%= j + 1 %></td>
+											  <td class="text-left">
+												<p><%= menu.find(item => item.name === menu[i].name).items[j].name %></p>
+											  </td>
+											  <td class="text-left">
+												<p><%= menu.find(item => item.name === menu[i].name).items[j].description %></p>
+											  </td>
+											  <td class="text-left">
+												<p>NT$<%= menu.find(item => item.name === menu[i].name).items[j].price.low %></p>
+											  </td>
 											  <td class="text-left">
 												<form action="/delete-item" method="POST">
 												  <input type="hidden" name="categoryName" value="<%= menu[i].name %>">
@@ -83,8 +89,8 @@
 											  </td>
 											</tr>
 										  <% } %>
-									</table>
-									<% } %>
+										</table>
+									  <% } %>
 								  </div>
 							</form>
 						</div>
@@ -153,10 +159,9 @@
 			<td><input type="name" class="form-control" id="exampleInputPassword1" placeholder="商品名稱" name="name${rowCount}"></td>
 			<td>
 				<select class="form-control" name="type${rowCount}">
-				<option>選擇要新增的種類</option>
-				<option>拉麵</option>
-				<option>壽司</option>
-				<option>甜點</option>
+					<% for (var i=0 ; i < menu.length ; i++) { %>
+						<option><%= menu[i].name %></option>
+					  <% } %>
 				</select>
 			</td>
 			<td><input type="description" class="form-control" id="exampleInputName" placeholder="商品描述" name="description${rowCount}"></td>
