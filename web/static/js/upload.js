@@ -55,4 +55,20 @@ function uploadItem(count) {
     }
     alert("上傳成功")
 }
+function toggleButton(button) {
+    button.parentNode.classList.toggle("selected");
+  }
 
+ function addNewname() {
+    var newItem = prompt("輸入想新增的種類:");
+    if (newItem) {
+      var buttonGroup = document.querySelector(".button-group");
+      var addButton = document.getElementById("addButton");
+
+      var newButton = document.createElement("div");
+      newButton.className = "button";
+      newButton.innerHTML = "<a href='#' onclick='toggleButton(this)'>" + newItem + "</a>";
+
+      buttonGroup.insertBefore(newButton, addButton);
+    }
+  }
