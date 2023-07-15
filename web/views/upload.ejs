@@ -67,19 +67,22 @@
 											<th class="text-left">刪除</th>
 										</tr>
 										<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
-										<tr>
-											<td class="text-left"><%= j+1 %></td>
-											<td class="text-left"><p><%=menu.find(item=> item.name === menu[i].name).items[j].name %></p></td>
-											<td class="text-left"><p><%= menu.find(item=> item.name ===menu[i].name).items[j].description %></p></td>
-											<td class="text-left"><p>NT$<%= menu.find(item=> item.name ===menu[i].name).items[j].price.low %></p></td>
-											<td class="text-left">
-												<a href="/delete-item/<%= menu[i].name %>/<%= menu.find(item => item.name === menu[i].name).items[j].name %>"
-												class="delete-item">
+											<tr>
+											  <td class="text-left"><%= j+1 %></td>
+											  <td class="text-left"><p><%= menu.find(item => item.name === menu[i].name).items[j].name %></p></td>
+											  <td class="text-left"><p><%= menu.find(item => item.name === menu[i].name).items[j].description %></p></td>
+											  <td class="text-left"><p>NT$<%= menu.find(item => item.name === menu[i].name).items[j].price.low %></p></td>
+											  <td class="text-left">
+												<form action="/delete-item" method="POST">
+												  <input type="hidden" name="categoryName" value="<%= menu[i].name %>">
+												  <input type="hidden" name="itemName" value="<%= menu.find(item => item.name === menu[i].name).items[j].name %>">
+												  <button type="submit" class="delete-item" id="delete-item-<%= i %>-<%= j %>">
 													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-												</a>
-											</td>
-										</tr>
-										<% } %>
+												  </button>
+												</form>
+											  </td>
+											</tr>
+										  <% } %>
 									</table>
 									<% } %>
 								  </div>
