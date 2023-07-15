@@ -13,7 +13,7 @@ const uploadCtl = require('../../controllers/uploadctl')
 
 router.get('/', uploadCtl.uploadPage)
 router.post('/uploadItem', upload.single('image'), uploadCtl.uploadItem)
-router.post('/delete-item', uploadCtl.deleteItem);
+router.post('/deleteItem', uploadCtl.deleteItem);
 
 
 
