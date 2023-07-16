@@ -8560,9 +8560,6 @@ button.close {
     background-color: #f7a69c; 
     border-radius: 20px;
   }
-  .buttonn.selected a {
-    background-color: #fd887a;
-  }
 .buttonn1-group {
     display: flex;
   }
@@ -8594,6 +8591,22 @@ button.close {
     text-decoration: none;
     color: #000;
   }
-
+  .delete-item {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
   
+  .delete-item:hover {
+    background-color: #c82333;
+  }
+  
+  /* 圖標字體樣式，請確保已經引入合適的圖標字體庫 */
+  .delete-item .glyphicon {
+    font-size: 9px;
+  }
 /*# sourceMappingURL=bootstrap.min.css.map */

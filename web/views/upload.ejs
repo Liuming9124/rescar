@@ -12,6 +12,8 @@
 <!-- Bootstrap js-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -42,11 +44,11 @@
 								<h2>商品種類</h2>
 								<div class="buttonn-group">
 									<div class="buttonn-group">
-										<% for (var i=0 ; i < menu.length ; i++) { %>
-										  <div class="buttonn">
-											<a href="#" onclick="toggleButton(this)"><%= menu[i].name %></a>
-										  </div>
-										<% } %>
+										<% for (var i = 0; i < menu.length; i++) { %>
+											<div class="buttonn">
+											  <a href="#a<%=i%>" onclick="toggleButton(this, <%= i %>)"><%= menu[i].name %></a>
+											</div>
+										  <% } %>
 										<div class="buttonn1" id="addButton">
 											<a href="#" onclick="addNewname()">新增種類+</a>
 										  </div>
@@ -57,39 +59,44 @@
 									<!-- 商品列表 -->
 									<h2>商品列表</h2>
 									<% for (var i = 0; i < menu.length; i++) { %>
-										<h4><%= menu[i].name %></h4>
-										<table class="table table-striped table-hover text-center">
-										  <tr>
-											<th class="text-left">項次</th>
-											<th class="text-left">商品名稱</th>
-											<th class="text-left">商品描述</th>
-											<th class="text-left">價錢</th>
-											<th class="text-left">刪除</th>
-										  </tr>
-										  <% for (var j = 0; j < menu.find(item => item.name === menu[i].name).items.length; j++) { %>
-											<tr>
-											  <td class="text-left"><%= j + 1 %></td>
-											  <td class="text-left">
-												<p><%= menu.find(item => item.name === menu[i].name).items[j].name %></p>
-											  </td>
-											  <td class="text-left">
-												<p><%= menu.find(item => item.name === menu[i].name).items[j].description %></p>
-											  </td>
-											  <td class="text-left">
-												<p>NT$<%= menu.find(item => item.name === menu[i].name).items[j].price.low %></p>
-											  </td>
-											  <td class="text-left">
-												<form action="/upload/deleteItem" method="POST">
-												  <input type="hidden" name="categoryName" value="<%= menu[i].name %>">
-												  <input type="hidden" name="itemName" value="<%= menu.find(item => item.name === menu[i].name).items[j].name %>">
-												  <button type="submit" class="delete-item" id="delete-item-<%= i %>-<%= j %>">
-													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-												  </button>
-												</form>
-											  </td>
-											</tr>
-										  <% } %>
-										</table>
+										<div class="target-area" id="a<%=i%>">
+											<br><br><br>
+											<div class="item-list" id="itemList-<%= i %>">
+												<h4><%= menu[i].name %></h4>
+												<table class="table table-striped table-hover text-center">
+												  <tr>
+													<th class="text-left">項次</th>
+													<th class="text-left">商品名稱</th>
+													<th class="text-left">商品描述</th>
+													<th class="text-left">價錢</th>
+													<th class="text-left">刪除</th>
+												  </tr>
+												  <% for (var j = 0; j < menu.find(item => item.name === menu[i].name).items.length; j++) { %>
+													<tr>
+													  <td class="text-left"><%= j + 1 %></td>
+													  <td class="text-left">
+														<p><%= menu.find(item => item.name === menu[i].name).items[j].name %></p>
+													  </td>
+													  <td class="text-left">
+														<p><%= menu.find(item => item.name === menu[i].name).items[j].description %></p>
+													  </td>
+													  <td class="text-left">
+														<p>NT$<%= menu.find(item => item.name === menu[i].name).items[j].price.low %></p>
+													  </td>
+													  <td class="text-left">
+														<form action="/upload/deleteItem" method="POST">
+														  <input type="hidden" name="categoryName" value="<%= menu[i].name %>">
+														  <input type="hidden" name="itemName" value="<%= menu.find(item => item.name === menu[i].name).items[j].name %>">
+														  <button type="submit" class="delete-item" id="delete-item-<%= i %>-<%= j %>">
+															<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+														  </button>
+														</form>
+													  </td>
+													</tr>
+												  <% } %>
+												</table>
+											  </div>
+										</div>
 									  <% } %>
 								  </div>
 							</form>
@@ -147,10 +154,12 @@
 			</div>
 
 		</div>
+		
 
 </body>
 
 <script>
+
 	var rowCount = 1;
 	$(document).on("click", "#add-field", function () {
 		rowCount++;
@@ -174,6 +183,23 @@
 		// 讓後端知道有幾個項目
 		$('#upload').attr('onclick', `uploadItem(${rowCount})`);
 	});
+	$(document).ready(function() {
+		// 捕獲所有點擊連結的事件
+		$('a[href^="#"]').on('click', function(event) {
+		  event.preventDefault(); // 阻止點擊連結時的默認行為
+	
+		  // 得到目標區域的ID
+		  var target = $(this).attr('href');
+	
+		  // 使用滾動效果平滑地滾動到目標區域
+		  $('html, body').animate({
+			scrollTop: $(target).offset().top
+		  }, 800, function(){
+			// 滾動完成後，對目標區域添加淡入效果
+			$(target).fadeIn(500);
+		  });
+		});
+	  });
 </script>
 <script src="/js/upload.js"></script>
 

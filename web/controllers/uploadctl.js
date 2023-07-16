@@ -137,14 +137,16 @@ const uploadController = {
           .then(() => {
             session.close();
             console.log('Item deleted successfully');
-            res.redirect('/upload');
+              // 在成功刪除後彈出警示框
+              res.send("<script>alert('項目已成功刪除'); window.location.href = '/upload';</script>");
           })
           .catch((error) => {
             session.close();
             console.error('Error deleting item:', error);
             res.status(500).send('Error deleting item');
           });
-      }
+      },
+      
 }
 
 module.exports = uploadController

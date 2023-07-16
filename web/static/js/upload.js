@@ -58,17 +58,30 @@ function uploadItem(count) {
 function toggleButton(button) {
     button.parentNode.classList.toggle("selected");
   }
-
- function addNewname() {
-    var newItem = prompt("輸入想新增的種類:");
-    if (newItem) {
-      var buttonGroup = document.querySelector(".button-group");
-      var addButton = document.getElementById("addButton");
-
-      var newButton = document.createElement("div");
-      newButton.className = "button";
-      newButton.innerHTML = "<a href='#' onclick='toggleButton(this)'>" + newItem + "</a>";
-
-      buttonGroup.insertBefore(newButton, addButton);
+  
+  function addNewname() {
+    var newCategory = prompt("Enter the new category name:");
+    if (newCategory) {
+      // Send a POST request to the server with the new category name
+      fetch('/addNewname', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ categoryName: newCategory }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('Category added successfully');
+            // Optionally, you can reload the page to update the category list after adding the new category
+            window.location.reload();
+          } else {
+            console.error('Failed to add category:', response.statusText);
+          }
+        })
+        .catch((error) => {
+          console.error('Error adding category:', error);
+        });
     }
   }
+  
