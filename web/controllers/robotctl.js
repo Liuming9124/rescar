@@ -106,12 +106,27 @@ const robotController = {
             promise.then(data => {
                 const word = JSON.parse(data); // extract the word from the response body
                 console.log(word);
-                res.send(word);
             }).catch(error => {
                 console.error(error);
                 res.status(500).send('Internal Server Error');
-            });
+            }).then(() => {
+                // console.log(req.body)
+                console.log('merchant update order :',req.body.oid)
+                // console.log(req.params.table)
+                var session = db.session()
+                session
+                    .run(`MATCH (o:order) WHERE ID(o) = ${req.body.oid} SET o.status = o.status+1 return o`)
+                    .catch(error => {
+                        console.log('updateOrder error:', error)
+                    })
+                    .finally(() => {
+                        session.close();
+                        res.redirect(`/robot`)
+                    });
+            })
     }
 }
 
 module.exports = robotController
+
+
