@@ -8609,4 +8609,9 @@ button.close {
   .delete-item .glyphicon {
     font-size: 9px;
   }
+  .containerlr {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 兩列等寬 */
+    grid-gap: 10px; /* 可選項，設置列之間的間距 */
+  }
 /*# sourceMappingURL=bootstrap.min.css.map */
