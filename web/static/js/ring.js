@@ -3,10 +3,10 @@ function fetchData() {
         .then(response => response.json())
         .then(data => {
             // modify html content 
-                for (i = 0; i < data.length; i++) {
-                    var html = ''
-                    if (data[i] == 0) {
-                        html = `
+            for (i = 0; i < data.length; i++) {
+                var html = ''
+                if (data[i] == 0) {
+                    html = `
                             <!-- Feature -->
                             <section>
                                 <!-- 沒人按鈴 -->
@@ -23,9 +23,9 @@ function fetchData() {
                                     <button type="button" class="btn">送餐</button></button>     
                             </section>
                         `
-                    }
-                    else {
-                        html = `
+                }
+                else {
+                    html = `
                             <!-- Feature -->
                             <section>
                                 <!-- 有人按鈴 -->
@@ -45,25 +45,71 @@ function fetchData() {
                             </section>
                         `
 
-                    }
-
-                    // update html content
-                    var element = document.getElementById(`table${i}`);
-                    // element.outerHTML = html;  
-                    element.innerHTML = html
                 }
+
+                // update html content
+                var element = document.getElementById(`table${i}`);
+                // element.outerHTML = html;  
+                element.innerHTML = html
+            }
         })
         .catch(error => {
             console.error('Request failed: ', error);
         });
+    // fetch orders to deliver
+    fetch('/robot/orderGet')
+        .then(response => response.json())
+        .then(data => {
+            // modify html content 
+            var html = ''
+            var element = document.getElementById(`test`);
+            for (i = 0; i < data.length; i++) {
+                JSON.stringify(data)
+                html += `
+                    <section>
+                        <div>第 ${data[i].table} 桌:訂單${data[i].orderid}號</div><br>
+                            <a href="#"><h5>
+                                <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">等待送餐中</div>
+                            </h5></a><br>
+                            <button type="button" class="btn" onclick=robotRun('${data[i].orderid}','${data[i].table}') >送餐</button></button>
+                        </div>
+                    </section>
+                `
+            }
+            element.innerHTML = html
+        })
+        .catch(error => {
+            console.error('OrderGet failed: ', error);
+        });
 }
-var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
+// this function and change the order status called robot to run
+function robotRun(oid, table) {
+    console.log(oid, table);
+    fetch(`/robot/robotRun`, {
+        method: 'POST',
+        headers: {
+            'Accept':'*/*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ oid: oid, table: table })
+    })
+        .then(response => response.json())
+        .then(data =>  {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error occurred:', error);
+            // Handle any errors that occurred during the fetch
+        });
+}
 
-// Event handler for WebSocket messages
-socket.onmessage = function (event) {
-    var messagesDiv = document.getElementById('test');
-    messagesDiv.innerHTML += '<p>' + event.data + '</p>';
-};
+// var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
+
+// // Event handler for WebSocket messages
+// socket.onmessage = function (event) {
+//     var messagesDiv = document.getElementById('test');
+//     messagesDiv.innerHTML += '<p>' + event.data + '</p>';
+// };
 
 
 // set interval to call api every 1 seconds

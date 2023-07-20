@@ -1,222 +1,253 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>food●商家管理系統</title>
-<!-- Bootstrap css-->
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/main1.css" />
-<!-- Bootstrap js-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>food●商家管理系統</title>
+	<!-- Bootstrap css-->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/main1.css" />
+	<!-- Bootstrap js-->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
 	<%- include('./partials/headermerch.ejs') %>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	<ul class="nav navbar-nav navbar-right">
-		<li><a href="order.html"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
-		<li><a href="mycart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;&nbsp;我的購物車</a></li>
-		<li>
-			<a href="orderrecord.html">
-				<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-				<span>&nbsp;&nbsp;訂單狀態</span>
-				<span id="tag">2</span>
-			</a>
-		</li>
-		
-	</ul>
-</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
-<div class="container" style="margin-top:0px;padding-bottom: 30px">
-<!-- Features -->
-				<section id="features">
-					<div class="container">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="order.html"><span class="glyphicon glyphicon-cutlery"
+							aria-hidden="true"></span>&nbsp;&nbsp;我要點餐</a></li>
+				<li><a href="mycart.html"><span class="glyphicon glyphicon-shopping-cart"
+							aria-hidden="true"></span>&nbsp;&nbsp;我的購物車</a></li>
+				<li>
+					<a href="orderrecord.html">
+						<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+						<span>&nbsp;&nbsp;訂單狀態</span>
+						<span id="tag">2</span>
+					</a>
+				</li>
+
+			</ul>
+		</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+		</nav>
+		<div class="container" style="margin-top:0px;padding-bottom: 30px">
+			<!-- Features -->
+			<section id="features">
+				<div class="container">
 						<!--<div class="containerlr">
 							<div class="left">左内容</div>
 							<div class="right">右内容</div>
 						  </div>-->
-						<div class="row aln-left">
-							<% var ring=0 ; %> 
-							<% for (var i=0 ; i < 6 ; i++) { %> 
-                                <div class="col-2 col-6-left col-12-small" id="table<%=i%>">
-                                  <!-- Feature -->
-                                    <section>
-										<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"  onclick="uncall('<%=i+1 %>')">
+					<div class="row aln-left">
+						<% var ring=0 ; %>
+							<% for (var i=0 ; i < 6 ; i++) { %>
+								<div class="col-2 col-6-left col-12-small" id="table<%=i%>">
+									<!-- Feature -->
+									<section>
+										<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
+											onclick="uncall('<%=i+1 %>')">
 											<!-- 沒人按鈴 -->
 
-											<%if (ringtable[i]==0){%> 
-												&nbsp;</a><br>
-											<%}%>
+											<%if (ringtable[i]==0){%>
+												&nbsp;
+										</a><br>
+										<%}%>
 											<!-- 有人按鈴 -->
-											
 
-											<%if (ringtable[i]==1){%> 
-													<span class="glyphicon glyphicon-bell" aria-hidden="true"></span><br>
-													
-											<%}%>
-											
-										</a>
-										<div class="tablestyle3">第 <%=i+1%> 桌</div><br>
-											<a href="#"><h5>
-												<%if (i%2==0){ %>
-													<div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>  	<!-- Modal2 -->
-												<%} %>	
-												<%if (i%2==1){ %>
-													<div  href="#" data-toggle="modal" data-target="#Modalrecord">訂單皆已送餐</div>  	<!-- Modal2 -->
-													
+
+											<%if (ringtable[i]==1){%>
+												<span class="glyphicon glyphicon-bell" aria-hidden="true"></span><br>
+
+												<%}%>
+
+													</a>
+													<div class="tablestyle3">第 <%=i+1%> 桌</div><br>
+													<a href="#">
+														<h5>
+															<%if (i%2==0){ %>
+																<div class=" warning-text" href="#" data-toggle="modal"
+																	data-target="#Modalrecord">尚有未送餐</div>
+																<!-- Modal2 -->
+																<%} %>
+																	<%if (i%2==1){ %>
+																		<div href="#" data-toggle="modal"
+																			data-target="#Modalrecord">訂單皆已送餐</div>
+																		<!-- Modal2 -->
+
+																		<%} %>
+														</h5>
+													</a><br>
+													<button type="button" class="btn">送餐</button></button>
+
+									</section>
+								</div>
+
+								<% }%>
+
+									<div class="col-7 col-1-left col-12-small">
+										<img src="images/seat.jpg" width="100%" alt="...">
+									</div>
+
+
+
+									<div class="col-4 col-6-medium col-12-small">
+										<!-- Feature -->
+										<section>
+											<%if (0){ %>
+												<div class="tablestyle">空閒中</div>
 												<%} %>
-											</h5></a><br>
-                                            <button type="button" class="btn">送餐</button></button>     
-                                        
-                                    </section>
-                                </div>
-								
-                            <% }%>
-						
-							<div class="col-7 col-1-left col-12-small">
-								<img src="images/seat.jpg" width="100%" alt="...">
-							</div>
-							
-						
+													<%if (1){ %>
+														<div class="tablestyle warning-text">移動中</div>
+														<%} %>
+															<header>
+																<br><br>
+																<button type="button" class="btn"
+																	onclick="alert('已暫停')">緊急暫停</button></button><br><br>
+																<button type="button" class="btn"
+																	onclick="alert('機器人回家中')">回到原位</button></button><br><br>
+																<button type="button" class="btn"
+																	onclick="alert('??')">此訂單餐點</button></button><br><br>
+																<button type="button" class="btn"
+																	onclick="alert('??')">??</button></button><br><br>
+															</header>
+										</section>
+									</div>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade bs-example-modal-sm" id="Modalring" tabindex="-1" role="dialog"
+					aria-labelledby="mySmallModalLabel">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+										aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="gridSystemModalLabel">已完成第g桌服務? <br>請在下方輸入員工服務碼</h4>
+								<!-- 員工可累積服務次數 也可從客人得知服務好壞 -->
 
-							<div class="col-4 col-6-medium col-12-small">
-								<!-- Feature -->
-								  <section>
-									<%if (0){ %>
-										<div class="tablestyle">空閒中</div>
-									<%} %>
-									<%if (1){ %>
-										<div class="tablestyle warning-text">移動中</div>
-									<%} %>
-									<header>
-										  <br><br>
-										  <button type="button" class="btn" onclick="alert('已暫停')">緊急暫停</button></button><br><br>
-										  <button type="button" class="btn" onclick="alert('機器人回家中')">回到原位</button></button><br><br>
-										  <button type="button" class="btn" onclick="alert('??')">此訂單餐點</button></button><br><br>
-										  <button type="button" class="btn" onclick="alert('??')">??</button></button><br><br>
-									</header>
-								  </section>
-							  </div>						
+							</div>
+							<div class="modal-body">
+								<input type="password" class="form-control" id="exampleInputPhonenumber"
+									placeholder="服務碼">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+								<a href="/ring/uncallRing" onclick="uncall(0,'<%=i %>')"><button type="submit"
+										id="ringok" class="btn btn-primary ">送出驗證</button></a>
+							</div>
 						</div>
 					</div>
-					<!-- Modal -->
-					<div class="modal fade bs-example-modal-sm" id="Modalring" tabindex="-1"  role="dialog" aria-labelledby="mySmallModalLabel">
-						<div class="modal-dialog modal-sm" role="document">
-							<div class="modal-content">
+				</div>
+				</form>
+				<!-- Modal2 -->
+				<div class="modal fade" id="Modalrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<form>
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="gridSystemModalLabel">已完成第g桌服務? <br>請在下方輸入員工服務碼</h4>           <!-- 員工可累積服務次數 也可從客人得知服務好壞 -->
-
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title itemname" id="myModalLabel">第?桌</h4>
+									<p>入座時間：</p>
 								</div>
 								<div class="modal-body">
-									<input type="password" class="form-control" id="exampleInputPhonenumber" placeholder="服務碼">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
-									<a href="/ring/uncallRing" onclick="uncall(0,'<%=i %>')"><button type="submit" id="ringok" class="btn btn-primary ">送出驗證</button></a>
-								</div>
-							</div>
-						</div>
-					</div>
-</form>
-				<!-- Modal2 -->
-					<div class="modal fade" id="Modalrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<form>
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h4 class="modal-title itemname" id="myModalLabel">第?桌</h4>
-										<p>入座時間：</p>
-									</div>
-									<div class="modal-body">
-										<table class="table table-striped table-hover text-center">
-											<tr>
-												<th class="text-center">項次</th>
-												<th class="text-center">時間</th>
-												<th class="text-center">訂單金額</th>
-												<th class="text-center">狀態</th>
-												<th class="text-center">明細</th>
-											</tr>
-											<%if (1){%>
-												<% for (var j=0 ; j < 3 ; j++) { %>	
+									<table class="table table-striped table-hover text-center">
+										<tr>
+											<th class="text-center">項次</th>
+											<th class="text-center">時間</th>
+											<th class="text-center">訂單金額</th>
+											<th class="text-center">狀態</th>
+											<th class="text-center">明細</th>
+										</tr>
+										<%if (1){%>
+											<% for (var j=0 ; j < 3 ; j++) { %>
 												<tr>
-													<th class="text-center"><%=j+1%></th>
+													<th class="text-center">
+														<%=j+1%>
+													</th>
 													<td>16:30</td>
 													<td>1750</td>
 													<td>已送出??</td>
-													<td>明細&nbsp;<a href="#" data-toggle="modal" data-target="#Modaldetail"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></td>
+													<td>明細&nbsp;<a href="#" data-toggle="modal"
+															data-target="#Modaldetail"><span
+																class="glyphicon glyphicon-th-list"
+																aria-hidden="true"></span></a></td>
 												</tr>
 												<%} %>
-											<%}%>
-											<%if (0){%>
+													<%}%>
+														<%if (0){%>
+															<tr>
+																<td colspan="5">
+																	<h4>目前無訂單</h4>
+																</td>
+															</tr>
+															<%}%>
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-primary" data-dismiss="modal" aria-label="Close">關閉</button>
+								</div>
+							</form>
+						</div><!--modal-content end-->
+					</div><!-- Modal end-->
+				</div><!--row end-->
+				<!-- Modal3 -->
+				<div class="modal fade" id="Modaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<form>
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
+									<p>訂單日期：2023年03月19日</p>
+								</div>
+								<div class="modal-body">
+									<table class="table table-striped text-center">
+										<tr>
+											<td>項次</td>
+											<td>品名</td>
+											<td>數量</td>
+											<td>單價</td>
+											<td>金額</td>
+										</tr>
+										<% if (1) { %>
+											<% for (var j=0 ; j < 3 ; j++) { %>
 												<tr>
-													<td colspan="5"><h4>目前無訂單</h4></td>
+													<td>j+1 %></td>
+													<td>orders[0].cart[j].name %></td>
+													<td>orders[0].cart[j].amt %></td>
+													<td>orders[0].cart[j].price %></td>
+													<td>orders[0].cart[j].amt*orders[0].cart[j].price %></td>
 												</tr>
-											<%}%>
-										</table>
-									</div>
-									<div class="modal-footer">
-										<button  class="btn btn-primary" data-dismiss="modal" aria-label="Close">關閉</button>
-									</div>
-								</form>
-							</div><!--modal-content end-->
-						</div><!-- Modal end-->
-					</div><!--row end-->
-					<!-- Modal3 -->
-					<div class="modal fade" id="Modaldetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<form>
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
-										<p>訂單日期：2023年03月19日</p>
-									</div>
-									<div class="modal-body">
-										<table class="table table-striped text-center">
-											<tr>
-												<td>項次</td>
-												<td>品名</td>
-												<td>數量</td>
-												<td>單價</td>
-												<td>金額</td>
-											</tr>
-											<% if (1) { %>
-												<% for (var j=0 ; j < 3 ; j++) { %>	
-													<tr>
-														<td>j+1 %></td>
-														<td>orders[0].cart[j].name %></td>
-														<td>orders[0].cart[j].amt %></td>
-														<td>orders[0].cart[j].price %></td>
-														<td>orders[0].cart[j].amt*orders[0].cart[j].price %></td>
-													</tr>
 												<%} %>
-											<% } %>
-											<tr>
-												<td colspan="4">訂單金額總計</td>
-												<td style="color: crimson;font-size: 18px">230</td>
-											</tr>
-										</table>
-									</div>
-									<div class="modal-footer">
-										<button  class="btn btn-primary" data-dismiss="modal" aria-label="Close">關閉</button>
-									</div>
-								</form>
-							</div><!--modal-content end-->
-						</div><!-- Modal end-->
-					</div><!--row end-->
-				</section>
-				<p id="test">test websocket</p>
+													<% } %>
+														<tr>
+															<td colspan="4">訂單金額總計</td>
+															<td style="color: crimson;font-size: 18px">230</td>
+														</tr>
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-primary" data-dismiss="modal" aria-label="Close">關閉</button>
+								</div>
+							</form>
+						</div><!--modal-content end-->
+					</div><!-- Modal end-->
+				</div><!--row end-->
+			</section>
+			<p id="test">test websocket</p>
 </body>
+
 </html>
 <script>
 	function uncall(i) {
