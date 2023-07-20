@@ -2,5 +2,7 @@
     "url":"0",
     "http": "http://localhost:7000/",
     "https":"https://liuming.ddns.net/",
-    "port":"7000"
+    "port":"7000",
+    "robotip":"http://127.0.0.1:8000/",
+    "note":"ip後面請務必加上「/」，否則會出錯，ex:'http://localhost:7000/'"
 }

@@ -70,14 +70,6 @@ app.use('*/crypto'    ,express.static(path.join(__dirname, '/static/crypto')));
 //require routes
 require('./route')(app)
 // error handling
-app.use((err, req, res, next) => {
-  if (err) {
-    res.status(500)
-    console.log('500 error: ', err)
-    return res.redirect('/home')
-    // return res.render('error', { err })
-  }
-})
 
 
 //set http or https
