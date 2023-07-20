@@ -85,22 +85,13 @@ function fetchData() {
 // this function and change the order status called robot to run
 function robotRun(oid, table) {
     console.log(oid, table);
-    // fetch('/robot/robotip')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data.robotip);
-    //         var robotip = data.robotip;
-    //     })
-    //     .catch(error => {
-    //         console.error('Request failed: ', `${robotip}robotRun:`+error);
-    //     });
-    
     fetch(`/robot/robotRun`, {
         method: 'POST',
         headers: {
             'Accept':'*/*',
-            'Content-Type': 'Access-Control-Allow-Origin'
+            'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ oid: oid, table: table })
     })
         .then(response => response.json())
         .then(data =>  {

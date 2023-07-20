@@ -1,5 +1,5 @@
 const db = require("../route/modules/db");
-// var session = db.session()
+const http = require('http');
 
 const robotController = {
 
@@ -62,12 +62,51 @@ const robotController = {
             console.log('ordertable error:', error)
         })
         .then(() => {
-            console.log('robotctl.js:',ordertable)
+            // console.log('robotctl.js:',ordertable)
             session.close()
             // console.log(ordertable)
             // console.log("ringupdate success")
             res.send(ordertable)
         })
+    },
+    robotRun: (req, res) => {
+            const jsonData = JSON.stringify(req.body);
+            const options = {
+                hostname: '192.168.4.3',
+                port: 8000,
+                path: '/robotRun',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Set the content type header for JSON data
+                    'Content-Length': jsonData.length // Set the content length header
+                }
+            };
+            const promise = new Promise((resolve, reject) => {
+                const request = http.request(options, response => {
+                    // console.log(`statusCode: ${response.statusCode}`);
+                    let data = '';
+                    response.on('data', chunk => {
+                        data += chunk;
+                    });
+                    response.on('end', () => {
+                        resolve(data);
+                    });
+                });
+                request.on('error', error => {
+                    reject(error);
+                });
+                request.write(jsonData);
+                request.end();
+            });
+        
+            promise.then(data => {
+                const word = JSON.parse(data); // extract the word from the response body
+                console.log(word);
+                res.send(word);
+            }).catch(error => {
+                console.error(error);
+                res.status(500).send('Internal Server Error');
+            });
     }
 }
 
