@@ -1,5 +1,6 @@
 const db = require("../route/modules/db");
 const http = require('http');
+const fs = require('fs');
 
 const robotController = {
 
@@ -71,9 +72,12 @@ const robotController = {
     },
     robotRun: (req, res) => {
             const jsonData = JSON.stringify(req.body);
+            // read config.json
+            const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+            console.log(config.robotport, config.robotip)
             const options = {
-                hostname: '192.168.4.3',
-                port: 8000,
+                hostname: config.robotip,
+                port: config.robotport,
                 path: '/robotRun',
                 method: 'POST',
                 headers: {

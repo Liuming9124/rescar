@@ -2,10 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const robotCtl = require('../../controllers/robotctl')
-const fs = require('fs');
-// read config.json
-const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-
 
 
 router.get('/', robotCtl.robotPage)
