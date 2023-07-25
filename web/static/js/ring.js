@@ -8,41 +8,40 @@ function fetchData() {
                 if (data[i] == 0) {
                     html = `
                             <!-- Feature -->
-                            <section>
+                            <div>
                                 <!-- 沒人按鈴 -->
-                                <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm">&nbsp;</a><br>
-                                <div class="tablestyle3">第 ${i + 1} 桌</div><br>
+                                <a>
+                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                </a>
+                            </div>
+                                <div class="tablestyle3">第 ${i + 1} 桌</div>
+                                <div>
                                     <a href="#"><h5>
-                                        <!-- if (i%2==0){  -->
-                                            <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>  	<!-- Modal2 -->
-                                        <!--  }	 -->	
-                                        <!--if (i%2==1){ -->
                                             訂單皆已送餐
-                                        <!-- } -->
-                                    </h5></a><br>
-                                    <button type="button" class="btn">送餐</button></button>     
-                            </section>
+                                    </h5></a>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn">送餐</button></button>
+                                </div>     
+                           
                         `
                 }
                 else {
                     html = `
                             <!-- Feature -->
-                            <section>
                                 <!-- 有人按鈴 -->
+                                <div>
                                     <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
                                         <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-                                    </a><br>
-                                <div class="tablestyle3">第 ${i + 1} 桌</div><br>
+                                    </a>
+                                </div>
+                                <div class="tablestyle3">第 ${i + 1} 桌</div>
                                     <a href="#"><h5>
                                         <!-- if (i%2==0){  -->
                                             <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>  	<!-- Modal2 -->
                                         <!--  }	 -->	
-                                        <!--if (i%2==1){ -->
-                                            訂單皆已送餐
-                                        <!-- } -->
-                                    </h5></a><br>
-                                    <button type="button" class="btn">送餐</button></button>     
-                            </section>
+                                    </h5></a>
+                                    <button type="button" class="btn">送餐</button></button>
                         `
 
                 }

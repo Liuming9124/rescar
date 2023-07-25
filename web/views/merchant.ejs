@@ -191,7 +191,14 @@
 					</table>
 				</div>
 				<div class="tab-pane fade" id="finish">
-					<h3 class="text-center">已完成配送-待結帳</h3>
+					<h3 class="text-center">結帳</h3>
+					<div class="button-container">
+					<% for (var i = 0; i < 6; i++) { %>
+						<a href="#" data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>">
+						<button class="gray-button"><span>桌號 <%= i + 1 %></span></button>
+						</a>
+					<% } %>
+					</div>
 					<table class="table table-striped table-hover text-center">
 						<tr>
 							<th class="text-center">桌號</th>
@@ -199,16 +206,21 @@
 							<th class="text-center">日期</th>
 							<th class="text-center">時間</th>
 							<th class="text-center">訂單金額</th>
-							<th class="text-center">編輯訂單</th>
 							<th class="text-center">更新狀態</th>
 						</tr>
 						<!-- count status=3 -->
-						<% const orders3=orders.filter(order=> {
-							const status = JSON.parse(order.info).status.low;
-							return status === 3;
-							});
-							// console.log(orders3)
-							%>
+						<%const orders3 = orders.filter(order => {
+								const status = JSON.parse(order.info).status.low;
+								return status === 3;
+								});
+
+								// Sort orders by 'table' attribute in ascending order
+								orders3.sort((a, b) => {
+								const tableA = JSON.parse(a.info).table;
+								const tableB = JSON.parse(b.info).table;
+								return tableA - tableB;
+								});
+								%>
 							<%if (orders3.length){ %>
 								<% for (var j=0 ; j < orders3.length ; j++) { %>
 									<% const datestr=JSON.parse(orders3[j].info).time %>
@@ -235,9 +247,6 @@
 															<td>
 																<%= total %>
 															</td>
-
-															<td><a href="#" class="my-button" data-toggle="modal"
-																	data-target="#Modalcheckedit">編輯</a></td>
 															<td><a href="#" class="my-button" data-toggle="modal"
 																	data-target="#Modalrecord" 
 																	onclick="detail(3,'<%=j %>')">結帳</a></td>
@@ -253,7 +262,6 @@
 																	<%}%>
 					</table>
 				</div>
-
 			</div>
 
 			<!-- Modal1 -->
@@ -265,7 +273,7 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<h4 class="modal-title itemname" id="myModalLabel">訂單明細 1</h4>
+								<h4 class="modal-title itemname" id="myModalLabel">訂單明細</h4>
 								<p>訂單日期：2023年03月19日</p>
 							</div>
 							<div class="modal-body">
@@ -375,6 +383,66 @@
 				</div><!-- Modal end-->
 			</div><!--row end-->
 		</div><!--container end-->
+		<!-- Modal3 -->
+		<div class="modal fade" id="Modalcheckout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title itemname" id="myModalLabel">桌號：</h4>
+							<p>訂單日期：2023年06月09日</p>
+						</div>
+						<div class="modal-body">
+							<table class="table table-striped text-center">
+								<tr>
+									<td>項次</td>
+									<td>訂單編號</td>
+									<td>下單時間</td>
+									<td>金額</td>
+								</tr>
+								<%const orders33 = orders.filter(order => {
+									const status = JSON.parse(order.info).status.low;
+									const table = JSON.parse(order.info).table;
+									return status === 3 && table === 3;
+								});
+								%>
+								
+									<% if (orders.length!=0) { %>
+									<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>
+										<% const targetTableNumber = 3; // Replace 3 with the desired table number %>
+
+										<tr>
+											<td>
+											</td>
+											<td>
+											</td>
+											<td >
+											</td>
+											<td>
+											</td>
+											
+										</tr>
+										<%} %>
+											<% } %>
+												<tr>
+													<td colspan="3">訂單金額總計</td>
+													<td colspan="4" style="color: crimson;font-size: 18px">230</td>
+												</tr>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal"
+								aria-label="Close">取消</button>
+							<button id="submit1" type="submit" class="btn btn-primary">結帳</button>
+						</div>
+					</form>
+				</div><!--modal-content end-->
+			</div><!-- Modal end-->
+		</div><!--row end-->
+	</div><!--container end-->
 
 
 </body>
@@ -419,7 +487,7 @@
 						${orders[i].cart[j].price}
 					</td>
 					<td>
-							${orders[i].cart[j].amt * orders[i].cart[j].price}
+						${orders[i].cart[j].amt * orders[i].cart[j].price}
 					</td>
 				</tr>
 			`;
