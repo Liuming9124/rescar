@@ -40,77 +40,78 @@
 			<!-- Features -->
 			<section id="features">
 				<div class="container">
-						<div class="containerlr">
-							<div class="left ">
-								<img src="images/seat.jpg" width="100%" alt="...">  <!-- 座位 -->
-								<br><br><br>
-								<!-- Feature -->
-									<%if (0){ %>
-										<div class="tablestyle">空閒中</div>
-									<%} %>
+					<div class="containerlr">
+						<div class="left ">
+							<img src="images/seat.jpg" width="100%" alt="..."> <!-- 座位 -->
+							<br><br><br>
+							<!-- Feature -->
+							<%if (0){ %>
+								<div class="tablestyle">空閒中</div>
+								<%} %>
 									<%if (1){ %>
 										<div class="tablestyle warning-text">移動中</div>
-									<%} %>
-										<header>
-											<br><br>
-											<button type="button" class="btn"
-												onclick="alert('已暫停')">緊急暫停</button></button>
-											<button type="button" class="btn"
-												onclick="alert('機器人回家中')">回到原位</button></button>
-											<button type="button" class="btn"
-												onclick="alert('??')">此訂單餐點</button></button>
-											<button type="button" class="btn"
-												onclick="alert('??')">??</button></button>
-										</header>
-							</div>
-							<div class="right ">
-								<div class="scrolling-container" style="height: 500px; overflow-y: scroll;">
-									<% var ring=0 ; %>
-								<% for (var i=0 ; i < 6 ; i++) { %>
-									<div class="button-container" id="table<%=i%>">
-										<!-- Feature -->
+										<%} %>
+											<header>
+												<br><br>
+												<button type="button" class="btn"
+													onclick="alert('已暫停')">緊急暫停</button></button>
+												<button type="button" class="btn"
+													onclick="alert('機器人回家中')">回到原位</button></button>
+												<button type="button" class="btn"
+													onclick="alert('??')">此訂單餐點</button></button>
+												<button type="button" class="btn"
+													onclick="alert('??')">??</button></button>
+											</header>
+						</div>
+						<div class="right ">
+							<div class="scrolling-container" style="height: 500px; overflow-y: scroll;">
+								<% var ring=0 ; %>
+									<% for (var i=0 ; i < 6 ; i++) { %>
+										<div class="button-container" id="table<%=i%>">
+											<!-- Feature -->
 											<div>
-											<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
-												onclick="uncall('<%=i+1 %>')">
-												<!-- 沒人按鈴 -->
-												<%if (ringtable[i]==0){%>
-													<a>
-														&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-													</a>
-												<%}%>
-												<!-- 有人按鈴 -->
-												<%if (ringtable[i]==1){%>
-													<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-													<%}%>
-											</a>
+												<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
+													onclick="uncall('<%=i+1 %>')">
+													<!-- 沒人按鈴 -->
+													<%if (ringtable[i]==0){%>
+														<a>
+															&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+														</a>
+														<%}%>
+															<!-- 有人按鈴 -->
+															<%if (ringtable[i]==1){%>
+																<span class="glyphicon glyphicon-bell"
+																	aria-hidden="true"></span>
+																<%}%>
+												</a>
 											</div>
-													<div class="tablestyle3">第 <%=i+1%> 桌</div>
-													<div>
-														<a href="#">
-															<h5>
-																<%if (i%2==0){ %>
-																	<div class=" warning-text" href="#" data-toggle="modal"
-																		data-target="#Modalrecord">尚有未送餐</div>
+											<div class="tablestyle3">第 <%=i+1%> 桌</div>
+											<div>
+												<a href="#">
+													<h5>
+														<%if (i%2==0||1){ %>
+															<div class=" warning-text" href="#" data-toggle="modal"
+																data-target="#Modalrecord">尚有未送餐</div>
+															<!-- Modal2 -->
+															<%} %>
+																<%if (i%2==2){ %>
+																	<div href="#" data-toggle="modal"
+																		data-target="#Modalrecord">訂單皆已送餐</div>
 																	<!-- Modal2 -->
 																	<%} %>
-																		<%if (i%2==1){ %>
-																			<div href="#" data-toggle="modal"
-																				data-target="#Modalrecord">訂單皆已送餐</div>
-																			<!-- Modal2 -->
-																			<%} %>
-															</h5>
-														</a>
-													</div>
-													<div>
-														<button type="button" class="btn">送餐</button></button>
-													</div>
-									</div>
-									<% }%>
-								</div>
+													</h5>
+												</a>
+											</div>
+											<div>
+												<button type="button" class="btn">送餐</button></button>
+											</div>
+										</div>
+										<% }%>
 							</div>
 						</div>
+					</div>
 					<div class="row aln-left">
-						
+
 					</div>
 				</div>
 				<!-- Modal -->

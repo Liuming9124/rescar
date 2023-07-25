@@ -87,13 +87,13 @@ function robotRun(oid, table) {
     fetch(`/robot/robotRun`, {
         method: 'POST',
         headers: {
-            'Accept':'*/*',
+            'Accept': '*/*',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ oid: oid, table: table })
     })
         .then(response => response.json())
-        .then(data =>  {
+        .then(data => {
             console.log(data);
         })
         .catch(error => {

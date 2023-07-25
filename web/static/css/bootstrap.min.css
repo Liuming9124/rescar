@@ -8631,7 +8631,13 @@ button.close {
   .button-container div {
     margin: 0 10px; /* 调整内部div之间的间距 */
   }
-  
+  .button-container1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 10px; /* 左右間距，增加間距 */
+  }
   /* Style the gray buttons */
   .gray-button {
     width: 150px;
