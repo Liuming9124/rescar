@@ -24,14 +24,12 @@ while key != ord('q'):
         frame)
 
     ids, idx = None, None
-    # print(type(markerIds))
-    # if markerIds != None:
+
     if np.logical_not(markerIds is None):
         ids = markerIds.ravel()
         idx = np.argmin(ids)
 
-    # markerCorners, markerIds, rejectedCandidates = cv2.aruco.detectMarkers(
-    #     frame, dictionary, parameters=parameters)
+
     frame = cv2.aruco.drawDetectedMarkers(frame, markerCorners, markerIds)
     rvec, tvec, _objPoints = cv2.aruco.estimatePoseSingleMarkers(
         markerCorners, 18.5, intrinsic, distortion)
@@ -63,4 +61,4 @@ while key != ord('q'):
 
     cv2.imshow("frame", frame)
     key = cv2.waitKey(33)
-    # cv2.destroyAllWindows()
+

@@ -20,11 +20,11 @@ def button_callback(channel):
         shutdown_jetson()
        
 
-# Set up GPIO mode and button pin
+
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-# Add event detection for button press and release
+
 GPIO.add_event_detect(button_pin, GPIO.BOTH, callback=button_callback, bouncetime=200)
 
 # Main loop
