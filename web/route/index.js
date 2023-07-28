@@ -12,6 +12,7 @@ const upload       = require('./modules/upload')
 const merchinfo    = require('./modules/merchinfo')
 const dataanalysis = require('./modules/dataanalysis')
 const history      = require('./modules/history')
+const map          = require('./modules/map.js')
 
 
 
@@ -30,6 +31,7 @@ module.exports = app => {
   app.use('/merchinfo',   merchinfo)
   app.use('/dataanalysis',dataanalysis)
   app.use('/history',     history)
+  app.use('/map',         map)
 
 
   app.use('/logout',(req, res) => {

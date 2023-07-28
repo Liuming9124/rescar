@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>food●點餐系統</title>
+    <!-- Bootstrap css-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/main1.css" />
+    <!-- Bootstrap js-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/map.css" />
+</head>
+
+<body>
+    <%- include('./partials/headermerch.ejs') %>
+
+        <div class="container" style="margin-top:50px;padding-bottom: 30px">
+            <h2 class="h2">地圖設定</h2>
+            <ul id="myTab1" class="nav nav-tabs">
+                <li class="active"><a href="#confirm" data-toggle="tab">匯入目前地圖</a></li>
+                <li><a href="#done" data-toggle="tab">設定新地圖</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+
+            <!-- 新增長度單位和寬度單位的按鈕 -->
+            <div class="container">
+                <button id="lengthUnitButton">設定長度</button>
+                <button id="widthUnitButton">設定寬度</button>
+                <button id="confirmButton">確定</button>
+            </div>
+
+            <!-- 長度輸入框，預設隱藏 -->
+            <div id="lengthInput" class="input-container" style="display: none;">
+                <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
+                <button id="lengthConfirmButton">確定</button>
+            </div>
+
+            <!-- 寬度輸入框，預設隱藏 -->
+            <div id="widthInput" class="input-container" style="display: none;">
+                <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
+                <button id="widthConfirmButton">確定</button>
+            </div>
+
+            <!-- 顯示矩陣的HTML表格 -->
+            <div id="matrixContainer" style="display: none;">
+                <table id="matrixTable"></table>
+            </div>
+</body>
+
+<script>
+    // 變數來儲存長度和寬度值
+    let lengthValue = 0;
+    let widthValue = 0;
+    let matrix = []; // 矩陣用來儲存0和1
+
+    // 當頁面載入完成後，綁定按鈕點擊事件處理函數
+    document.addEventListener('DOMContentLoaded', function () {
+        const lengthUnitButton = document.getElementById('lengthUnitButton');
+        const widthUnitButton = document.getElementById('widthUnitButton');
+        const lengthInput = document.getElementById('lengthInput');
+        const widthInput = document.getElementById('widthInput');
+        const lengthValueInput = document.getElementById('lengthValue');
+        const widthValueInput = document.getElementById('widthValue');
+        const lengthConfirmButton = document.getElementById('lengthConfirmButton');
+        const widthConfirmButton = document.getElementById('widthConfirmButton');
+        const confirmButton = document.getElementById('confirmButton');
+        const matrixContainer = document.getElementById('matrixContainer');
+        const matrixTable = document.getElementById('matrixTable');
+
+        // 顯示長度輸入框
+        lengthUnitButton.addEventListener('click', function () {
+            lengthInput.style.display = 'block';
+        });
+
+        // 顯示寬度輸入框
+        widthUnitButton.addEventListener('click', function () {
+            widthInput.style.display = 'block';
+        });
+
+        // 長度確定按鈕點擊事件處理
+        lengthConfirmButton.addEventListener('click', function () {
+            lengthValue = parseInt(lengthValueInput.value);
+            if (lengthValue && lengthValue > 0) {
+                lengthUnitButton.textContent = `設定長度 (${lengthValue})`;
+                lengthInput.style.display = 'none';
+            } else {
+                alert('請輸入有效的長度！');
+            }
+        });
+
+        // 寬度確定按鈕點擊事件處理
+        widthConfirmButton.addEventListener('click', function () {
+            widthValue = parseInt(widthValueInput.value);
+            if (widthValue && widthValue > 0) {
+                widthUnitButton.textContent = `設定寬度 (${widthValue})`;
+                widthInput.style.display = 'none';
+            } else {
+                alert('請輸入有效的寬度！');
+            }
+        });
+
+        // 確定按鈕點擊事件處理
+        confirmButton.addEventListener('click', function () {
+            if (lengthValue > 0 && widthValue > 0) {
+                // 初始化矩陣為全為0的矩陣
+                matrix = Array.from({ length: lengthValue }, () => Array(widthValue).fill(0));
+
+                // 產生矩陣的HTML表格
+                generateMatrixTable();
+
+                // 顯示矩陣的HTML表格
+                matrixContainer.style.display = 'block';
+            } else {
+                alert('請先設定有效的長度和寬度！');
+            }
+        });
+    });
+    // 產生矩陣的HTML表格
+    function generateMatrixTable() {
+        const matrixTable = document.getElementById('matrixTable');
+        matrixTable.innerHTML = '';
+
+        for (let i = 0; i < lengthValue; i++) {
+            const row = document.createElement('tr');
+            for (let j = 0; j < widthValue; j++) {
+                const cell = document.createElement('td');
+                cell.dataset.row = i; // 設定data屬性來儲存矩陣元素的位置
+                cell.dataset.col = j;
+                cell.addEventListener('click', function () {
+                    toggleCellValue(i, j);
+                });
+                row.appendChild(cell);
+            }
+            matrixTable.appendChild(row);
+        }
+    }
+
+    // 點擊矩陣元素時，在0和1之間進行轉換
+    function toggleCellValue(row, col) {
+        matrix[row][col] = 1 - matrix[row][col];
+        generateMatrixTable(); // 更新矩陣的HTML表格
+
+        // 設定矩陣格子的背景顏色
+        const matrixTable = document.getElementById('matrixTable');
+        for (let i = 0; i < lengthValue; i++) {
+            for (let j = 0; j < widthValue; j++) {
+                const cell = matrixTable.rows[i].cells[j];
+                if (matrix[i][j] === 0) {
+                    cell.style.backgroundColor = 'white';
+                } else {
+                    cell.style.backgroundColor = 'black';
+                }
+            }
+        }
+    }
+    // 確定按鈕點擊事件處理
+    confirmButton.addEventListener('click', function () {
+        if (lengthValue > 0 && widthValue > 0) {
+            // 初始化矩陣為全為0的矩陣
+            matrix = Array.from({ length: lengthValue }, () => Array(widthValue).fill(0));
+
+            // 產生矩陣的HTML表格
+            generateMatrixTable();
+
+            // 顯示矩陣的HTML表格
+            matrixContainer.style.display = 'block';
+        } else {
+            alert('請先設定有效的長度和寬度！');
+        }
+    });
+
+</script>
+
+
+
+
+</html>

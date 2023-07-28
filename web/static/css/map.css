@@ -1,0 +1,19 @@
+/* 格式化矩陣表格 */
+#matrixTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 10px auto;
+  }
+  
+  /* 設定每個正方形的樣式 */
+  #matrixTable td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
