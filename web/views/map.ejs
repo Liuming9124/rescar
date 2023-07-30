@@ -16,6 +16,32 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/map.css" />
+
+
+    <style>
+        /* Outer container */
+        .outer-container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Left container */
+        .left-container {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            width: 60%;
+        }
+
+        /* Right container */
+        .right-container {
+            flex: 1;
+            background-color: #e0e0e0;
+            padding: 20px;
+            width: 40%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -28,32 +54,37 @@
                 <li><a href="#done" data-toggle="tab">設定新地圖</a></li>
             </ul>
         </div>
-
         <div class="container">
+            <div class="outer-container">
+                <div class="left-container">
+                    <!-- 新增長度單位和寬度單位的按鈕 -->
+                    <button id="lengthWidthUnitButton">設定長度寬度</button>
+                    <!-- 長度和寬度輸入框，預設隱藏 -->
+                    <div id="lengthWidthInput" class="input-container" style="display: none;">
+                        <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
+                        <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
+                        <button id="lengthWidthConfirmButton">確定</button>
+                    </div>
 
-            <!-- 新增長度單位和寬度單位的按鈕 -->
-            <div class="container">
-                <button id="lengthWidthUnitButton">設定長度寬度</button>
-            </div>
-
-            <!-- 長度和寬度輸入框，預設隱藏 -->
-            <div id="lengthWidthInput" class="input-container" style="display: none;">
-                <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
-                <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
-                <button id="lengthWidthConfirmButton">確定</button>
-            </div>
-
-            <!-- 顯示矩陣的HTML表格 -->
-            <div id="matrixContainer" style="display: none;">
-                <table id="matrixTable"></table>
-            </div>
-
-            <!-- 新增顏色和種類的按鈕 -->
-            <div class="container" style="margin-top:5px">
-                <button id="barrier">障礙物</button>
-                <button id="counter">櫃台</button>
-                <button id="kitchen">廚房</button>
-                <button id="table">桌子</button>
+                    <!-- 顯示矩陣的HTML表格 -->
+                    <div id="matrixContainer" style="display: none;">
+                        <table id="matrixTable"></table>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <button id="barrier" style="background-color: black; color: white;">障礙物</button>
+                    <button id="counter" style="background-color: rgba(0, 128, 0, 0.8); color: white">櫃台</button>
+                    <button id="kitchen" style="background-color: rgba(255, 255, 0, 0.5);">廚房</button>
+                    <br><br>
+                    <div class="container">
+                        <h4>設定桌號</h4>
+                        <input type="number" min="1" step="1" class="form-control" id="tablnum" placeholder="請輸入桌號">
+                        <div class="col-md-4" style="top: 10px;">
+                            <button id="table"
+                                style="background-color: rgba(0, 0, 255, 0.8); color: white">確認桌號</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 </body>
@@ -103,7 +134,7 @@
         });
 
         // 確定按鈕點擊事件處理
-        lengthWidthConfirmButton    .addEventListener('click', function () {
+        lengthWidthConfirmButton.addEventListener('click', function () {
             if (matrix.length > 0 && matrix[0].length > 0) {
                 // 顯示矩陣的HTML表格
                 matrixContainer.style.display = 'block';
@@ -126,7 +157,8 @@
 
     // 點擊矩陣元素時，在0和1之間進行轉換
     function toggleCellValue(row, col) {
-        matrix[row][col] = (matrix[row][col] + 1) % 6;
+        if (!(matrix[row][col] === 0)) matrix[row][col] = 0;
+        else matrix[row][col] = 0.5;
         generateMatrixTable(); // 更新矩陣的HTML表格
         updateMatrixTableColor(); // 更新矩陣的HTML表格顏色
     }
@@ -161,47 +193,46 @@
                     case 0:
                         cell.style.backgroundColor = 'white';
                         break;
-                    case 1:
+                    case 0.5:
                         cell.style.backgroundColor = 'gray';
                         break;
-                    case 2:
+                    case -1:
                         cell.style.backgroundColor = 'black';
                         break;
-                    case 3:
+                    case -2:
                         cell.style.backgroundColor = 'green';
                         break;
-                    case 4:
+                    case -3:
                         cell.style.backgroundColor = 'yellow';
                         break;
-                    case 5:
-                        cell.style.backgroundColor = 'blue';
-                        break;
                     default:
+                        cell.style.backgroundColor = 'blue';
+                        cell.innerHTML = matrix[i][j];
                         break;
                 }
             }
         }
     }
     // 更改矩陣元素的顏色並同步更新matrix裡面的值
-    function changeColor(type) {
+    function changeColor(type, tableNumber) {
         const matrixTable = document.getElementById('matrixTable');
         for (let i = 0; i < lengthValue; i++) {
             for (let j = 0; j < widthValue; j++) {
                 const cell = matrixTable.rows[i].cells[j];
-                if (matrix[i][j] === 1) {
-                    // 如果矩陣元素為1，表示是灰色方塊
+                if (matrix[i][j] === 0.5) {
+                    // 如果矩陣元素為0.5，表示是灰色方塊
                     switch (type) {
                         case 'barrier':
-                            matrix[i][j]=2;
+                            matrix[i][j] = -1;
                             break;
                         case 'counter':
-                            matrix[i][j]=3;
+                            matrix[i][j] = -2;
                             break;
                         case 'kitchen':
-                            matrix[i][j]=4;
+                            matrix[i][j] = -3;  
                             break;
                         case 'table':
-                            matrix[i][j]=5;
+                            matrix[i][j] = tableNumber;
                             break;
                         default:
                             break;
@@ -229,11 +260,14 @@
 
     // 當桌子按鈕被點擊時
     document.getElementById('table').addEventListener('click', function () {
-        changeColor('table'); // 將灰色的方塊換成桌子的顏色
+        // 將灰色的方塊換成桌子的顏色並設定桌號
+        const tableNumber = parseInt(document.getElementById('tablnum').value);
+        if (!isNaN(tableNumber) && tableNumber > 0) {
+            changeColor('table', tableNumber);
+        } else {
+            alert('請輸入有效的桌號！');
+        }
     });
 </script>
-
-
-
 
 </html>
