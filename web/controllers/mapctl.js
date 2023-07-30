@@ -1,4 +1,6 @@
 const db = require("../route/modules/db");
+const http = require('http');
+const fs = require('fs');
 // var session = db.session()
 function processData(inputArray) {
     const data = {
@@ -86,7 +88,7 @@ async function writeDataToNeo4j(data) {
             RETURN n, b, x, y, r    
         `)
 
-        console.log('Data has been written to Neo4j successfully.');    
+        console.log('Data has been written to Neo4j successfully.');
     } catch (error) {
         console.error('Error occurred:', error);
     } finally {
@@ -165,12 +167,58 @@ const mapController = {
     mapUpload: async (req, res) => {
         var map = req.body
         // console.log('receive new maps:', map)
-        var data = processData(map);
+        var data = await processData(map);
         console.log('initData:', data)
         // console.log('data:', JSON.stringify(data))
+
+        // Upload Maps to Neo4j
         writeDataToNeo4j(data)
-        console.log('afterData:',await getDataFromNeo4j())
-        res.send('{"status": "ok"}')
+
+        // Download Maps from Neo4j
+        // console.log('afterData:', await getDataFromNeo4j())
+
+        // Send Maps to Robot
+        const jsonData = JSON.stringify(data);
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        console.log(config.robotport, config.robotip)
+        const options = {
+            hostname: config.robotip,
+            port: config.robotport,
+            path: '/mapSet',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set the content type header for JSON data
+                'Content-Length': jsonData.length // Set the content length header
+            }
+        };
+        const promise = new Promise((resolve, reject) => {
+            const request = http.request(options, response => {
+                // console.log(`statusCode: ${response.statusCode}`);
+                let data = '';
+                response.on('data', chunk => {
+                    data += chunk;
+                });
+                response.on('end', () => {
+                    resolve(data);
+                });
+            });
+            request.on('error', error => {
+                reject(error);
+            });
+            request.write(jsonData);
+            request.end();
+        });
+
+        promise.then(data => {
+            const word = JSON.parse(data); // extract the word from the response body
+            console.log(word);
+        }).catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }).then(() => {
+            res.send('{"status": "ok"}')
+        });
     }
 
 }
