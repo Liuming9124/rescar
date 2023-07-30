@@ -93,6 +93,69 @@ async function writeDataToNeo4j(data) {
         session.close();
     }
 }
+async function getDataFromNeo4j() {
+    session = db.session();
+    try {
+        // Fetch the data from Neo4j
+        const result = await session.run(`
+            MATCH (r:Robot)-[:has]->(n:Kitchen),
+                  (r)-[:has]->(b:Counter),
+                  (r)-[:has]->(x:Map),
+                  (r)-[:has]->(y:Table)
+            RETURN x.x as mapX, x.y as mapY, x.flatMaps as flatMaps,
+                   n.x as kitchenX, n.y as kitchenY,
+                   b.x as counterX, b.y as counterY,
+                   collect({x: y.x, y: y.y, tableNumber: y.tableNumber}) as tables
+        `);
+
+        // Extract the data from the result
+        const data = {
+            maps: [],
+            location: {
+                counter: [],
+                kitchen: [],
+                table: {}
+            }
+        };
+
+        if (result.records.length > 0) {
+            const record = result.records[0];
+            const mapX = record.get('mapX');
+            const mapY = record.get('mapY');
+            const flatMaps = record.get('flatMaps');
+            const kitchenX = record.get('kitchenX');
+            const kitchenY = record.get('kitchenY');
+            const counterX = record.get('counterX');
+            const counterY = record.get('counterY');
+            const tables = record.get('tables');
+
+            // Convert the flatMaps back to a 2D array
+            const maps = [];
+            for (let i = 0; i < mapX; i++) {
+                maps.push(flatMaps.slice(i * mapY, (i + 1) * mapY));
+            }
+
+            // Set the data
+            data.maps = maps;
+            data.location.counter = [counterX, counterY];
+            data.location.kitchen = [kitchenX, kitchenY];
+
+            // Set the table data
+            for (const table of tables) {
+                const tableNumber = table.tableNumber;
+                data.location.table[tableNumber] = [table.x, table.y];
+            }
+        }
+        // console.log(data)
+        return data;
+    } catch (error) {
+        console.error('Error occurred:', error);
+    } finally {
+        session.close();
+    }
+}
+
+
 const mapController = {
 
     mapPage: async (req, res) => {
@@ -103,10 +166,10 @@ const mapController = {
         var map = req.body
         // console.log('receive new maps:', map)
         var data = processData(map);
-        // console.log('data:', data)
+        console.log('initData:', data)
         // console.log('data:', JSON.stringify(data))
         writeDataToNeo4j(data)
-        
+        console.log('afterData:',await getDataFromNeo4j())
         res.send('{"status": "ok"}')
     }
 
