@@ -16,32 +16,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/map.css" />
-
-
-    <style>
-        /* Outer container */
-        .outer-container {
-            display: flex;
-            width: 100%;
-        }
-
-        /* Left container */
-        .left-container {
-            flex: 1;
-            background-color: #f0f0f0;
-            padding: 20px;
-            width: 60%;
-        }
-
-        /* Right container */
-        .right-container {
-            flex: 1;
-            background-color: #e0e0e0;
-            padding: 20px;
-            width: 40%;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -55,35 +29,27 @@
             </ul>
         </div>
         <div class="container">
-            <div class="outer-container">
-                <div class="left-container">
-                    <!-- 新增長度單位和寬度單位的按鈕 -->
-                    <button id="lengthWidthUnitButton">設定長度寬度</button>
-                    <!-- 長度和寬度輸入框，預設隱藏 -->
-                    <div id="lengthWidthInput" class="input-container" style="display: none;">
-                        <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
-                        <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
-                        <button id="lengthWidthConfirmButton">確定</button>
-                    </div>
-
-                    <!-- 顯示矩陣的HTML表格 -->
-                    <div id="matrixContainer" style="display: none;">
-                        <table id="matrixTable"></table>
-                    </div>
+            <div class="container">
+                <!-- 新增長度單位和寬度單位的按鈕 -->
+                <button id="lengthWidthUnitButton">設定長度寬度</button>
+                <button id="barrier" style="background-color: black; color: white;">障礙物</button>
+                <button id="counter" style="background-color: rgba(0, 128, 0, 0.8); color: white">櫃台</button>
+                <button id="kitchen" style="background-color: rgba(255, 255, 0, 0.5);">廚房</button>
+                <input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號">
+                <button id="table" style="background-color: rgba(0, 0, 255, 0.8); color: white">確認桌號</button>
+                <button id="submit">上傳</button>
+                <!-- 長度和寬度輸入框，預設隱藏 -->
+                <div id="lengthWidthInput" class="input-container" style="display: none;">
+                    <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
+                    <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
+                    <button id="lengthWidthConfirmButton">確定</button>
                 </div>
-                <div class="right-container">
-                    <button id="barrier" style="background-color: black; color: white;">障礙物</button>
-                    <button id="counter" style="background-color: rgba(0, 128, 0, 0.8); color: white">櫃台</button>
-                    <button id="kitchen" style="background-color: rgba(255, 255, 0, 0.5);">廚房</button>
-                    <br><br>
-                    <div class="container">
-                        <h4>設定桌號</h4>
-                        <input type="number" min="1" step="1" class="form-control" id="tablnum" placeholder="請輸入桌號">
-                        <div class="col-md-4" style="top: 10px;">
-                            <button id="table"
-                                style="background-color: rgba(0, 0, 255, 0.8); color: white">確認桌號</button>
-                        </div>
-                    </div>
+
+                <h4>設定桌號</h4>
+
+                <!-- 顯示矩陣的HTML表格 -->
+                <div id="matrixContainer" style="display: none;">
+                    <table id="matrixTable"></table>
                 </div>
             </div>
         </div>
@@ -229,7 +195,7 @@
                             matrix[i][j] = -2;
                             break;
                         case 'kitchen':
-                            matrix[i][j] = -3;  
+                            matrix[i][j] = -3;
                             break;
                         case 'table':
                             matrix[i][j] = tableNumber;
