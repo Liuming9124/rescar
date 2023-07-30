@@ -37,7 +37,7 @@
                 <button id="kitchen" style="background-color: rgba(255, 255, 0, 0.5);">廚房</button>
                 <input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號">
                 <button id="table" style="background-color: rgba(0, 0, 255, 0.8); color: white">確認桌號</button>
-                <button id="submit">上傳</button>
+                <button id="upload">上傳</button>
                 <!-- 長度和寬度輸入框，預設隱藏 -->
                 <div id="lengthWidthInput" class="input-container" style="display: none;">
                     <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
@@ -208,6 +208,44 @@
         }
         updateMatrixTableColor(); // 更新矩陣的HTML表格顏色
     }
+    function checkTwoDimensionalArray(arr) {
+        const setValues = new Set();
+        let hasUnsetValues = false;
+        let hasDuplicateTableNumbers = false;
+
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < arr[i].length; j++) {
+                const value = arr[i][j];
+
+                if (value === 0.5) {
+                    hasUnsetValues = true;
+                } else if (value >= 1) {
+                    if (setValues.has(value)) {
+                        hasDuplicateTableNumbers = true;
+                    } else {
+                        setValues.add(value);
+                    }
+                }
+            }
+        }
+        if (!hasUnsetValues && !hasDuplicateTableNumbers) {
+            console.log('correct maps')
+            return true;
+        }
+        else if (hasUnsetValues && hasDuplicateTableNumbers) {
+            alert('仍有尚未設定的值，且桌號重覆');
+            return false;
+        }
+        else if (hasUnsetValues) {
+            alert('仍有尚未設定的值');
+            return false;
+        }
+        else if (hasDuplicateTableNumbers) {
+            alert('桌號重覆');
+            return false;
+        }
+    }
+
 
     // 當障礙物按鈕被點擊時
     document.getElementById('barrier').addEventListener('click', function () {
@@ -229,11 +267,37 @@
         // 將灰色的方塊換成桌子的顏色並設定桌號
         const tableNumber = parseInt(document.getElementById('tablnum').value);
         if (!isNaN(tableNumber) && tableNumber > 0) {
+            document.getElementById('tablnum').value = tableNumber + 1;
             changeColor('table', tableNumber);
         } else {
             alert('請輸入有效的桌號！');
         }
     });
+    document.getElementById('upload').addEventListener('click', function () {
+
+        if (matrix.length === 0)
+            alert("Empty data.");
+        else if (checkTwoDimensionalArray(matrix)) {
+            fetch(`/map/upload`, {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(matrix)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // 在控制台中輸出回應的 JSON 數據
+                    alert(data.status); // 顯示回應的 JSON 數據
+                })
+                .catch(error => {
+                    console.error('Error occurred:', error);
+                    // 處理發生在 fetch 中的任何錯誤
+                });
+        }
+
+    })
 </script>
 
 </html>
