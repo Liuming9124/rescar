@@ -8468,7 +8468,7 @@ button.close {
     text-align: center;
     display: block;
     color: white;
-    font-size: 20px;
+    font-size: 5px;
     line-height: 60px;
 }
 
@@ -8492,7 +8492,10 @@ button.close {
         opacity: 1;
     }
 }
-
+.flex{
+    display: flex;
+    align-items: center; /* 將內容垂直置中 */
+}
 .buttonreturn {
     display: block;
     margin: auto;
@@ -8619,7 +8622,7 @@ button.close {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #bdbdbd;
+    background-color: #e0dede;
     padding: 5px;
     margin: 10px; /* 左右間距，增加間距 */
     border: 1px solid #ccc; /* 加上邊框 */
@@ -8668,4 +8671,42 @@ button.close {
     transform: scale(0.9);
   }
   
+  .btnrbt {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px; /* 使用圓弧狀的邊角 */
+    color: #fff;
+    background-color: #ed786a; /* 使用主色系的顏色 */
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  .btnrbt:hover {
+    background-color: #ce5d4f; /* 使用稍微深一些的色調 */
+  }
+  .btnrbt:active {
+    background-color: #b35447; /* 使用更深的色調 */
+  }
+  .stylerbt {
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 25px; /* 使用圓弧狀的邊角 */
+    color: #fff;
+    background-color: #ed786a; /* 使用主色系的顏色 */
+    margin: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .button-container3 {
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e0dede;
+    padding: 3px;
+    width: 100%
+    margin: 10px; /* 左右間距，增加間距 */
+    border: 1px solid #ccc; /* 加上邊框 */
+    border-radius: 8px; /* 添加圓角 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  }
 /*# sourceMappingURL=bootstrap.min.css.map */

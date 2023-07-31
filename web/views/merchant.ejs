@@ -463,31 +463,31 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	function detail(status, i) {
-		if (status === 0) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders0) %>))
+	function detail(status,i) {
+		if(status === 0){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders0)%>))
 			const tagg = "開始製作!";
 		}
-		if (status === 1) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders1) %>))
+		if(status === 1){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders1)%>))
 			const tagg = "餐點完成!";
 		}
-		if (status === 2) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders2) %>))
+		if(status === 2){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders2)%>))
 			const tagg = "前往送餐!";
 		}
-		if (status === 3) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders3) %>))
+		if(status === 3){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders3)%>))
 			const tagg = "結帳!";
 		}
 		const datestr = JSON.parse(orders[i].info).time;
-		const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
+		const total=orders[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0);
 		var cart = '';
-		for (var j = 0; j < orders[i].cart.length; j++) {
+		for (var j=0 ; j <  orders[i].cart.length; j++){
 			cart += `
 				<tr>
 					<td>
-						${j + 1}
+						${j+1}
 					</td>
 					<td>
 						${orders[i].cart[j].name}
@@ -499,11 +499,11 @@
 						${orders[i].cart[j].price}
 					</td>
 					<td>
-						${orders[i].cart[j].amt * orders[i].cart[j].price}
+							${orders[i].cart[j].amt * orders[i].cart[j].price}
 					</td>
 				</tr>
 			`;
-			if (j == orders[i].cart.length - 1) {
+			if (j==orders[i].cart.length-1){
 				cart += `
 					<tr>
 						<td colspan="4">訂單金額總計</td>

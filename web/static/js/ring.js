@@ -7,41 +7,27 @@ function fetchData() {
                 var html = ''
                 if (data[i] == 0) {
                     html = `
-                            <!-- Feature -->
-                            <div>
-                                <!-- 沒人按鈴 -->
-                                <a>
-                                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                                </a>
-                            </div>
-                                <div class="tablestyle3">第 ${i + 1} 桌</div>
-                                <div>
-                                    <a href="#"><h5>
-                                            訂單皆已送餐
-                                    </h5></a>
+                                <!-- Feature -->
+                                <div  id="table<%=i%>" style="width: 45px; " >
+                                    <a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
+                                         " onclick="uncall(${i + 1})">
+                                        <!-- 沒人按鈴 -->
+                                        <a>
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        </a>
+                                    </a>
                                 </div>
-                                <div>
-                                    <button type="button" class="btn">送餐</button></button>
-                                </div>     
-                           
                         `
                 }
                 else {
                     html = `
-                            <!-- Feature -->
-                                <!-- 有人按鈴 -->
-                                <div>
-                                    <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
-                                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-                                    </a>
-                                </div>
-                                <div class="tablestyle3">第 ${i + 1} 桌</div>
-                                    <a href="#"><h5>
-                                        <!-- if (i%2==0){  -->
-                                            <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>  	<!-- Modal2 -->
-                                        <!--  }	 -->	
-                                    </h5></a>
-                                    <button type="button" class="btn">送餐</button></button>
+                        <!-- Feature -->
+                        <div  id="table<%=i%>" style="width: 45px; " >
+                            <!-- 有人按鈴 -->
+                            <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
+                                    <span class="glyphicon glyphicon-bell"aria-hidden="true"  ></span>
+                            </a>
+                        </div>
                         `
 
                 }
@@ -57,29 +43,30 @@ function fetchData() {
         });
     // fetch orders to deliver
     fetch('/robot/orderGet')
-        .then(response => response.json())
-        .then(data => {
-            // modify html content 
-            var html = ''
-            var element = document.getElementById(`test`);
-            for (i = 0; i < data.length; i++) {
-                JSON.stringify(data)
-                html += `
-                    <section>
-                        <div>第 ${data[i].table} 桌:訂單${data[i].orderid}號</div><br>
-                            <a href="#"><h5>
-                                <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">等待送餐中</div>
-                            </h5></a><br>
-                            <button type="button" class="btn" onclick=robotRun('${data[i].orderid}','${data[i].table}') >送餐</button></button>
-                        </div>
-                    </section>
-                `
-            }
-            element.innerHTML = html
-        })
-        .catch(error => {
-            console.error('OrderGet failed: ', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        // modify html content 
+        var html = ''
+        for (i = 0; i < data.length; i++) {
+            JSON.stringify(data)
+            html = `
+                <div class="flex">
+                <div class="tablestyle3" style="width:110px; ">第 ${data[i].table} 桌:訂單${data[i].orderid}號</div>
+                    <a href="#"><h5>
+                        <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">等待送餐中</div>
+                    </h5></a>
+                    <button type="button" class="btn" onclick=robotRun('${data[i].orderid}','${data[i].table}') >送餐</button></button>
+                </div>
+            `
+        }
+         // update html content
+         var element = document.getElementById(`tabledetail${data[i].table}`);
+         // element.outerHTML = html;  
+         element.innerHTML = html
+     })
+    .catch(error => {
+        console.error('OrderGet failed: ', error);
+    });
 }
 // this function and change the order status called robot to run
 function robotRun(oid, table) {
