@@ -220,9 +220,6 @@ const mapController = {
             var data = await processData(map);
             console.log('initData:', data)
             // console.log('data:', JSON.stringify(data))
-
-            // Upload Maps to Neo4j
-            writeDataToNeo4j(data)
             
             // Send Maps to Robot
             const jsonData = JSON.stringify(data);
@@ -260,6 +257,8 @@ const mapController = {
             promise.then(data => {
                 const word = JSON.parse(data); // extract the word from the response body
                 console.log(word);
+                // Upload Maps to Neo4j
+                writeDataToNeo4j(data);
                 res.send('{"status": "error"}');
             }).catch(error => {
                 console.error(error);
