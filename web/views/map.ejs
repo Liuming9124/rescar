@@ -60,8 +60,10 @@
     let lengthValue = 0;
     let widthValue = 0;
     let matrix = []; // 矩陣用來儲存0和1
-    // 當頁面載入完成後，綁定按鈕點擊事件處理函數
+
+    // 當頁面載入完成後，載入原始地圖，並且綁定按鈕點擊事件處理函數
     document.addEventListener('DOMContentLoaded', function () {
+        showmaps();
         const lengthWidthUnitButton = document.getElementById('lengthWidthUnitButton');
         const lengthWidthInput = document.getElementById('lengthWidthInput');
         const lengthValueInput = document.getElementById('lengthValue');
@@ -109,7 +111,18 @@
             }
         });
     });
-
+    // 載入原本的地圖
+    function showmaps(){
+        var initmaps = JSON.parse(JSON.stringify(<%-JSON.stringify(maps)%>))
+        matrix = initmaps;
+        lengthValue = initmaps.length;
+        widthValue = initmaps[0].length;
+        if(lengthValue!=0&&widthValue!=0){
+            generateMatrixTable();
+            updateMatrixTableColor();
+            matrixContainer.style.display = 'block';
+        }
+    }
 
     // 初始化矩陣顏色
     function initColorMatrix() {
@@ -129,7 +142,7 @@
         updateMatrixTableColor(); // 更新矩陣的HTML表格顏色
     }
     // 產生矩陣的HTML表格
-    function generateMatrixTable() {
+    function generateMatrixTable() {    
         const matrixTable = document.getElementById('matrixTable');
         matrixTable.innerHTML = '';
 

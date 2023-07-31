@@ -38,6 +38,49 @@ function processData(inputArray) {
     }
     return data;
 }
+// 反函式of processData
+function convertDataToInputArray(data) {
+    const inputArray = [];
+
+    for (let i = 0; i < data.maps.length; i++) {
+        const row = data.maps[i];
+        const newRow = [];
+
+        for (let j = 0; j < row.length; j++) {
+            const value = row[j];
+
+            if (value === 1) {
+                const kitchenPos = data.location.kitchen;
+                const counterPos = data.location.counter;
+                let tablePos = null;
+
+                // Check if the position is for a table
+                for (const tableNumber in data.location.table) {
+                    const tablePosArr = data.location.table[tableNumber];
+                    if (tablePosArr[0] === i && tablePosArr[1] === j) {
+                        tablePos = tableNumber;
+                        break;
+                    }
+                }
+
+                if (kitchenPos[0] === i && kitchenPos[1] === j) {
+                    newRow.push(-3); // Convert back to -3 for kitchen
+                } else if (counterPos[0] === i && counterPos[1] === j) {
+                    newRow.push(-2); // Convert back to -2 for counter
+                } else if (tablePos !== null) {
+                    newRow.push(parseInt(tablePos)); // Convert back to table number
+                } else {
+                    newRow.push(-1); // Convert back to -1 for a value of 1
+                }
+            } else {
+                newRow.push(value);
+            }
+        }
+        inputArray.push(newRow);
+    }
+    return inputArray;
+}
+
 // 建立一個函式來執行寫入操作   
 async function writeDataToNeo4j(data) {
     // Convert the maps 2D array into a 1D array
@@ -161,7 +204,13 @@ async function getDataFromNeo4j() {
 const mapController = {
 
     mapPage: async (req, res) => {
+        // Download Maps from Neo4j
+        var maps = await getDataFromNeo4j()
+        // console.log('afterData:', maps)
+        var showMaps = await convertDataToInputArray(maps)
+        // console.log('convertData:', showMaps)   
         res.render('map', {
+            "maps":showMaps 
         })
     },
     mapUpload: async (req, res) => {
@@ -173,10 +222,7 @@ const mapController = {
 
         // Upload Maps to Neo4j
         writeDataToNeo4j(data)
-
-        // Download Maps from Neo4j
-        // console.log('afterData:', await getDataFromNeo4j())
-
+        
         // Send Maps to Robot
         const jsonData = JSON.stringify(data);
         // read config.json
