@@ -20,24 +20,25 @@ function processData(inputArray) {
             const value = row[j];
 
             if (value === -1) {
-                newRow.push(1);
+                newRow.push(0); // 將 -1 改成 0
             } else if (value === -2) {
-                newRow.push(1);
+                newRow.push(0); // 將 -2 改成 0
                 data.location.counter = [i, j];
             } else if (value === -3) {
-                newRow.push(1);
+                newRow.push(0); // 將 -3 改成 0
                 data.location.kitchen = [i, j];
             } else if (value >= 1) {
-                newRow.push(1);
+                newRow.push(0); // 將大於等於 1 的數字改成 0
                 data.location.table[value.toString()] = [i, j];
             } else {
-                newRow.push(value);
+                newRow.push(1); // 將其他數字改成 1
             }
         }
         data.maps.push(newRow);
     }
     return data;
 }
+
 // 反函式of processData
 function convertDataToInputArray(data) {
     const inputArray = [];
@@ -210,7 +211,7 @@ const mapController = {
         var showMaps = await convertDataToInputArray(maps)
         // console.log('convertData:', showMaps)   
         res.render('map', {
-            "maps":showMaps 
+            "maps": showMaps
         })
     },
     mapUpload: async (req, res) => {
@@ -220,7 +221,7 @@ const mapController = {
             var data = await processData(map);
             console.log('initData:', data)
             // console.log('data:', JSON.stringify(data))
-            
+
             // Send Maps to Robot
             const jsonData = JSON.stringify(data);
             // read config.json
@@ -264,7 +265,7 @@ const mapController = {
                 console.error(error);
                 res.send('{"status": "robot connect error: maps upload"}');
             });
-        }catch(error){
+        } catch (error) {
             console.error('mapupload error:', error);
             res.send('{"status": "robot not connected"}');
         }
