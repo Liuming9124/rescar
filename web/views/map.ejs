@@ -114,13 +114,15 @@
     // 載入原本的地圖
     function showmaps(){
         var initmaps = JSON.parse(JSON.stringify(<%-JSON.stringify(maps)%>))
-        matrix = initmaps;
-        lengthValue = initmaps.length;
-        widthValue = initmaps[0].length;
-        if(lengthValue!=0&&widthValue!=0){
-            generateMatrixTable();
-            updateMatrixTableColor();
-            matrixContainer.style.display = 'block';
+        if (initmaps.length!=0){
+            matrix = initmaps;
+            lengthValue = initmaps.length;
+            widthValue = initmaps[0].length;
+            if(lengthValue!=0&&widthValue!=0){
+                generateMatrixTable();
+                updateMatrixTableColor();
+                matrixContainer.style.display = 'block';
+            }
         }
     }
 

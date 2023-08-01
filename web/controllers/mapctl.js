@@ -41,7 +41,6 @@ function processData(inputArray) {
 // 反函式of processData
 function convertDataToInputArray(data) {
     const inputArray = [];
-
     for (let i = 0; i < data.maps.length; i++) {
         const row = data.maps[i];
         const newRow = [];
@@ -80,7 +79,11 @@ function convertDataToInputArray(data) {
     }
     return inputArray;
 }
-
+async function robotProcessData(data) {
+    const reversedMaps = data.maps.map(row => row.map(value => (value === 0 ? 1 : 0)));
+    data.maps = reversedMaps;
+    return data;
+}
 // 建立一個函式來執行寫入操作   
 async function writeDataToNeo4j(data) {
     // Convert the maps 2D array into a 1D array
@@ -208,7 +211,7 @@ const mapController = {
         var maps = await getDataFromNeo4j()
         // console.log('afterData:', maps)
         var showMaps = await convertDataToInputArray(maps)
-        // console.log('convertData:', showMaps)   
+        console.log('convertData:', showMaps)   
         res.render('map', {
             "maps":showMaps 
         })
@@ -218,11 +221,12 @@ const mapController = {
             var map = req.body
             // console.log('receive new maps:', map)
             var data = await processData(map);
-            console.log('initData:', data)
+            // console.log('processData:', data)
             // console.log('data:', JSON.stringify(data))
-            
+            // Upload Maps to Neo4j
+            await writeDataToNeo4j(data);
             // Send Maps to Robot
-            const jsonData = JSON.stringify(data);
+            const jsonData = JSON.stringify(await robotProcessData(data));
             // read config.json
             const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
             console.log(config.robotport, config.robotip)
@@ -257,9 +261,7 @@ const mapController = {
             promise.then(data => {
                 const word = JSON.parse(data); // extract the word from the response body
                 console.log(word);
-                // Upload Maps to Neo4j
-                writeDataToNeo4j(data);
-                res.send('{"status": "error"}');
+                res.send('{"status": "success"}');
             }).catch(error => {
                 console.error(error);
                 res.send('{"status": "robot connect error: maps upload"}');
