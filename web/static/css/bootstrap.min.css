@@ -8709,4 +8709,30 @@ button.close {
     border-radius: 8px; /* 添加圓角 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
   }
+
+  .robot-box-container {
+    gap: 20px;
+  }
+
+  .robot-box {
+    border: 2px solid #ed786a;
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #ed786a;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    transition: background-color 0.2s ease;
+  }
+
+  .robot-box:hover {
+    background-color: rgba(237, 120, 106, 0.1);
+  }
+
 /*# sourceMappingURL=bootstrap.min.css.map */

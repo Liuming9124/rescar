@@ -36,8 +36,22 @@
 		</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 		</nav>
-		
-		<div class="container" style="margin-top:0px;padding-bottom: 30px">
+		<div class="container" >
+			<div class="container">
+				<h3>待派送餐點</h3>
+				<div class="flex" id="test" style="width: 100%; overflow-x: scroll;">
+					<% for (var i=0 ; i < 12 ; i++) { %>
+						<div style="width: 120px; " >
+							<a href="your_link_here" class="robot-box loading">
+								<div class="loading-spinner"></div>
+								<div class="loading-text">
+								  載入中
+								</div>
+							  </a>
+						</div>&nbsp&nbsp&nbsp&nbsp
+					<% }%>
+				</div>
+			</div>
 			<!-- Features -->
 			<section id="features">
 				<div class="container">
@@ -66,30 +80,20 @@
 												<div  id="table<%=i%>" style="width: 45px; " >
 													<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
 														 >
-														<!-- 沒人按鈴 -->
-														<%if (ringtable[i]==0){%>
-															<a>
-																&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-															</a>
-															<%}%>
-																<!-- 有人按鈴 -->
-																<%if (ringtable[i]==1){%>
-																	<span class="glyphicon glyphicon-bell"
-																		aria-hidden="true" ></span>
-																	<%}%>
+															&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 													</a>
 												</div>
-												<div class="flex"id="tabledetail<%=i%>">
-													<div class="tablestyle3" style="width:110px; ">第 <%=i+1%> 桌</div>
+												<div id="tabledetail<%=i%>" class="flex">
+													<div class="tablestyle3" style="width:130px; ">第 <%=i+1%> 桌</div>
 													<div>
 														<a href="#">
 															<h5>
 																<div href="#" data-toggle="modal"
-																	data-target="#Modalrecord" style="width: 90px; ">訂單皆已送餐</div>
+																	data-target="#Modalrecord" style="width: 110px; ">訂單皆已送餐</div>
 															</h5>
 														</a>
 													</div>
-													<div><button type="button" class="btn">送餐</button></button></div>
+													<!--<div><button type="button" class="btn">送餐</button></button></div>-->
 												</div>		
 											</div>
 										<% }%>
@@ -225,7 +229,6 @@
 					</div><!-- Modal end-->
 				</div><!--row end-->
 			</section>
-			<p id="test">test websocket</p>
 </body>
 
 
