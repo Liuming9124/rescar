@@ -78,11 +78,12 @@ function fetchData() {
                     html1 = `
                         <a href="#">
                             <h5>
-                            <div class="warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>
+                            <div href="#" class="warning-text" data-toggle="modal"data-target="#Modalrecord" style="width: 110px;">尚有未送餐</div>
                             </h5>
                         </a>
                 `;
-                }else{
+                }
+                else{
                     html1 = `
                         <a href="#">
                             <h5>
