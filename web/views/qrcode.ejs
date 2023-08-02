@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>food●點餐系統-QRcode產生頁面</title>
-<!-- Bootstrap css-->
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<!-- Bootstrap js-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>food●點餐系統-QRcode產生頁面</title>
+	<!-- Bootstrap css-->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<!-- Bootstrap js-->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
 	<div class="container" style="margin-top: 80px">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4" style="text-align: center">
 				<h3>成功產生QRcode!!</h3>
-				<hr/>
+				<hr />
 				<form>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="point">桌號：<%= table %></label>					
+					</div> -->
+					<div class="form-group">
+						<button type="button" id="robotRunButton" class="btn btn-default"
+							style="background-color: rgb(235, 236, 124);">機器人帶位:桌號：<%= table %></button>
 					</div>
 					<a href="<%= qrurl %>">
 						<img src="./static/qr/<%= time %>.png" width="250px" alt="">
@@ -29,18 +37,22 @@
 					</div>
 					<div class="form-group">
 						<div style="text-align: center;margin-top: 5px;">
-							<button type="button" class="btn btn-default"data-toggle="modal" data-target=".bs-example-modal-sm">重新產生QRcode</button>
+							<button type="button" class="btn btn-default" data-toggle="modal"
+								data-target=".bs-example-modal-sm">重新產生QRcode</button>
 							<button type="button" class="btn btn-primary" href="/qrchoose">回到選擇頁面</button>
-							<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+							<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+								aria-labelledby="mySmallModalLabel">
 								<div class="modal-dialog modal-sm" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title" id="gridSystemModalLabel">確認清除並重新產生？</h4>
 										</div>
 										<div class="form-group">
 											<label for="acount">請輸入授權碼<span style="color:crimson"></span></label>
-											<input type="password" class="form-control" id="exampleInputPassword1" placeholder="授權碼">
+											<input type="password" class="form-control" id="exampleInputPassword1"
+												placeholder="授權碼">
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default">取消</button>
@@ -56,4 +68,33 @@
 		</div>
 	</div>
 </body>
+<script>
+	// Get a reference to the button element
+	document.getElementById('robotRunButton').addEventListener('click', function () {
+		cmd = {
+			"start":[-1],
+			"stop":[<%= table %>],
+			"end":[-1], 
+		};
+		fetch(`/robot/robotCounter`, {
+			method: 'POST',
+			headers: {
+				'Accept': '*/*',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(cmd)
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data.response); // 在控制台中輸出回應的 JSON 數據
+				alert(data.response); // 顯示回應的 JSON 數據
+			})
+			.catch(error => {
+				console.error('Error occurred:', error);
+				// 處理發生在 fetch 中的任何錯誤
+			});
+
+	})
+</script>
+
 </html>

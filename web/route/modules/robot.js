@@ -8,6 +8,7 @@ router.get('/', robotCtl.robotPage)
 router.post('/place', robotCtl.robotPlace)
 router.get('/orderget', robotCtl.orderGet)
 router.post('/robotRun', robotCtl.robotRun);
+router.post('/robotCounter', robotCtl.robotCounter)
 
 
 module.exports = router
