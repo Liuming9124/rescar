@@ -65,25 +65,35 @@ function fetchData() {
             }
             element.innerHTML = html;
             var html1 = '';
-            var integerValue; // Define the variable outside the loop
-
+            var a = {};
             for (var i = 0; i < data.length; i++) {
-                var tableValue = data[i].table;
-                html1 += `
-                    <div class="tablestyle3" style="width: 130px;">第 ${tableValue} 桌</div>
-                    <div>
+                var tableValue = data[i].table.trim();
+                if (tableValue !== '') {
+                    a[tableValue] = 1; // Assign 1 to the table as a key in the object
+                }
+            }
+            console.log(a.length);
+            for (var i = 1; i <= 6; i++) {
+                if(a[i] == 1){
+                    html1 = `
                         <a href="#">
                             <h5>
-                                <div href="#" data-toggle="modal"
-                                    data-target="#Modalrecord" style="width: 110px; ">訂單皆未送餐</div>
+                            <div class="warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">尚有未送餐</div>
                             </h5>
                         </a>
-                    </div>
                 `;
+                }else{
+                    html1 = `
+                        <a href="#">
+                            <h5>
+                                <div href="#" data-toggle="modal"data-target="#Modalrecord" style="width: 110px;">訂單皆已送餐</div>
+                            </h5>
+                        </a>    
+                `;
+                }
+                var element1 = document.getElementById(`tabledetail${i-1}`); // Replace "your-target-element" with the actual ID of the container where you want to display the generated HTML
                 element1.innerHTML = html1;
             }
-
-           
         })
 }
 // this function and change the order status called robot to run
