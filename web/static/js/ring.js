@@ -43,30 +43,28 @@ function fetchData() {
         });
     // fetch orders to deliver
     fetch('/robot/orderGet')
-    .then(response => response.json())
-    .then(data => {
-        // modify html content 
-        var html = ''
-        for (i = 0; i < data.length; i++) {
-            JSON.stringify(data)
-            html = `
-                <div class="flex">
-                <div class="tablestyle3" style="width:110px; ">第 ${data[i].table} 桌:訂單${data[i].orderid}號</div>
-                    <a href="#"><h5>
-                        <div class=" warning-text" href="#" data-toggle="modal" data-target="#Modalrecord">等待送餐中</div>
-                    </h5></a>
-                    <button type="button" class="btn" onclick=robotRun('${data[i].orderid}','${data[i].table}') >送餐</button></button>
-                </div>
-            `
-        }
-         // update html content
-         var element = document.getElementById(`tabledetail${data[i].table}`);
-         // element.outerHTML = html;  
-         element.innerHTML = html
-     })
-    .catch(error => {
-        console.error('OrderGet failed: ', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            // modify html content 
+            var html = ''
+            var element = document.getElementById(`test`);
+            for (i = 0; i < data.length; i++) {
+                JSON.stringify(data)
+                html += `
+                        <div style="width: 120px; " >
+                            <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}'>
+                                內用${data[i].table}桌<br>
+                                訂單編號<br>${data[i].orderid}
+                            </a>
+                        </div>&nbsp&nbsp&nbsp&nbsp
+                        
+                `
+            }
+            element.innerHTML = html
+        })
+        .catch(error => {
+            console.error('OrderGet failed: ', error);
+        });
 }
 // this function and change the order status called robot to run
 function robotRun(oid, table) {
