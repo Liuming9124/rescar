@@ -46,10 +46,12 @@ function fetchData() {
         .then(response => response.json())
         .then(data => {
             // modify html content 
-            var html = ''
+            var html = '';
             var element = document.getElementById(`test`);
+                    
             for (i = 0; i < data.length; i++) {
                 JSON.stringify(data)
+                console.log(data); 
                 html += `
                         <div style="width: 120px; " >
                             <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}'>
@@ -60,11 +62,28 @@ function fetchData() {
                         
                 `
             }
-            element.innerHTML = html
+            element.innerHTML = html;
+            var html1 = '';
+            var integerValue; // Define the variable outside the loop
+
+            for (var i = 0; i < data.length; i++) {
+                var tableValue = data[i].table;
+                html1 += `
+                    <div class="tablestyle3" style="width: 130px;">第 ${tableValue} 桌</div>
+                    <div>
+                        <a href="#">
+                            <h5>
+                                <div href="#" data-toggle="modal"
+                                    data-target="#Modalrecord" style="width: 110px; ">訂單皆未送餐</div>
+                            </h5>
+                        </a>
+                    </div>
+                `;
+                element1.innerHTML = html1;
+            }
+
+           
         })
-        .catch(error => {
-            console.error('OrderGet failed: ', error);
-        });
 }
 // this function and change the order status called robot to run
 function robotRun(oid, table) {
