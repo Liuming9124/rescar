@@ -124,6 +124,48 @@ const robotController = {
                         res.redirect(`/robot`)
                     });
             })
+    },
+    robotCounter: (req, res) => {
+        const jsonData = JSON.stringify(req.body);
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        console.log(config.robotport, config.robotip)
+        const options = {
+            hostname: config.robotip,
+            port: config.robotport,
+            path: '/robotRun',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set the content type header for JSON data
+                'Content-Length': jsonData.length // Set the content length header
+            }
+        };
+        const promise = new Promise((resolve, reject) => {
+            const request = http.request(options, response => {
+                // console.log(`statusCode: ${response.statusCode}`);
+                let data = '';
+                response.on('data', chunk => {
+                    data += chunk;
+                });
+                response.on('end', () => {
+                    resolve(data);
+                });
+            });
+            request.on('error', error => {
+                reject(error);
+            });
+            request.write(jsonData);
+            request.end();
+        });
+    
+        promise.then(data => {
+            const word = JSON.parse(data); // extract the word from the response body
+            res.send(word)
+        }).catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        })
+
     }
 }
 

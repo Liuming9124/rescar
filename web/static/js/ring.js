@@ -1,3 +1,4 @@
+fetchData();
 function fetchData() {
     fetch('/ring/ringupdate')
         .then(response => response.json())
