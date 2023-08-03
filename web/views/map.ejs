@@ -24,8 +24,7 @@
         <div class="container" style="margin-top:50px;padding-bottom: 30px">
             <h2 class="h2">地圖設定</h2>
             <ul id="myTab1" class="nav nav-tabs">
-                <li class="active"><a href="#confirm" data-toggle="tab">匯入目前地圖</a></li>
-                <li><a href="#done" data-toggle="tab">設定新地圖</a></li>
+                
             </ul>
         </div>
         <div class="container">
@@ -45,18 +44,18 @@
                     
                     <!-- STEP 2 -->
                     <h3>STEP 2:店內擺設設置</h3>
-                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後，按下放按鈕即可擺放-</h5>
+                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊右方位置後，按下放按鈕即可擺放-</h5>
                     <button id="barrier" style="width: 90px; background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">障礙物</button>
                     <button id="counter" style="width: 90px; background-color: rgba(0, 128, 0, 0.8); color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">櫃台</button>
                     <button id="kitchen" style="width: 90px; background-color: rgba(255, 255, 0, 0.5); padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">廚房</button>
-                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後，輸入桌號並按下確認-</h5>
-                    <br><button onclick="showAlert()" style="width: 100px; background-color: rgba(0, 0, 255, 0.8);color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">設定桌號</button>
-                    <br><br><input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
-                    <button id="table" style="background-color: #ed786a; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">確認桌號</button>
+                    
                     
                     <!-- STEP 3 -->
-                    <h3>STEP 3</h3>
-                    <button id="upload" class="buttonnext"  style="width: 80%;">上傳</button>
+                    <h3>STEP 3:店內桌號配置</h3>
+                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊右方位置後，輸入桌號並按下確認-</h5>
+                    <input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <button id="table" style="background-color: #ed786a; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">確認桌號</button>
+                    <br><br><button id="upload" class="buttonnext"  style="width: 80%;">上傳</button>
                 </div>
                 <div class="right">
                         <!-- 顯示矩陣的HTML表格 -->

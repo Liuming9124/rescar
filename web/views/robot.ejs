@@ -38,15 +38,19 @@
 		</nav>
 		<div class="container" >
 			<div class="container">
-				<h3>待派送餐點</h3>
-				<div class="flex" id="test" style="width: 100%; overflow-x: scroll;">
-					<% for (var i=0 ; i < 12 ; i++) { %>
-						<div style="width: 120px; " >
-							<a href="your_link_here" class="robot-box loading">
-								  載入中
-							  </a>
-						</div>&nbsp&nbsp&nbsp&nbsp
-					<% }%>
+				<h2>待派送餐點</h2>
+				<ul id="myTab1" class="nav nav-tabs">
+				</ul>
+				<div class="scroll-arrows" style="overflow-x: scroll;">
+					<div class="flex" id="test" style="display: flex;">
+					<% for (var i = 0; i < 12; i++) { %>
+					  <div style="width: 100px;">
+						<a href="#" class="warning-text robot-box loading">
+						  載入中
+						</a>
+					  </div>&nbsp&nbsp&nbsp&nbsp
+					<% } %>
+					</div>
 				</div>
 			</div>
 			<!-- Features -->
@@ -256,6 +260,32 @@
 		var element = document.getElementById('Modalring')
 		element.innerHTML = html;
 	}
+	#test {
+		touch-action: pan-x; 
+		-ms-touch-action: pan-x; 
+	  }
 </script>
+<style>
+	/* 添加箭頭樣式 */
+	.scroll-arrows::before,
+	.scroll-arrows::after {
+	  content: "";
+	  display: block;
+	  width: 20px;
+	  height: 20px;
+	  background: url("arrow.png") no-repeat center center; /* 箭頭圖片替換為實際圖片的 URL */
+	}
+  
+	/* 左側箭頭 */
+	.scroll-arrows::before {
+	  transform: rotate(180deg); /* 旋轉箭頭方向 */
+	  margin-right: 10px;
+	}
+  
+	/* 右側箭頭 */
+	.scroll-arrows::after {
+	  margin-left: 10px;
+	}
+  </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../static/js/ring.js"></script>
