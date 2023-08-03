@@ -1,0 +1,6 @@
+[Thu Aug 03 2023 14:37:24 GMT+0800 (台北標準時間)]{"logs":"success","cmd":{"start":[-1],"stop":[2],"end":[-1]}}
+[Thu Aug 03 2023 14:37:31 GMT+0800 (台北標準時間)]{"logs":"success","cmd":{"start":[-1],"stop":[2],"end":[-1]}}
+[Thu Aug 03 2023 14:37:33 GMT+0800 (台北標準時間)]{"logs":"success","cmd":{"start":[-1],"stop":[2],"end":[-1]}}
+[Thu Aug 03 2023 14:37:49 GMT+0800 (台北標準時間)]{"logs":"log","cmd":{"start":[-1],"stop":[2],"end":[-1]}}
+[Thu Aug 03 2023 14:37:49 GMT+0800 (台北標準時間)]{"logs":"log","cmd":{"start":[-1],"stop":[2],"end":[-1]}}
+[Thu Aug 03 2023 14:38:19 GMT+0800 (台北標準時間)]{"logs":"send to robot error","cmd":{"start":[-1],"stop":[2],"end":[-1]}}

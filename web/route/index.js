@@ -13,6 +13,7 @@ const merchinfo    = require('./modules/merchinfo')
 const dataanalysis = require('./modules/dataanalysis')
 const history      = require('./modules/history')
 const map          = require('./modules/map.js')
+const log          = require('./modules/log.js')
 
 
 
@@ -32,7 +33,7 @@ module.exports = app => {
   app.use('/dataanalysis',dataanalysis)
   app.use('/history',     history)
   app.use('/map',         map)
-
+  app.use('/log',         log)
 
   app.use('/logout',(req, res) => {
     req.session.destroy();
