@@ -51,7 +51,7 @@ function fetchData() {
                 console.log(data); 
                 html += `
                         <div style="width: 120px; " >
-                            <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}'>
+                            <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}')>
                                 內用${data[i].table}桌<br>
                                 訂單編號<br>${data[i].orderid}
                             </a>
@@ -103,9 +103,14 @@ function robotRun(oid, table) {
         },
         body: JSON.stringify({ oid: oid, table: table })
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
+        .then(response => {
+            console.log(response);
+            if (response.status == 200) {
+                alert('成功下達指令')
+            }else{
+                alert('下達指令失敗')
+            }
+            
         })
         .catch(error => {
             console.error('Error occurred:', error);
