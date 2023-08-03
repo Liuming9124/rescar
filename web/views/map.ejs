@@ -49,7 +49,7 @@
                     <button id="barrier" style="width: 90px; background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">障礙物</button>
                     <button id="counter" style="width: 90px; background-color: rgba(0, 128, 0, 0.8); color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">櫃台</button>
                     <button id="kitchen" style="width: 90px; background-color: rgba(255, 255, 0, 0.5); padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">廚房</button>
-                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後輸入桌號並按下確認-</h5>
+                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後，輸入桌號並按下確認-</h5>
                     <br><button onclick="showAlert()" style="width: 100px; background-color: rgba(0, 0, 255, 0.8);color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">設定桌號</button>
                     <br><br><input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
                     <button id="table" style="background-color: #ed786a; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">確認桌號</button>
@@ -335,14 +335,11 @@
     /* 美化容器 */
     #matrixContainer {
         place-items: center;
-        border: 1px solid #ccc;
+        border: 1px solid #ffffff;
         padding: 10px;
         width: 600px; /* 調整容器的寬度 */
         height: 450px;
-        margin: 0 auto; /* 容器置中 */
-        background-color: #f9f9f9; /* 背景顏色 */
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 陰影效果 */
-        border-radius: 5px; /*圓角效果 */
+        background-color: #ffffff; /* 背景顏色 */
     }
 
     /* 美化表格 */
@@ -369,9 +366,12 @@
 
     /* 美化表格单元格 */
     #matrixTable td {
-        padding: 8px;
+        width: 20px;
+        height: 20px;
+        padding: 0;
         text-align: center;
         border: 1px solid #ccc;
+        box-sizing: border-box;
     }
 
     /* 奇数行的背景颜色 */
