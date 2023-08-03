@@ -29,33 +29,50 @@
             </ul>
         </div>
         <div class="container">
-            <div class="container">
-                <!-- 新增長度單位和寬度單位的按鈕 -->
-                <button id="lengthWidthUnitButton">設定長度寬度</button>
-                <button id="barrier" style="background-color: black; color: white;">障礙物</button>
-                <button id="counter" style="background-color: rgba(0, 128, 0, 0.8); color: white">櫃台</button>
-                <button id="kitchen" style="background-color: rgba(255, 255, 0, 0.5);">廚房</button>
-                <input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號">
-                <button id="table" style="background-color: rgba(0, 0, 255, 0.8); color: white">確認桌號</button>
-                <button id="upload">上傳</button>
-                <!-- 長度和寬度輸入框，預設隱藏 -->
-                <div id="lengthWidthInput" class="input-container" style="display: none;">
-                    <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" />
-                    <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" />
-                    <button id="lengthWidthConfirmButton">確定</button>
+            <div class="containerlr1">
+                <div class="left">
+                        <!-- 新增長度單位和寬度單位的按鈕 -->
+                    <!-- STEP 1 -->
+                    <h3>STEP 1:設定長寬</h3>
+                    <button id="lengthWidthUnitButton" style="width: 125px;background-color: #daebdb7c; color: rgb(0, 0, 0); padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">設定長度寬度</button>
+                    <!-- 長度和寬度輸入框，預設隱藏 -->
+                    <div id="lengthWidthInput" class="input-container" style="display: none;">
+                        <input type="number" id="lengthValue" min="1" step="1" placeholder="請輸入長度" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-right: 10px;" />
+                        <input type="number" id="widthValue" min="1" step="1" placeholder="請輸入寬度" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-right: 10px;" />
+                        <br>
+                        <button id="lengthWidthConfirmButton" style="background-color: #ed786a; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">確定</button>
+                    </div>
+                    
+                    <!-- STEP 2 -->
+                    <h3>STEP 2:店內擺設設置</h3>
+                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後，按下放按鈕即可擺放-</h5>
+                    <button id="barrier" style="width: 90px; background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">障礙物</button>
+                    <button id="counter" style="width: 90px; background-color: rgba(0, 128, 0, 0.8); color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">櫃台</button>
+                    <button id="kitchen" style="width: 90px; background-color: rgba(255, 255, 0, 0.5); padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">廚房</button>
+                    <h5 style="font-size: 16px; font-weight: bold; text-align: center; color: #333;">-點擊擺設位置後輸入桌號並按下確認-</h5>
+                    <br><button onclick="showAlert()" style="width: 100px; background-color: rgba(0, 0, 255, 0.8);color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">設定桌號</button>
+                    <br><br><input type="number" min="1" step="1" id="tablnum" placeholder="請輸入桌號" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <button id="table" style="background-color: #ed786a; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">確認桌號</button>
+                    
+                    <!-- STEP 3 -->
+                    <h3>STEP 3</h3>
+                    <button id="upload" class="buttonnext"  style="width: 80%;">上傳</button>
                 </div>
-
-                <h4>設定桌號</h4>
-
-                <!-- 顯示矩陣的HTML表格 -->
-                <div id="matrixContainer" style="display: none;">
-                    <table id="matrixTable"></table>
+                <div class="right">
+                        <!-- 顯示矩陣的HTML表格 -->
+                    <div id="matrixContainer" style="display: none;">
+                        <table id="matrixTable"></table><br><br>
+                        
+                    </div>
                 </div>
             </div>
         </div>
 </body>
 
 <script>
+    function showAlert() {
+        alert("請在下方輸入桌號並按確認");
+      }
     // 變數來儲存長度和寬度值
     let lengthValue = 0;
     let widthValue = 0;
@@ -314,5 +331,58 @@
 
     })
 </script>
+<style>
+    /* 美化容器 */
+    #matrixContainer {
+        place-items: center;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 600px; /* 調整容器的寬度 */
+        height: 450px;
+        margin: 0 auto; /* 容器置中 */
+        background-color: #f9f9f9; /* 背景顏色 */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+        border-radius: 5px; /*圓角效果 */
+    }
+
+    /* 美化表格 */
+    #matrixTable {
+        width: 80%;
+        height: 80%;
+        border-collapse: collapse;
+        background-color: #fff; /* 表格背景顏色 */
+    }
+
+    /* 美化表头行 */
+    #matrixTable th {
+        padding: 10px;
+        text-align: center;
+        background-color: #f2f2f2; /* 背景顏色 */
+        border: 1px solid #ccc;
+        font-weight: bold;
+    }
+
+    /* 美化表格行 */
+    #matrixTable tr {
+        background-color: #fff;
+    }
+
+    /* 美化表格单元格 */
+    #matrixTable td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+    /* 奇数行的背景颜色 */
+    #matrixTable tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    /* 鼠标悬停时的背景颜色 */
+    #matrixTable tr:hover {
+        background-color: #e6e6e6;
+    }
+</style>
 
 </html>

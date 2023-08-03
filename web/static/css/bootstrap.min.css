@@ -8618,6 +8618,12 @@ button.close {
     grid-gap: 10px;
     justify-items: center; /* 水平居中 */
   }
+  .containerlr1 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    justify-items: center; /* 水平居中 */
+  }
   .button-container {
     display: flex;
     justify-content: space-between;

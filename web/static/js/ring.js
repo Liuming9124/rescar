@@ -9,7 +9,6 @@ function fetchData() {
                 if (data[i] == 0) {
                     html = `
                                 <!-- Feature -->
-                                <div  id="table<%=i%>" style="width: 45px; " >
                                     <a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
                                          " onclick="uncall(${i + 1})">
                                         <!-- 沒人按鈴 -->
@@ -17,18 +16,15 @@ function fetchData() {
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                         </a>
                                     </a>
-                                </div>
                         `
                 }
                 else {
                     html = `
                         <!-- Feature -->
-                        <div  id="table<%=i%>" style="width: 45px; " >
                             <!-- 有人按鈴 -->
                             <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
                                     <span class="glyphicon glyphicon-bell"aria-hidden="true"  ></span>
                             </a>
-                        </div>
                         `
 
                 }
@@ -72,7 +68,6 @@ function fetchData() {
                     a[tableValue] = 1; // Assign 1 to the table as a key in the object
                 }
             }
-            console.log(a.length);
             for (var i = 1; i <= 6; i++) {
                 if(a[i] == 1){
                     html1 = `
