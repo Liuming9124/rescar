@@ -50,7 +50,7 @@ function fetchData() {
                 JSON.stringify(data)
                 console.log(data); 
                 html += `
-                        <div style="width: 120px; " >
+                        <div style="width: 100px; " >
                             <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}')>
                                 內用${data[i].table}桌<br>
                                 訂單編號<br>${data[i].orderid}
