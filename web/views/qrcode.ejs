@@ -76,6 +76,7 @@
 			"stop":[<%= table %>],
 			"end":[-1], 
 		};
+		var log = "error"
 		fetch(`/robot/robotCounter`, {
 			method: 'POST',
 			headers: {
@@ -87,13 +88,34 @@
 			.then(response => response.json())
 			.then(data => {
 				console.log(data.response); // 在控制台中輸出回應的 JSON 數據
+				log = data.response
 				alert(data.response); // 顯示回應的 JSON 數據
 			})
 			.catch(error => {
 				console.error('Error occurred:', error);
 				// 處理發生在 fetch 中的任何錯誤
-			});
+			})
+			.then (()=>{
+				var logs = {"logs": log,"cmd": cmd}
+				console.log(JSON.stringify(logs))
+				fetch(`/log/userlog`, {
+						method: 'POST',
+						headers: {
+							'Accept': '*/*',
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(logs)
+					})
+						.then(response => {
+							console.log('response:',response)
+						})
+						.catch(error => {
+							console.log('Error occurred:', error);
+							// 處理發生在 fetch 中的任何錯誤
+						});
 
+
+			})
 	})
 </script>
 
