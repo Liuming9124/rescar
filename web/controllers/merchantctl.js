@@ -221,25 +221,15 @@ const merchantController = {
     },
     checkoutOrder: (req, res) => {
         var session = db.session()
-        var forder = []
         session
-            .run(`match (n:url{status:0})-[r:order]->(o) return n,o`)
-            .then(result => {
-                // 依序抓取回傳的節點
-                result.records.forEach(record => {
-                    // console.log(record.get('o').properties)
-                    let sorder = record.get('o').properties //  抓取訂單資料
-                    let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
-                    forder.push({ id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
-                })
-            })
+            .run(`match (n:url{table:'${req.params.table}',status:0})-[r:order]->(o)  set n.status=1 ,o.status=4  return n,o`)
             .catch(error => {
-                console.log('orderRecord error:', error)
+                console.log('checkoutOrder error:', error)
+                res.send(JSON.stringify({"status":"error"}))
             })
             .finally(() => {
                 session.close();
-                console.log('forder:',forder)
-                res.send(forder)
+                res.send(JSON.stringify({"status":"success"}))
             });
     },
     getOrderbyTable: (req, res) => {

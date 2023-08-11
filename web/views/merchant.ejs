@@ -206,7 +206,7 @@
 					<div class="button-container1">
 						<% for (var i=0; i < 6; i++) { %>
 							<a href="#" data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>">
-								<button class="gray-button"><span>桌號 <%= i + 1 %></span></button>
+								<button class="gray-button" onclick="getOrderbyTable(<%=i%>+1)"><span>桌號 <%= i + 1 %></span></button>
 							</a>
 							<% } %>
 					</div>
@@ -448,7 +448,8 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal"
 								aria-label="Close">取消</button>
-							<button id="submit1" type="submit" class="btn btn-primary">結帳</button>
+							<!-- 更改下一行的onclick function, 將checkoutOrder()改成checkoutOrder(桌號) -->
+							<button id="submit1" type="submit" class="btn btn-primary" onclick="checkoutOrder(1)">結帳</button>
 						</div>
 					</form>
 				</div><!--modal-content end-->
@@ -551,6 +552,46 @@
 		`
 		var element = document.getElementById('Modalrecord')
 		element.innerHTML = html;
+	}
+	function getOrderbyTable(table){
+		//send a http request to get order by table
+		
+		fetch(`/merchant/getOrderbyTable/${table}`, {
+			method: 'Get',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (myJson) {
+				console.log(myJson);
+  			})
+			.catch(error => {
+				console.error('Error occurred:', error);
+				// Handle any errors that occurred during the fetch
+			});
+			
+	}
+	function checkoutOrder(table){
+		//send a http request to checkout order by table
+		fetch(`/merchant/checkoutOrder/${table}`, {
+			method: 'Get',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (myJson) {
+				alert(myJson.status);
+  			})
+			.catch(error => {
+				console.error('Error occurred:', error);
+				// Handle any errors that occurred during the fetch
+			});
 	}
 </script>
 <script>
