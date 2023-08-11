@@ -218,6 +218,82 @@ const merchantController = {
                 session.close();
                 res.redirect(`/merchant`)
             });
+    },
+    checkoutOrder: (req, res) => {
+        var session = db.session()
+        var forder = []
+        session
+            .run(`match (n:url{status:0})-[r:order]->(o) return n,o`)
+            .then(result => {
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    // console.log(record.get('o').properties)
+                    let sorder = record.get('o').properties //  抓取訂單資料
+                    let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
+                    forder.push({ id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
+                })
+            })
+            .catch(error => {
+                console.log('orderRecord error:', error)
+            })
+            .finally(() => {
+                session.close();
+                console.log('forder:',forder)
+                res.send(forder)
+            });
+    },
+    getOrderbyTable: (req, res) => {
+        var session = db.session()
+        var forder = []
+        session
+            .run(`match (n:url{table:'${req.params.table}',status:0})-[r:order]->(o) return n,o`)
+            .then(result => {
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    // console.log(record.get('o').properties)
+                    let sorder = record.get('o').properties //  抓取訂單資料
+                    let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
+                    forder.push({ id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
+                })
+            })
+            .catch(error => {
+                console.log('orderRecord error:', error)
+            })
+            .then(async () => {
+                // get cart by order id
+                var session2 = db.session()
+                const temp = forder.length
+                for (var i = 0; i < temp; i++) {
+                    var carts = []
+                    // 查詢特定類別的商品並新增至itemsarr
+                    try {
+                        const results = await session2.run(`match(o) where ID(o) = ${forder[i].id} match(o) -[:orders]-> (p:cart) return p`);
+                        results.records.forEach(record => {
+                            // console.log(record.get('p').properties)
+                            carts.push(record.get('p').properties);
+                        });
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    // add items to forder
+                    // 為了避免直接修改原始的 forder 數組，先創建一個副本
+                    const ordersCp = forder.slice();
+
+                    // 使用 map() 方法更新 forder 數組，將新數據添加到舊數據的末尾
+                    forder = ordersCp.map((item, index) => {
+                        if (index === i) {
+                            return { ...item, cart: carts };
+                        } else {
+                            return item;
+                        }
+                    });
+                }
+            })
+            .finally(() => {
+                session.close();
+                console.log('forder:',forder)
+                res.send(forder)
+            });
     }
 }
 

@@ -9,6 +9,8 @@ router.get('/',  merchantCtl.merchantPage)
 router.get('/qr/:table',merchantCtl.qrgenerate)
 router.post('/searchOrder', merchantCtl.searchOrder)
 router.get('/updateOrder/:id', merchantCtl.updateOrder)
+router.get('/checkoutOrder', merchantCtl.checkoutOrder)
+router.get('/getOrderbyTable/:table', merchantCtl.getOrderbyTable)
 
 
 
