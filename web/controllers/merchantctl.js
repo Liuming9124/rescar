@@ -125,7 +125,7 @@ const merchantController = {
         
         console.log('seed:',seed)
         session
-            .run(`create(n:url{link:'${seed}',time:'${cdate}',table:'${req.params.table}',alert:'0'}) return n`)
+            .run(`create(n:url{link:'${seed}',time:'${cdate}',table:'${req.params.table}',alert:'0',status:0}) return n`)
             .catch(error => {
                 console.log('add qrUrl error:')
                 console.log(error)

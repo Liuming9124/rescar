@@ -15,13 +15,31 @@ const homeController = {
             var valid = 0
             // 先找出是否為合法URL，若合法才給予進入
             if (req.session.seed) {  //  get session seed
+                try {
+                    // find whether url exist in db
+                    const session = db.session();
+                    const result = await session.run(
+                        `match(result:url{link:'${req.session.seed}',status:0}) return (result)`
+                    );
+                    const singleRecord = result.records[0];
+                    const node = singleRecord.get(0);
+                    console.log(node.properties.link);
+                    // console.log('table',node.properties.table)
+                    req.session.table = node.properties.table
+                    valid = true;
+                    req.session.seed = req.params.url;
+                    session.close();
+                    valid = 2   //  get session seed
+                } catch (error) {
+                    res.redirect('/menu')
+                }
                 valid = 1;
             } else if (req.params.url !== '') {    // get incoming url and set Seed in session
                 try {
                     // find whether url exist in db
                     const session = db.session();
                     const result = await session.run(
-                        `match(result:url{link:'${req.params.url}'}) return (result)`
+                        `match(result:url{link:'${req.params.url}',status:0}) return (result)`
                     );
                     const singleRecord = result.records[0];
                     const node = singleRecord.get(0);
