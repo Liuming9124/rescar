@@ -11,6 +11,7 @@ function fetchData() {
                                 <!-- Feature -->
                                     <a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
                                          " onclick="uncall(${i + 1})">
+                                         <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
                                         <!-- 沒人按鈴 -->
                                         <a>
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
@@ -23,8 +24,8 @@ function fetchData() {
                         <!-- Feature -->
                             <!-- 有人按鈴 -->
                             <a class=" warning-text-ring" data-toggle="modal" data-target=".bs-example-modal-sm"  onclick="uncall(${i + 1})">
-                                    <span class="glyphicon glyphicon-bell"aria-hidden="true"  ></span>
-                            </a>
+                            <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                        </a><br>
                         `
 
                 }
@@ -51,7 +52,7 @@ function fetchData() {
                 console.log(data); 
                 html += `
                         <div style="width: 100px; " >
-                            <a href="#" class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}')>
+                            <a  class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}')>
                                 內用${data[i].table}桌<br>
                                 訂單編號<br>${data[i].orderid}
                             </a>

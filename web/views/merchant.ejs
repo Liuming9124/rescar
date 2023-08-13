@@ -205,8 +205,8 @@
 					<h3 class="text-center">結帳</h3>
 					<div class="button-container1">
 						<% for (var i=0; i < 6; i++) { %>
-							<a href="#" data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>">
-								<button class="gray-button" onclick="getOrderbyTable(<%=i%>+1)"><span>桌號 <%= i + 1 %></span></button>
+							<a data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>"onclick="getOrderbyTable(<%=i%>+1)">
+								<button class="gray-button" ><span>桌號 <%= i + 1 %></span></button>
 							</a>
 							<% } %>
 					</div>
@@ -414,35 +414,11 @@
 									<td>下單時間</td>
 									<td>金額</td>
 								</tr>
-								<%const orders33=orders.filter(order=> {
-									const status = JSON.parse(order.info).status.low;
-									const table = JSON.parse(order.info).table;
-									return status === 3 && table === 3;
-									});
-									%>
 
-									<% if (orders.length!=0) { %>
-										<% for (var j=0 ; j < orders[0].cart.length ; j++) { %>
-											<% const targetTableNumber=3; // Replace 3 with the desired table number %>
-
-												<tr>
-													<td>
-													</td>
-													<td>
-													</td>
-													<td>
-													</td>
-													<td>
-													</td>
-
-												</tr>
-												<%} %>
-													<% } %>
-														<tr>
-															<td colspan="3">訂單金額總計</td>
-															<td colspan="4" style="color: crimson;font-size: 18px">230
-															</td>
-														</tr>
+								<tr>
+									<td colspan="3">訂單金額總計</td>
+									<td colspan="4" style="color: crimson;font-size: 18px">230</td>
+								</tr>
 							</table>
 						</div>
 						<div class="modal-footer">
@@ -555,7 +531,46 @@
 	}
 	function getOrderbyTable(table){
 		//send a http request to get order by table
+		var html = `
+				<form action="/merchant/checkoutOrder/:table" method="POST">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<form>
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title itemname" id="myModalLabel">桌號：${table}</h4>
+									<p>訂單日期：2023年06月09日</p>
+								</div>
+								<div class="modal-body">
+									<table class="table table-striped text-center">
+										<tr>
+											<td>項次</td>
+											<td>訂單編號</td>
+											<td>下單時間</td>
+											<td>金額</td>
+										</tr>
 		
+										<tr>
+											<td colspan="3">訂單金額總計</td>
+											<td colspan="4" style="color: crimson;font-size: 18px">30</td>
+										</tr>
+									</table>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal"
+										aria-label="Close">取消</button>
+									<!-- 更改下一行的onclick function, 將checkoutOrder()改成checkoutOrder(桌號) -->
+									<button id="submit1" type="submit" class="btn btn-primary" onclick="checkoutOrder(1)">結帳</button>
+								</div>
+							</form>
+						</div><!--modal-content end-->
+					</div><!-- Modal end-->
+				</form>
+		`
+		var element = document.getElementById('Modalcheckout')
+		element.innerHTML = html;
 		fetch(`/merchant/getOrderbyTable/${table}`, {
 			method: 'Get',
 			headers: {
