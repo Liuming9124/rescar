@@ -166,6 +166,10 @@ const robotController = {
             res.status(500).send('Internal Server Error');
         })
 
+    },
+    robotStatus: (req, res) => {
+        // get robot current status, error code, and error message, and get robot current position, and get robot current battery, and get robot next stop
+        const jsonData = JSON.stringify({'start': [0], 'stop': [0], 'end': [0]});
     }
 }
 
