@@ -71,59 +71,62 @@ const robotController = {
         })
     },
     robotRun: (req, res) => {
-            const jsonData = JSON.stringify({'start': [0], 'stop': [req.body.table], 'end': [0]});
-            // read config.json
-            const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-            console.log(config.robotport, config.robotip)
-            const options = {
-                hostname: config.robotip,
-                port: config.robotport,
-                path: '/robotRun',
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', // Set the content type header for JSON data
-                    'Content-Length': jsonData.length // Set the content length header
-                }
-            };
-            const promise = new Promise((resolve, reject) => {
-                const request = http.request(options, response => {
-                    // console.log(`statusCode: ${response.statusCode}`);
-                    let data = '';
-                    response.on('data', chunk => {
-                        data += chunk;
-                    });
-                    response.on('end', () => {
-                        resolve(data);
-                    });
+        const jsonData = JSON.stringify({'start': [0], 'stop': [req.body.table], 'end': [0]});
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        console.log(config.robotport, config.robotip)
+        const options = {
+            hostname: config.robotip,
+            port: config.robotport,
+            path: '/robotRun',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set the content type header for JSON data
+                'Content-Length': jsonData.length // Set the content length header
+            }
+        };
+        const promise = new Promise((resolve, reject) => {
+            const request = http.request(options, response => {
+                // console.log(`statusCode: ${response.statusCode}`);
+                let data = '';
+                response.on('data', chunk => {
+                    data += chunk;
                 });
-                request.on('error', error => {
-                    reject(error);
+                response.on('end', () => {
+                    resolve(data);
                 });
-                request.write(jsonData);
-                request.end();
             });
-        
-            promise.then(data => {
-                const word = JSON.parse(data); // extract the word from the response body
-                console.log(word);
-            }).catch(error => {
-                console.error(error);
+            request.on('error', error => {
+                reject(error);
                 res.status(500).send('Internal Server Error');
-            }).then(() => {
-                // console.log(req.body)
-                console.log('merchant update order :',req.body.oid)
-                // console.log(req.params.table)
-                var session = db.session()
-                session
-                    .run(`MATCH (o:order) WHERE ID(o) = ${req.body.oid} SET o.status = o.status+1 return o`)
-                    .catch(error => {
-                        console.log('updateOrder error:', error)
-                    })
-                    .finally(() => {
-                        session.close();
-                        res.redirect(`/robot`)
-                    });
-            })
+            });
+            request.write(jsonData);
+            request.end();
+        });
+    
+        promise.then(data => {
+            const word = JSON.parse(data); // extract the word from the response body
+            console.log(word);
+        }).catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }).then(() => {
+            // console.log(req.body)
+            console.log('merchant update order :',req.body.oid)
+            // console.log(req.params.table)
+            var session = db.session()
+            session
+                .run(`MATCH (o:order) WHERE ID(o) = ${req.body.oid} SET o.status = o.status+1 return o`)
+                .catch(error => {
+                    console.log('updateOrder error:', error)
+                })
+                .finally(() => {
+                    session.close();
+                    res.redirect(`/robot`)
+                });
+        }).catch(error => {
+            console.error("Unhandled promise rejection:", error);
+        });
     },
     robotCounter: (req, res) => {
         const jsonData = JSON.stringify(req.body);
