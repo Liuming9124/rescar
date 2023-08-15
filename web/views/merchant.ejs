@@ -205,8 +205,9 @@
 					<h3 class="text-center">結帳</h3>
 					<div class="button-container1">
 						<% for (var i=0; i < 6; i++) { %>
-							<a data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>"onclick="getOrderbyTable(<%=i%>+1)">
-								<button class="gray-button" ><span>桌號 <%= i + 1 %></span></button>
+							<a data-toggle="modal" data-target="#Modalcheckout" data-table="<%= i + 1 %>"
+								onclick="getOrderbyTable(<%=i%>+1)">
+								<button class="gray-button"><span>桌號 <%= i + 1 %></span></button>
 							</a>
 							<% } %>
 					</div>
@@ -400,7 +401,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<form>
-						
+
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -416,7 +417,8 @@
 							<button type="button" class="btn btn-default" data-dismiss="modal"
 								aria-label="Close">取消</button>
 							<!-- 更改下一行的onclick function, 將checkoutOrder()改成checkoutOrder(桌號) -->
-							<button id="submit1" type="submit" class="btn btn-primary" onclick="checkoutOrder(1)">結帳</button>
+							<button id="submit1" type="submit" class="btn btn-primary"
+								onclick="checkoutOrder(1)">結帳</button>
 						</div>
 					</form>
 				</div><!--modal-content end-->
@@ -431,31 +433,31 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	function detail(status,i) {
-		if(status === 0){
-			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders0)%>))
+	function detail(status, i) {
+		if (status === 0) {
+			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders0) %>))
 			const tagg = "開始製作!";
 		}
-		if(status === 1){
-			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders1)%>))
+		if (status === 1) {
+			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders1) %>))
 			const tagg = "餐點完成!";
 		}
-		if(status === 2){
-			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders2)%>))
+		if (status === 2) {
+			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders2) %>))
 			const tagg = "前往送餐!";
 		}
-		if(status === 3){
-			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders3)%>))
+		if (status === 3) {
+			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders3) %>))
 			const tagg = "結帳!";
 		}
 		const datestr = JSON.parse(orders[i].info).time;
-		const total=orders[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0);
+		const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
 		var cart = '';
-		for (var j=0 ; j <  orders[i].cart.length; j++){
+		for (var j = 0; j < orders[i].cart.length; j++) {
 			cart += `
 				<tr>
 					<td>
-						${j+1}
+						${j + 1}
 					</td>
 					<td>
 						${orders[i].cart[j].name}
@@ -471,7 +473,7 @@
 					</td>
 				</tr>
 			`;
-			if (j==orders[i].cart.length-1){
+			if (j == orders[i].cart.length - 1) {
 				cart += `
 					<tr>
 						<td colspan="4">訂單金額總計</td>
@@ -517,32 +519,50 @@
 				</div><!--modal-content end-->
 			</div><!-- Modal end-->
 		`
-		
+
 		var element = document.getElementById('Modalrecord')
 		element.innerHTML = html;
 	}
 
 
-	function getOrderbyTable(table){
-		var tableOrder=table.toString();
-			//send a http request to get order by table
-			var checkout = '';
-		var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders3)%>))
-		var totalmoney=0;
-		console.log('orders:',orders)
-		const filteredOrders = orders.filter(order => order.info && JSON.parse(order.info).table === tableOrder);
-			console.log('ordersssss:',filteredOrders);
-			for (var i=0 ; i < filteredOrders.length; i++){
-				const time = JSON.parse(filteredOrders[i].info).time;
-				const iso8601Time = JSON.parse(filteredOrders[i].info).time;
-				const parsedTime = new Date(iso8601Time);
-				const formattedTime = parsedTime.toLocaleString();
-				const total=filteredOrders[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0);
-				totalmoney=totalmoney+total;
-				checkout += `
+	function getOrderbyTable(table) {
+		fetch(`/merchant/getOrderbyTable/${table}`, {
+			method: 'Get',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (myJson) {
+				console.log(myJson);
+			})
+			.catch(error => {
+				console.error('Error occurred:', error);
+				// Handle any errors that occurred during the fetch
+			})
+			.then(function () {
+
+				var tableOrder = table.toString();
+				//send a http request to get order by table
+				var checkout = '';
+				var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders3) %>))
+				var totalmoney = 0;
+				console.log('orders:', orders)
+				const filteredOrders = orders.filter(order => order.info && JSON.parse(order.info).table === tableOrder);
+				console.log('ordersssss:', filteredOrders);
+				for (var i = 0; i < filteredOrders.length; i++) {
+					const time = JSON.parse(filteredOrders[i].info).time;
+					const iso8601Time = JSON.parse(filteredOrders[i].info).time;
+					const parsedTime = new Date(iso8601Time);
+					const formattedTime = parsedTime.toLocaleString();
+					const total = filteredOrders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
+					totalmoney = totalmoney + total;
+					checkout += `
 					<tr>
 						<td>
-							${i+1}
+							${i + 1}
 						</td>
 						<td>
 							${filteredOrders[i].id}
@@ -555,9 +575,9 @@
 						</td>
 					</tr>
 				`;
-				
-			}
-			var html = `
+
+				}
+				var html = `
 					<form action="/merchant/checkoutOrder/:table" method="POST">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -594,28 +614,13 @@
 						</div><!-- Modal end-->
 					</form>
 			`
-			var element = document.getElementById('Modalcheckout')
-			element.innerHTML = html;
-		
-		fetch(`/merchant/getOrderbyTable/${table}`, {
-			method: 'Get',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (myJson) {
-				console.log(myJson);
-  			})
-			.catch(error => {
-				console.error('Error occurred:', error);
-				// Handle any errors that occurred during the fetch
+				var element = document.getElementById('Modalcheckout')
+				element.innerHTML = html;
+
 			});
-			
+
 	}
-	function checkoutOrder(table){
+	function checkoutOrder(table) {
 		//send a http request to checkout order by table
 		fetch(`/merchant/checkoutOrder/${table}`, {
 			method: 'Get',
@@ -628,7 +633,7 @@
 			})
 			.then(function (myJson) {
 				alert(myJson.status);
-  			})
+			})
 			.catch(error => {
 				console.error('Error occurred:', error);
 				// Handle any errors that occurred during the fetch
