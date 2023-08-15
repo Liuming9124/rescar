@@ -171,8 +171,39 @@ const robotController = {
 
     },
     robotStatus: (req, res) => {
-        // get robot current status, error code, and error message, and get robot current position, and get robot current battery, and get robot next stop
-        const jsonData = JSON.stringify({'start': [0], 'stop': [0], 'end': [0]});
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        console.log(config.robotport, config.robotip)
+        const options = {
+            hostname: config.robotip,
+            port: config.robotport,
+            path: '/robotStatus',
+            method: 'GET',
+        };
+        const promise = new Promise((resolve, reject) => {
+            const request = http.request(options, response => {
+                let data = '';
+                response.on('data', chunk => {
+                    data += chunk;
+                });
+                response.on('end', () => {
+                    resolve(data);
+                });
+            });
+            request.on('error', error => {
+                reject(error);
+                res.status(500).send('Internal Server Error');
+            });
+            request.end();
+        });
+        promise.then(data => {
+            const word = JSON.parse(data); // extract the word from the response body
+            console.log(word);
+            res.send(JSON.stringify(word))
+        }).catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        });
     }
 }
 
