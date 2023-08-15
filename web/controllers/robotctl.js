@@ -4,29 +4,29 @@ const fs = require('fs');
 
 const robotController = {
 
-    robotPage:async (req, res) => {
+    robotPage: async (req, res) => {
         var session = db.session()
-        var ringtable = [0,0,0,0,0,0]
+        var ringtable = [0, 0, 0, 0, 0, 0]
         session
-        .run(`MATCH (n:url{alert: "1"}) RETURN n.table`)
-        .then(result => {
-            // 依序抓取回傳的節點
-            result.records.forEach(record => {
-                // console.log(record.get('o').properties)
-                let table = record.get('n.table') //  抓取訂單資料
-                ringtable[table-1] = 1
+            .run(`MATCH (n:url{alert: "1"}) RETURN n.table`)
+            .then(result => {
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    // console.log(record.get('o').properties)
+                    let table = record.get('n.table') //  抓取訂單資料
+                    ringtable[table - 1] = 1
+                })
             })
-        })
-        .catch(error => {
-            console.log('ringtable error:', error)
-        })
-        .then(() => {
-            session.close()
-            // console.log(ringtable)
-            res.render('robot',{
-                'ringtable':ringtable
+            .catch(error => {
+                console.log('ringtable error:', error)
             })
-        })
+            .then(() => {
+                session.close()
+                // console.log(ringtable)
+                res.render('robot', {
+                    'ringtable': ringtable
+                })
+            })
     },
     robotPlace: (req, res) => {
         console.log((req.body))
@@ -36,42 +36,42 @@ const robotController = {
         var table = 1
         var session = db.session()
         session
-        .run(`MATCH (n:url{table:'${table}',alert:'1'}) set n.alert='0'`)
-        .catch(error => { console.log('uncallring error:', error) })
-        .then(() => {
-            session.close()
-            res.redirect('/ring')
-        })
+            .run(`MATCH (n:url{table:'${table}',alert:'1'}) set n.alert='0'`)
+            .catch(error => { console.log('uncallring error:', error) })
+            .then(() => {
+                session.close()
+                res.redirect('/ring')
+            })
     },
     orderGet: (req, res) => {
         var session = db.session()
         var ordertable = []
         session
-        .run(`MATCH (n:url)-[orders]->(b:order{status:2}) RETURN n.table, id(b) order by b.time DESC`)
-        .then(result => {
-            // 依序抓取回傳的節點
-            result.records.forEach(record => {
-                // console.log(record.get('o').properties)
-                let table = record.get('n.table') //  抓取桌號資料
-                let orderid = record.get('id(b)').low //  抓取訂單資料
-                ordertable.push({table, orderid})
-                // console.log(table, orderid)  
-                //資料格式: [ { table: '4', orderid: 22 }, { table: '4', orderid: 46 } ]
+            .run(`MATCH (n:url)-[orders]->(b:order{status:2}) RETURN n.table, id(b) order by b.time DESC`)
+            .then(result => {
+                // 依序抓取回傳的節點
+                result.records.forEach(record => {
+                    // console.log(record.get('o').properties)
+                    let table = record.get('n.table') //  抓取桌號資料
+                    let orderid = record.get('id(b)').low //  抓取訂單資料
+                    ordertable.push({ table, orderid })
+                    // console.log(table, orderid)  
+                    //資料格式: [ { table: '4', orderid: 22 }, { table: '4', orderid: 46 } ]
+                })
             })
-        })
-        .catch(error => {
-            console.log('ordertable error:', error)
-        })
-        .then(() => {
-            // console.log('robotctl.js:',ordertable)
-            session.close()
-            // console.log(ordertable)
-            // console.log("ringupdate success")
-            res.send(ordertable)
-        })
+            .catch(error => {
+                console.log('ordertable error:', error)
+            })
+            .then(() => {
+                // console.log('robotctl.js:',ordertable)
+                session.close()
+                // console.log(ordertable)
+                // console.log("ringupdate success")
+                res.send(ordertable)
+            })
     },
     robotRun: (req, res) => {
-        const jsonData = JSON.stringify({'start': [0], 'stop': [req.body.table], 'end': [0]});
+        const jsonData = JSON.stringify({ 'start': [0], 'stop': [req.body.table], 'end': [0] });
         // read config.json
         const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
         console.log(config.robotport, config.robotip)
@@ -103,7 +103,7 @@ const robotController = {
             request.write(jsonData);
             request.end();
         });
-    
+
         promise.then(data => {
             const word = JSON.parse(data); // extract the word from the response body
             console.log(word);
@@ -112,7 +112,7 @@ const robotController = {
             res.status(500).send('Internal Server Error');
         }).then(() => {
             // console.log(req.body)
-            console.log('merchant update order :',req.body.oid)
+            console.log('merchant update order :', req.body.oid)
             // console.log(req.params.table)
             var session = db.session()
             session
@@ -160,7 +160,7 @@ const robotController = {
             request.write(jsonData);
             request.end();
         });
-    
+
         promise.then(data => {
             const word = JSON.parse(data); // extract the word from the response body
             res.send(word)
@@ -171,39 +171,44 @@ const robotController = {
 
     },
     robotStatus: (req, res) => {
-        // read config.json
-        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-        console.log(config.robotport, config.robotip)
-        const options = {
-            hostname: config.robotip,
-            port: config.robotport,
-            path: '/robotStatus',
-            method: 'GET',
-        };
-        const promise = new Promise((resolve, reject) => {
-            const request = http.request(options, response => {
-                let data = '';
-                response.on('data', chunk => {
-                    data += chunk;
+        try {
+            // read config.json
+            const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+            console.log(config.robotport, config.robotip)
+            const options = {
+                hostname: config.robotip,
+                port: config.robotport,
+                path: '/robotStatus',
+                method: 'GET',
+            };
+            const promise = new Promise((resolve, reject) => {
+                const request = http.request(options, response => {
+                    let data = '';
+                    response.on('data', chunk => {
+                        data += chunk;
+                    });
+                    response.on('end', () => {
+                        resolve(data);
+                    });
                 });
-                response.on('end', () => {
-                    resolve(data);
+                request.on('error', error => {
+                    reject(error);
+                    res.send('Internal Server Error');
                 });
+                request.end();
             });
-            request.on('error', error => {
-                reject(error);
-                res.status(500).send('Internal Server Error');
+            promise.then(data => {
+                const word = JSON.parse(data); // extract the word from the response body
+                console.log(word);
+                res.send(JSON.stringify(word))
+            }).catch(error => {
+                console.error(error);
+                res.send('Internal Server Error');
             });
-            request.end();
-        });
-        promise.then(data => {
-            const word = JSON.parse(data); // extract the word from the response body
-            console.log(word);
-            res.send(JSON.stringify(word))
-        }).catch(error => {
+        }catch(error){
             console.error(error);
-            res.status(500).send('Internal Server Error');
-        });
+            res.send('Internal Server Error');
+        }
     }
 }
 

@@ -119,22 +119,27 @@ function robotRun(oid, table) {
         });
 }
 function robotStatus(){
-    fetch(`/robot/robotStatus`, {
-        method: 'Get',
-        headers: {
-            'Accept': '*/*',
-            'Content-Type': 'application/json'
-        },
-    })
-        .then(response => response.json())
-        .then(data => {
-            // console.log(data)
-            document.getElementById('robotStatus').innerHTML= JSON.stringify(data);
+    try{
+        fetch(`/robot/robotStatus`, {
+            method: 'Get',
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json'
+            },
         })
-        .catch(error => {
-            console.error('Error occurred:', error);
-            // Handle any errors that occurred during the fetch
-        });
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                document.getElementById('robotStatus').innerHTML= JSON.stringify(data);
+            })
+            .catch(error => {
+                console.error('Error occurred:', error);
+                document.getElementById('robotStatus').innerHTML= '機器人離線中';
+                // Handle any errors that occurred during the fetch
+            });
+        }catch(e){
+            console.log(e);
+        }
 }
 
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
