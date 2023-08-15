@@ -1,0 +1,8 @@
+[Tue Aug 15 2023 15:12:28 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}[Tue Aug 15 2023 15:16:30 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}[Tue Aug 15 2023 15:21:07 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}[二  8月 15 2023 15:22:08 GMT+0800 (台北標準時間)]{"logs": "success", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}[Tue Aug 15 2023 15:32:46 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:33:23 GMT+0800 (台北標準時間)]{"logs": "success", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:34:00 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:35:40 GMT+0800 (台北標準時間)]{"logs": "success", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:44:00 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:44:40 GMT+0800 (台北標準時間)]{"logs": "success", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:49:39 GMT+0800 (台北標準時間)]{"logs": "receive", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}
+[二  8月 15 2023 15:50:19 GMT+0800 (台北標準時間)]{"logs": "success", "cmd": {"start": 0, "stop": [1, 2, 3], "end": 0}}

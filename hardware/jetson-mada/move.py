@@ -27,12 +27,14 @@ def cal():
             frame)
 
         ids, idx = None, None
-
+        # print(type(markerIds))
+        # if markerIds != None:
         if np.logical_not(markerIds is None):
             ids = markerIds.ravel()
             idx = np.argmin(ids)
 
-
+        # markerCorners, markerIds, rejectedCandidates = cv2.aruco.detectMarkers(
+        #     frame, dictionary, parameters=parameters)
         frame = cv2.aruco.drawDetectedMarkers(frame, markerCorners, markerIds)
         rvec, tvec, _objPoints = cv2.aruco.estimatePoseSingleMarkers(
             markerCorners, 18.5, intrinsic, distortion)
@@ -72,7 +74,6 @@ def cal():
 def move_to_next(current_pos, next_pos):
     x_diff = next_pos[0] - current_pos[0]
     y_diff = next_pos[1] - current_pos[1]
-
     if x_diff > 0:
         car.forward()
     elif x_diff < 0:
@@ -83,26 +84,13 @@ def move_to_next(current_pos, next_pos):
         car.go_left()
 
 
-def move(direction):
-    if direction == "forward":
-        car.forward()
-    elif direction == "left":
-        car.go_left()
-    elif direction == "right":
-        car.go_right()
-    elif direction == "backward":
-        car.backward()
-    else:
-        print("Invalid direction")
-
-
 def dijkstra(start, end, graph):
-
+    # distances存储起点到每个节点的最短距离
     distances = {node: float('inf') for node in graph}
     distances[start] = 0
-
+    # heap存储待访问节点
     heap = [(0, start)]
-
+    # path存储每个节点的前一个节点
     path = {start: None}
     while heap:
         (distance, current_node) = heapq.heappop(heap)
@@ -116,7 +104,7 @@ def dijkstra(start, end, graph):
                 distances[neighbor] = new_distance
                 heapq.heappush(heap, (new_distance, neighbor))
                 path[neighbor] = current_node
-
+    # 从终点反向遍历每个节点，得到最短路径
     shortest_path = []
     node = end
     while node is not None:
@@ -127,10 +115,11 @@ def dijkstra(start, end, graph):
 
 
 if __name__ == "__main__":
-
+    # t1 = threading.Thread(target=sr04.wrapper)  # sr04
+    # t1.start()
 
     try:
-
+        # 定义地图
         map = {}
         matrix = [
             [1, 1, 1, 1, 1],
@@ -139,8 +128,9 @@ if __name__ == "__main__":
             [0, 1, 1, 0, 1],
             [0, 0, 1, 1, 1]
         ]
-        n = len(matrix)
-        m = len(matrix[0])
+        start = (0, 0)
+        end = (2, 1)
+        n, m = len(matrix), len(matrix[0])
         for i in range(n):
             for j in range(m):
                 if matrix[i][j] == 1:
@@ -155,17 +145,17 @@ if __name__ == "__main__":
                         neighbors[(i, j + 1)] = 1
                     map[(i, j)] = neighbors
 
-
+        # 起点和终点
         start = (0, 0)
         end = (2, 1)
 
-
+        # 使用Dijkstra算法求最短路径
         shortest_path = dijkstra(start, end, map)
 
-
+        # 输出最短路径上经过每个节点的坐标
         print(shortest_path)
 
-
+        # 按照最短路径移动
         for i in range(len(shortest_path) - 1):
             current_pos = shortest_path[i]
             next_pos = shortest_path[i + 1]

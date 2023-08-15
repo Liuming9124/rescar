@@ -229,6 +229,7 @@ const merchantController = {
             })
             .finally(() => {
                 session.close();
+                console.log('checkoutOrder success')
                 res.send(JSON.stringify({"status":"success"}))
             });
     },
@@ -281,7 +282,7 @@ const merchantController = {
             })
             .finally(() => {
                 session.close();
-                console.log('forder:',forder)
+                // console.log('forder:',forder)
                 res.send(forder)
             });
     }
