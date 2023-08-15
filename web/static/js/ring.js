@@ -118,6 +118,24 @@ function robotRun(oid, table) {
             // Handle any errors that occurred during the fetch
         });
 }
+function robotStatus(){
+    fetch(`/robot/robotStatus`, {
+        method: 'Get',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data)
+            document.getElementById('robotStatus').innerHTML= JSON.stringify(data);
+        })
+        .catch(error => {
+            console.error('Error occurred:', error);
+            // Handle any errors that occurred during the fetch
+        });
+}
 
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
 
@@ -130,3 +148,4 @@ function robotRun(oid, table) {
 
 // set interval to call api every 1 seconds
 setInterval(fetchData, 1000);
+setInterval(robotStatus, 500);
