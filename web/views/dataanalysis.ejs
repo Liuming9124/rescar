@@ -156,5 +156,30 @@
 		  
 		</script>
 </body>
+<script>
+	async function getDataAnalysis(startDate,endDate){
+		try{
+			var jsonbody = {
+				"startDate": startDate,
+				"endDate": endDate
+			}
+			const response = await fetch(`/dataanalysis/getDataAnalysis`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(jsonbody),
+			})
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			const data = await response.json();
+			console.log('Success:', data);
 
+		}catch(e){
+			console.log(e);
+		}
+	}
+	(getDataAnalysis(1,1))
+</script>
 </html>

@@ -8,17 +8,21 @@ const dataanalysisController = {
         res.render('dataanalysis', {
         })
     },
-    getDataAnlysis: (req, res) => {
+    getDataAnalysis: (req, res) => {
+        console.log(req.body)
         try {
-            // time format operation
-            filterTime = req.body
-            // console.log(filterTime)
-            const sdate = new Date(`${filterTime.startDate}T00:00:00`);
-            const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
-            // console.log(stime); // 2023-05-17-23-59-00.000Z
-            const edate = new Date(`${filterTime.endDate}T23:59:59`);
-            const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
-            console.log(etime); // 2023-05-17-23-59-00.000Z
+            // // time format operation
+            // filterTime = req.body
+            // // console.log(filterTime)
+            // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
+            // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
+            // // console.log(stime); // 2023-05-17-23-59-00.000Z
+            // const edate = new Date(`${filterTime.endDate}T23:59:59`);
+            // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
+            // console.log(etime); // 2023-05-17-23-59-00.000Z
+
+            stime = `2023-05-17-23-59-00.000Z`
+            etime = `2023-12-17-23-59-00.000Z`
 
             
             let forder = []
@@ -35,7 +39,7 @@ const dataanalysisController = {
                     })
                 })
                 .catch(error => {
-                    console.log('orderRecord error:', error)
+                    res.send(`{"status":"${error}"}}`)
                 })
                 .then(async () => {
                     // console.log(JSON.stringify(forder))   //上一層的所有訂單結果  
@@ -77,12 +81,7 @@ const dataanalysisController = {
                 .then(() => {
                     session.close()
                     console.log(forder)
-                    // res.render('history', {
-                    //     'forder': forder,
-                    //     'time': req.body,  //put searching time into html by variable 'time'
-                    // })
-                    res.render('dataanalysis', {
-                    })
+                    res.send(JSON.stringify(forder))
                 })
         }
         catch (err) {
