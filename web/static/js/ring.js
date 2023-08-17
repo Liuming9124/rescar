@@ -133,13 +133,13 @@ function robotStatus(){
                 document.getElementById('robotStatus').innerHTML= JSON.stringify(data);
             })
             .catch(error => {
-                console.error('Error occurred:', error);
+                console.log('Error occurred:', error);
                 document.getElementById('robotStatus').innerHTML= '機器人離線中';
                 // Handle any errors that occurred during the fetch
             });
-        }catch(e){
-            console.log(e);
-        }
+    }catch(e){
+        alert(e);
+    }
 }
 
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
