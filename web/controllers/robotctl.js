@@ -203,7 +203,6 @@ const robotController = {
                 res.send(JSON.stringify(word))
             }).catch(error => {
                 console.error(error);
-                res.send('Internal Server Error');
             });
         }catch(error){
             console.error(error);
