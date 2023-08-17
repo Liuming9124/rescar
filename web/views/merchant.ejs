@@ -406,7 +406,6 @@
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title itemname" id="myModalLabel">桌號：</h4>
 						</div>
 						<div class="modal-body">
 							<table class="table table-striped text-center">
@@ -536,28 +535,29 @@
 				return response.json();
 			})
 			.then(function (myJson) {
-				console.log(myJson);
+				console.log('json:',myJson);
+				return myJson;
 			})
 			.catch(error => {
 				console.error('Error occurred:', error);
 				// Handle any errors that occurred during the fetch
 			})
-			.then(function () {
-
+			.then(function (Json) {
+				const filteredData = Json.filter(item => {
+					const info = JSON.parse(item.info); // Parse the "info" property JSON string
+					return info.status.low === 3; // Filter items with "low" value equal to 3
+				  });
+				  
+				  console.log(filteredData);
 				var tableOrder = table.toString();
 				//send a http request to get order by table
 				var checkout = '';
-				var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders3) %>))
 				var totalmoney = 0;
-				console.log('orders:', orders)
-				const filteredOrders = orders.filter(order => order.info && JSON.parse(order.info).table === tableOrder);
-				console.log('ordersssss:', filteredOrders);
-				for (var i = 0; i < filteredOrders.length; i++) {
-					const time = JSON.parse(filteredOrders[i].info).time;
-					const iso8601Time = JSON.parse(filteredOrders[i].info).time;
-					const parsedTime = new Date(iso8601Time);
-					const formattedTime = parsedTime.toLocaleString();
-					const total = filteredOrders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
+				for (var i = 0; i <filteredData.length; i++) {
+					const total = filteredData[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
+					const datestr=JSON.parse(filteredData[i].info).time;
+					const date=new Date(datestr.replace("-", "/" ).replace("-", "/").replace("-", " " ).replace("-", ":" ).replace("-", ":" ));
+					const time=`${date.getHours()}:${date.getMinutes()}`;
 					totalmoney = totalmoney + total;
 					checkout += `
 					<tr>
@@ -565,10 +565,11 @@
 							${i + 1}
 						</td>
 						<td>
-							${filteredOrders[i].id}
+							${filteredData[i].id}
+					
 						</td>
 						<td>
-							${JSON.parse(filteredOrders[0].info).time} 
+							${time} 
 						</td>
 						<td>
 							${total}
