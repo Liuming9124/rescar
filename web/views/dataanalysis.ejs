@@ -82,81 +82,9 @@
 			</div>
 		</div><!--container end-->
 
-		<script>
-			// Pie Chart Data
-			var pieData = {
-				labels: ['Red', 'Blue', 'Yellow'],
-				datasets: [{
-					data: [20, 30, 50],
-					backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-				}]
-			};
-
-			var pieChart = new Chart(document.getElementById('pieChart'), {
-				type: 'pie',
-				data: pieData,
-				options: {}
-			});
-
-			// Line Chart Data
-			var lineData = {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-				datasets: [{
-					label: 'Sales',
-					data: [100, 200, 150, 300, 250, 180],
-					borderColor: '#FF6384',
-					fill: false
-				}]
-			};
-
-			var lineChart = new Chart(document.getElementById('lineChart'), {
-				type: 'line',
-				data: lineData,
-				options: {}
-			});
-
-			var data = {
-				labels: ['項目1', '項目2', '項目3', '項目4', '項目5'],
-				datasets: [{
-				  label: '數據集1',
-				  data: [10, 25, 15, 30, 20],
-				  backgroundColor: 'rgba(75, 192, 192, 0.6)',
-				  borderColor: 'rgba(75, 192, 192, 1)',
-				  borderWidth: 1
-				}]
-			  };
-		  //BAR CHART
-		  const salesData = {
-            labels: ['日期1', '日期2', '日期3', '日期4', '日期5'],
-            datasets: [{
-                label: '銷售量',
-                data: [120, 200, 150, 300, 250],
-                backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
-                borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
-                borderWidth: 1 // 邊框寬度
-            }]
-        };
-
-        // 配置
-        const chartConfig = {
-            type: 'bar',
-            data: salesData,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true // y 軸從 0 開始
-                    }
-                }
-            }
-        };
-
-        // 創建圖表
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctx, chartConfig);
-		  
-		</script>
 </body>
 <script>
+	let orderData = [];
 	async function getDataAnalysis(startDate,endDate){
 		try{
 			var jsonbody = {
@@ -174,12 +102,86 @@
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 			const data = await response.json();
-			console.log('Success:', data);
+			
+			orderData=data;
+			console.log('Success:', orderData);
 
 		}catch(e){
 			console.log(e);
 		}
 	}
 	(getDataAnalysis(1,1))
+
+		// Pie Chart Data
+		var pieData = {
+			labels: ['Red', 'Blue', 'Yellow'],
+			datasets: [{
+				data: [20, 30, 50],
+				backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+			}]
+		};
+
+		var pieChart = new Chart(document.getElementById('pieChart'), {
+			type: 'pie',
+			data: pieData,
+			options: {}
+		});
+
+		// Line Chart Data
+		var lineData = {
+			labels: ['8/11', '8/12', '8/13', '8/14', '8/15', '8/16','8/17'],
+			datasets: [{
+				label: 'Sales',
+				data: [100, 200, 150, 300, 250, 180,1000],
+				borderColor: '#FF6384',
+				fill: false
+			}]
+		};
+
+		var lineChart = new Chart(document.getElementById('lineChart'), {
+			type: 'line',
+			data: lineData,
+			options: {}
+		});
+
+		var data = {
+			labels: ['項目1', '項目2', '項目3', '項目4', '項目5'],
+			datasets: [{
+			label: '數據集1',
+			data: [10, 25, 15, 30, 20],
+			backgroundColor: 'rgba(75, 192, 192, 0.6)',
+			borderColor: 'rgba(75, 192, 192, 1)',
+			borderWidth: 1
+			}]
+		};
+		//BAR CHART
+		const salesData = {
+			labels: ['日期1', '日期2', '日期3', '日期4', '日期5'],
+			datasets: [{
+				label: '銷售量',
+				data: [120, 200, 150, 300, 250],
+				backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
+				borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
+				borderWidth: 1 // 邊框寬度
+			}]
+		};
+
+	// 配置
+	const chartConfig = {
+		type: 'bar',
+		data: salesData,
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true // y 軸從 0 開始
+				}
+			}
+		}
+	};
+
+	// 創建圖表
+	const ctx = document.getElementById('salesChart').getContext('2d');
+	new Chart(ctx, chartConfig);
+
 </script>
 </html>
