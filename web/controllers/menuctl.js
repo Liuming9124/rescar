@@ -9,7 +9,7 @@ const menuController = {
         // 需要印出的變數->menu
         var menu = []
         menu = JSON.parse(await funCtl.getMenu())
-        console.log('menu:',menu)
+        // console.log('menu:',menu)
         console.log(menu.length)
         
         res.render('menu', {

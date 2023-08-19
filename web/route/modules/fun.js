@@ -44,7 +44,7 @@ async function getMenu(req) {
         console.error('menu items error:', error);
     }
 
-    console.log('menu:', JSON.stringify(menu));
+    // console.log('menu:', JSON.stringify(menu));
 
     return Promise.resolve(JSON.stringify(menu));
 }
