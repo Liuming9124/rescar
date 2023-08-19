@@ -1,5 +1,6 @@
 const db = require("../route/modules/db");
-// var session = db.session()
+// 引用常見function
+const funCtl = require("../route/modules/fun");
 
 const LRU = require('lru-cache');
 
@@ -54,78 +55,27 @@ const homeController = {
             if (!req.session.cart) {
                 req.session.cart = [];
             }
+            // 從Fun.js中取得menu
+            menu = JSON.parse(await funCtl.getMenu())
+            var seed
+            if (req.session.seed){
+                seed = req.session.seed
+            }else {
+                seed = req.session.url
+            }
+            // 查詢訂單有幾個
             session = db.session()
             session
-                .run('match (n:type) return n.name')
-                .then(result => {
-                    // 依序抓取回傳的節點
-                    result.records.forEach(record => {
-                        menu.push({ tname: `${record.get('n.name')}` })
-                    })
-                })
-                .then(async () => {
-                    // 使用第二個db連接查詢下一層資料
-                    const session2 = db.session()
-                    for (var i = 0; i < menu.length; i++) {
-                        var tname = menu[i].tname;
-                        var itemsarr = []
-                        // 查詢特定類別的商品並新增至itemsarr
-                        try {
-                            const results = await session2.run(`MATCH (t:type{name:'${tname}'})-[:own]->(i:item) RETURN i`);
-                            results.records.forEach(record => {
-                                itemsarr.push(record.get('i').properties);
-                            });
-                        } catch (error) {
-                            console.error(error);
-                        }
-                        // add items to menu
-                        // 為了避免直接修改原始的 menu 數組，先創建一個副本
-                        const menuCopy = menu.slice();
-
-                        // 使用 flatMap() 方法更新 menu 數組，將新數據添加到舊數據的末尾
-                        menu = menuCopy.flatMap(item => {
-                            if (item.tname === tname) {
-                                return {
-                                    name: item.tname,
-                                    items: itemsarr
-                                };
-                            } else {
-                                return item;
-                            }
-                        });
-                    }
-                    session2.close();
-                    return menu;
-                })
-                .catch(error => {
-                    console.log('home type error:', error)
-                })
-                .then(async () => {
-                    // 使用第三個db查詢訂單有幾個
-                    const session3 = db.session()
-                    for (var i = 0; i < menu.length; i++) {
-                        if (req.session.seed){
-                            seed = req.session.seed
-                        }else {
-                            seed = req.session.url
-                        }
-                        try {
-                            const results = await session3.run(`match(u:url{link:'${seed}'})-[:order]->(o:order) return (o)`);
-                            req.session.orderamt = results.records.length
-                        } catch (error) {
-                            console.error(error);
-                        }
-                    }
-                    session3.close();
-                    return menu;
-                })
-                .then(menu => {
+                .run(`match(u:url{link:'${seed}'})-[:order]->(o:order) return (o)`)
+                .then(results => {
+                    req.session.orderamt = results.records.length
                     session.close();
-                    res.render(`home`, {
-                        'menu': menu,
-                        'session': req.session
-                    });
                 })
+            // console.log('menu:', menu)
+            res.render(`home`, {
+                'menu': menu,
+                'session': req.session
+            });
         }
     }
 }
