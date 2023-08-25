@@ -8861,3 +8861,14 @@ button.close {
 .rectangle1:hover {
     transform: translateY(-5px);
 }
+.type_choose1 {
+    padding: 10px;
+    font-size: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    width: 120px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}

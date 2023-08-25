@@ -30,7 +30,7 @@
 						<form id="serarchOrderBtn" action="/dataanalysis/getDataAnlysis" method="post">
 							<h3 class="text-center">餐點銷售數據</h3>
 							<div class="container">
-								<div class="flex"  style="display: flex; gap: 20px;">
+								<div class="flex"  style="display: flex; gap: 30px;">
 								<div class="rectangle">
 								  <h4>本月營業額</h4>
 								  <p>NT$100,000</p>
@@ -51,7 +51,16 @@
 
 							
 							<div class="box">
-								<h4>本店總營收</h4>								
+								<div class="flex" style="display: flex; justify-content: space-between; align-items: center;">
+									<h4 style="margin: 0;">本店總營收</h4>
+									<select class="type_choose1" name="product" style="margin: 0;">
+										<option>選擇查看區間</option>
+										<option>週</option>
+										<option>月</option>
+										<option>季</option>
+										<option>年</option>
+									</select>
+								</div>
 								<div class="containerlr1">
 									<div class="left ">
 										<table class="revenue-table">
@@ -69,7 +78,9 @@
 										</table>
 									</div>
 									<div class="right ">
-										<canvas id="lineChart"></canvas>
+										<div style="width: 500px;">
+											<canvas id="lineChart"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -79,13 +90,16 @@
 									<div class="left ">
 										<div class="rectangle-container">
 											<% for (var i = 1; i < 7; i++) { %>
-												<div class="rectangle1">
+												<a href=""id="category<%= i %>">
+													<div class="rectangle1">
 													種類<%= i %>
-												</div>
+													</div>
+												</a>
 											<% } %>
 										</div>
 									</div>
 									<div class="right ">
+										<h4>種類????</h4>
 										<div class="box-body" id="chart">
 											<canvas id="pieChart"></canvas>
 										</div>
@@ -109,11 +123,19 @@
 												<option>品項<%=i%></option>
 											  <% } %>
 										</select>
+										<h3>STEP 3:選擇顯示區間</h3>
+										<select class="type_choose" name="product">
+											<option>週</option>
+											<option>月</option>
+											<option>季</option>
+											<option>年</option>
+										</select>
 										<br><br>
 										<button id="search" class="dataAna"  style="width: 100%;">查詢</button>
 									</div>
 									<div class="right ">
-										<div style="width: 400px;">
+										<h4>品項????</h4>
+										<div style="width: 500px;">
 											<canvas id="salesChart"></canvas>
 										</div>
 									</div>
@@ -279,11 +301,14 @@
         font-weight: bold;
         margin-bottom: 5px;
     }
+	
 	.left {
-		display: flex;
-		flex-direction: column;
-		align-items: center; /* 上下居中对齐 */
-		justify-content: center; /* 左右居中对齐 */
+		display: grid;
+		place-items: center; 
+	}
+	.right {
+		display: grid;
+		place-items: center; 
 	}
 </style>
 </html>
