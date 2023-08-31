@@ -30,14 +30,16 @@ const dataanalysisController = {
             let forder = []
             session = db.session()
             session
-                .run(`MATCH (o:order) WHERE o.time >= ('${stime}') AND o.time < ('${etime}') RETURN (o) order by o.time desc`)
+                .run(`MATCH (o:order) WHERE o.time >= ('${stime}') AND o.time < ('${etime}') match(n:url)-[:order]->(o) RETURN n,o order by o.time desc`)
                 .then(result => {
                     // 依序抓取回傳的節點
                     result.records.forEach(record => {
                         // console.log(record.get('o').properties)
+                        let url = record.get('n').properties
+                        let urlid = parseInt(record.get('n').elementId.split(':')[2]);  //  處理ID格式至十進制
                         let sorder = record.get('o').properties //  抓取訂單資料
                         let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
-                        forder.push({ id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
+                        forder.push({ urlid: `${urlid}`, urltime: `${url.time}` , id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
                     })
                 })
                 .catch(error => {
