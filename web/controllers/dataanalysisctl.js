@@ -1,8 +1,19 @@
 const db = require("../route/modules/db");
 const funCtl = require("../route/modules/fun");
 
-// var session = db.session()
 
+function convertToValidDateString(timeString) {
+    const parts = timeString.split("-");
+    const year = parseInt(parts[0]);
+    const month = parseInt(parts[1]) - 1; // Months are zero-based in JavaScript
+    const day = parseInt(parts[2]);
+    const hour = parseInt(parts[3]);
+    const minute = parseInt(parts[4]);
+    const second = parseInt(parts[5].split(".")[0]);
+    const millisecond = parseInt(parts[5].split(".")[1].replace("Z", ""));
+    const date = new Date(Date.UTC(year, month, day, hour, minute, second, millisecond));
+    return date
+}
 
 const dataanalysisController = {
 
@@ -26,7 +37,7 @@ const dataanalysisController = {
             stime = `2023-05-17-23-59-00.000Z`
             etime = `2023-12-17-23-59-00.000Z`
 
-            
+
             let forder = []
             session = db.session()
             session
@@ -39,7 +50,7 @@ const dataanalysisController = {
                         let urlid = parseInt(record.get('n').elementId.split(':')[2]);  //  處理ID格式至十進制
                         let sorder = record.get('o').properties //  抓取訂單資料
                         let eleID = parseInt(record.get('o').elementId.split(':')[2]);  //  處理ID格式至十進制
-                        forder.push({ urlid: `${urlid}`, urltime: `${url.time}` , id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
+                        forder.push({ urlid: `${urlid}`, urltime: `${url.time}`, id: `${eleID}`, info: `${JSON.stringify(sorder)}` }) //  將訂單資訊push到forder裡面
                     })
                 })
                 .catch(error => {
@@ -56,11 +67,11 @@ const dataanalysisController = {
                         var items = menu[i].items;   // 獲取食物項目數組
                         food[category] = {}; // 在food物件中創建一個空物件來存儲當前類別的食物項目
                         for (var j = 0; j < items.length; j++) {
-                          food[category][j + 1] = { name: items[j].name, count: 0 }; // 將食物項目添加到當前類別下，注意這裡的 j + 1 作為食物項目的編號
+                            food[category][j + 1] = { name: items[j].name, count: 0 }; // 將食物項目添加到當前類別下，注意這裡的 j + 1 作為食物項目的編號
                         }
-                      }
-                      
-                      console.log('menu:',food);
+                    }
+
+                    //   console.log('menu:',food);
 
                     // console.log(JSON.stringify(forder))   //上一層的所有訂單結果  
                     // 使用第二個db連接查詢下一層訂單明細
@@ -98,15 +109,33 @@ const dataanalysisController = {
                 .catch(error => {
                     console.log(error)
                 })
-                
                 .then(() => {
                     session.close()
-                    console.log(forder)
-                    res.send(JSON.stringify(forder))
+                    // console.log(forder)
                 })
                 .then(() => {
-                    const ordersData = forder;
-                    console.log("ordersData:",ordersData)
+                    const revenueByYearMonth = {};
+
+                    forder.forEach(item => {
+                        const info = JSON.parse(item.info);
+                        const time = convertToValidDateString(info.time)
+                        const year = time.getFullYear();
+                        const month = time.getMonth() + 1;
+                        const revenue = item.cart.reduce((sum, cartItem) => sum + (parseFloat(cartItem.price) * parseInt(cartItem.amt)), 0);
+
+                        const yearMonthKey = `${year}-${month}`;
+                        if (!revenueByYearMonth[yearMonthKey]) {
+                            revenueByYearMonth[yearMonthKey] = revenue;
+                        } else {
+                            revenueByYearMonth[yearMonthKey] += revenue;
+                        }
+                    });
+                    console.log( revenueByYearMonth);
+
+
+                })
+                .finally(() => {
+                    res.send(JSON.stringify(forder))
                 })
         }
         catch (err) {
