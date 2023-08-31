@@ -103,7 +103,7 @@ class A4988Nema(object):
             GPIO.output(self.mode_pins, resolution[steptype])
 
     def motor_go(self, clockwise=False, steptype="Full",
-                 steps=200, stepdelay=.005, verbose=False, initdelay=.005):
+                 steps=200, stepdelay=.05, verbose=False, initdelay=.005):
         """ motor_go,  moves stepper motor based on 6 inputs
 
          (1) clockwise, type=bool default=False
@@ -232,7 +232,7 @@ class CAR(object):
 
         if ultrasonic:
             while any(thread.is_alive() for thread in threads):
-                print(sr04.distance)
+                # print(sr04.distance)
                 while sr04.distance < 30:
                     self.motor1.motor_stop()
                     self.motor2.motor_stop()
@@ -340,8 +340,11 @@ if __name__ == "__main__":
         t1 = threading.Thread(target=sr04.wrapper)  # sr04
         t1.start()
         car = CAR()
-        for _ in range(1):
-            car.forward(num_steps=2000, step_delay=0.004)
+        for _ in range(5):
+            car.forward(ultrasonic=True)
+            car.backward()
+            car.go_right()
+            car.go_left()
         sr04.sr04_stop()
     except:
         pass
