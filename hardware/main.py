@@ -32,10 +32,11 @@ async def robot_run(request: Request):
 @app.get("/robotStatus")
 async def robotstatus():
     json_data =  {
-        "status": "0",
-        "loc":[3,1],
-        "err":0,
-        "battery":55,
-        "stop": 0
+        "status": "Ready", #Moving
+        "current_position":[1,1], #null
+        "next_position":[2,1], #null
+        "battery":59.3%,
+        "sr04_active": 1, #0
+        "next_stop":[2,1] #null
     }
     return json_data
