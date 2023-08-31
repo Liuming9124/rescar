@@ -46,19 +46,6 @@ function countUniqueUrlids(data) {
 async function getdatabytime(stime, etime) {
 
     try {
-        // // time format operation
-        // filterTime = req.body
-        // // console.log(filterTime)
-        // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
-        // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
-        // // console.log(stime); // 2023-05-17-23-59-00.000Z
-        // const edate = new Date(`${filterTime.endDate}T23:59:59`);
-        // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
-        // console.log(etime); // 2023-05-17-23-59-00.000Z
-
-        stime = `2023-05-17-23-59-00.000Z`
-        etime = `2023-12-17-23-59-00.000Z`
-
 
         let forder = []
         session = db.session()
@@ -149,78 +136,6 @@ async function getdatabytime(stime, etime) {
         console.log('getDataAnalysis error:', err)
     }
 }
-    // try {
-    //     let forder = [];
-    //     let target;
-    //     session = db.session();
-
-    //     await session.run(`MATCH (o:order) WHERE o.time >= ('${stime}') AND o.time < ('${etime}') match(n:url)-[:order]->(o) RETURN n,o order by o.time desc`)
-    //         .then(async result => {
-    //             result.records.forEach(record => {
-    //                 let url = record.get('n').properties;
-    //                 let urlid = parseInt(record.get('n').elementId.split(':')[2]);
-    //                 let sorder = record.get('o').properties;
-    //                 let eleID = parseInt(record.get('o').elementId.split(':')[2]);
-    //                 forder.push({ urlid: `${urlid}`, urltime: `${url.time}`, id: `${eleID}`, info: `${JSON.stringify(sorder)}` });
-    //             });
-
-    //             var menu = JSON.parse(await funCtl.getMenu());
-    //             var food = {};
-
-    //             for (var i = 0; i < menu.length; i++) {
-    //                 var category = menu[i].name;
-    //                 var items = menu[i].items;
-    //                 food[category] = {};
-
-    //                 for (var j = 0; j < items.length; j++) {
-    //                     food[category][j + 1] = { name: items[j].name, count: 0 };
-    //                 }
-    //             }
-
-    //             var session2 = db.session();
-    //             const temp = forder.length;
-
-    //             for (var i = 0; i < temp; i++) {
-    //                 var carts = [];
-
-    //                 try {
-    //                     const results = await session2.run(`match(o) where ID(o) = ${forder[i].id} match(o) -[:orders]-> (p:cart) return p`);
-    //                     results.records.forEach(record => {
-    //                         carts.push(record.get('p').properties);
-    //                     });
-    //                 } catch (error) {
-    //                     console.error(error);
-    //                 }
-
-    //                 const ordersCp = forder.slice();
-
-    //                 forder = ordersCp.map((item, index) => {
-    //                     if (index === i) {
-    //                         return { ...item, cart: carts };
-    //                     } else {
-    //                         return item;
-    //                     }
-    //                 });
-    //             }
-
-    //             session2.close();
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    //         .then(() => {
-    //             session.close();
-    //             target = forder;
-    //         });
-
-    //     return new Promise(resolve => {
-    //         setTimeout(() => {
-    //             resolve(target);
-    //         }, 0);
-    //     });
-    // } catch (err) {
-    //     console.log('getDataAnalysis error:', err);
-    // }
 
 const dataanalysisController = {
 
