@@ -35,7 +35,7 @@ async def robotstatus():
         "status": "Ready", #Moving
         "current_position":[1,1], #null
         "next_position":[2,1], #null
-        "battery":59.3%,
+        "battery":"59.3%",
         "sr04_active": 1, #0
         "next_stop":[2,1] #null
     }
