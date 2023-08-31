@@ -432,31 +432,31 @@
 	<!-- <p><%=JSON.stringify(orders2)%></p> -->
 </footer>
 <script>
-	function detail(status, i) {
-		if (status === 0) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders0) %>))
+	function detail(status,i) {
+		if(status === 0){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders0)%>))
 			const tagg = "開始製作!";
 		}
-		if (status === 1) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders1) %>))
+		if(status === 1){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders1)%>))
 			const tagg = "餐點完成!";
 		}
-		if (status === 2) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders2) %>))
+		if(status === 2){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders2)%>))
 			const tagg = "前往送餐!";
 		}
-		if (status === 3) {
-			var orders = JSON.parse(JSON.stringify(<% -JSON.stringify(orders3) %>))
+		if(status === 3){
+			var orders = JSON.parse(JSON.stringify(<%-JSON.stringify(orders3)%>))
 			const tagg = "結帳!";
 		}
 		const datestr = JSON.parse(orders[i].info).time;
-		const total = orders[i].cart.reduce((acc, curr) => acc + Number(curr.price) * Number(curr.amt), 0);
+		const total=orders[i].cart.reduce((acc, curr)=> acc + Number(curr.price) * Number(curr.amt), 0);
 		var cart = '';
-		for (var j = 0; j < orders[i].cart.length; j++) {
+		for (var j=0 ; j <  orders[i].cart.length; j++){
 			cart += `
 				<tr>
 					<td>
-						${j + 1}
+						${j+1}
 					</td>
 					<td>
 						${orders[i].cart[j].name}
@@ -472,7 +472,7 @@
 					</td>
 				</tr>
 			`;
-			if (j == orders[i].cart.length - 1) {
+			if (j==orders[i].cart.length-1){
 				cart += `
 					<tr>
 						<td colspan="4">訂單金額總計</td>
@@ -518,12 +518,9 @@
 				</div><!--modal-content end-->
 			</div><!-- Modal end-->
 		`
-
 		var element = document.getElementById('Modalrecord')
 		element.innerHTML = html;
 	}
-
-
 	function getOrderbyTable(table) {
 		fetch(`/merchant/getOrderbyTable/${table}`, {
 			method: 'Get',
@@ -608,7 +605,7 @@
 										<button type="button" class="btn btn-default" data-dismiss="modal"
 											aria-label="Close">取消</button>
 										<!-- 更改下一行的onclick function, 將checkoutOrder()改成checkoutOrder(桌號) -->
-										<button id="submit1" type="submit" class="btn btn-primary" onclick="checkoutOrder(1)">結帳</button>
+										<button id="submit1" type="submit" class="btn btn-primary" onclick="checkoutOrder(${table})">結帳</button>
 									</div>
 								</form>
 							</div><!--modal-content end-->
@@ -621,7 +618,7 @@
 			});
 
 	}
-	function checkoutOrder(table) {
+	function checkoutOrder(table){
 		//send a http request to checkout order by table
 		fetch(`/merchant/checkoutOrder/${table}`, {
 			method: 'Get',
@@ -634,7 +631,7 @@
 			})
 			.then(function (myJson) {
 				alert(myJson.status);
-			})
+  			})
 			.catch(error => {
 				console.error('Error occurred:', error);
 				// Handle any errors that occurred during the fetch

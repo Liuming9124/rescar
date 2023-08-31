@@ -98,20 +98,15 @@ const dataanalysisController = {
                 .catch(error => {
                     console.log(error)
                 })
-                .then(() => {
-                    var session3 = db.session()
-                    try {
-                        const result3 =session3.run(`MATCH (n:type) RETURN n LIMIT 25`);
-                        console.log(result3);
-                    } catch (error) {
-                        console.error(error);
-                    }    
-                    
-                })
+                
                 .then(() => {
                     session.close()
                     console.log(forder)
                     res.send(JSON.stringify(forder))
+                })
+                .then(() => {
+                    const ordersData = forder;
+                    console.log("ordersData:",ordersData)
                 })
         }
         catch (err) {
