@@ -1,24 +1,21 @@
 import time
 import RPi.GPIO as GPIO
 
-# 禁止 GPIO 警告提示
-GPIO.setwarnings(False)
-
-GPIO.setmode(GPIO.BCM)
-trig_pin = 25  # 22
-echo_pin = 24  # 18
 
 # GPIO.setmode(GPIO.BOARD)
 # trig_pin = 22  # 22
 # echo_pin = 18  # 18
 
+# 禁止 GPIO 警告提示
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+trig_pin = 25  # 22
+echo_pin = 24  # 18
 distance = 0
 stop = False
 # 设置Trig和Echo引脚的方向
 GPIO.setup(trig_pin, GPIO.OUT)
 GPIO.setup(echo_pin, GPIO.IN)
-
-# 定义读取距离的函数
 
 
 def get_distance():
@@ -77,7 +74,8 @@ def wrapper():
     global distance
     while (not stop):
         distance = get_distance()
-        time.sleep(0.1)
+        # print(distance)
+        time.sleep(0.5)
     return
 
 
@@ -85,7 +83,7 @@ if __name__ == "__main__":
     try:
         while True:
             print(get_distance())
-            #print(measure())
+            # print(measure())
             time.sleep(0.1)
     except:
         pass

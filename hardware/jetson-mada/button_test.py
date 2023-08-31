@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-BUTTON = 5
+BUTTON = 12
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON, GPIO.IN)
 previousStatus = None
@@ -14,7 +14,7 @@ try:
     #     previousStatus = input
     while True:
         state = GPIO.input(BUTTON)
-        if not state:
+        if state:
             print("on")
             break
         else:
