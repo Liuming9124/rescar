@@ -1,12 +1,17 @@
 const db = require("../route/modules/db");
 const http = require('http');
 const fs = require('fs');
+const functl = require("../route/modules/fun");
 
 const robotController = {
 
     robotPage: async (req, res) => {
         var session = db.session()
         var ringtable = [0, 0, 0, 0, 0, 0]
+        var maps = await functl.getDataFromNeo4j()
+        // console.log('afterData:', maps)
+        var showMaps = functl.convertDataToInputArray(maps)
+
         session
             .run(`MATCH (n:url{alert: "1"}) RETURN n.table`)
             .then(result => {
@@ -22,11 +27,11 @@ const robotController = {
             })
             .then(() => {
                 session.close()
-                // console.log(ringtable)
                 res.render('robot', {
-                    'ringtable': ringtable
+                    'ringtable': ringtable,
+                    'maps': showMaps
                 })
-            })
+            });
     },
     robotPlace: (req, res) => {
         console.log((req.body))
