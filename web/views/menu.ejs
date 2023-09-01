@@ -65,7 +65,6 @@
 			<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;熱門商品&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
 		</div>
 		<% for (var i=0 ; i < menu.find(item=> item.name === menu[0].name).items.length ; i++) { %>
-		<div class="row">
 			<div class="col-xs-6 col-sm-3">
 				<div class="thumbnail">
 					<img src="images/food/food6<%=i+1%>.jpg" width="100%" alt="...">
@@ -93,9 +92,9 @@
 			<div style="text-align: center">
 				<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;<%= menu[i].name %>&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
 			</div>
+			<div class="scroll-arrows" style="overflow-x: scroll;">
 			<% for (var j=0 ; j < menu.find(item => item.name === menu[i].name).items.length ; j++) { %>
 				<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
-					<div class="row">
 						<div class="col-xs-6 col-sm-3">
 							<div class="thumbnail">
 								<img src="images/food/<%=menu.find(item=> item.name === menu[i].name).items[j].image %>" width="100%" alt="...">
@@ -109,6 +108,7 @@
 						</div>
 				</a>
 			<% } %>
+			</div>
 		</div>
 		<!-- Modal1 -->
 		<div class="modal fade" id="Modalopen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
