@@ -7,6 +7,7 @@ const dataanalysisCtl = require('../../controllers/dataanalysisctl')
 
 router.get('/', dataanalysisCtl.dataanalysisPage)
 router.post('/getDataAnalysis', dataanalysisCtl.getDataAnalysis)
+router.post('/getObjectSales',  dataanalysisCtl.getObjectSales)
 
 
 

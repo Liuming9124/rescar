@@ -43,6 +43,72 @@ function countUniqueUrlids(data) {
     return urlids.size;
 }
 
+async function getSalesData(data, period) {
+    // 初始化銷售量物件
+    const sales = {};
+
+    // 遍歷資料進行統計
+    data.forEach((item) => {
+        const salesData = {};
+
+        const info = JSON.parse(item.info);
+        const time = convertToValidDateString(info.time);
+        const year = time.getFullYear();
+        const month = time.getMonth() + 1;
+        const day = time.getDate();
+        console.log(year, month, day)
+
+        let ptime;
+        if (period === "year") {
+            ptime = `${year}`;
+        } else if (period === "season"){
+            if (month <= 3) {
+                ptime = `${year}-1`;
+            } else if (month <= 6) {
+                ptime = `${year}-2`;
+            } else if (month <= 9) {
+                ptime = `${year}-3`;
+            } else if (month <= 12) {
+                ptime = `${year}-4`;
+            }
+        } else if (period === "month") {
+            ptime = `${year}-${month}`;
+        } else if (period === "day") {
+            ptime = `${year}-${month}-${day}`;
+        }
+        const cart = item.cart;
+
+        cart.forEach((product) => {
+            const name = product.name;
+            const amount = parseInt(product.amt);
+
+            // 紀錄銷售量
+            salesData[name] = amount;
+        });
+        console.log(salesData)
+
+        // 查詢salesData中是否已經有該時間段的資料，並將相同產品的銷售量相加
+        if (sales.hasOwnProperty(ptime)) {
+            // 時間段已存在於銷售量物件中
+            const existingSalesData = sales[ptime];
+            for (const name in salesData) {
+                if (existingSalesData.hasOwnProperty(name)) {
+                    // 相同產品已存在於該時間段的銷售量中，將銷售量相加
+                    existingSalesData[name] += salesData[name];
+                } else {
+                    // 相同產品不存在於該時間段的銷售量中，直接加入銷售量物件
+                    existingSalesData[name] = salesData[name];
+                }
+            }
+        } else {
+            // 時間段不存在於銷售量物件中，新增該時間段的銷售量物件
+            sales[ptime] = salesData;
+        }
+    });
+
+    return sales;
+}
+
 async function getdatabytime(stime, etime) {
     try {
         let forder = []
@@ -65,43 +131,42 @@ async function getdatabytime(stime, etime) {
             })
             .then(async () => {
                 var session2 = db.session()
-                const temp = forder.length
                 var i = 0
                 for await (let temp of forder) {
                     var carts = []
                     // 查詢特定類別的商品並新增至itemsarr
                     try {
-                        console.log('id',temp)
+                        // console.log('id',temp)
                         await session2
-                        .run(`match(o) where ID(o) = ${temp.id} match(o) -[:orders]-> (p:cart) return p`)
-                        .then(result => {
-                            result.records.forEach(record => {
-                            // console.log(record.get('p').properties)
-                            carts.push(record.get('p').properties);
+                            .run(`match(o) where ID(o) = ${temp.id} match(o) -[:orders]-> (p:cart) return p`)
+                            .then(result => {
+                                result.records.forEach(record => {
+                                    // console.log(record.get('p').properties)
+                                    carts.push(record.get('p').properties);
+                                })
                             })
-                        })
-                        .catch (error => {
-                            console.error(error);
-                        })
-                        .then(() => {
-                            // add items to forder
-                            // 為了避免直接修改原始的 forder 數組，先創建一個副本
-                            const ordersCp = forder.slice();
+                            .catch(error => {
+                                console.error(error);
+                            })
+                            .then(() => {
+                                // add items to forder
+                                // 為了避免直接修改原始的 forder 數組，先創建一個副本
+                                const ordersCp = forder.slice();
 
-                            // 使用 map() 方法更新 forder 數組，將新數據添加到舊數據的末尾
-                            forder = ordersCp.map((item, index) => {
-                                if (index === i) {
-                                    return { ...item, cart: carts };
-                                } else {
-                                    return item;
-                                }
-                            });
-                        })
+                                // 使用 map() 方法更新 forder 數組，將新數據添加到舊數據的末尾
+                                forder = ordersCp.map((item, index) => {
+                                    if (index === i) {
+                                        return { ...item, cart: carts };
+                                    } else {
+                                        return item;
+                                    }
+                                });
+                            })
                     } catch (error) {
                         console.error(error);
                     }
                     i++
-                    console.log(i)
+                    // console.log(i)
                 }
                 session2.close();
                 //  在此return將更新後的資料傳出
@@ -172,12 +237,14 @@ const dataanalysisController = {
             forder = await getdatabytime(stime, etime);
             // console.log(forder)
             // res.send(forder)
-            
+
             // calculate income by year and month
             const revenueByYearMonth = await getrevenueByYearMonth(forder)
             console.log('各月營收', revenueByYearMonth)
             // calculate unique urlid , urlid 來客組數
-            console.log('來客組數 urlid:',await countUniqueUrlids(forder))
+            console.log('本月來客組數 urlid:', await countUniqueUrlids(forder))
+
+
 
             res.send(JSON.stringify(forder))
         }
@@ -185,6 +252,23 @@ const dataanalysisController = {
             console.log('getdata time error:', err)
             res.redirect('/dataanalysis')
         }
+    },
+    getObjectSales: async (req, res) => {
+        // input
+        // console.log(req.body)
+        stime = `2023-05-17-23-59-00.000Z`
+        etime = `2023-12-17-23-59-00.000Z`
+        // timeInterval = day week month season year
+        timeInterval = 'season'
+
+        // get order data from neo4j
+        let forder = []
+        forder = await getdatabytime(stime, etime);
+        let salesData = []
+        salesData = await getSalesData(forder, timeInterval)
+        console.log(JSON.stringify(salesData))
+        res.send(salesData)
+
     }
 
 }
