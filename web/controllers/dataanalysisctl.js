@@ -15,6 +15,14 @@ function convertToValidDateString(timeString) {
     return date
 }
 
+function formatInputDate(req) {
+    const dates = new Date(req+'T00:00:00');
+    console.log(req+'T00:00:00')
+    const time = dates.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + dates.getMilliseconds() + 'Z';
+    // console.log(time); // 2023-05-17-23-59-00.000Z
+    return time
+}
+
 async function getRevenue(data, period) {
     const revenueByYearMonth = {};
     data.forEach((item) => {
@@ -224,44 +232,37 @@ async function getdatabytime(stime, etime) {
     }
 }
 async function getFormatMenu() {
-    // var menu = []
-    // menu = JSON.parse(await funCtl.getMenu())
-    // //console.log('menu:',menu)
-    // var food = {}; // 創建一個空物件來存儲菜單數據
+    var menu = []
+    menu = JSON.parse(await funCtl.getMenu())
+    //console.log('menu:',menu)
+    var food = {}; // 創建一個空物件來存儲菜單數據
 
-    // for (var i = 0; i < menu.length; i++) {
-    //     var category = menu[i].name; // 獲取類別名稱
-    //     var items = menu[i].items;   // 獲取食物項目數組
-    //     food[category] = {}; // 在food物件中創建一個空物件來存儲當前類別的食物項目
-    //     for (var j = 0; j < items.length; j++) {
-    //         food[category][j + 1] = { name: items[j].name, count: 0 }; // 將食物項目添加到當前類別下，注意這裡的 j + 1 作為食物項目的編號
-    //     }
-    // }
-    // //   console.log('menu:',food);
+    for (var i = 0; i < menu.length; i++) {
+        var category = menu[i].name; // 獲取類別名稱
+        var items = menu[i].items;   // 獲取食物項目數組
+        food[category] = {}; // 在food物件中創建一個空物件來存儲當前類別的食物項目
+        for (var j = 0; j < items.length; j++) {
+            food[category][j + 1] = { name: items[j].name, count: 0 }; // 將食物項目添加到當前類別下，注意這裡的 j + 1 作為食物項目的編號
+        }
+    }
+    // console.log('menu:', food);
+    return food;
 }
 
 const dataanalysisController = {
-    // 時間格式預處理:源自於/history頁面的傳遞格式
-
-    // // time format operation
-    // filterTime = req.body
-    // // console.log(filterTime)
-    // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
-    // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
-    // // console.log(stime); // 2023-05-17-23-59-00.000Z
-    // const edate = new Date(`${filterTime.endDate}T23:59:59`);
-    // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
-    // console.log(etime); // 2023-05-17-23-59-00.000Z
-
     dataanalysisPage: (req, res) => {
         res.render('dataanalysis', {
         })
     },
     getUrlCounts: async (req, res) => {
+        const data = req.body
         // input
-        stime = `2023-05-17-23-59-00.000Z`
-        etime = `2023-12-17-23-59-00.000Z`
-        timeInterval = 'month'
+        stime = formatInputDate(data.stime)
+        etime = formatInputDate(data.etime)
+        timeInterval = data.timeInterval
+        // stime = `2023-05-17-23-59-00.000Z`
+        // etime = `2023-12-17-23-59-00.000Z`
+        // timeInterval = 'month'
 
         // get order data from neo4j
         let forder = []
@@ -275,12 +276,15 @@ const dataanalysisController = {
 
     },
     getRevenueSales: async (req, res) => {
+        const data = req.body
         // input
-        // console.log(req.body)
-        stime = `2023-05-17-23-59-00.000Z`
-        etime = `2023-12-17-23-59-00.000Z`
-        // timeInterval = day month season year
-        timeInterval = 'month'
+        stime = formatInputDate(data.stime)
+        etime = formatInputDate(data.etime)
+        timeInterval = data.timeInterval
+        // stime = `2023-05-17-23-59-00.000Z`
+        // etime = `2023-12-17-23-59-00.000Z`
+        // // timeInterval = day month season year
+        // timeInterval = 'month'
 
         // get order data from neo4j
         let forder = []
@@ -294,12 +298,15 @@ const dataanalysisController = {
 
     },
     getObjectSales: async (req, res) => {
+        const data = req.body
         // input
-        // console.log(req.body)
-        stime = `2023-05-17-23-59-00.000Z`
-        etime = `2023-12-17-23-59-00.000Z`
-        // timeInterval = day month season year
-        timeInterval = 'year'
+        stime = formatInputDate(data.stime)
+        etime = formatInputDate(data.etime)
+        timeInterval = data.timeInterval
+        // // console.log(req.body)
+        // stime = `2023-05-17-23-59-00.000Z`
+        // etime = `2023-12-17-23-59-00.000Z`
+        // timeInterval = 'year'
 
         // get order data from neo4j
         let forder = []
@@ -308,6 +315,12 @@ const dataanalysisController = {
         salesData = await getSalesData(forder, timeInterval)
         console.log(JSON.stringify(salesData))
         res.send(JSON.stringify(salesData))
+    },
+    getFormatMenu: async (req, res) => {
+        let food = {}
+        food = await getFormatMenu()
+        console.log(food)
+        res.send(JSON.stringify(food))
     }
 
 }
@@ -322,15 +335,15 @@ module.exports = dataanalysisController
 // getDataAnalysis: async (req, res) => {
 //     console.log(req.body)
 //     try {
-//         // // time format operation
-//         // filterTime = req.body
-//         // // console.log(filterTime)
-//         // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
-//         // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
-//         // // console.log(stime); // 2023-05-17-23-59-00.000Z
-//         // const edate = new Date(`${filterTime.endDate}T23:59:59`);
-//         // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
-//         // console.log(etime); // 2023-05-17-23-59-00.000Z
+//         // time format operation
+//         filterTime = req.body
+//         // console.log(filterTime)
+//         const sdate = new Date(`${filterTime.startDate}T00:00:00`);
+//         const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
+//         // console.log(stime); // 2023-05-17-23-59-00.000Z
+//         const edate = new Date(`${filterTime.endDate}T23:59:59`);
+//         const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
+//         console.log(etime); // 2023-05-17-23-59-00.000Z
 
 //         stime = `2023-05-17-23-59-00.000Z`
 //         etime = `2023-12-17-23-59-00.000Z`

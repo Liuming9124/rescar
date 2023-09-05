@@ -14,7 +14,7 @@ const historyController = {
         try {
             // time format operation
             filterTime = req.body
-            // console.log(filterTime)
+            console.log(filterTime)
             const sdate = new Date(`${filterTime.startDate}T${filterTime.startTime}`);
             const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
             // console.log(stime); // 2023-05-17-23-59-00.000Z

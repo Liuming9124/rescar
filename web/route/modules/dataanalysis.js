@@ -10,6 +10,7 @@ router.get('/', dataanalysisCtl.dataanalysisPage)
 router.post('/getUrlCounts', dataanalysisCtl.getUrlCounts)
 router.post('/getRevenueSales', dataanalysisCtl.getRevenueSales)
 router.post('/getObjectSales',  dataanalysisCtl.getObjectSales)
+router.get('/getFormatMenu' , dataanalysisCtl.getFormatMenu)
 
 
 
