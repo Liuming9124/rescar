@@ -15,32 +15,69 @@ function convertToValidDateString(timeString) {
     return date
 }
 
-function getrevenueByYearMonth(forder) {
+async function getRevenue(data, period) {
     const revenueByYearMonth = {};
-    forder.forEach(item => {
+    data.forEach((item) => {
         const info = JSON.parse(item.info);
         const time = convertToValidDateString(info.time);
         const year = time.getFullYear();
+        const season = Math.floor((time.getMonth() + 3) / 3);
         const month = time.getMonth() + 1;
+        const day = time.getDate();
         const revenue = item.cart.reduce((sum, cartItem) => sum + (parseFloat(cartItem.price) * parseInt(cartItem.amt)), 0);
 
-        const yearMonthKey = `${year}-${month}`;
-        if (!revenueByYearMonth[yearMonthKey]) {
-            revenueByYearMonth[yearMonthKey] = revenue;
+        let ptime;
+        if (period === "year") {
+            ptime = `${year}`;
+        } else if (period === "season") {
+            ptime = `${year}-${season}`;
+        } else if (period === "month") {
+            ptime = `${year}-${month}`;
+        } else if (period === "day") {
+            ptime = `${year}-${month}-${day}`;
+        }
+
+        if (!revenueByYearMonth[ptime]) {
+            revenueByYearMonth[ptime] = revenue;
         } else {
-            revenueByYearMonth[yearMonthKey] += revenue;
+            revenueByYearMonth[ptime] += revenue;
         }
     });
     return revenueByYearMonth;
 }
 
-function countUniqueUrlids(data) {
-    const urlids = new Set();
+function countUniqueUrlids(data, period) {
+    const urlcounts = {};
+
     for (const item of data) {
-        const urlid = item.urlid;
-        urlids.add(urlid);
+        const info = JSON.parse(item.info);
+        const time = convertToValidDateString(info.time);
+        const year = time.getFullYear();
+        const season = Math.floor((time.getMonth() + 3) / 3);
+        const month = time.getMonth() + 1;
+        const day = time.getDate();
+        
+        let ptime;
+        if (period === "year") {
+            ptime = `${year}`;
+        } else if (period === "season") {
+            ptime = `${year}-${season}`;
+        } else if (period === "month") {
+            ptime = `${year}-${month}`;
+        } else if (period === "day") {
+            ptime = `${year}-${month}-${day}`;
+        }
+        
+        if (!urlcounts[ptime]) {
+            urlcounts[ptime] = 1;
+            console.log(ptime)
+        } else {
+            urlcounts[ptime] += 1;
+        }
+        console.log(urlcounts)
+        
     }
-    return urlids.size;
+    return urlcounts;
 }
 
 async function getSalesData(data, period) {
@@ -54,6 +91,7 @@ async function getSalesData(data, period) {
         const info = JSON.parse(item.info);
         const time = convertToValidDateString(info.time);
         const year = time.getFullYear();
+        const season = Math.floor((time.getMonth() + 3) / 3);
         const month = time.getMonth() + 1;
         const day = time.getDate();
         console.log(year, month, day)
@@ -61,16 +99,8 @@ async function getSalesData(data, period) {
         let ptime;
         if (period === "year") {
             ptime = `${year}`;
-        } else if (period === "season"){
-            if (month <= 3) {
-                ptime = `${year}-1`;
-            } else if (month <= 6) {
-                ptime = `${year}-2`;
-            } else if (month <= 9) {
-                ptime = `${year}-3`;
-            } else if (month <= 12) {
-                ptime = `${year}-4`;
-            }
+        } else if (period === "season") {
+            ptime = `${year}-${season}`;
         } else if (period === "month") {
             ptime = `${year}-${month}`;
         } else if (period === "day") {
@@ -235,31 +265,62 @@ const dataanalysisController = {
             // get order data from neo4j
             let forder = []
             forder = await getdatabytime(stime, etime);
-            // console.log(forder)
-            // res.send(forder)
 
-            // calculate income by year and month
-            const revenueByYearMonth = await getrevenueByYearMonth(forder)
-            console.log('各月營收', revenueByYearMonth)
             // calculate unique urlid , urlid 來客組數
+            let count;
+            count = await countUniqueUrlids(forder)
             console.log('本月來客組數 urlid:', await countUniqueUrlids(forder))
 
-
-
-            res.send(JSON.stringify(forder))
+            res.send(count)
         }
         catch (err) {
             console.log('getdata time error:', err)
             res.redirect('/dataanalysis')
         }
     },
+    getUrlCounts: async (req, res) => {
+        // input
+        stime = `2023-05-17-23-59-00.000Z`
+        etime = `2023-12-17-23-59-00.000Z`
+        timeInterval = 'month'
+
+        // get order data from neo4j
+        let forder = []
+        forder = await getdatabytime(stime, etime);
+
+        // calculate unique urlid , urlid 來客組數
+        let count;
+        count = await countUniqueUrlids(forder, timeInterval)
+
+        res.send(JSON.stringify(count))
+
+    },
+    getRevenueSales: async (req, res) => {
+        // input
+        // console.log(req.body)
+        stime = `2023-05-17-23-59-00.000Z`
+        etime = `2023-12-17-23-59-00.000Z`
+        // timeInterval = day month season year
+        timeInterval = 'month'
+
+        // get order data from neo4j
+        let forder = []
+        forder = await getdatabytime(stime, etime);
+
+        // calculate income by time interval
+        let revenue = {}
+        revenue = await getRevenue(forder, timeInterval)
+        res.send(revenue)
+
+
+    },
     getObjectSales: async (req, res) => {
         // input
         // console.log(req.body)
         stime = `2023-05-17-23-59-00.000Z`
         etime = `2023-12-17-23-59-00.000Z`
-        // timeInterval = day week month season year
-        timeInterval = 'season'
+        // timeInterval = day month season year
+        timeInterval = 'year'
 
         // get order data from neo4j
         let forder = []
@@ -268,7 +329,6 @@ const dataanalysisController = {
         salesData = await getSalesData(forder, timeInterval)
         console.log(JSON.stringify(salesData))
         res.send(salesData)
-
     }
 
 }
