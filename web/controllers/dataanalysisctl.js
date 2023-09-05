@@ -56,7 +56,7 @@ function countUniqueUrlids(data, period) {
         const season = Math.floor((time.getMonth() + 3) / 3);
         const month = time.getMonth() + 1;
         const day = time.getDate();
-        
+
         let ptime;
         if (period === "year") {
             ptime = `${year}`;
@@ -67,7 +67,7 @@ function countUniqueUrlids(data, period) {
         } else if (period === "day") {
             ptime = `${year}-${month}-${day}`;
         }
-        
+
         if (!urlcounts[ptime]) {
             urlcounts[ptime] = 1;
             console.log(ptime)
@@ -75,7 +75,7 @@ function countUniqueUrlids(data, period) {
             urlcounts[ptime] += 1;
         }
         console.log(urlcounts)
-        
+
     }
     return urlcounts;
 }
@@ -241,42 +241,21 @@ async function getFormatMenu() {
 }
 
 const dataanalysisController = {
+    // 時間格式預處理:源自於/history頁面的傳遞格式
+
+    // // time format operation
+    // filterTime = req.body
+    // // console.log(filterTime)
+    // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
+    // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
+    // // console.log(stime); // 2023-05-17-23-59-00.000Z
+    // const edate = new Date(`${filterTime.endDate}T23:59:59`);
+    // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
+    // console.log(etime); // 2023-05-17-23-59-00.000Z
 
     dataanalysisPage: (req, res) => {
         res.render('dataanalysis', {
         })
-    },
-    getDataAnalysis: async (req, res) => {
-        console.log(req.body)
-        try {
-            // // time format operation
-            // filterTime = req.body
-            // // console.log(filterTime)
-            // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
-            // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
-            // // console.log(stime); // 2023-05-17-23-59-00.000Z
-            // const edate = new Date(`${filterTime.endDate}T23:59:59`);
-            // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
-            // console.log(etime); // 2023-05-17-23-59-00.000Z
-
-            stime = `2023-05-17-23-59-00.000Z`
-            etime = `2023-12-17-23-59-00.000Z`
-
-            // get order data from neo4j
-            let forder = []
-            forder = await getdatabytime(stime, etime);
-
-            // calculate unique urlid , urlid 來客組數
-            let count;
-            count = await countUniqueUrlids(forder)
-            console.log('本月來客組數 urlid:', await countUniqueUrlids(forder))
-
-            res.send(count)
-        }
-        catch (err) {
-            console.log('getdata time error:', err)
-            res.redirect('/dataanalysis')
-        }
     },
     getUrlCounts: async (req, res) => {
         // input
@@ -310,7 +289,7 @@ const dataanalysisController = {
         // calculate income by time interval
         let revenue = {}
         revenue = await getRevenue(forder, timeInterval)
-        res.send(revenue)
+        res.send(JSON.stringify(revenue))
 
 
     },
@@ -328,7 +307,7 @@ const dataanalysisController = {
         let salesData = []
         salesData = await getSalesData(forder, timeInterval)
         console.log(JSON.stringify(salesData))
-        res.send(salesData)
+        res.send(JSON.stringify(salesData))
     }
 
 }
@@ -336,3 +315,41 @@ const dataanalysisController = {
 
 
 module.exports = dataanalysisController
+
+
+
+
+// getDataAnalysis: async (req, res) => {
+//     console.log(req.body)
+//     try {
+//         // // time format operation
+//         // filterTime = req.body
+//         // // console.log(filterTime)
+//         // const sdate = new Date(`${filterTime.startDate}T00:00:00`);
+//         // const stime = sdate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + sdate.getMilliseconds() + 'Z';
+//         // // console.log(stime); // 2023-05-17-23-59-00.000Z
+//         // const edate = new Date(`${filterTime.endDate}T23:59:59`);
+//         // const etime = edate.toISOString().slice(0, 19).replace('T', '-').replace(':', '-').replace(':', '-') + '.' + edate.getMilliseconds() + 'Z';
+//         // console.log(etime); // 2023-05-17-23-59-00.000Z
+
+//         stime = `2023-05-17-23-59-00.000Z`
+//         etime = `2023-12-17-23-59-00.000Z`
+
+//         // get order data from neo4j
+//         let forder = []
+//         forder = await getdatabytime(stime, etime);
+
+//         // calculate unique urlid , urlid 來客組數
+//         let count;
+//         count = await countUniqueUrlids(forder)
+//         console.log('本月來客組數 urlid:', count)
+
+//         res.send(count)
+//     }
+//     catch (err) {
+//         console.log('getdata time error:', err)
+//         res.redirect('/dataanalysis')
+//     }
+// },
+
+
