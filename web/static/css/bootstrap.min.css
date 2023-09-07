@@ -316,7 +316,6 @@ th {
         border: 1px solid #ddd !important
     }
 }
-
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url(../fonts/glyphicons-halflings-regular.eot);
@@ -329,7 +328,7 @@ th {
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
@@ -1549,7 +1548,7 @@ h5 .small,
 h5 small,
 h6 .small,
 h6 small {
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1;
     color: #777
 }
@@ -1645,11 +1644,12 @@ p {
     line-height: 1.4
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .lead {
         font-size: 21px
     }
 }
+
 
 .small,
 small {
@@ -1843,7 +1843,7 @@ dd {
     margin-left: 0
 }
 
-@media (max-width: 600px) {
+@media (min-width:768px) {
     .dl-horizontal dt {
         float: left;
         width: 160px;
@@ -1999,7 +1999,7 @@ pre code {
     margin-left: auto
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .container {
         width: 750px
     }
@@ -2302,7 +2302,7 @@ pre code {
     margin-left: 0
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
 
     .col-sm-1,
     .col-sm-10,
@@ -3740,7 +3740,7 @@ textarea.input-lg {
     color: #737373
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .form-inline .form-group {
         display: inline-block;
         margin-bottom: 0;
@@ -3820,7 +3820,7 @@ textarea.input-lg {
     margin-left: -30px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .form-horizontal .control-label {
         padding-top: 7px;
         margin-bottom: 0;
@@ -3832,14 +3832,14 @@ textarea.input-lg {
     right: 15px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .form-horizontal .form-group-lg .control-label {
         padding-top: 11px;
         font-size: 18px
     }
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .form-horizontal .form-group-sm .control-label {
         padding-top: 6px;
         font-size: 12px
@@ -3851,7 +3851,7 @@ textarea.input-lg {
     padding: 6px 12px;
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
@@ -4299,7 +4299,7 @@ fieldset[disabled] .btn-danger:hover {
 }
 
 .btn-link {
-    font-weight: 380;
+    font-weight: 768;
     color: #ed786a;
     border-radius: 0
 }
@@ -4477,7 +4477,7 @@ tbody.collapse.in {
     display: block;
     padding: 3px 20px;
     clear: both;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1.42857143;
     color: #333;
     white-space: nowrap
@@ -4570,7 +4570,7 @@ tbody.collapse.in {
     margin-bottom: 2px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-right .dropdown-menu {
         right: 0;
         left: auto
@@ -4888,7 +4888,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .input-group-addon {
     padding: 6px 12px;
     font-size: 14px;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1;
     color: #555;
     text-align: center;
@@ -5085,7 +5085,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 
 
-@media (min-width: 380px) {
+@media (min-width: 768px) {
     .nav-tabs.nav-justified > li {
         display: table-cell;
         width: 1%;
@@ -5107,16 +5107,17 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border: 1px solid #ddd;
 }
 
-@media (min-width: 380px) {
-    .nav-tabs.nav-justified > li > a {
+
+@media (min-width:768px) {
+    .nav-tabs.nav-justified>li>a {
         border-bottom: 1px solid #ddd;
-        border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0
     }
 
-    .nav-tabs.nav-justified > .active > a,
-    .nav-tabs.nav-justified > .active > a:focus,
-    .nav-tabs.nav-justified > .active > a:hover {
-        border-bottom-color: #fff;
+    .nav-tabs.nav-justified>.active>a,
+    .nav-tabs.nav-justified>.active>a:focus,
+    .nav-tabs.nav-justified>.active>a:hover {
+        border-bottom-color: #fff
     }
 }
 .nav-pills>li {
@@ -5165,7 +5166,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     left: auto
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .nav-justified>li {
         display: table-cell;
         width: 1%
@@ -5191,7 +5192,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border: 1px solid #ddd
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .nav-tabs-justified>li>a {
         border-bottom: 1px solid #ddd;
         border-radius: 4px 4px 0 0
@@ -5225,13 +5226,13 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border: 1px solid transparent
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar {
         border-radius: 4px
     }
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-header {
         float: left
     }
@@ -5251,7 +5252,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     overflow-y: auto
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-collapse {
         width: auto;
         border-top: 0;
@@ -5299,7 +5300,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-left: -15px
 }
 
-@media (min-width:300px) {
+@media (min-width:768px) {
 
     .container-fluid>.navbar-collapse,
     .container-fluid>.navbar-header,
@@ -5315,7 +5316,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border-width: 0 0 1px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-static-top {
         border-radius: 0
     }
@@ -5329,7 +5330,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     z-index: 1030
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
 
     .navbar-fixed-bottom,
     .navbar-fixed-top {
@@ -5369,7 +5370,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     display: block
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
 
     .navbar>.container .navbar-brand,
     .navbar>.container-fluid .navbar-brand {
@@ -5405,7 +5406,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-top: 4px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-toggle {
         display: none
     }
@@ -5448,7 +5449,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-nav {
         float: left;
         margin: 0
@@ -5476,7 +5477,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1)
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-form .form-group {
         display: inline-block;
         margin-bottom: 0;
@@ -5547,7 +5548,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-form {
         width: auto;
         padding-top: 0;
@@ -5594,7 +5595,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-bottom: 15px
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-text {
         float: left;
         margin-right: 15px;
@@ -5602,7 +5603,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .navbar-left {
         float: left !important
     }
@@ -6210,7 +6211,7 @@ a.badge:hover {
     max-width: 100%
 }
 
-@media screen and (min-width:380px) {
+@media screen and (min-width:768px) {
     .jumbotron {
         padding-top: 48px;
         padding-bottom: 48px
@@ -7394,7 +7395,7 @@ button.close {
     overflow: scroll
 }
 
-@media (min-width:380px) {
+@media (min-width:768px) {
     .modal-dialog {
         width: 600px;
         margin: 30px auto
@@ -7423,7 +7424,7 @@ button.close {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-style: normal;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1.42857143;
     text-align: left;
     text-align: start;
@@ -7557,7 +7558,7 @@ button.close {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
-    font-weight: 380;
+    font-weight: 768;
     line-height: 1.42857143;
     text-align: left;
     text-align: start;
@@ -7924,7 +7925,7 @@ button.close {
     text-shadow: none
 }
 
-@media screen and (min-width:380px) {
+@media screen and (min-width:768px) {
 
     .carousel-control .glyphicon-chevron-left,
     .carousel-control .glyphicon-chevron-right,
@@ -8117,7 +8118,7 @@ button.close {
     }
 }
 
-@media (min-width:380px) and (max-width:991px) {
+@media (min-width:768px) and (max-width:991px) {
     .visible-sm {
         display: block !important
     }
@@ -8136,19 +8137,19 @@ button.close {
     }
 }
 
-@media (min-width:380px) and (max-width:991px) {
+@media (min-width:768px) and (max-width:991px) {
     .visible-sm-block {
         display: block !important
     }
 }
 
-@media (min-width:380px) and (max-width:991px) {
+@media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline {
         display: inline !important
     }
 }
 
-@media (min-width:380px) and (max-width:991px) {
+@media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline-block {
         display: inline-block !important
     }
@@ -8234,7 +8235,7 @@ button.close {
     }
 }
 
-@media (min-width:380px) and (max-width:991px) {
+@media (min-width:768px) and (max-width:991px) {
     .hidden-sm {
         display: none !important
     }
@@ -8339,7 +8340,7 @@ button.close {
     z-index: 1030
 }
 
-@media (min-width:300px0) {
+@media (min-width:768px) {
 
     .navbar-fixed-bottom,
     .navbar-fixed-topmid {
