@@ -18,13 +18,14 @@ function geturls() {
         });
 }
 function getSales() {
+    const selectedTimeInterval = document.getElementById("timeInterval").value;
     fetch(`/dataanalysis/getRevenueSales`, {
         method: 'POST',
         headers: {
             'Accept': '*/*',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "stime": "2023-06-29", "etime": "2023-10-29", "timeInterval": "month" })
+        body: JSON.stringify({ "stime": "2023-06-29", "etime": "2023-10-29", "timeInterval": selectedTimeInterval })
     })
         .then(response => response.json())
         .then(data => {

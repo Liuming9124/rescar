@@ -26,160 +26,166 @@
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<!-- 訂單紀錄查詢 -->
-					<div class="tab-pane fade in active" id="customer">
-						<form id="serarchOrderBtn" action="/dataanalysis/getDataAnlysis" method="post">
-							<h3 class="text-center">餐點銷售數據</h3>
-							<div class="container">
-								<div class="flex"  style="display: flex; gap: 30px;">
-								<div class="rectangle">
-								  <h4>本月營業額</h4>
-								  <p>NT$100,000</p>
-								  <span class="trend-arrow">↑</span>
+				<div class="tab-pane fade in active" id="customer">
+					<h3 class="text-center">餐點銷售數據</h3>
+					<div class="container">
+						<div class="flex" style="display: flex; gap: 30px;">
+							<div class="rectangle">
+								<h4>本月營業額</h4>
+								<p>NT$100,000</p>
+								<span class="trend-arrow">↑</span>
+							</div>
+							<div class="rectangle">
+								<h4>本月累積來客桌次</h4>
+								<p>500 次</p>
+								<span class="trend-arrow">↓</span>
+							</div>
+							<div class="rectangle">
+								<h4>本月平均日營業額</h4>
+								<p>NT$5,000</p>
+								<span class="trend-arrow">↑</span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="box">
+						<form id="restaurantSlaes" action="/dataanalysis/getRevenueSales" method="post">
+							<div class="flex"
+								style="display: flex; justify-content: space-between; align-items: center;">
+								<h4 style="margin: 0;">本店總營收</h4>
+								<select class="type_choose1" id="timeInterval" name="timeInterval" style="margin: 0;">
+									<option value="day">日</option>
+									<option value="month">月</option>
+									<option value="season">季</option>
+									<option value="year">年</option>
+								</select>
+							</div>
+						</form>
+						<div class="containerlr1">
+							<div class="left ">
+								<table class="revenue-table">
+									<caption>店家營收</caption>
+									<tr>
+										<th>日期</th>
+										<th>總營收</th>
+									</tr>
+									<% for (var i=1 ; i < 6 ; i++) { %>
+										<tr>
+											<td>2023-<%=i%>
+											</td>
+											<td>$1000</td>
+										</tr>
+										<% } %>
+								</table>
+							</div>
+							<div class="right ">
+								<div style="width: 500px;">
+									<canvas id="lineChart"></canvas>
 								</div>
-								<div class="rectangle">
-								  <h4>本月累積來客桌次</h4>
-								  <p>500 次</p>
-								  <span class="trend-arrow">↓</span>
-								</div>
-								<div class="rectangle">
-								  <h4>本月平均日營業額</h4>
-								  <p>NT$5,000</p>
-								  <span class="trend-arrow">↑</span>
-								</div>
-							  </div>
+							</div>
+						</div>
+					</div>
+					<div class="box">
+						<form id="restaurantSlaes" action="/dataanalysis/getObjectSales" method="post">
+							<div class="flex" style="display: flex; justify-content: space-between; align-items: center;">
+								<h4>各類商品銷售分析</h4>
 							</div>
 
-							
-							<div class="box">
-								<div class="flex" style="display: flex; justify-content: space-between; align-items: center;">
-									<h4 style="margin: 0;">本店總營收</h4>
-									<select class="type_choose1" name="product" style="margin: 0;">
-										<option>選擇查看區間</option>
-										<option>週</option>
-										<option>月</option>
-										<option>季</option>
-										<option>年</option>
-									</select>
-								</div>
-								<div class="containerlr1">
-									<div class="left ">
-										<table class="revenue-table">
-											<caption>店家營收</caption>
-											<tr>
-												<th>日期</th>
-												<th>總營收</th>
-											</tr>
-											<% for (var i=1 ; i < 6 ; i++) { %>
-												<tr>
-													<td>2023-<%=i%></td>
-													<td>$1000</td>
-												</tr>
+							<div class="containerlr1">
+								<div class="left ">
+									<h3>STEP 1:選擇種類</h3>
+									<select class="type_choose" name="type">
+										<% for (var i=1 ; i < 6 ; i++) { %>
+											<option>種類<%=i%>
+											</option>
 											<% } %>
-										</table>
-									</div>
-									<div class="right ">
-										<div style="width: 500px;">
-											<canvas id="lineChart"></canvas>
-										</div>
+									</select>
+									<h3>STEP 2:選擇顯示區間</h3>
+									<select class="type_choose" name="product">
+										<option value="day">日</option>
+										<option value="month">月</option>
+										<option value="season">季</option>
+										<option value="year">年</option>
+									</select>
+									<br><br>
+									<button id="search1" class="dataAna" style="width: 100%;">查詢</button>
+								</div>
+								<div class="right ">
+									<h4>種類????</h4>
+									<div class="box-body" id="chart">
+										<canvas id="pieChart"></canvas>
 									</div>
 								</div>
 							</div>
-							<div class="box">
-								<div class="flex" style="display: flex; justify-content: space-between; align-items: center;">
-									<h4>各類商品銷售分析</h4>
-									<select class="type_choose1" name="product" style="margin: 0;">
-										<option>選擇查看區間</option>
+						</form>
+					</div>
+
+					<div class="box">
+						<form id="restaurantSlaes" action="/dataanalysis/getObjectSales" method="post">
+							<h4>單項商品銷售分析</h4>
+							<div class="containerlr1">
+								<div class="left ">
+									<h3>STEP 1:選擇種類</h3>
+									<select class="type_choose" name="type">
+										<% for (var i=1 ; i < 6 ; i++) { %>
+											<option>種類<%=i%>
+											</option>
+											<% } %>
+									</select>
+									<h3>STEP 2:選擇商品</h3>
+									<select class="type_choose" name="product">
+										<% for (var i=1 ; i < 6 ; i++) { %>
+											<option>品項<%=i%>
+											</option>
+											<% } %>
+									</select>
+									<h3>STEP 3:選擇顯示區間</h3>
+									<select class="type_choose" name="product">
 										<option>日</option>
 										<option>週</option>
 										<option>月</option>
 										<option>季</option>
 										<option>年</option>
 									</select>
+									<br><br>
+									<button id="search2" class="dataAna" style="width: 100%;">查詢</button>
 								</div>
-								
-								<div class="containerlr1">
-									<div class="left ">
-										<div class="rectangle-container">
-											<% for (var i = 1; i < 7; i++) { %>
-												<a href=""id="category<%= i %>">
-													<div class="rectangle1">
-													種類<%= i %>
-													</div>
-												</a>
-											<% } %>
-										</div>
-									</div>
-									<div class="right ">
-										<h4>種類????</h4>
-										<div class="box-body" id="chart">
-											<canvas id="pieChart"></canvas>
-										</div>
+								<div class="right ">
+									<h4>品項????</h4>
+									<div style="width: 500px;">
+										<canvas id="salesChart"></canvas>
 									</div>
 								</div>
-							</div>
-
-							<div class="box">
-								<h4>單項商品銷售分析</h4>
-								<div class="containerlr1">
-									<div class="left ">
-										<h3>STEP 1:選擇種類</h3>
-										<select class="type_choose" name="type">
-											<% for (var i=1 ; i < 6 ; i++) { %>
-												<option>種類<%=i%></option>
-											  <% } %>
-										</select>
-										<h3>STEP 2:選擇商品</h3>
-										<select class="type_choose" name="product">
-											<% for (var i=1 ; i < 6 ; i++) { %>
-												<option>品項<%=i%></option>
-											  <% } %>
-										</select>
-										<h3>STEP 3:選擇顯示區間</h3>
-										<select class="type_choose" name="product">
-											<option>日</option>
-											<option>週</option>
-											<option>月</option>
-											<option>季</option>
-											<option>年</option>
-										</select>
-										<br><br>
-										<button id="search" class="dataAna"  style="width: 100%;">查詢</button>
-									</div>
-									<div class="right ">
-										<h4>品項????</h4>
-										<div style="width: 500px;">
-											<canvas id="salesChart"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
 						</form>
 					</div>
-				
-
-				<div class="tab-pane fade" id="howmanyfood">
-					<h3 class="text-center">餐點備貨分析</h3>
-					<label for="startDate">開始日期：</label>
-					<input type="date" id="startDate" name="startDate">
-					&nbsp;&nbsp;~&nbsp;&nbsp;
-					<label for="endDate">結束日期：</label>
-					<input type="date" id="endDate" name="endDate">
-					&nbsp&nbsp&nbsp
-					<a id="search" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-					<br><br>
-					<table class="table table-striped table-hover text-center">
-
-					</table>
 				</div>
-				
 			</div>
+
+
+			<div class="tab-pane fade" id="howmanyfood">
+				<h3 class="text-center">餐點備貨分析</h3>
+				<label for="startDate">開始日期：</label>
+				<input type="date" id="startDate" name="startDate">
+				&nbsp;&nbsp;~&nbsp;&nbsp;
+				<label for="endDate">結束日期：</label>
+				<input type="date" id="endDate" name="endDate">
+				&nbsp&nbsp&nbsp
+				<a id="search" href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+				<br><br>
+				<table class="table table-striped table-hover text-center">
+
+				</table>
+			</div>
+
+		</div>
 		</div><!--container end-->
 
 </body>
 <script>
 	let orderData = [];
-	async function getDataAnalysis(startDate,endDate){
-		try{
+	async function getDataAnalysis(startDate, endDate) {
+		try {
 			var jsonbody = {
 				"startDate": startDate,
 				"endDate": endDate
@@ -195,69 +201,69 @@
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 			const data = await response.json();
-			
-			orderData=data;
+
+			orderData = data;
 			console.log('Success:', orderData);
 
-		}catch(e){
+		} catch (e) {
 			console.log(e);
 		}
 	}
-	(getDataAnalysis(1,1))
+	(getDataAnalysis(1, 1))
 
-		// Pie Chart Data
-		var pieData = {
-			labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple'],
-			datasets: [{
-				data: [20, 30, 50, 20, 30, 50],				
-				backgroundColor: ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6']
-			}]
-		};
+	// Pie Chart Data
+	var pieData = {
+		labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple'],
+		datasets: [{
+			data: [20, 30, 50, 20, 30, 50],
+			backgroundColor: ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6']
+		}]
+	};
 
-		var pieChart = new Chart(document.getElementById('pieChart'), {
-			type: 'pie',
-			data: pieData,
-			options: {}
-		});
+	var pieChart = new Chart(document.getElementById('pieChart'), {
+		type: 'pie',
+		data: pieData,
+		options: {}
+	});
 
-		// Line Chart Data
-		var lineData = {
-			labels: ['8/11', '8/12', '8/13', '8/14', '8/15', '8/16','8/17'],
-			datasets: [{
-				label: 'Sales',
-				data: [100, 200, 150, 300, 250, 180,1000],
-				borderColor: '#FF6384',
-				fill: false
-			}]
-		};
+	// Line Chart Data
+	var lineData = {
+		labels: ['8/11', '8/12', '8/13', '8/14', '8/15', '8/16', '8/17'],
+		datasets: [{
+			label: 'Sales',
+			data: [100, 200, 150, 300, 250, 180, 1000],
+			borderColor: '#FF6384',
+			fill: false
+		}]
+	};
 
-		var lineChart = new Chart(document.getElementById('lineChart'), {
-			type: 'line',
-			data: lineData,
-			options: {}
-		});
+	var lineChart = new Chart(document.getElementById('lineChart'), {
+		type: 'line',
+		data: lineData,
+		options: {}
+	});
 
-		var data = {
-			labels: ['項目1', '項目2', '項目3', '項目4', '項目5'],
-			datasets: [{
+	var data = {
+		labels: ['項目1', '項目2', '項目3', '項目4', '項目5'],
+		datasets: [{
 			label: '數據集1',
 			data: [10, 25, 15, 30, 20],
 			backgroundColor: 'rgba(75, 192, 192, 0.6)',
 			borderColor: 'rgba(75, 192, 192, 1)',
 			borderWidth: 1
-			}]
-		};
-		//BAR CHART
-		const salesData = {
-			labels: ['日期1', '日期2', '日期3', '日期4', '日期5'],
-			datasets: [{
-				label: '銷售量',
-				data: [120, 200, 150, 300, 250],
-				backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
-				borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
-				borderWidth: 1 // 邊框寬度
-			}]
-		};
+		}]
+	};
+	//BAR CHART
+	const salesData = {
+		labels: ['日期1', '日期2', '日期3', '日期4', '日期5'],
+		datasets: [{
+			label: '銷售量',
+			data: [120, 200, 150, 300, 250],
+			backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
+			borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
+			borderWidth: 1 // 邊框寬度
+		}]
+	};
 
 	// 配置
 	const chartConfig = {
@@ -280,49 +286,52 @@
 <!-- here to get the data from the server -->
 <script src="../static/js/dataAnalysis.js"></script>
 <style>
-    table {
-        border-collapse: collapse;
-        width:100%;
-        margin: auto;
-        margin-top: 10px;
-    }
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin: auto;
+		margin-top: 10px;
+	}
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 4px;
-        text-align: center;
-    }
+	th,
+	td {
+		border: 1px solid #ddd;
+		padding: 4px;
+		text-align: center;
+	}
 
-    th {
-        background-color: #f2f2f2;
-    }
+	th {
+		background-color: #f2f2f2;
+	}
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
 
-    tr:hover {
-        background-color: #f5f5f5;
-    }
+	tr:hover {
+		background-color: #f5f5f5;
+	}
 
-    .revenue-table {
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-    }
+	.revenue-table {
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+		border-radius: 5px;
+	}
 
-    .revenue-table caption {
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-	
+	.revenue-table caption {
+		font-size: 12px;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
 	.left {
 		display: grid;
-		place-items: center; 
+		place-items: center;
 	}
+
 	.right {
 		display: grid;
-		place-items: center; 
+		place-items: center;
 	}
 </style>
+
 </html>
