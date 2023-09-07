@@ -80,33 +80,32 @@ function getFormatMenu() {
 
 geturls("2023-06-29", "2023-10-29", "month")
     .then(data => {
-        console.log(data); // 处理返回的数据
+        console.log(data); // 處理返回的數據
         show = data
     })
     .catch(error => {
-        console.error(error); // 处理错误
+        console.error(error); // 處理錯誤
     });
 getSales("2023-06-29", "2023-10-29", "month")
     .then(data => {
-        console.log(data); // 处理返回的数据
-        show = data
+        console.log(data); // 處理返回的數據
     })
     .catch(error => {
-        console.error(error); // 处理错误
+        console.error(error); // 處理錯誤
     });
 getObjectSales("2023-06-29", "2023-10-29", "month")
     .then(data => {
-        console.log(data); // 处理返回的数据
+        console.log(data); // 處理返回的數據
         show = data
     })
     .catch(error => {
-        console.error(error); // 处理错误
+        console.error(error); // 處理錯誤
     });
 getFormatMenu()
     .then(data => {
-        console.log(data); // 处理返回的数据
+        console.log(data); // 處理返回的數據
         show = data
     })
     .catch(error => {
-        console.error(error); // 处理错误
+        console.error(error); // 處理錯誤
     });
