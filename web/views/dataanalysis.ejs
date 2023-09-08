@@ -30,20 +30,34 @@
 					<h3 class="text-center">餐點銷售數據</h3>
 					<div class="container">
 						<div class="flex" style="display: flex; gap: 30px;">
-							<div class="rectangle">
+							<!-- 格子1 -->
+							<div class="rectangle" id="todyEarn">
+								<h4>本日營業額</h4>
+								<p>NT$0</p>
+								<span class="trend-arrow">?</span>
+							</div>
+							<!-- 格子2 -->
+							<div class="rectangle" id="cusCountDay">
+								<h4>本日累積來客桌次</h4>
+								<p> 0桌</p>
+								<span class="trend-arrow">?</span>
+							</div>
+							<!-- 格子3 -->
+							<div class="rectangle"id="monthEarn">
 								<h4>本月營業額</h4>
-								<p>NT$100,000</p>
-								<span class="trend-arrow">↑</span>
+								<p>NT$0</p>
+								<span class="trend-arrow">?</span>
 							</div>
-							<div class="rectangle">
+							<!-- 格子4 -->
+							<div class="rectangle" id="cusCount">
 								<h4>本月累積來客桌次</h4>
-								<p>500 次</p>
-								<span class="trend-arrow">↓</span>
+								<p>0桌</p>
+								<span class="trend-arrow">?</span>
 							</div>
-							<div class="rectangle">
+							<!-- 格子5 -->
+							<div class="rectangle"id="monthEarnavg">
 								<h4>本月平均日營業額</h4>
-								<p>NT$5,000</p>
-								<span class="trend-arrow">↑</span>
+								<p>NT$0</p> 
 							</div>
 						</div>
 					</div>
@@ -52,15 +66,14 @@
 					<div class="box">
 						<form id="restaurantSlaes" action="/dataanalysis/getRevenueSales" method="post">
 							<div class="flex" style="display: flex; justify-content: space-between; align-items: center;">
-								<h4 style="margin: 0;">本店總營收</h4>
-								<select class="type_choose1" id="timeInterval" name="timeInterval" style="margin: 0;"onchange="geturls('2023-01-29', '2023-12-29', this.value)">
-									<option value="day">日</option>
-									<option value="month">月</option>
-									<option value="season">季</option>
-									<option value="year">年</option>
-								</select>
+							  <h4 style="margin: 0;">本店總營收</h4>
+							  <select class="type_choose1" id="timeInterval" name="timeInterval" style="margin: 0;" onchange="getSales('2023-01-29', '2023-12-29', this.value)">								
+								<option value="month">月</option>
+								<option value="season">季</option>
+								<option value="year">年</option>
+							  </select>
 							</div>
-						</form>
+						  </form>						  
 						<div class="containerlr1">
 							<div class="left " id="revenueForm">
 								<table class="revenue-table">
@@ -280,9 +293,21 @@
 	// 創建圖表
 	const ctx = document.getElementById('salesChart').getContext('2d');
 	new Chart(ctx, chartConfig);
-	function geturls(startDate, endDate, selectedValue) {
-		// 在这里执行你的逻辑，使用 selectedValue 来获取当前选择的选项值
+	function getSales(startDate, endDate, selectedValue) {
+		// 在这里执行你的逻辑
 		console.log(`用户选择了选项：${selectedValue}`);
+		
+		// 根据 selectedValue 进行不同的处理
+		if (selectedValue === "day") {
+		  // 处理日选项的逻辑
+		} else if (selectedValue === "month") {
+		  // 处理月选项的逻辑
+		} else if (selectedValue === "season") {
+		  // 处理季选项的逻辑
+		} else if (selectedValue === "year") {
+		  // 处理年选项的逻辑
+		}
+	  
 		// 可以执行其他操作，如向服务器发起请求或更新页面内容等
 	  }
 	  
