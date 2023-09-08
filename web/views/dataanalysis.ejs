@@ -62,7 +62,7 @@
 							</div>
 						</form>
 						<div class="containerlr1">
-							<div class="left ">
+							<div class="left " id="revenueForm">
 								<table class="revenue-table">
 									<caption>店家營收</caption>
 									<tr>
@@ -280,7 +280,12 @@
 	// 創建圖表
 	const ctx = document.getElementById('salesChart').getContext('2d');
 	new Chart(ctx, chartConfig);
-
+	function geturls(startDate, endDate, selectedValue) {
+		// 在这里执行你的逻辑，使用 selectedValue 来获取当前选择的选项值
+		console.log(`用户选择了选项：${selectedValue}`);
+		// 可以执行其他操作，如向服务器发起请求或更新页面内容等
+	  }
+	  
 </script>
 <!-- here to get the data from the server -->
 <script src="../static/js/dataAnalysis.js"></script>

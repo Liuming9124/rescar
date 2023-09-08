@@ -82,13 +82,39 @@ geturls("2023-06-29", "2023-10-29", "month")
     .then(data => {
         console.log(data); // 處理返回的數據
         show = data
+        
     })
     .catch(error => {
         console.error(error); // 處理錯誤
     });
-getSales("2023-06-29", "2023-10-29", "month")
+getSales("2023-06-29", "2023-10-29", "day")
     .then(data => {
         console.log(data); // 處理返回的數據
+        show = data
+        const dataArray = Object.entries(show);
+        console.log('aaaa',dataArray);
+
+        var thisData = '';
+        for (var i=0 ; i <  dataArray.length; i++) {
+            thisData+= `<tr>
+                            <td>${dataArray[i][0]}</td>
+                            <td>${dataArray[i][1]}</td>
+                        </tr> 
+                         `
+        }
+        var html = `
+                 <table class="revenue-table">
+                    <caption>店家營收</caption>
+                            <tr>
+                                <th>日期</th>
+                                <th>總營收</th>
+                            </tr>
+                            ${thisData}  
+                </table>
+                    
+			    `
+        var element = document.getElementById('revenueForm')
+        element.innerHTML = html;
     })
     .catch(error => {
         console.error(error); // 處理錯誤
