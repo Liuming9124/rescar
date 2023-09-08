@@ -259,7 +259,7 @@ const dataanalysisController = {
         // input
         stime = formatInputDate(data.stime)
         etime = formatInputDate(data.etime)
-        timeInterval = data.timeInterval
+        const TimeInterval = data.timeInterval
         // stime = `2023-05-17-23-59-00.000Z`
         // etime = `2023-12-17-23-59-00.000Z`
         // timeInterval = 'month'
@@ -270,7 +270,7 @@ const dataanalysisController = {
 
         // calculate unique urlid , urlid 來客組數
         let count;
-        count = await countUniqueUrlids(forder, timeInterval)
+        count = await countUniqueUrlids(forder, TimeInterval)
 
         res.send(JSON.stringify(count))
 
@@ -280,7 +280,7 @@ const dataanalysisController = {
         // input
         stime = formatInputDate(data.stime)
         etime = formatInputDate(data.etime)
-        timeInterval = data.timeInterval
+        const TimeInterval = data.timeInterval
         // stime = `2023-05-17-23-59-00.000Z`
         // etime = `2023-12-17-23-59-00.000Z`
         // // timeInterval = day month season year
@@ -292,7 +292,7 @@ const dataanalysisController = {
 
         // calculate income by time interval
         let revenue = {}
-        revenue = await getRevenue(forder, timeInterval)
+        revenue = await getRevenue(forder, TimeInterval)
         res.send(JSON.stringify(revenue))
 
 
@@ -302,7 +302,7 @@ const dataanalysisController = {
         // input
         stime = formatInputDate(data.stime)
         etime = formatInputDate(data.etime)
-        timeInterval = data.timeInterval
+        const TimeInterval = data.timeInterval
         // // console.log(req.body)
         // stime = `2023-05-17-23-59-00.000Z`
         // etime = `2023-12-17-23-59-00.000Z`
@@ -312,7 +312,7 @@ const dataanalysisController = {
         let forder = []
         forder = await getdatabytime(stime, etime);
         let salesData = []
-        salesData = await getSalesData(forder, timeInterval)
+        salesData = await getSalesData(forder, TimeInterval)
         console.log(JSON.stringify(salesData))
         res.send(JSON.stringify(salesData))
     },
