@@ -284,25 +284,20 @@ getObjectSales(sttime, endtime, "month")
         
         // 打印整理後的二維數組
         for (var i = 0; i < twoDimensionalArray.length; i++) {
-            // 遍歷twoDimensional中的食品項目並更新dataG中的數量
-            twoDimensionalArray[i].forEach(item => {
-                const item_name = item[0];  // 食品名稱
-                const item_count = item[1];  // 食品數量
-                console.log('itemmmmmmmm',item);
-                // 在dataG中查找相應食品並更新數量
-                for (const category in dataG) {
-                    const category_items = dataG[category];
-                    for (const item_id in category_items) {
-                        const item_info = category_items[item_id];
-                        if (item_info.name === item_name) {
-                            item_info.count += item_count;
-                        }
-                    }
+            var date = twoDimensionalArray[i][0];
+            var items = twoDimensionalArray[i][1];
+            for (var j = 0; j < items.length; j++) {
+              var itemName = items[j][0];
+              var itemCount = items[j][1];
+              for (var category in dataG) {
+                for (var itemID in dataG[category]) {
+                  if (dataG[category][itemID].name === itemName) {
+                    dataG[category][itemID].count += itemCount;
+                  }
                 }
-            });
-            // 輸出更新後的dataG
-            //console.log('twoDimensional',twoDimensionalArray[i]);
-        }
+              }
+            }
+          }
         console.log('newwwwwwwG',dataG);
         
     })
