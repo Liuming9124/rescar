@@ -11,6 +11,7 @@
     const lasttDate = `${year}-${month}-${daylast}`;
     const Dateint = today.getDate()
   console.log(currentDate);
+    var dataG={};
 // 注意: timeInterval只能有以下幾種值: day, month, season, year
 const sttime = "2023-06-29";
 const endtime = "2023-10-29";
@@ -98,7 +99,7 @@ getSales(sttime, endtime, "day")
         console.log(data); // 處理返回的數據
         show = data
         const dataArray2 = Object.entries(show);
-        console.log('aa11111',dataArray2);
+       // console.log('格子1',dataArray2);
         const currentDateData = dataArray2.find(item => item[0] === currentDate);
         const lasttDateData = dataArray2.find(item => item[0] === lasttDate);
 
@@ -125,7 +126,7 @@ geturls(sttime, endtime, "day")
         console.log(data); // 處理返回的數據
         show = data
         const dataArray1 = Object.entries(show);
-        console.log('格子2',dataArray1,currentDate,lasttDate);
+        //console.log('格子2',dataArray1,currentDate,lasttDate);
         var thisData1 = '';
         var thisData11 = '';
         var temp = dataArray1.findIndex(item => item[0] === currentDate);
@@ -133,6 +134,9 @@ geturls(sttime, endtime, "day")
         
         if (temp !== -1) {
             thisData1 += `<p>${dataArray1[temp][1]} 桌</p>`;
+        }
+        else {
+            thisData1 += `<p>0桌</p>`;
         }
         
         //thisData11 += `<span class="trend-arrow">${dataArray1[temp][1] >= dataArray1[temp2][1] ? '↑' : '↓'}</span>`;
@@ -252,6 +256,55 @@ getObjectSales(sttime, endtime, "month")
     .then(data => {
         console.log(data); // 處理返回的數據
         show = data
+        const dataArray = Object.entries(show);
+        const dataArray1 = Object.entries(dataG);
+        console.log('obj',dataG);
+
+        // 創建一個空的二維數組
+        var twoDimensionalArray = [];
+
+        // 遍歷每個月份的數據
+        for (var month in show) {
+            if (show.hasOwnProperty(month)) {
+                // 創建一個空的子數組來存放每個月份的數據
+                var monthData = [];
+                // 遍歷每個食物項目和數量
+                for (var item in show[month]) {
+                    if (show[month].hasOwnProperty(item)) {
+                        // 將食物項目和數量作為一個數組添加到子數組中
+                        monthData.push([item, show[month][item]]);
+                    }
+                }
+                // 將每個月份的數據子數組添加到二維數組中
+                twoDimensionalArray.push([month, monthData]);
+            }
+        }
+        
+
+        
+        // 打印整理後的二維數組
+        for (var i = 0; i < twoDimensionalArray.length; i++) {
+            // 遍歷twoDimensional中的食品項目並更新dataG中的數量
+            twoDimensionalArray[i].forEach(item => {
+                const item_name = item[0];  // 食品名稱
+                const item_count = item[1];  // 食品數量
+                console.log('itemmmmmmmm',item);
+                // 在dataG中查找相應食品並更新數量
+                for (const category in dataG) {
+                    const category_items = dataG[category];
+                    for (const item_id in category_items) {
+                        const item_info = category_items[item_id];
+                        if (item_info.name === item_name) {
+                            item_info.count += item_count;
+                        }
+                    }
+                }
+            });
+            // 輸出更新後的dataG
+            //console.log('twoDimensional',twoDimensionalArray[i]);
+        }
+        console.log('newwwwwwwG',dataG);
+        
     })
     .catch(error => {
         console.error(error); // 處理錯誤
@@ -260,6 +313,9 @@ getFormatMenu()
     .then(data => {
         console.log(data); // 處理返回的數據
         show = data
+        dataG= data;
+        console.log('dataG',dataG);
+
     })
     .catch(error => {
         console.error(error); // 處理錯誤

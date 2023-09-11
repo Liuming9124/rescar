@@ -107,14 +107,14 @@
 							<div class="containerlr1">
 								<div class="left ">
 									<h3>STEP 1:選擇種類</h3>
-									<select class="type_choose" name="type">
+									<select class="type_choose" name="type1" id="type1">
 										<% for (var i=1 ; i < 6 ; i++) { %>
 											<option>種類<%=i%>
 											</option>
 											<% } %>
 									</select>
 									<h3>STEP 2:選擇顯示區間</h3>
-									<select class="type_choose" name="product">
+									<select class="type_choose" name="timeInterval1" id="timeInterval1">
 										<option value="day">日</option>
 										<option value="month">月</option>
 										<option value="season">季</option>
@@ -139,21 +139,21 @@
 							<div class="containerlr1">
 								<div class="left ">
 									<h3>STEP 1:選擇種類</h3>
-									<select class="type_choose" name="type">
+									<select class="type_choose" name="type2" id="type2">
 										<% for (var i=1 ; i < 6 ; i++) { %>
 											<option>種類<%=i%>
 											</option>
 											<% } %>
 									</select>
 									<h3>STEP 2:選擇商品</h3>
-									<select class="type_choose" name="product">
+									<select class="type_choose" name="product2" id="product2">
 										<% for (var i=1 ; i < 6 ; i++) { %>
 											<option>品項<%=i%>
 											</option>
 											<% } %>
 									</select>
 									<h3>STEP 3:選擇顯示區間</h3>
-									<select class="type_choose" name="product">
+									<select class="type_choose" name="timeInterval2" id="timeInterval2">
 										<option>日</option>
 										<option>週</option>
 										<option>月</option>
@@ -161,7 +161,8 @@
 										<option>年</option>
 									</select>
 									<br><br>
-									<button id="search2" class="dataAna" style="width: 100%;">查詢</button>
+									<button id="search2" class="dataAna" style="width: 100%;" id="upload" onclick="getObjectSales(type1,product1,timeInterval1)"><span>查詢
+									</span></button>
 								</div>
 								<div class="right ">
 									<h4>品項????</h4>
