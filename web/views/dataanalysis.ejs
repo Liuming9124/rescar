@@ -121,7 +121,7 @@
 										<option value="year">年</option>
 									</select>
 									<br><br>
-									<button id="search1" class="dataAna" style="width: 100%;">查詢</button>
+									<button id="search1" class="dataAna" style="width: 100%;"onclick="updatespieChart()" >查詢</button>
 								</div>
 								<div class="right ">
 									<h4>種類????</h4>
@@ -154,14 +154,13 @@
 									</select>
 									<h3>STEP 3:選擇顯示區間</h3>
 									<select class="type_choose" name="timeInterval2" id="timeInterval2">
-										<option>日</option>
-										<option>週</option>
-										<option>月</option>
-										<option>季</option>
-										<option>年</option>
+										<option value="day" id="day">日</option>
+										<option value="month" id="month">月</option>
+										<option value="season"id="season">季</option>
+										<option value="year"id="year">年</option>
 									</select>
 									<br><br>
-									<button id="search2" class="dataAna" style="width: 100%;" id="upload" onclick="getObjectSales(type1,product1,timeInterval1)"><span>查詢
+									<button id="search2" class="dataAna" style="width: 100%;" id="upload" onclick="updatesalesChart()"><span>查詢
 									</span></button>
 								</div>
 								<div class="right ">
@@ -226,7 +225,7 @@
 
 	// Pie Chart Data
 	var pieData = {
-		labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple'],
+		labels: ['鮭魚肚刺身', '生魚片拼盤', 'Yellow', 'Green', 'Blue', 'Purple'],
 		datasets: [{
 			data: [20, 30, 50, 20, 30, 50],
 			backgroundColor: ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6']
