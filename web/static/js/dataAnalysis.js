@@ -315,3 +315,75 @@ getFormatMenu()
     .catch(error => {
         console.error(error); // 處理錯誤
     });
+
+
+// test global variable
+
+var testglobal;
+
+async function fetchData() {
+  try {
+    const data = await getObjectSales(sttime, endtime, "month");
+    console.log(data); // Process the returned data
+    show = data;
+    const dataArray = Object.entries(show);
+    const dataArray1 = Object.entries(dataG);
+    console.log('obj', dataG);
+
+    // Rest of your code...
+
+    
+        // 創建一個空的二維數組
+        var twoDimensionalArray = [];
+
+        // 遍歷每個月份的數據
+        for (var month in show) {
+            if (show.hasOwnProperty(month)) {
+                // 創建一個空的子數組來存放每個月份的數據
+                var monthData = [];
+                // 遍歷每個食物項目和數量
+                for (var item in show[month]) {
+                    if (show[month].hasOwnProperty(item)) {
+                        // 將食物項目和數量作為一個數組添加到子數組中
+                        monthData.push([item, show[month][item]]);
+                    }
+                }
+                // 將每個月份的數據子數組添加到二維數組中
+                twoDimensionalArray.push([month, monthData]);
+            }
+        }
+        
+
+        
+        // 打印整理後的二維數組
+        for (var i = 0; i < twoDimensionalArray.length; i++) {
+            var date = twoDimensionalArray[i][0];
+            var items = twoDimensionalArray[i][1];
+            for (var j = 0; j < items.length; j++) {
+              var itemName = items[j][0];
+              var itemCount = items[j][1];
+              for (var category in dataG) {
+                for (var itemID in dataG[category]) {
+                  if (dataG[category][itemID].name === itemName) {
+                    dataG[category][itemID].count += itemCount;
+                  }
+                }
+              }
+            }
+          }
+        console.log('newwwwwwwG',dataG);
+
+
+    console.log('newwwwwwwG', dataG);
+    testglobal = dataG;
+    console.log('testglobal', testglobal);
+  } catch (error) {
+    console.error(error); // Handle the error
+  }
+}
+
+fetchData();
+
+
+
+
