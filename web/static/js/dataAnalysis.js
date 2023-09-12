@@ -326,7 +326,11 @@ getObjectSales(sttime, endtime, "month")
             }
           }
         console.log('newwwwwwwG',dataG);
+        return dataG;
         
+    })
+    .then(dataG => {    // 加一個then確保上面的操作完成後再執行下面的操作
+        document.getElementById('test').innerHTML = JSON.stringify(dataG);
     })
     .catch(error => {
         console.error(error); // 處理錯誤

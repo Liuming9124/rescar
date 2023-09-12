@@ -72,9 +72,8 @@
 	// Get a reference to the button element
 	document.getElementById('robotRunButton').addEventListener('click', function () {
 		cmd = {
-			"start":[-1],
-			"stop":[<%= table %>],
-			"end":[-1], 
+			"start":-1,
+			"stop":[<%= table %>]
 		};
 		var log = "error"
 		fetch(`/robot/robotCounter`, {

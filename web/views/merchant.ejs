@@ -620,6 +620,7 @@
 	}
 	function checkoutOrder(table){
 		//send a http request to checkout order by table
+		event.preventDefault();
 		fetch(`/merchant/checkoutOrder/${table}`, {
 			method: 'Get',
 			headers: {
@@ -631,6 +632,8 @@
 			})
 			.then(function (myJson) {
 				alert(myJson.status);
+				document.querySelector("#Modalcheckout > form > div > div > div.modal-header > button > span").click();
+
   			})
 			.catch(error => {
 				console.error('Error occurred:', error);

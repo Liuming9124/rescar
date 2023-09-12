@@ -76,7 +76,7 @@ const robotController = {
             })
     },
     robotRun: (req, res) => {
-        const jsonData = JSON.stringify({ 'start': [0], 'stop': [req.body.table], 'end': [0] });
+        const jsonData = JSON.stringify({ 'start': 0, 'stop': [req.body.table] });
         // read config.json
         const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
         console.log(config.robotport, config.robotip)
@@ -179,7 +179,7 @@ const robotController = {
         try {
             // read config.json
             const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-            console.log(config.robotport, config.robotip)
+            // console.log(config.robotport, config.robotip)
             const options = {
                 hostname: config.robotip,
                 port: config.robotport,
@@ -207,7 +207,7 @@ const robotController = {
                 console.log(word);
                 res.send(JSON.stringify(word))
             }).catch(error => {
-                console.error(error);
+                console.error('robotStatus error');
             });
         }catch(error){
             console.error(error);

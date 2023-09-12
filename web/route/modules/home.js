@@ -7,7 +7,7 @@ const homeCtl = require('../../controllers/homectl')
 
 router.get('/', homeCtl.homePage)
 router.get('/:url', homeCtl.homePage)
-router.post('/addcart', (req, res) => {
+router.post('/addcart/:id', (req, res) => {
     // get product data
     // console.log('token'+ JSON.parse(req.body.token))
     var product = req.body;
@@ -17,7 +17,7 @@ router.post('/addcart', (req, res) => {
         req.session.cart = [];
     }
     req.session.cart.push(product);
-    res.redirect(`/home`)
+    res.redirect(`/home#food${req.params.id}`)
 });
 
 
