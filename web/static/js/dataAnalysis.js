@@ -226,7 +226,7 @@ getSales(sttime, endtime, "day")
         console.log(data); // 處理返回的數據
         show = data
         const dataArray2 = Object.entries(show);
-        console.log('aaaa',dataArray2);
+        console.log('ary',dataArray2);
         var thisData2 = '';
         for (var i=0 ; i <  dataArray2.length; i++) {
             thisData2+= `<tr>
@@ -258,7 +258,7 @@ getObjectSales(sttime, endtime, "month")
         show = data
         const dataArray = Object.entries(show);
         const dataArray1 = Object.entries(dataG);
-        console.log('obj',dataG);
+        //console.log('obj',dataG);
 
         // 創建一個空的二維數組
         var twoDimensionalArray = [];
@@ -279,9 +279,6 @@ getObjectSales(sttime, endtime, "month")
                 twoDimensionalArray.push([month, monthData]);
             }
         }
-        
-
-        
         // 打印整理後的二維數組
         for (var i = 0; i < twoDimensionalArray.length; i++) {
             var date = twoDimensionalArray[i][0];
@@ -309,7 +306,7 @@ getFormatMenu()
         console.log(data); // 處理返回的數據
         show = data
         dataG= data;
-        console.log('dataG',dataG);
+        //console.log('dataG',dataG);
 
     })
     .catch(error => {
