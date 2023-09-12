@@ -76,7 +76,7 @@ const robotController = {
             })
     },
     robotRun: (req, res) => {
-        const jsonData = JSON.stringify({ 'start': [0], 'stop': [req.body.table], 'end': [0] });
+        const jsonData = JSON.stringify({ 'start': 0, 'stop': [req.body.table] });
         // read config.json
         const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
         console.log(config.robotport, config.robotip)
