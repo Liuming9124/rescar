@@ -330,7 +330,7 @@ getObjectSales(sttime, endtime, "month")
         
     })
     .then(dataG => {    // 加一個then確保上面的操作完成後再執行下面的操作
-        document.getElementById('test').innerHTML = JSON.stringify(dataG);
+       // document.getElementById('test').innerHTML = JSON.stringify(dataG);
     })
     .catch(error => {
         console.error(error); // 處理錯誤
@@ -418,7 +418,7 @@ getObjectSales(sttime, endtime, "day")
             const salesData = {
             labels: labels,
             datasets: [{
-                label: '銷售量',
+                label: '綜合壽司',
                 data: data,
                 backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
                 borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
@@ -446,3 +446,15 @@ getObjectSales(sttime, endtime, "day")
         .catch(error => {
             console.error(error); // 處理錯誤
         });
+ function getSalesValue() {
+            // 獲取<select>元素
+            var selectElement = document.getElementById("timeIntervalSales");
+
+            // 獲取所選選項的值
+            var selectedValue = selectElement.value;
+
+            // 將所選值顯示在<div>中
+            var selectedValueDiv = document.getElementById("selectedValue");
+            selectedValueDiv.innerHTML = "所選值為：" + selectedValue;
+        }
+
