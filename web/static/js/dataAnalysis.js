@@ -226,6 +226,11 @@ getSales(sttime, endtime, "day")
         console.log(data); // 處理返回的數據
         show = data
         const dataArray2 = Object.entries(show);
+        dataArray2.sort(function(a, b) {
+            var dateA = new Date(a[0]);
+            var dateB = new Date(b[0]);
+            return dateA - dateB;
+          });
         console.log('ary',dataArray2);
         var thisData2 = '';
         for (var i=0 ; i <  dataArray2.length; i++) {
@@ -248,6 +253,31 @@ getSales(sttime, endtime, "day")
 			    `
         var element = document.getElementById('revenueForm')
         element.innerHTML = html;
+        // Line Chart Data
+            var labels = [];
+            var data1 = [];
+
+            for (var i = 0; i < dataArray2.length; i++) {
+            labels.push(dataArray2[i][0]);
+            data1.push(dataArray2[i][1]);
+            }
+
+            var lineData = {
+            labels: labels,
+            datasets: [{
+                label: 'Sales',
+                data: data1,
+                borderColor: '#FF6384',
+                fill: false
+            }]
+            };
+
+            var lineChart = new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: lineData,
+            options: {}
+        });
+
     })
     .catch(error => {
         console.error(error); // 處理錯誤
@@ -258,7 +288,7 @@ getObjectSales(sttime, endtime, "month")
         show = data
         const dataArray = Object.entries(show);
         const dataArray1 = Object.entries(dataG);
-        //console.log('obj',dataG);
+        console.log('obj',dataG);
 
         // 創建一個空的二維數組
         var twoDimensionalArray = [];
@@ -307,80 +337,108 @@ getFormatMenu()
         show = data
         dataG= data;
         //console.log('dataG',dataG);
-
+        
     })
     .catch(error => {
         console.error(error); // 處理錯誤
     });
-
-
-// test global variable
-
-var testglobal;
-
-async function fetchData() {
-  try {
-    const data = await getObjectSales(sttime, endtime, "month");
-    console.log(data); // Process the returned data
-    show = data;
-    const dataArray = Object.entries(show);
-    const dataArray1 = Object.entries(dataG);
-    console.log('obj', dataG);
-
-    // Rest of your code...
-
-    
-        // 創建一個空的二維數組
-        var twoDimensionalArray = [];
-
-        // 遍歷每個月份的數據
-        for (var month in show) {
-            if (show.hasOwnProperty(month)) {
-                // 創建一個空的子數組來存放每個月份的數據
-                var monthData = [];
-                // 遍歷每個食物項目和數量
-                for (var item in show[month]) {
-                    if (show[month].hasOwnProperty(item)) {
-                        // 將食物項目和數量作為一個數組添加到子數組中
-                        monthData.push([item, show[month][item]]);
+async function processData() {
+        try {
+          var data = await getFormatMenu();
+          var labels = [];
+          var data1 = [];
+          var backgroundColor = ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6', '#FF1493', '#00CED1', '#FF4500', '#8B008B', '#00FF7F', '#4169E1', '#FF00FF', '#00FF00', '#FFA500', '#1E90FF', '#FFC0CB', '#7FFF00', '#FF69B4', '#00BFFF'];
+          for (var key in dataG["壽司"]) {
+            var item = dataG["壽司"][key];
+            labels.push(item["name"]);
+            data1.push(item["count"]);
+          }
+      
+          var pieData = {
+            labels: labels,
+            datasets: [{
+              data: data1,
+              backgroundColor: backgroundColor.slice(0, labels.length)
+            }]
+          };
+          console.log('labels', labels);
+          console.log('data1', data1);
+          var pieChart = new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: pieData,
+            options: {
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      var label = context.label || '';
+                      var value = context.raw || '';
+                      return label + ': ' + value;
                     }
-                }
-                // 將每個月份的數據子數組添加到二維數組中
-                twoDimensionalArray.push([month, monthData]);
-            }
-        }
-        
-
-        
-        // 打印整理後的二維數組
-        for (var i = 0; i < twoDimensionalArray.length; i++) {
-            var date = twoDimensionalArray[i][0];
-            var items = twoDimensionalArray[i][1];
-            for (var j = 0; j < items.length; j++) {
-              var itemName = items[j][0];
-              var itemCount = items[j][1];
-              for (var category in dataG) {
-                for (var itemID in dataG[category]) {
-                  if (dataG[category][itemID].name === itemName) {
-                    dataG[category][itemID].count += itemCount;
                   }
                 }
               }
             }
-          }
-        console.log('newwwwwwwG',dataG);
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      
+      processData();
 
 
-    console.log('newwwwwwwG', dataG);
-    testglobal = dataG;
-    console.log('testglobal', testglobal);
-  } catch (error) {
-    console.error(error); // Handle the error
-  }
-}
+getObjectSales(sttime, endtime, "day")
+      .then(data => {
+          console.log(data); // 處理返回的數據
+          show = data
+          const dataArray3 = Object.entries(show);
+         dataArray3.sort(function(a, b) {
+            var dateA = new Date(a[0]);
+            var dateB = new Date(b[0]);
+            return dateA - dateB;
+        });
+        console.log('ary',dataArray3);
 
-fetchData();
+          //BAR CHART
+          var labels = [];
+            var data = [];
 
+            for (var i = 0; i < dataArray3.length; i++) {
+            var date = dataArray3[i][0];
+            var sales = dataArray3[i][1]["綜合壽司"];
+            labels.push(date);
+            data.push(sales);
+            }
 
+            const salesData = {
+            labels: labels,
+            datasets: [{
+                label: '銷售量',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
+                borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
+                borderWidth: 1 // 邊框寬度
+            }]
+            };
 
+            const chartConfig = {
+            type: 'bar',
+            data: salesData,
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true // y 軸從 0 開始
+                }
+                }
+            }
+            };
 
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            new Chart(ctx, chartConfig);
+    
+            
+        })
+        .catch(error => {
+            console.error(error); // 處理錯誤
+        });

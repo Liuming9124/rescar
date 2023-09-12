@@ -223,93 +223,11 @@
 	}
 	(getDataAnalysis(1, 1))
 
-	// Pie Chart Data
-	var pieData = {
-		labels: ['鮭魚肚刺身', '生魚片拼盤', 'Yellow', 'Green', 'Blue', 'Purple'],
-		datasets: [{
-			data: [20, 30, 50, 20, 30, 50],
-			backgroundColor: ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6']
-		}]
-	};
+	
 
-	var pieChart = new Chart(document.getElementById('pieChart'), {
-		type: 'pie',
-		data: pieData,
-		options: {}
-	});
-
-	// Line Chart Data
-	var lineData = {
-		labels: ['8/11', '8/12', '8/13', '8/14', '8/15', '8/16', '8/17'],
-		datasets: [{
-			label: 'Sales',
-			data: [100, 200, 150, 300, 250, 180, 1000],
-			borderColor: '#FF6384',
-			fill: false
-		}]
-	};
-
-	var lineChart = new Chart(document.getElementById('lineChart'), {
-		type: 'line',
-		data: lineData,
-		options: {}
-	});
-
-	var data = {
-		labels: ['項目1', '項目2', '項目3', '項目4', '項目5'],
-		datasets: [{
-			label: '數據集1',
-			data: [10, 25, 15, 30, 20],
-			backgroundColor: 'rgba(75, 192, 192, 0.6)',
-			borderColor: 'rgba(75, 192, 192, 1)',
-			borderWidth: 1
-		}]
-	};
-	//BAR CHART
-	const salesData = {
-		labels: ['日期1', '日期2', '日期3', '日期4', '日期5'],
-		datasets: [{
-			label: '銷售量',
-			data: [120, 200, 150, 300, 250],
-			backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
-			borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
-			borderWidth: 1 // 邊框寬度
-		}]
-	};
-
-	// 配置
-	const chartConfig = {
-		type: 'bar',
-		data: salesData,
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true // y 軸從 0 開始
-				}
-			}
-		}
-	};
-
-	// 創建圖表
-	const ctx = document.getElementById('salesChart').getContext('2d');
-	new Chart(ctx, chartConfig);
-	function getSales(startDate, endDate, selectedValue) {
-		// 在这里执行你的逻辑
-		console.log(`用户选择了选项：${selectedValue}`);
-		
-		// 根据 selectedValue 进行不同的处理
-		if (selectedValue === "day") {
-		  // 处理日选项的逻辑
-		} else if (selectedValue === "month") {
-		  // 处理月选项的逻辑
-		} else if (selectedValue === "season") {
-		  // 处理季选项的逻辑
-		} else if (selectedValue === "year") {
-		  // 处理年选项的逻辑
-		}
-	  
-		// 可以执行其他操作，如向服务器发起请求或更新页面内容等
-	  }
+	
+	
+	
 	  
 </script>
 <!-- here to get the data from the server -->
