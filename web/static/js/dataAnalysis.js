@@ -226,6 +226,11 @@ getSales(sttime, endtime, "day")
         console.log(data); // 處理返回的數據
         show = data
         const dataArray2 = Object.entries(show);
+        dataArray2.sort(function(a, b) {
+            var dateA = new Date(a[0]);
+            var dateB = new Date(b[0]);
+            return dateA - dateB;
+          });
         console.log('ary',dataArray2);
         var thisData2 = '';
         for (var i=0 ; i <  dataArray2.length; i++) {
@@ -248,6 +253,31 @@ getSales(sttime, endtime, "day")
 			    `
         var element = document.getElementById('revenueForm')
         element.innerHTML = html;
+        // Line Chart Data
+            var labels = [];
+            var data1 = [];
+
+            for (var i = 0; i < dataArray2.length; i++) {
+            labels.push(dataArray2[i][0]);
+            data1.push(dataArray2[i][1]);
+            }
+
+            var lineData = {
+            labels: labels,
+            datasets: [{
+                label: 'Sales',
+                data: data1,
+                borderColor: '#FF6384',
+                fill: false
+            }]
+            };
+
+            var lineChart = new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: lineData,
+            options: {}
+        });
+
     })
     .catch(error => {
         console.error(error); // 處理錯誤
@@ -258,7 +288,7 @@ getObjectSales(sttime, endtime, "month")
         show = data
         const dataArray = Object.entries(show);
         const dataArray1 = Object.entries(dataG);
-        //console.log('obj',dataG);
+        console.log('obj',dataG);
 
         // 創建一個空的二維數組
         var twoDimensionalArray = [];
@@ -300,7 +330,7 @@ getObjectSales(sttime, endtime, "month")
         
     })
     .then(dataG => {    // 加一個then確保上面的操作完成後再執行下面的操作
-        document.getElementById('test').innerHTML = JSON.stringify(dataG);
+       // document.getElementById('test').innerHTML = JSON.stringify(dataG);
     })
     .catch(error => {
         console.error(error); // 處理錯誤
@@ -311,9 +341,120 @@ getFormatMenu()
         show = data
         dataG= data;
         //console.log('dataG',dataG);
-
+        
     })
     .catch(error => {
         console.error(error); // 處理錯誤
     });
+async function processData() {
+        try {
+          var data = await getFormatMenu();
+          var labels = [];
+          var data1 = [];
+          var backgroundColor = ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6', '#FF1493', '#00CED1', '#FF4500', '#8B008B', '#00FF7F', '#4169E1', '#FF00FF', '#00FF00', '#FFA500', '#1E90FF', '#FFC0CB', '#7FFF00', '#FF69B4', '#00BFFF'];
+          for (var key in dataG["壽司"]) {
+            var item = dataG["壽司"][key];
+            labels.push(item["name"]);
+            data1.push(item["count"]);
+          }
+      
+          var pieData = {
+            labels: labels,
+            datasets: [{
+              data: data1,
+              backgroundColor: backgroundColor.slice(0, labels.length)
+            }]
+          };
+          console.log('labels', labels);
+          console.log('data1', data1);
+          var pieChart = new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: pieData,
+            options: {
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      var label = context.label || '';
+                      var value = context.raw || '';
+                      return label + ': ' + value;
+                    }
+                  }
+                }
+              }
+            }
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      
+      processData();
+
+
+getObjectSales(sttime, endtime, "day")
+      .then(data => {
+          console.log(data); // 處理返回的數據
+          show = data
+          const dataArray3 = Object.entries(show);
+         dataArray3.sort(function(a, b) {
+            var dateA = new Date(a[0]);
+            var dateB = new Date(b[0]);
+            return dateA - dateB;
+        });
+        console.log('ary',dataArray3);
+
+          //BAR CHART
+          var labels = [];
+            var data = [];
+
+            for (var i = 0; i < dataArray3.length; i++) {
+            var date = dataArray3[i][0];
+            var sales = dataArray3[i][1]["綜合壽司"];
+            labels.push(date);
+            data.push(sales);
+            }
+
+            const salesData = {
+            labels: labels,
+            datasets: [{
+                label: '綜合壽司',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)', // 長條的背景顏色
+                borderColor: 'rgba(54, 162, 235, 1)', // 長條的邊框顏色
+                borderWidth: 1 // 邊框寬度
+            }]
+            };
+
+            const chartConfig = {
+            type: 'bar',
+            data: salesData,
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true // y 軸從 0 開始
+                }
+                }
+            }
+            };
+
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            new Chart(ctx, chartConfig);
+    
+            
+        })
+        .catch(error => {
+            console.error(error); // 處理錯誤
+        });
+ function getSalesValue() {
+            // 獲取<select>元素
+            var selectElement = document.getElementById("timeIntervalSales");
+
+            // 獲取所選選項的值
+            var selectedValue = selectElement.value;
+
+            // 將所選值顯示在<div>中
+            var selectedValueDiv = document.getElementById("selectedValue");
+            selectedValueDiv.innerHTML = "所選值為：" + selectedValue;
+        }
 
