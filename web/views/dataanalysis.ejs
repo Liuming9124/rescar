@@ -70,33 +70,25 @@
 								<h4 style="margin: 0;">本店總營收</h4>
 								<select class="type_choose1" id="timeIntervalSales" name="timeIntervalSales" style="margin: 0;"
 									onchange="getSalesValue()">
+									<option disabled selected>**請選擇區間**</option>
+									<option value="day">日</option>
 									<option value="month">月</option>
 									<option value="season">季</option>
 									<option value="year">年</option>
 								</select>
 							</div>
 						</form>
-						<div id="selectedValue">選擇的值將顯示在這裡</div>
+						<!-- <div id="selectedValue">選擇的值將顯示在這裡</div> -->
 
 						<div class="containerlr1">
 							<div class="left " id="revenueForm">
 								<table class="revenue-table">
-									<caption>店家營收</caption>
-									<tr>
-										<th>日期</th>
-										<th>總營收</th>
-									</tr>
-									<% for (var i=1 ; i < 2 ; i++) { %>
-										<tr>
-											<td>2023-<%=i%>
-											</td>
-											<td>$1000</td>
-										</tr>
-										<% } %>
+									
+									
 								</table>
 							</div>
 							<div class="right ">
-								<div style="width: 500px;">
+								<div style="width: 500px;"id="lineChartDiv">
 									<canvas id="lineChart"></canvas>
 								</div>
 							</div>
@@ -111,24 +103,24 @@
 							<div class="left ">
 								<h3>STEP 1:選擇種類</h3>
 								<select class="type_choose" name="type1" id="type1">
-									<% for (var i=1 ; i < 6 ; i++) { %>
-										<option>種類<%=i%>
-										</option>
-										<% } %>
+									<option disabled selected>**請選擇種類**</option>
+									<% for (var i = 0; i < menu.length; i++) { %>
+										<option value="<%= menu[i].value %>"><%= menu[i].name %></option>
+									<% } %>
 								</select>
 								<h3>STEP 2:選擇顯示區間</h3>
 								<select class="type_choose" name="timeInterval1" id="timeInterval1">
+									<option disabled selected>**請選擇區間**</option>
 									<option value="day">日</option>
 									<option value="month">月</option>
 									<option value="season">季</option>
 									<option value="year">年</option>
 								</select>
 								<br><br>
-								<button id="search0" class="dataAna" style="width: 100%;"
-									onclick="updatespieChart()">查詢</button>
+								<div id="selectedValues1">選擇的值將顯示在這裡</div>
+								<button type="button" id="search0" class="dataAna" style="width: 100%;">查詢</button>
 							</div>
 							<div class="right ">
-								<h4>種類????</h4>
 								<div class="box-body" id="chart">
 									<canvas id="pieChart"></canvas>
 								</div>
@@ -142,21 +134,22 @@
 							<div class="left ">
 								<form id="myForm"> <!-- 添加表單元素 -->
 									<h3>STEP 1:選擇種類</h3>
-									<select class="type_choose" name="type2" id="type2">
-										<% for (var i=1 ; i < 6 ; i++) { %>
-											<option value="種類<%=i%>">種類<%=i%></option>
+									<select class="type_choose" name="type2" id="type2" onchange="getType()">
+										<option disabled selected>**請選擇種類**</option>
+										<% for (var i = 0; i < menu.length; i++) { %>
+											<option><%= menu[i].name %></option>
 										<% } %>
 									</select>
 							
 									<h3>STEP 2:選擇商品</h3>
-									<select class="type_choose" name="product2" id="product2">
-										<% for (var i=1 ; i < 6 ; i++) { %>
-											<option value="品項<%=i%>">品項<%=i%></option>
-										<% } %>
+									<div id="productchoose">
+									<select class="type_choose" name="c2" id="product2">
+										<option disabled selected>**請先選擇種類**</option>
 									</select>
-							
+									</div>
 									<h3>STEP 3:選擇顯示區間</h3>
 									<select class="type_choose" name="timeInterval2" id="timeInterval2">
+										<option disabled selected>**請選擇區間**</option>
 										<option value="day" id="day">日</option>
 										<option value="month" id="month">月</option>
 										<option value="season" id="season">季</option>
@@ -225,30 +218,6 @@
 		}
 	}
 	(getDataAnalysis(1, 1))
-
-	// 獲取按鈕和下拉選單元素
-	const typeSelect = document.getElementById("type2");
-	const productSelect = document.getElementById("product2");
-	const timeIntervalSelect = document.getElementById("timeInterval2");
-	const selectedValues2Div = document.getElementById("selectedValues2");
-
-	// 定義一個函式，用於處理按鈕點擊事件
-	function handleButtonClick(event) {
-		event.preventDefault(); // 防止表單提交
-
-		// 獲取所選擇的值
-		const selectedType = typeSelect.value;
-		const selectedProduct = productSelect.value;
-		const selectedTimeInterval = timeIntervalSelect.value;
-
-		// 在選擇的值的 <div> 元素中顯示它
-		selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的商品是：${selectedProduct}, 選擇的區間是：${selectedTimeInterval}`;
-	}
-
-	// 獲取按鈕元素並添加點擊事件監聽器
-	const searchButton = document.getElementById("search1");
-	searchButton.addEventListener("click", handleButtonClick);
-
 
 
 

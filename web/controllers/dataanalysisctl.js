@@ -234,7 +234,7 @@ async function getdatabytime(stime, etime) {
 async function getFormatMenu() {
     var menu = []
     menu = JSON.parse(await funCtl.getMenu())
-    //console.log('menu:',menu)
+    console.log('menu:',menu)
     var food = {}; // 創建一個空物件來存儲菜單數據
 
     for (var i = 0; i < menu.length; i++) {
@@ -250,9 +250,13 @@ async function getFormatMenu() {
 }
 
 const dataanalysisController = {
-    dataanalysisPage: (req, res) => {
+    dataanalysisPage:async (req, res) => {
+        var menu = []
+        menu = JSON.parse(await funCtl.getMenu())
         res.render('dataanalysis', {
+            'menu': menu
         })
+        console.log('menu:',menu)   
     },
     getUrlCounts: async (req, res) => {
         const data = req.body
