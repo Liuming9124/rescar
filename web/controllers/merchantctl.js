@@ -148,7 +148,7 @@ const merchantController = {
         let forder = []
         session = db.session()
         session
-            .run(`MATCH (o:order) WHERE o.time >= ('2023-04-05-05-27-16.569Z') AND o.time < ('2023-04-22-11-42-05.051Z') RETURN (o) order by o.time desc`)
+            .run(`MATCH (o:order) WHERE o.time >= ('2023-04-05-05-27-16.569Z') AND o.time < ('2023-04-22-11-42-05.051Z') RETURN (o) order by o.time desc`) // TODO
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
@@ -216,7 +216,7 @@ const merchantController = {
             })
             .finally(() => {
                 session.close();
-                res.redirect(`/merchant`)
+                res.redirect(301, '/merchant');
             });
     },
     checkoutOrder: (req, res) => {

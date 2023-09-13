@@ -13,7 +13,7 @@ var favicon      = require('serve-favicon');
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
 
-// set body-parser to parse json request
+// set body-parser to parse json request //TODO: remove this
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser('secret'));
+app.use(cookieParser('secret')); // TODO: remove this
 app.use(session({
   secret: 'book',
   resave: false,
@@ -53,7 +53,7 @@ app.ws('/', function (ws, req) {
 
 
 // db.conn();
-var session = db.session(session)
+var session = db.session(session) // TODO: remove this
 
 
 
@@ -61,9 +61,10 @@ app.use(express.static('static')); //讀取靜態檔案
 app.use('*/js'        ,express.static(path.join(__dirname, '/static/js')));
 app.use('*/css'       ,express.static(path.join(__dirname, '/static/css')));
 app.use('*/images'    ,express.static(path.join(__dirname, '/static/images')));
-app.use('*/ssl'       ,express.static(path.join(__dirname, '/static/ssl')));
+// app.use('*/ssl'       ,express.static(path.join(__dirname, '/static/ssl')));
 app.use('*/qr'        ,express.static(path.join(__dirname, '/static/qr')))
-app.use('*/crypto'    ,express.static(path.join(__dirname, '/static/crypto')));
+app.use('*/fonts'        ,express.static(path.join(__dirname, '/static/fonts')))
+// app.use('*/crypto'    ,express.static(path.join(__dirname, '/static/crypto')));
 // app.use('*/pki-validation',express.static(path.join(__dirname, '/static/ssl')));
 
 
@@ -93,7 +94,7 @@ else if (config.url=="1"){
 
   https.createServer(options, app).listen(config.port,function(){
     console.log(`listen on ${config.https}`)
-    console.log(`listen on ${config.http}`)
+    // console.log(`listen on ${config.http}`)
   });
 }
 
