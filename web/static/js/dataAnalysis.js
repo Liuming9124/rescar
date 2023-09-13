@@ -374,7 +374,7 @@ function getType() {
         const nameName = nameData["name"];
         //console.log('nameName',nameName);
         thisData2 += `
-                    <option value=" ${nameName}"> ${nameName}</option>
+                    <option value="${nameName}">${nameName}</option>
                      `
       }
     // 將所選值顯示在<div>中
@@ -392,15 +392,15 @@ function getType() {
 
 function handleButtonClick1(event) {
     event.preventDefault(); // 防止表單提交
-    const typeSelect0 = document.getElementById("type1");
-    const timeIntervalSelect0 = document.getElementById("timeInterval1");
-    const selectedValues2Div0 = document.getElementById("selectedValues1");
+    const typeSelect = document.getElementById("type1");
+    const timeIntervalSelect = document.getElementById("timeInterval1");
+    const selectedValues2Div = document.getElementById("selectedValues1");
     // 獲取所選擇的值
-    const selectedType = typeSelect0.value;
-    const selectedTimeInterval = timeIntervalSelect0.value;
+    const selectedType = typeSelect.value;
+    const selectedTimeInterval = timeIntervalSelect.value;
 
     // 在選擇的值的 <div> 元素中顯示它
-    selectedValues2Div0.textContent = `選擇的種類是：${selectedType}, 選擇的區間是：${selectedTimeInterval}`;
+    selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的區間是：${selectedTimeInterval}`;
     //piechart
     async function processData() {
         try {
@@ -488,7 +488,7 @@ function handleButtonClick2(event) {
 
             for (var i = 0; i < dataArray3.length; i++) {
                 var date = dataArray3[i][0];
-                var sales = dataArray3[i][1]["綜合壽司"];
+                var sales = dataArray3[i][1][selectedProduct];
                 labels.push(date);
                 data.push(sales);
             }
