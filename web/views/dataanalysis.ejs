@@ -105,7 +105,7 @@
 								<select class="type_choose" name="type1" id="type1">
 									<option disabled selected>**請選擇種類**</option>
 									<% for (var i = 0; i < menu.length; i++) { %>
-										<option value="<%= menu[i].value %>"><%= menu[i].name %></option>
+										<option><%= menu[i].name %></option>
 									<% } %>
 								</select>
 								<h3>STEP 2:選擇顯示區間</h3>
@@ -117,7 +117,7 @@
 									<option value="year">年</option>
 								</select>
 								<br><br>
-								<div id="selectedValues1">選擇的值將顯示在這裡</div>
+								<!-- <div id="selectedValues1">選擇的值將顯示在這裡</div>-->
 								<button type="button" id="search0" class="dataAna" style="width: 100%;">查詢</button>
 							</div>
 							<div class="right ">
@@ -157,8 +157,8 @@
 									</select>
 							
 									<!-- 顯示選擇的值的 <div> 元素 -->
-									<div id="selectedValues2">選擇的值將顯示在這裡</div>
-							
+									<!-- <div id="selectedValues2">選擇的值將顯示在這裡</div>-->
+									<br><br>
 									<button type="button" id="search1" class="dataAna" style="width: 100%;">查詢</button> <!-- 將按鈕的 type 設定為 "button" 以防止表單提交 -->
 								</form>
 							</div>

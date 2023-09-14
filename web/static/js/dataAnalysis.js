@@ -96,7 +96,7 @@ function getFormatMenu() {
 //格子1
 getSales(sttime, endtime, "day")
     .then(data => {
-        console.log(data); // 處理返回的數據
+       // console.log(data); // 處理返回的數據
         show = data
         const dataArray2 = Object.entries(show);
         // console.log('格子1',dataArray2);
@@ -123,7 +123,7 @@ getSales(sttime, endtime, "day")
 //格子2
 geturls(sttime, endtime, "day")
     .then(data => {
-        console.log(data); // 處理返回的數據
+        //console.log(data); // 處理返回的數據
         show = data
         const dataArray1 = Object.entries(show);
         //console.log('格子2',dataArray1,currentDate,lasttDate);
@@ -157,7 +157,7 @@ geturls(sttime, endtime, "day")
 //格子3&5
 getSales(sttime, endtime, "month")
     .then(data => {
-        console.log(data); // 處理返回的數據
+        //console.log(data); // 處理返回的數據
         show = data
         const dataArray1 = Object.entries(show);
         //console.log('格子3',dataArray1);
@@ -191,7 +191,7 @@ getSales(sttime, endtime, "month")
 //格子4
 geturls(sttime, endtime, "month")
     .then(data => {
-        console.log(data); // 處理返回的數據
+       // console.log(data); // 處理返回的數據
         show = data
         const dataArray1 = Object.entries(show);
         //console.log('格子3',dataArray1);
@@ -220,62 +220,9 @@ geturls(sttime, endtime, "month")
     });
 
 
-getObjectSales(sttime, endtime, "month")
-    .then(data => {
-        console.log(data); // 處理返回的數據
-        show = data
-        const dataArray = Object.entries(show);
-        const dataArray1 = Object.entries(dataG);
-        console.log('obj', dataG);
-
-        // 創建一個空的二維數組
-        var twoDimensionalArray = [];
-
-        // 遍歷每個月份的數據
-        for (var month in show) {
-            if (show.hasOwnProperty(month)) {
-                // 創建一個空的子數組來存放每個月份的數據
-                var monthData = [];
-                // 遍歷每個食物項目和數量
-                for (var item in show[month]) {
-                    if (show[month].hasOwnProperty(item)) {
-                        // 將食物項目和數量作為一個數組添加到子數組中
-                        monthData.push([item, show[month][item]]);
-                    }
-                }
-                // 將每個月份的數據子數組添加到二維數組中
-                twoDimensionalArray.push([month, monthData]);
-            }
-        }
-        // 打印整理後的二維數組
-        for (var i = 0; i < twoDimensionalArray.length; i++) {
-            var date = twoDimensionalArray[i][0];
-            var items = twoDimensionalArray[i][1];
-            for (var j = 0; j < items.length; j++) {
-                var itemName = items[j][0];
-                var itemCount = items[j][1];
-                for (var category in dataG) {
-                    for (var itemID in dataG[category]) {
-                        if (dataG[category][itemID].name === itemName) {
-                            dataG[category][itemID].count += itemCount;
-                        }
-                    }
-                }
-            }
-        }
-        console.log('newwwwwwwG', dataG);
-        return dataG;
-
-    })
-    .then(dataG => {    // 加一個then確保上面的操作完成後再執行下面的操作
-        // document.getElementById('test').innerHTML = JSON.stringify(dataG);
-    })
-    .catch(error => {
-        console.error(error); // 處理錯誤
-    });
 getFormatMenu()
     .then(data => {
-        console.log(data); // 處理返回的數據
+        //console.log(data); // 處理返回的數據
         show = data
         dataG = data;
         //console.log('dataG',dataG);
@@ -301,7 +248,7 @@ function getSalesValue() {
     
     getSales(sttime, endtime, selectedValue)
         .then(data => {
-            console.log(data); // 處理返回的數據
+            //console.log(data); // 處理返回的數據
             show = data
             const dataArray2 = Object.entries(show);
             dataArray2.sort(function (a, b) {
@@ -309,7 +256,7 @@ function getSalesValue() {
                 var dateB = new Date(b[0]);
                 return dateA - dateB;
             });
-            console.log('ary', dataArray2);
+           // console.log('ary', dataArray2);
             var thisData2 = '';
             for (var i = 0; i < dataArray2.length; i++) {
                 thisData2 += `<tr>
@@ -334,7 +281,9 @@ function getSalesValue() {
             // Line Chart Data
             var labels = [];
             var data1 = [];
+            var lineChart = null; // Initialize the chart variable
 
+            // Assuming dataArray2 contains your data
             for (var i = 0; i < dataArray2.length; i++) {
                 labels.push(dataArray2[i][0]);
                 data1.push(dataArray2[i][1]);
@@ -350,11 +299,19 @@ function getSalesValue() {
                 }]
             };
 
-            lineChart = new Chart(document.getElementById('lineChart'), {
+            // Check if lineChart is not null and destroy it
+            if (lineChart !== null) {
+                lineChart.destroy();
+            }
+
+            // Create a new chart with a unique canvas ID
+            var canvas = document.getElementById('lineChart');
+            lineChart = new Chart(canvas, {
                 type: 'line',
                 data: lineData,
                 options: {}
             });
+
         
 
         })
@@ -389,7 +346,60 @@ function getType() {
 }
 
 //各類商品銷售分析
+async function processData(Interval, selectedType) {
+    try {
+        const data = await getObjectSales(sttime, endtime, Interval);
+        var labels = [];
+        var data1 = [];
+        var backgroundColor = ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6', '#FF1493', '#00CED1', '#FF4500', '#8B008B', '#00FF7F', '#4169E1', '#FF00FF', '#00FF00', '#FFA500', '#1E90FF', '#FFC0CB', '#7FFF00', '#FF69B4', '#00BFFF'];
 
+        for (var key in dataG[selectedType]) {
+            var item = dataG[selectedType][key];
+            labels.push(item["name"]);
+            data1.push(item["count"]);
+        }
+
+        var pieData = {
+            labels: labels,
+            datasets: [{
+                data: data1,
+                backgroundColor: backgroundColor.slice(0, labels.length)
+            }]
+        };
+
+        // Get the canvas element by ID
+        var canvas = document.getElementById('pieChart');
+
+        // Check if there's an existing chart on the canvas
+        if (canvas.chart) {
+            canvas.chart.destroy(); // Destroy the existing chart
+        }
+
+        var pieChart = new Chart(canvas, {
+            type: 'pie',
+            data: pieData,
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                var label = context.label || '';
+                                var value = context.raw || '';
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Store the chart instance on the canvas element
+        canvas.chart = pieChart;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 function handleButtonClick1(event) {
     event.preventDefault(); // 防止表單提交
     const typeSelect = document.getElementById("type1");
@@ -398,54 +408,67 @@ function handleButtonClick1(event) {
     // 獲取所選擇的值
     const selectedType = typeSelect.value;
     const selectedTimeInterval = timeIntervalSelect.value;
-
+    //console.log(`Selected Type: ${selectedType}`);
     // 在選擇的值的 <div> 元素中顯示它
-    selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的區間是：${selectedTimeInterval}`;
-    //piechart
-    async function processData() {
-        try {
-            var data = await getFormatMenu();
-            var labels = [];
-            var data1 = [];
-            var backgroundColor = ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6', '#FF1493', '#00CED1', '#FF4500', '#8B008B', '#00FF7F', '#4169E1', '#FF00FF', '#00FF00', '#FFA500', '#1E90FF', '#FFC0CB', '#7FFF00', '#FF69B4', '#00BFFF'];
-            for (var key in dataG["壽司"]) {
-                var item = dataG["壽司"][key];
-                labels.push(item["name"]);
-                data1.push(item["count"]);
-            }
+   // selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的區間是：${selectedTimeInterval}`;
+
     
-            var pieData = {
-                labels: labels,
-                datasets: [{
-                    data: data1,
-                    backgroundColor: backgroundColor.slice(0, labels.length)
-                }]
-            };
-            console.log('labels', labels);
-            console.log('data1', data1);
-            var pieChart = new Chart(document.getElementById('pieChart'), {
-                type: 'pie',
-                data: pieData,
-                options: {
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function (context) {
-                                    var label = context.label || '';
-                                    var value = context.raw || '';
-                                    return label + ': ' + value;
-                                }
+    getObjectSales(sttime, endtime, selectedTimeInterval)
+        .then(data => {
+            //console.log(data); // 處理返回的數據
+            show = data
+            const dataArray = Object.entries(show);
+            const dataArray1 = Object.entries(dataG);
+           // console.log('obj', dataG);
+
+            // 創建一個空的二維數組
+            var twoDimensionalArray = [];
+
+            // 遍歷每個月份的數據
+            for (var month in show) {
+                if (show.hasOwnProperty(month)) {
+                    // 創建一個空的子數組來存放每個月份的數據
+                    var monthData = [];
+                    // 遍歷每個食物項目和數量
+                    for (var item in show[month]) {
+                        if (show[month].hasOwnProperty(item)) {
+                            // 將食物項目和數量作為一個數組添加到子數組中
+                            monthData.push([item, show[month][item]]);
+                        }
+                    }
+                    // 將每個月份的數據子數組添加到二維數組中
+                    twoDimensionalArray.push([month, monthData]);
+                }
+            }
+            // 打印整理後的二維數組
+            for (var i = 0; i < twoDimensionalArray.length; i++) {
+                var date = twoDimensionalArray[i][0];
+                var items = twoDimensionalArray[i][1];
+                for (var j = 0; j < items.length; j++) {
+                    var itemName = items[j][0];
+                    var itemCount = items[j][1];
+                    for (var category in dataG) {
+                        for (var itemID in dataG[category]) {
+                            if (dataG[category][itemID].name === itemName) {
+                                dataG[category][itemID].count += itemCount;
                             }
                         }
                     }
                 }
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    }
+            }
+            console.log('newwwwwwwG', dataG);
+            return dataG;
+
+        })
+        .then(dataG => {    // 加一個then確保上面的操作完成後再執行下面的操作
+            processData(selectedTimeInterval,selectedType);
+        })
+        .catch(error => {
+            console.error(error); // 處理錯誤
+        });
+    //piechart
     
-    processData();
+    
 }
 
 // 獲取按鈕元素並添加點擊事件監聽器
@@ -469,7 +492,7 @@ function handleButtonClick2(event) {
         
 
         // 在選擇的值的 <div> 元素中顯示它
-        selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的商品是：${selectedProduct}, 選擇的區間是：${selectedTimeInterval}`;
+        //selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的商品是：${selectedProduct}, 選擇的區間是：${selectedTimeInterval}`;
         getObjectSales(sttime, endtime, selectedTimeInterval)
         .then(data => {
             console.log(data); // 處理返回的數據
@@ -517,7 +540,10 @@ function handleButtonClick2(event) {
             };
 
             const ctx = document.getElementById('salesChart').getContext('2d');
-            new Chart(ctx, chartConfig);
+            if (window.myBarChart) {
+                window.myBarChart.destroy();
+            }
+            window.myBarChart = new Chart(ctx, chartConfig);
 
 
         })
