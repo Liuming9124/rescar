@@ -281,38 +281,42 @@ function getSalesValue() {
             // Line Chart Data
             var labels = [];
             var data1 = [];
-            var lineChart = null; // Initialize the chart variable
-
-            // Assuming dataArray2 contains your data
-            for (var i = 0; i < dataArray2.length; i++) {
-                labels.push(dataArray2[i][0]);
-                data1.push(dataArray2[i][1]);
+            var lineChart = null;
+            var canvas = document.getElementById('lineChart'); // Get the canvas element
+            
+            // Function to create or update the chart
+            function createOrUpdateChart() {
+                for (var i = 0; i < dataArray2.length; i++) {
+                    labels.push(dataArray2[i][0]);
+                    data1.push(dataArray2[i][1]);
+                }
+            
+                var lineData = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Sales',
+                        data: data1,
+                        borderColor: '#FF6384',
+                        fill: false
+                    }]
+                };
+            
+                // Check if a chart instance already exists and destroy it
+                if (lineChart) {
+                    lineChart.destroy();
+                }
+            
+                // Create a new Chart instance
+                lineChart = new Chart(canvas, {
+                    type: 'line',
+                    data: lineData,
+                    options: {}
+                });
             }
-
-            var lineData = {
-                labels: labels,
-                datasets: [{
-                    label: 'Sales',
-                    data: data1,
-                    borderColor: '#FF6384',
-                    fill: false
-                }]
-            };
-
-            // Check if lineChart is not null and destroy it
-            if (lineChart !== null) {
-                lineChart.destroy();
-            }
-
-            // Create a new chart with a unique canvas ID
-            var canvas = document.getElementById('lineChart');
-            lineChart = new Chart(canvas, {
-                type: 'line',
-                data: lineData,
-                options: {}
-            });
-
-        
+            
+            // Call the function to create or update the chart
+            createOrUpdateChart();
+            
 
         })
         .catch(error => {
