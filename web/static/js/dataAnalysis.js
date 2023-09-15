@@ -1,20 +1,20 @@
 //定義全域日期變數
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
-const monthlast = today.getMonth();
-const day = today.getDate().toString();
-const daylast = (today.getDate() - 1).toString();
-const currentMonth = `${year}-${month}`;
-const lastMonth = `${year}-${monthlast}`;
-const currentDate = `${year}-${month}-${day}`;
-const lasttDate = `${year}-${month}-${daylast}`;
-const Dateint = today.getDate()
+var today = new Date();
+var year = today.getFullYear();
+var month = today.getMonth() + 1;
+var monthlast = today.getMonth();
+var day = today.getDate().toString();
+var daylast = (today.getDate() - 1).toString();
+var currentMonth = `${year}-${month}`;
+var lastMonth = `${year}-${monthlast}`;
+var currentDate = `${year}-${month}-${day}`;
+var lasttDate = `${year}-${month}-${daylast}`;
+var Dateint = today.getDate()
 console.log(currentDate);
 var dataG = {};
 // 注意: timeInterval只能有以下幾種值: day, month, season, year
-const sttime = "2023-06-29";
-const endtime = "2023-10-29";
+var sttime = "2023-06-29";
+var endtime = "2023-10-29";
 function geturls(stime, etime, timeInterval) {
     return new Promise((resolve, reject) => {
         fetch(`/dataanalysis/getUrlCounts`, {
@@ -98,17 +98,17 @@ getSales(sttime, endtime, "day")
     .then(data => {
        // console.log(data); // 處理返回的數據
         show = data
-        const dataArray2 = Object.entries(show);
+        var dataArray2 = Object.entries(show);
         // console.log('格子1',dataArray2);
-        const currentDateData = dataArray2.find(item => item[0] === currentDate);
-        const lasttDateData = dataArray2.find(item => item[0] === lasttDate);
+        var currentDateData = dataArray2.find(item => item[0] === currentDate);
+        var lasttDateData = dataArray2.find(item => item[0] === lasttDate);
 
-        const currentMonthRevenue = currentDateData ? currentDateData[1] : 0;
-        const lastMonthRevenue = lasttDateData ? lasttDateData[1] : 0;
+        var currentMonthRevenue = currentDateData ? currentDateData[1] : 0;
+        var lastMonthRevenue = lasttDateData ? lasttDateData[1] : 0;
 
-        const trendArrow = currentMonthRevenue >= lastMonthRevenue ? '↑' : '↓';
+        var trendArrow = currentMonthRevenue >= lastMonthRevenue ? '↑' : '↓';
 
-        const html = `
+        var html = `
             <h4>本日營業額</h4>
             <p>NT$${currentMonthRevenue} 元</p>
             <span class="trend-arrow">${trendArrow}</span>
@@ -125,7 +125,7 @@ geturls(sttime, endtime, "day")
     .then(data => {
         //console.log(data); // 處理返回的數據
         show = data
-        const dataArray1 = Object.entries(show);
+        var dataArray1 = Object.entries(show);
         //console.log('格子2',dataArray1,currentDate,lasttDate);
         var thisData1 = '';
         var thisData11 = '';
@@ -159,29 +159,29 @@ getSales(sttime, endtime, "month")
     .then(data => {
         //console.log(data); // 處理返回的數據
         show = data
-        const dataArray1 = Object.entries(show);
+        var dataArray1 = Object.entries(show);
         //console.log('格子3',dataArray1);
-        const currentMonthData = dataArray1.find(item => item[0] === currentMonth);
-        const lastMonthData = dataArray1.find(item => item[0] === lastMonth);
+        var currentMonthData = dataArray1.find(item => item[0] === currentMonth);
+        var lastMonthData = dataArray1.find(item => item[0] === lastMonth);
 
-        const currentMonthRevenue = currentMonthData ? currentMonthData[1] : 0;
-        const lastMonthRevenue = lastMonthData ? lastMonthData[1] : 0;
+        var currentMonthRevenue = currentMonthData ? currentMonthData[1] : 0;
+        var lastMonthRevenue = lastMonthData ? lastMonthData[1] : 0;
 
-        const trendArrow = currentMonthRevenue >= lastMonthRevenue ? '↑' : '↓';
-        const avg = (currentMonthRevenue / Dateint).toFixed(2);
-        const html = `
+        var trendArrow = currentMonthRevenue >= lastMonthRevenue ? '↑' : '↓';
+        var avg = (currentMonthRevenue / Dateint).toFixed(2);
+        var html = `
         <h4>本月營業額</h4>
         <p>NT$${currentMonthRevenue} 元</p>
         <span class="trend-arrow">${trendArrow}</span>
     `;
-        const html1 = `
+        var html1 = `
     <h4>本月平均日營業額</h4>
     <p>NT$${avg} 元</p>
     `;
 
-        const element = document.getElementById('monthEarn');
+        var element = document.getElementById('monthEarn');
         element.innerHTML = html;
-        const element1 = document.getElementById('monthEarnavg');
+        var element1 = document.getElementById('monthEarnavg');
         element1.innerHTML = html1;
     })
     .catch(error => {
@@ -193,7 +193,7 @@ geturls(sttime, endtime, "month")
     .then(data => {
        // console.log(data); // 處理返回的數據
         show = data
-        const dataArray1 = Object.entries(show);
+        var dataArray1 = Object.entries(show);
         //console.log('格子3',dataArray1);
         var thisData1 = '';
         var thisData11 = '';
@@ -250,7 +250,7 @@ function getSalesValue() {
         .then(data => {
             //console.log(data); // 處理返回的數據
             show = data
-            const dataArray2 = Object.entries(show);
+            var dataArray2 = Object.entries(show);
             dataArray2.sort(function (a, b) {
                 var dateA = new Date(a[0]);
                 var dateB = new Date(b[0]);
@@ -330,9 +330,9 @@ function getType() {
     // 獲取所選選項的值
     var selectedValue = selectElement.value;
     var thisData2 = '';
-    for (const nameId in dataG[selectedValue]) {
-        const nameData = dataG[selectedValue][nameId];
-        const nameName = nameData["name"];
+    for (var nameId in dataG[selectedValue]) {
+        var nameData = dataG[selectedValue][nameId];
+        var nameName = nameData["name"];
         //console.log('nameName',nameName);
         thisData2 += `
                     <option value="${nameName}">${nameName}</option>
@@ -352,7 +352,7 @@ function getType() {
 //各類商品銷售分析
 async function processData(Interval, selectedType) {
     try {
-        const data = await getObjectSales(sttime, endtime, Interval);
+        var data = await getObjectSales(sttime, endtime, Interval);
         var labels = [];
         var data1 = [];
         var backgroundColor = ['#FF5733', '#ff8c00', '#FFD700', '#4CAF50', '#3498DB', '#9B59B6', '#FF1493', '#00CED1', '#FF4500', '#8B008B', '#00FF7F', '#4169E1', '#FF00FF', '#00FF00', '#FFA500', '#1E90FF', '#FFC0CB', '#7FFF00', '#FF69B4', '#00BFFF'];
@@ -406,12 +406,12 @@ async function processData(Interval, selectedType) {
 }
 function handleButtonClick1(event) {
     event.preventDefault(); // 防止表單提交
-    const typeSelect = document.getElementById("type1");
-    const timeIntervalSelect = document.getElementById("timeInterval1");
-    const selectedValues2Div = document.getElementById("selectedValues1");
+    var typeSelect = document.getElementById("type1");
+    var timeIntervalSelect = document.getElementById("timeInterval1");
+    var selectedValues2Div = document.getElementById("selectedValues1");
     // 獲取所選擇的值
-    const selectedType = typeSelect.value;
-    const selectedTimeInterval = timeIntervalSelect.value;
+    var selectedType = typeSelect.value;
+    var selectedTimeInterval = timeIntervalSelect.value;
     //console.log(`Selected Type: ${selectedType}`);
     // 在選擇的值的 <div> 元素中顯示它
    // selectedValues2Div.textContent = `選擇的種類是：${selectedType}, 選擇的區間是：${selectedTimeInterval}`;
@@ -421,8 +421,8 @@ function handleButtonClick1(event) {
         .then(data => {
             //console.log(data); // 處理返回的數據
             show = data
-            const dataArray = Object.entries(show);
-            const dataArray1 = Object.entries(dataG);
+            var dataArray = Object.entries(show);
+            var dataArray1 = Object.entries(dataG);
            // console.log('obj', dataG);
 
             // 創建一個空的二維數組
@@ -476,7 +476,7 @@ function handleButtonClick1(event) {
 }
 
 // 獲取按鈕元素並添加點擊事件監聽器
-const searchButton0 = document.getElementById("search0");
+var searchButton0 = document.getElementById("search0");
 searchButton0.addEventListener("click", handleButtonClick1);
 
 
@@ -484,15 +484,15 @@ searchButton0.addEventListener("click", handleButtonClick1);
 
 function handleButtonClick2(event) {
     event.preventDefault(); // 防止表單提交
-    const typeSelect = document.getElementById("type2");
-    const timeIntervalSelect = document.getElementById("timeInterval2");
-    const selectedType = typeSelect.value;
-    const selectedTimeInterval = timeIntervalSelect.value;
+    var typeSelect = document.getElementById("type2");
+    var timeIntervalSelect = document.getElementById("timeInterval2");
+    var selectedType = typeSelect.value;
+    var selectedTimeInterval = timeIntervalSelect.value;
     // 使用 setTimeout 延遲執行獲取 productSelect 的值
     setTimeout(() => {
-        const productSelect = document.getElementById("product2");
-        const selectedValues2Div = document.getElementById("selectedValues2");
-        const selectedProduct = productSelect.value;
+        var productSelect = document.getElementById("product2");
+        var selectedValues2Div = document.getElementById("selectedValues2");
+        var selectedProduct = productSelect.value;
         
 
         // 在選擇的值的 <div> 元素中顯示它
@@ -501,7 +501,7 @@ function handleButtonClick2(event) {
         .then(data => {
             console.log(data); // 處理返回的數據
             show = data
-            const dataArray3 = Object.entries(show);
+            var dataArray3 = Object.entries(show);
             dataArray3.sort(function (a, b) {
                 var dateA = new Date(a[0]);
                 var dateB = new Date(b[0]);
@@ -520,7 +520,7 @@ function handleButtonClick2(event) {
                 data.push(sales);
             }
             //setTimeout(() => {})
-            const salesData = {
+            var salesData = {
                 labels: labels,
                 datasets: [{
                     label: selectedProduct,
@@ -531,7 +531,7 @@ function handleButtonClick2(event) {
                 }]
             };
 
-            const chartConfig = {
+            var chartConfig = {
                 type: 'bar',
                 data: salesData,
                 options: {
@@ -543,7 +543,7 @@ function handleButtonClick2(event) {
                 }
             };
 
-            const ctx = document.getElementById('salesChart').getContext('2d');
+            var ctx = document.getElementById('salesChart').getContext('2d');
             if (window.myBarChart) {
                 window.myBarChart.destroy();
             }
@@ -560,7 +560,7 @@ function handleButtonClick2(event) {
 }
 
 // 獲取按鈕元素並添加點擊事件監聽器
-const searchButton1 = document.getElementById("search1");
+var searchButton1 = document.getElementById("search1");
 searchButton1.addEventListener("click", handleButtonClick2);
 
 
