@@ -5,6 +5,7 @@
     "port":"7000",
     "robotip":"127.0.0.1",
     "robotport":"8000",
+    "dbFile":"C:\\rescarDb.txt",
     "note" :"軟體ip後面請務必加上「/」，否則會出錯，  ex:'http://localhost:7000/'",
     "note1":"url格式   '0'代表使用http '1'代表使用https ",
     "note2":"硬體ip格式   ex:'127.0.0.1' 硬體port格式 ex:'8000'"
