@@ -32,9 +32,6 @@
 	<div class="row orderlist">
 		<div class="col-xs-5">
 			<div class="media cartitem">
-				<div class="media-left">
-					<img src="../static/images/food1.jpeg" class="media-object" style="width:60px" alt="">
-				</div>
 				<div class="media-body">
 					<div class="row">
 						<div class="col-xs-6">
@@ -44,7 +41,6 @@
 						</div>
 						<div class="col-xs-6">
 							<p class="listcolor">
-								商品描述：<%= item.data %><br/><br/>
 								備註：<%= citem.remark %><br/><br/>
 							</p>
 						</div>
@@ -54,7 +50,9 @@
 		</div>
 		
 		<div class="col-xs-2 orderlistpt15">
-			<input id="itemNumberId" type="number" class="form-control" name="itemnumber" min="0" value="<%= citem.amt %>">
+			<p class="listcolor">
+				<a><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>&nbsp&nbsp<%= citem.amt %>
+			</p>
 		</div>
 		<div class="col-xs-2 orderlistpt15" style="text-align: right">
 			小計NT$&nbsp;<em id="itemtotalId" class="itemprice"></em><%= item.price.low*citem.amt %>元

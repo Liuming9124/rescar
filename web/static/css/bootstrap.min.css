@@ -328,7 +328,7 @@ th {
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
@@ -1548,7 +1548,7 @@ h5 .small,
 h5 small,
 h6 .small,
 h6 small {
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1;
     color: #777
 }
@@ -1644,7 +1644,7 @@ p {
     line-height: 1.4
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .lead {
         font-size: 21px
     }
@@ -1843,7 +1843,7 @@ dd {
     margin-left: 0
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .dl-horizontal dt {
         float: left;
         width: 160px;
@@ -1999,7 +1999,7 @@ pre code {
     margin-left: auto
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .container {
         width: 750px
     }
@@ -2302,7 +2302,7 @@ pre code {
     margin-left: 0
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
 
     .col-sm-1,
     .col-sm-10,
@@ -3740,7 +3740,7 @@ textarea.input-lg {
     color: #737373
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .form-inline .form-group {
         display: inline-block;
         margin-bottom: 0;
@@ -3820,7 +3820,7 @@ textarea.input-lg {
     margin-left: -30px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .form-horizontal .control-label {
         padding-top: 7px;
         margin-bottom: 0;
@@ -3832,14 +3832,14 @@ textarea.input-lg {
     right: 15px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .form-horizontal .form-group-lg .control-label {
         padding-top: 11px;
         font-size: 18px
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .form-horizontal .form-group-sm .control-label {
         padding-top: 6px;
         font-size: 12px
@@ -3851,7 +3851,7 @@ textarea.input-lg {
     padding: 6px 12px;
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
@@ -4299,7 +4299,7 @@ fieldset[disabled] .btn-danger:hover {
 }
 
 .btn-link {
-    font-weight: 768;
+    font-weight: 896;
     color: #ed786a;
     border-radius: 0
 }
@@ -4477,7 +4477,7 @@ tbody.collapse.in {
     display: block;
     padding: 3px 20px;
     clear: both;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1.42857143;
     color: #333;
     white-space: nowrap
@@ -4570,7 +4570,7 @@ tbody.collapse.in {
     margin-bottom: 2px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-right .dropdown-menu {
         right: 0;
         left: auto
@@ -4888,7 +4888,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .input-group-addon {
     padding: 6px 12px;
     font-size: 14px;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1;
     color: #555;
     text-align: center;
@@ -5085,7 +5085,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 
 
-@media (min-width: 768px) {
+@media (min-width: 896px) {
     .nav-tabs.nav-justified > li {
         display: table-cell;
         width: 1%;
@@ -5108,7 +5108,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .nav-tabs.nav-justified>li>a {
         border-bottom: 1px solid #ddd;
         border-radius: 4px 4px 0 0
@@ -5166,7 +5166,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     left: auto
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .nav-justified>li {
         display: table-cell;
         width: 1%
@@ -5192,7 +5192,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border: 1px solid #ddd
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .nav-tabs-justified>li>a {
         border-bottom: 1px solid #ddd;
         border-radius: 4px 4px 0 0
@@ -5226,13 +5226,13 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border: 1px solid transparent
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar {
         border-radius: 4px
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-header {
         float: left
     }
@@ -5252,7 +5252,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     overflow-y: auto
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-collapse {
         width: auto;
         border-top: 0;
@@ -5300,7 +5300,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-left: -15px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
 
     .container-fluid>.navbar-collapse,
     .container-fluid>.navbar-header,
@@ -5316,7 +5316,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     border-width: 0 0 1px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-static-top {
         border-radius: 0
     }
@@ -5330,7 +5330,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     z-index: 1030
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
 
     .navbar-fixed-bottom,
     .navbar-fixed-top {
@@ -5370,7 +5370,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     display: block
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
 
     .navbar>.container .navbar-brand,
     .navbar>.container-fluid .navbar-brand {
@@ -5406,14 +5406,14 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-top: 4px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-toggle {
         display: none
     }
 }
 
 .navbar-nav {
-    margin: 7.5px -15px
+    margin: 5px -15px
 }
 
 .navbar-nav>li>a {
@@ -5449,7 +5449,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-nav {
         float: left;
         margin: 0
@@ -5477,7 +5477,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1)
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-form .form-group {
         display: inline-block;
         margin-bottom: 0;
@@ -5548,7 +5548,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-form {
         width: auto;
         padding-top: 0;
@@ -5595,7 +5595,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     margin-bottom: 15px
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-text {
         float: left;
         margin-right: 15px;
@@ -5603,7 +5603,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .navbar-left {
         float: left !important
     }
@@ -5686,157 +5686,6 @@ textarea.input-group-sm>.input-group-btn>.btn {
     background-color: #e7e7e7
 }
 
-@media (max-width:767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-        color: #777
-    }
-
-    .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus,
-    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
-        color: #333;
-        background-color: transparent
-    }
-
-    .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
-    .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus,
-    .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover {
-        color: #555;
-        background-color: #e7e7e7
-    }
-
-    .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,
-    .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus,
-    .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover {
-        color: #ccc;
-        background-color: transparent
-    }
-}
-
-.navbar-default .navbar-link {
-    color: #777
-}
-
-.navbar-default .navbar-link:hover {
-    color: #333
-}
-
-.navbar-default .btn-link {
-    color: #777
-}
-
-.navbar-default .btn-link:focus,
-.navbar-default .btn-link:hover {
-    color: #333
-}
-
-.navbar-default .btn-link[disabled]:focus,
-.navbar-default .btn-link[disabled]:hover,
-fieldset[disabled] .navbar-default .btn-link:focus,
-fieldset[disabled] .navbar-default .btn-link:hover {
-    color: #ccc
-}
-
-.navbar-inverse {
-    background-color: #222;
-    border-color: #080808
-}
-
-.navbar-inverse .navbar-brand {
-    color: #9d9d9d
-}
-
-.navbar-inverse .navbar-brand:focus,
-.navbar-inverse .navbar-brand:hover {
-    color: #fff;
-    background-color: transparent
-}
-
-.navbar-inverse .navbar-text {
-    color: #9d9d9d
-}
-
-.navbar-inverse .navbar-nav>li>a {
-    color: #9d9d9d
-}
-
-.navbar-inverse .navbar-nav>li>a:focus,
-.navbar-inverse .navbar-nav>li>a:hover {
-    color: #fff;
-    background-color: transparent
-}
-
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:focus,
-.navbar-inverse .navbar-nav>.active>a:hover {
-    color: #fff;
-    background-color: #080808
-}
-
-.navbar-inverse .navbar-nav>.disabled>a,
-.navbar-inverse .navbar-nav>.disabled>a:focus,
-.navbar-inverse .navbar-nav>.disabled>a:hover {
-    color: #444;
-    background-color: transparent
-}
-
-.navbar-inverse .navbar-toggle {
-    border-color: #333
-}
-
-.navbar-inverse .navbar-toggle:focus,
-.navbar-inverse .navbar-toggle:hover {
-    background-color: #333
-}
-
-.navbar-inverse .navbar-toggle .icon-bar {
-    background-color: #fff
-}
-
-.navbar-inverse .navbar-collapse,
-.navbar-inverse .navbar-form {
-    border-color: #101010
-}
-
-.navbar-inverse .navbar-nav>.open>a,
-.navbar-inverse .navbar-nav>.open>a:focus,
-.navbar-inverse .navbar-nav>.open>a:hover {
-    color: #fff;
-    background-color: #080808
-}
-
-@media (max-width:767px) {
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header {
-        border-color: #080808
-    }
-
-    .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
-        background-color: #080808
-    }
-
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-        color: #9d9d9d
-    }
-
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus,
-    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
-        color: #fff;
-        background-color: transparent
-    }
-
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus,
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover {
-        color: #fff;
-        background-color: #080808
-    }
-
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a,
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:focus,
-    .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:hover {
-        color: #444;
-        background-color: transparent
-    }
-}
 
 .navbar-inverse .navbar-link {
     color: #9d9d9d
@@ -6211,7 +6060,7 @@ a.badge:hover {
     max-width: 100%
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:896px) {
     .jumbotron {
         padding-top: 48px;
         padding-bottom: 48px
@@ -7395,7 +7244,7 @@ button.close {
     overflow: scroll
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
     .modal-dialog {
         width: 600px;
         margin: 30px auto
@@ -7424,7 +7273,7 @@ button.close {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-style: normal;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1.42857143;
     text-align: left;
     text-align: start;
@@ -7558,7 +7407,7 @@ button.close {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-style: normal;
-    font-weight: 768;
+    font-weight: 896;
     line-height: 1.42857143;
     text-align: left;
     text-align: start;
@@ -7925,7 +7774,7 @@ button.close {
     text-shadow: none
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:896px) {
 
     .carousel-control .glyphicon-chevron-left,
     .carousel-control .glyphicon-chevron-right,
@@ -8118,7 +7967,7 @@ button.close {
     }
 }
 
-@media (min-width:768px) and (max-width:991px) {
+@media (min-width:896px) and (max-width:991px) {
     .visible-sm {
         display: block !important
     }
@@ -8137,19 +7986,19 @@ button.close {
     }
 }
 
-@media (min-width:768px) and (max-width:991px) {
+@media (min-width:896px) and (max-width:991px) {
     .visible-sm-block {
         display: block !important
     }
 }
 
-@media (min-width:768px) and (max-width:991px) {
+@media (min-width:896px) and (max-width:991px) {
     .visible-sm-inline {
         display: inline !important
     }
 }
 
-@media (min-width:768px) and (max-width:991px) {
+@media (min-width:896px) and (max-width:991px) {
     .visible-sm-inline-block {
         display: inline-block !important
     }
@@ -8235,7 +8084,7 @@ button.close {
     }
 }
 
-@media (min-width:768px) and (max-width:991px) {
+@media (min-width:896px) and (max-width:991px) {
     .hidden-sm {
         display: none !important
     }
@@ -8313,19 +8162,25 @@ button.close {
 }
 
 .image-text-container {
-    display: inline-block;
-    vertical-align: top;
+    display: flex;
+    flex-direction: column; /* 讓子元素在垂直方向上堆疊 */
+    align-items: center; /* 水平居中對齊元素 */
+    text-align: center; /* 文本置中對齊 */
 }
 
 .image-text-container img {
-    display: inline-block;
-    vertical-align: top;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* 給圖片添加輕微的圓角效果 */
+    margin-bottom: 10px; /* 為圖片添加一些底部間距，以控制圖片和文本之間的距離 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
 }
 
 .image-text-container p {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 10px;
+    line-height: 0.5; /* 增加文字行高 */
+    font-weight: bold;
+    color: #ed786a;
+    /* 您可以根據需要進一步調整其他樣式 */
 }
 
 .fixtop {
@@ -8335,12 +8190,12 @@ button.close {
 .navbar-fixed-topmid {
     position: fixed;
     right: 0px;
-    left: 70px;
-    0;
-    z-index: 1030
+    left: 0px;
+    z-index: 1030;
+    padding-bottom: 10px; /* Adjust the bottom padding as needed */
 }
 
-@media (min-width:768px) {
+@media (min-width:896px) {
 
     .navbar-fixed-bottom,
     .navbar-fixed-topmid {
@@ -8881,12 +8736,43 @@ button.close {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.text-container1 {
+.text-container1 {  /* 商品框框 */
     vertical-align: top;
     border: 1px solid #ccc; /* 添加邊框 */
-    padding: 10px; /* 添加內邊距 */
+    padding-top: 10px; 
+    padding-bottom: 5px; 
     background-color: #f7f7f7; /* 添加背景顏色 */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 添加陰影效果 */
     border-radius: 5px; /* 添加圓角 */
-    margin-top: 10px; /* 添加上方間距 */
+    margin-top: 0px; /* 添加上方間距 */
+    margin-left: 10px; /* 左邊距 */
+    margin-right: 10px; /* 右邊距 */
 }
+.top-bar-1 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar-nav66 li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px; /* 可根据需要调整间距 */
+}
+
+.custom-link {
+    
+   
+    padding: 5px 10px; /* Add padding around the text */
+        
+       
+    background-color: #fac0b9; /* Set a background color */
+        color: #fff; /* Set text color to white */
+        
+       
+    text-decoration: none; /* Remove underline from links */
+        
+       
+    border-radius: 5px; /* Add rounded corners */
+        font-weight: bold; /* Make the text bold */
+    }
