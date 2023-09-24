@@ -28,32 +28,6 @@
 		</a>
 	<% } %>
 </div></h5>
-<!--<div class="container" style="margin-top: 30px;padding-bottom: 50px">
-	<div id="item1" class="menuclass">
-		<div style="text-align: center">
-			<h3>商品頁面</h3><br>
-			<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>&nbsp;&nbsp;熱門商品&nbsp;&nbsp;<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span></h4>
-		</div>
-		<% for (var i=0 ; i < 4 ; i++) { %>
-		<div class="row">
-			<div class="col-xs-6 col-sm-3">
-				<a href="#" data-toggle="modal" data-target="#myModal0<%=i%>">
-					<div class="thumbnail">
-						<img src="images/food/<%=menu.find(item=> item.name === menu[0].name).items[i].image %>" width="100%" alt="...">
-						<div class="caption">
-							<h3 class="text-center">
-								<%=menu.find(item=> item.name === menu[0].name).items[i].name %>
-							</h3>
-							<p class="h5 text-center">NT$<%= menu.find(item=> item.name ===
-								menu[0].name).items[i].price.low %></p>
-								<p class="text-center"><a href="#" data-toggle="modal" data-target="#myModal0<%=i%>"  class="btn btn-primary" role="button">點餐</a></p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<% } %>
-		</div>
-	</div>-->
 
 <% for (var i=0 ; i < menu.length ; i++) { %>
 <A Name="food<%=i%>"></A>
