@@ -316,6 +316,7 @@ th {
         border: 1px solid #ddd !important
     }
 }
+
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url(../fonts/glyphicons-halflings-regular.eot);
@@ -5027,33 +5028,39 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .nav>li>a>img {
     max-width: none
 }
+
 .nav-tabs {
     border-bottom: 1px solid #ddd;
 }
 
-.nav-tabs > li {
+.nav-tabs>li {
     float: left;
     margin-bottom: -1px;
 }
 
-.nav-tabs > li > a {
+.nav-tabs>li>a {
     margin-right: 2px;
     line-height: 2.42857143;
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
-    color: #ed786a; /* 修改標籤文字顏色 */
-    background-color: #f8f8f8; /* 修改標籤背景顏色 */
-    padding: 8px 12px; /* 調整內邊距 */
-    transition: background-color 0.3s ease; /* 添加漸變過渡效果 */
+    color: #ed786a;
+    /* 修改標籤文字顏色 */
+    background-color: #f8f8f8;
+    /* 修改標籤背景顏色 */
+    padding: 8px 12px;
+    /* 調整內邊距 */
+    transition: background-color 0.3s ease;
+    /* 添加漸變過渡效果 */
 }
 
-.nav-tabs > li > a:hover {
+.nav-tabs>li>a:hover {
     border-color: #eee #eee #ddd;
-    background-color: #d6caca; /* 修改標籤懸停時的背景顏色 */
+    background-color: #d6caca;
+    /* 修改標籤懸停時的背景顏色 */
 }
 
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
 .nav-tabs>li.active>a:hover {
     color: #555;
     cursor: default;
@@ -5063,17 +5070,22 @@ textarea.input-group-sm>.input-group-btn>.btn {
 }
 
 .nav-tabs.nav-justified {
-    display: flex; /* 使用 Flexbox 布局 */
-    justify-content: center; /* 水平居中 */
+    display: flex;
+    /* 使用 Flexbox 布局 */
+    justify-content: center;
+    /* 水平居中 */
 }
 
-.nav-tabs.nav-justified > li {
-    flex: 1; /* 平均分配寬度 */
-    display: flex; /* 使用 Flexbox 布局 */
-    justify-content: center; /* 水平居中 */
+.nav-tabs.nav-justified>li {
+    flex: 1;
+    /* 平均分配寬度 */
+    display: flex;
+    /* 使用 Flexbox 布局 */
+    justify-content: center;
+    /* 水平居中 */
 }
 
-.nav-tabs.nav-justified > li > a {
+.nav-tabs.nav-justified>li>a {
     margin-bottom: 5px;
     text-align: center;
     border-radius: 4px;
@@ -5086,24 +5098,24 @@ textarea.input-group-sm>.input-group-btn>.btn {
 
 
 @media (min-width: 896px) {
-    .nav-tabs.nav-justified > li {
+    .nav-tabs.nav-justified>li {
         display: table-cell;
         width: 1%;
     }
 
-    .nav-tabs.nav-justified > li > a {
+    .nav-tabs.nav-justified>li>a {
         margin-bottom: 0;
     }
 }
 
-.nav-tabs.nav-justified > li > a {
+.nav-tabs.nav-justified>li>a {
     margin-right: 0;
     border-radius: 4px;
 }
 
-.nav-tabs.nav-justified > .active > a,
-.nav-tabs.nav-justified > .active > a:focus,
-.nav-tabs.nav-justified > .active > a:hover {
+.nav-tabs.nav-justified>.active>a,
+.nav-tabs.nav-justified>.active>a:focus,
+.nav-tabs.nav-justified>.active>a:hover {
     border: 1px solid #ddd;
 }
 
@@ -5120,6 +5132,7 @@ textarea.input-group-sm>.input-group-btn>.btn {
         border-bottom-color: #fff
     }
 }
+
 .nav-pills>li {
     float: left
 }
@@ -6080,21 +6093,30 @@ a.badge:hover {
 
 .thumbnail {
     display: block;
-    padding: 10px; /* 增加内边距 */
+    width: 170px;
+    height: 200px;
+    padding: 10px;
+    /* 增加内边距 */
     margin-bottom: 20px;
-    line-height: 1.5; /* 增加行高，提高可读性 */
-    background-color: #f7f7f7; /* 背景颜色 */
-    border: 1px solid #ccc; /* 边框 */
-    border-radius: 8px; /* 圆角 */
+    line-height: 1.5;
+    /* 增加行高，提高可读性 */
+    background-color: #f7f7f7;
+    /* 背景颜色 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
     transition: border .2s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 阴影效果 */
 }
 
 /* 悬停时改变边框颜色 */
 .thumbnail:hover {
-    border: 1px solid #007bff; /* 鼠标悬停时边框颜色 */
+    border: 1px solid #007bff;
+    /* 鼠标悬停时边框颜色 */
 }
 
 
@@ -8163,21 +8185,28 @@ button.close {
 
 .image-text-container {
     display: flex;
-    flex-direction: column; /* 讓子元素在垂直方向上堆疊 */
-    align-items: center; /* 水平居中對齊元素 */
-    text-align: center; /* 文本置中對齊 */
+    flex-direction: column;
+    /* 讓子元素在垂直方向上堆疊 */
+    align-items: center;
+    /* 水平居中對齊元素 */
+    text-align: center;
+    /* 文本置中對齊 */
 }
 
 .image-text-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px; /* 給圖片添加輕微的圓角效果 */
-    margin-bottom: 10px; /* 為圖片添加一些底部間距，以控制圖片和文本之間的距離 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+    border-radius: 10px;
+    /* 給圖片添加輕微的圓角效果 */
+    margin-bottom: 10px;
+    /* 為圖片添加一些底部間距，以控制圖片和文本之間的距離 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 添加陰影效果 */
 }
 
 .image-text-container p {
-    line-height: 0.5; /* 增加文字行高 */
+    line-height: 0.5;
+    /* 增加文字行高 */
     font-weight: bold;
     color: #ed786a;
     /* 您可以根據需要進一步調整其他樣式 */
@@ -8192,7 +8221,8 @@ button.close {
     right: 0px;
     left: 0px;
     z-index: 1030;
-    padding-bottom: 10px; /* Adjust the bottom padding as needed */
+    padding-bottom: 10px;
+    /* Adjust the bottom padding as needed */
 }
 
 @media (min-width:896px) {
@@ -8258,6 +8288,7 @@ button.close {
     opacity: 1;
     right: 0;
 }
+
 .buttonsearch {
     text-align: center;
     display: block;
@@ -8298,6 +8329,7 @@ button.close {
     opacity: 1;
     right: 0;
 }
+
 .tablestyle {
     border-radius: 10px;
     width: 260px;
@@ -8355,10 +8387,13 @@ button.close {
         opacity: 1;
     }
 }
-.flex{
+
+.flex {
     display: flex;
-    align-items: center; /* 將內容垂直置中 */
+    align-items: center;
+    /* 將內容垂直置中 */
 }
+
 .buttonreturn {
     display: block;
     margin: auto;
@@ -8381,37 +8416,46 @@ button.close {
     animation: pulse 1s infinite;
     font-size: 30px;
 }
+
 .chat-button {
     position: fixed;
-    bottom: 20px; /* 距离底部的距离 */
-    right: 20px; /* 距离右侧的距离 */
-    background-color: #ed786a; /* 背景颜色 */
-    color: #fff; /* 文字颜色 */
-    padding: 20px 20px; /* 内边距 */
-    border: 2px solid #ed7861; 
-    border-radius: 100%; /* 圆角边框 */
-    z-index: 9999; /* 使按钮在其他元素之上 */
+    bottom: 20px;
+    /* 距离底部的距离 */
+    right: 20px;
+    /* 距离右侧的距离 */
+    background-color: #ed786a;
+    /* 背景颜色 */
+    color: #fff;
+    /* 文字颜色 */
+    padding: 20px 20px;
+    /* 内边距 */
+    border: 2px solid #ed7861;
+    border-radius: 100%;
+    /* 圆角边框 */
+    z-index: 9999;
+    /* 使按钮在其他元素之上 */
 }
 
 /* 添加一些鼠标悬停效果 */
 .chat-button:hover {
-    background-color:#ed786b;
+    background-color: #ed786b;
     cursor: pointer;
 }
+
 .buttonn-group {
     display: flex;
-  }
+}
 
-  .buttonn {
+.buttonn {
     flex: 1;
     margin-right: 10px;
-  }
+}
 
-  .buttonn:last-child {
+.buttonn:last-child {
     margin-right: 0;
-  }
+}
 
-  .buttonn a {
+.buttonn a {
     display: block;
     text-align: center;
     border: 1px solid #ccc;
@@ -8419,27 +8463,30 @@ button.close {
     padding: 10px;
     text-decoration: none;
     color: #000;
-    white-space: nowrap; /* 禁止文字換行 */
+    white-space: nowrap;
+    /* 禁止文字換行 */
 
-  }
-  .buttonn a:active {
-    background-color: #f7a69c; 
+}
+
+.buttonn a:active {
+    background-color: #f7a69c;
     border-radius: 20px;
-  }
+}
+
 .buttonn1-group {
     display: flex;
-  }
+}
 
-  .buttonn1 {
+.buttonn1 {
     flex: 1;
     margin-right: 10px;
-  }
+}
 
-  .buttonn1:last-child {
+.buttonn1:last-child {
     margin-right: 0;
-  }
+}
 
-  .buttonn1 a {
+.buttonn1 a {
     display: block;
     text-align: center;
     border: 1px solid #ccc;
@@ -8447,17 +8494,21 @@ button.close {
     padding: 10px;
     text-decoration: none;
     color: #000;
-    white-space: nowrap; /* 禁止文字換行 */
-  }
-  .buttonn2 a {
+    white-space: nowrap;
+    /* 禁止文字換行 */
+}
+
+.buttonn2 a {
     text-align: center;
     border: 1px solid #ccc;
-    border-radius: 50%; /* 設置圓角半徑為50% */
+    border-radius: 50%;
+    /* 設置圓角半徑為50% */
     padding: 10px;
     text-decoration: none;
     color: #000;
-  }
-  .delete-item {
+}
+
+.delete-item {
     background-color: #dc3545;
     color: #ffffff;
     border: none;
@@ -8465,53 +8516,66 @@ button.close {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .delete-item:hover {
+}
+
+.delete-item:hover {
     background-color: #c82333;
-  }
-  
-  /* 圖標字體樣式，請確保已經引入合適的圖標字體庫 */
-  .delete-item .glyphicon {
+}
+
+/* 圖標字體樣式，請確保已經引入合適的圖標字體庫 */
+.delete-item .glyphicon {
     font-size: 9px;
-  }
-  .containerlr {
+}
+
+.containerlr {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    justify-items: center; /* 水平居中 */
-  }
-  .containerlr1 {
+    justify-items: center;
+    /* 水平居中 */
+}
+
+.containerlr1 {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 10px;
-    justify-items: center; /* 水平居中 */
-  }
-  .button-container {
+    justify-items: center;
+    /* 水平居中 */
+}
+
+.button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #e0dede;
     padding: 5px;
-    margin: 10px; /* 左右間距，增加間距 */
-    border: 1px solid #ccc; /* 加上邊框 */
-    border-radius: 8px; /* 添加圓角 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
-  }
-  
-  /* 新增的样式规则 */
-  .button-container div {
-    margin: 0 10px; /* 调整内部div之间的间距 */
-  }
-  .button-container1 {
+    margin: 10px;
+    /* 左右間距，增加間距 */
+    border: 1px solid #ccc;
+    /* 加上邊框 */
+    border-radius: 8px;
+    /* 添加圓角 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 添加陰影效果 */
+}
+
+/* 新增的样式规则 */
+.button-container div {
+    margin: 0 10px;
+    /* 调整内部div之间的间距 */
+}
+
+.button-container1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    margin: 10px; /* 左右間距，增加間距 */
-  }
-  /* Style the gray buttons */
-  .gray-button {
+    margin: 10px;
+    /* 左右間距，增加間距 */
+}
+
+/* Style the gray buttons */
+.gray-button {
     width: 150px;
     height: 60px;
     background-color: #AAAAAA;
@@ -8525,65 +8589,78 @@ button.close {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-image: linear-gradient(#CCCCCC, #AAAAAA);
     transition: transform 0.2s ease-in-out;
-  }
-  
-  .gray-button span {
+}
+
+.gray-button span {
     display: block;
     margin-top: 8px;
-  }
-  
-  .gray-button:hover {
+}
+
+.gray-button:hover {
     transform: scale(1.1);
-  }
-  
-  .gray-button:active {
+}
+
+.gray-button:active {
     transform: scale(0.9);
-  }
-  
-  .btnrbt {
+}
+
+.btnrbt {
     font-size: 16px;
     padding: 10px 20px;
     border: none;
-    border-radius: 25px; /* 使用圓弧狀的邊角 */
+    border-radius: 25px;
+    /* 使用圓弧狀的邊角 */
     color: #fff;
-    background-color: #ed786a; /* 使用主色系的顏色 */
+    background-color: #ed786a;
+    /* 使用主色系的顏色 */
     cursor: pointer;
     margin: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-  }
-  .btnrbt:hover {
-    background-color: #ce5d4f; /* 使用稍微深一些的色調 */
-  }
-  .btnrbt:active {
-    background-color: #b35447; /* 使用更深的色調 */
-  }
-  .stylerbt {
+}
+
+.btnrbt:hover {
+    background-color: #ce5d4f;
+    /* 使用稍微深一些的色調 */
+}
+
+.btnrbt:active {
+    background-color: #b35447;
+    /* 使用更深的色調 */
+}
+
+.stylerbt {
     font-size: 24px;
     padding: 10px 20px;
-    border-radius: 25px; /* 使用圓弧狀的邊角 */
+    border-radius: 25px;
+    /* 使用圓弧狀的邊角 */
     color: #fff;
-    background-color: #ed786a; /* 使用主色系的顏色 */
+    background-color: #ed786a;
+    /* 使用主色系的顏色 */
     margin: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .button-container3 {
+}
+
+.button-container3 {
     justify-content: space-between;
     align-items: center;
     background-color: #e0dede;
     padding: 3px;
-    width: 100%
-    margin: 10px; /* 左右間距，增加間距 */
-    border: 1px solid #ccc; /* 加上邊框 */
-    border-radius: 8px; /* 添加圓角 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
-  }
+    width: 100% margin: 10px;
+    /* 左右間距，增加間距 */
+    border: 1px solid #ccc;
+    /* 加上邊框 */
+    border-radius: 8px;
+    /* 添加圓角 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 添加陰影效果 */
+}
 
-  .robot-box-container {
+.robot-box-container {
     gap: 20px;
-  }
+}
 
-  .robot-box {
+.robot-box {
     border: 2px solid #ed786a;
     border-radius: 10px;
     width: 100px;
@@ -8598,32 +8675,38 @@ button.close {
     justify-content: center;
     background-color: #fff;
     transition: background-color 0.2s ease;
-  }
+}
 
-  .robot-box:hover {
+.robot-box:hover {
     background-color: rgba(237, 120, 106, 0.1);
-  }
-  #test::-webkit-scrollbar {
-    width: 0; /* 隐藏垂直滚动条 */
-    height: 0; /* 隐藏水平滚动条 */
-  }
-  .loading-icon {
+}
+
+#test::-webkit-scrollbar {
+    width: 0;
+    /* 隐藏垂直滚动条 */
+    height: 0;
+    /* 隐藏水平滚动条 */
+}
+
+.loading-icon {
     width: 40px;
     height: 40px;
     border: 4px solid #ccc;
     border-top: 4px solid #ed786a;
     border-radius: 50%;
     animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
+
 /*# sourceMappingURL=bootstrap.min.css.map */
 .rectangle {
     width: 180px;
@@ -8635,20 +8718,20 @@ button.close {
     position: relative;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
-  }
+}
 
-  .rectangle:hover {
+.rectangle:hover {
     transform: translateY(-5px);
-  }
+}
 
-  .trend-arrow {
+.trend-arrow {
     position: absolute;
     bottom: 10px;
     right: 10px;
     font-size: 18px;
-  }
+}
 
-  .box {
+.box {
     border: 1px solid #ccc;
     padding: 20px;
     margin: 20px;
@@ -8659,24 +8742,26 @@ button.close {
 #lineChart {
     width: 100%;
     max-width: 600px;
-    max-height:300px; 
+    max-height: 300px;
 }
+
 #pieChart {
     width: 100%;
     max-width: 800px;
-    max-height:300px; 
+    max-height: 300px;
 }
+
 #salesChart {
     width: 100%;
     max-width: 600px;
-    max-height:300px; 
+    max-height: 300px;
 }
 
 .type_choose {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 15px; 
+    border-radius: 15px;
     background-color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -8690,12 +8775,14 @@ button.close {
     box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.5);
     outline: none;
 }
+
 .dataAna {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
-    border-radius: 20px; /* 圆弧效果 */
-    background-color:#ed786a;
+    border-radius: 20px;
+    /* 圆弧效果 */
+    background-color: #ed786a;
     color: white;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -8706,6 +8793,7 @@ button.close {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
+
 .rectangle1 {
     width: 90px;
     height: 45px;
@@ -8724,11 +8812,12 @@ button.close {
 .rectangle1:hover {
     transform: translateY(-5px);
 }
+
 .type_choose1 {
     padding: 10px;
     font-size: 8px;
     border: 1px solid #ccc;
-    border-radius: 10px; 
+    border-radius: 10px;
     background-color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -8736,18 +8825,27 @@ button.close {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.text-container1 {  /* 商品框框 */
+.text-container1 {
+    /* 商品框框 */
     vertical-align: top;
-    border: 1px solid #ccc; /* 添加邊框 */
-    padding-top: 10px; 
-    padding-bottom: 5px; 
-    background-color: #f7f7f7; /* 添加背景顏色 */
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* 添加陰影效果 */
-    border-radius: 5px; /* 添加圓角 */
-    margin-top: 0px; /* 添加上方間距 */
-    margin-left: 10px; /* 左邊距 */
-    margin-right: 10px; /* 右邊距 */
+    border: 1px solid #ccc;
+    /* 添加邊框 */
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: #f7f7f7;
+    /* 添加背景顏色 */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    /* 添加陰影效果 */
+    border-radius: 5px;
+    /* 添加圓角 */
+    margin-top: 0px;
+    /* 添加上方間距 */
+    margin-left: 10px;
+    /* 左邊距 */
+    margin-right: 10px;
+    /* 右邊距 */
 }
+
 .top-bar-1 {
     background-color: #333;
     color: #fff;
@@ -8757,22 +8855,43 @@ button.close {
 .navbar-nav66 li {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 10px; /* 可根据需要调整间距 */
+    margin-right: 10px;
+    /* 可根据需要调整间距 */
 }
 
 .custom-link {
-    
-   
-    padding: 5px 10px; /* Add padding around the text */
-        
-       
-    background-color: #fac0b9; /* Set a background color */
-        color: #fff; /* Set text color to white */
-        
-       
-    text-decoration: none; /* Remove underline from links */
-        
-       
-    border-radius: 5px; /* Add rounded corners */
-        font-weight: bold; /* Make the text bold */
-    }
+
+
+    padding: 5px 10px;
+    /* Add padding around the text */
+
+
+    background-color: #fac0b9;
+    /* Set a background color */
+    color: #fff;
+    /* Set text color to white */
+
+
+    text-decoration: none;
+    /* Remove underline from links */
+
+
+    border-radius: 5px;
+    /* Add rounded corners */
+    font-weight: bold;
+    /* Make the text bold */
+}
+
+.dashed-divider {
+    border-bottom: 1px dashed #c2c2c2;
+    margin-bottom: 10px;
+    /* 設置上邊距，以確保有足夠的間隔 */
+    padding-bottom: 10px;
+    /* 可選：設置內容區域的上內邊距 */
+    padding-top: 10px;
+    /* 可選：設置內容區域的上內邊距 */
+}
+
+
+.white-space: nowrap;
+overflow-x: auto;

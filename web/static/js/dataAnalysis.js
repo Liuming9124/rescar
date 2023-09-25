@@ -144,7 +144,7 @@ geturls(sttime, endtime, "day")
         var html = `
             <h4>本日累積來客桌次</h4>
             ${thisData1}
-            <span class="trend-arrow">?</span>
+            <span class="trend-arrow">↑</span>
         `;
 
         var element = document.getElementById('cusCountDay');
