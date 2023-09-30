@@ -279,13 +279,24 @@ function getSalesValue() {
             var element = document.getElementById('revenueForm')
             element.innerHTML = html;
             // Line Chart Data
-            var labels = [];
-            var data1 = [];
-            var lineChart = null;
-            var canvas = document.getElementById('lineChart'); // Get the canvas element
+           
             
             // Function to create or update the chart
             function createOrUpdateChart() {
+                var canvas = document.getElementById('lineChart'); // Get the canvas element
+                
+                // Check if a chart instance already exists and destroy it
+                var existingChart = Chart.getChart(canvas);
+                if (existingChart) {
+                    console.log("Existing Chart Instance:", existingChart);
+                    existingChart.destroy();
+                    console.log("Chart Destroyed");
+                }
+                var labels = [];
+                var data1 = [];
+                var lineChart = null;
+                
+                var canvas = document.getElementById('lineChart'); // Get the canvas element
                 for (var i = 0; i < dataArray2.length; i++) {
                     labels.push(dataArray2[i][0]);
                     data1.push(dataArray2[i][1]);
@@ -302,16 +313,18 @@ function getSalesValue() {
                 };
             
                 // Check if a chart instance already exists and destroy it
-                if (lineChart) {
-                    lineChart.destroy();
-                }
-            
+                
+                
+                
                 // Create a new Chart instance
                 lineChart = new Chart(canvas, {
                     type: 'line',
                     data: lineData,
-                    options: {}
+                    options: {},
+                    // Add this line to set a unique ID for the chart
+                    id: 'lineChartInstance'
                 });
+                
             }
             
             // Call the function to create or update the chart
