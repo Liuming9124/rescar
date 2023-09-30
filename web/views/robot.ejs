@@ -35,33 +35,33 @@
 		</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 		</nav>
-		<div class="container" >
-			<div class="container">
-				<h2>待派送餐點</h2>
+		<div class="container">
+			<form>
+			<h2>待派送餐點</h2>
 				<ul id="myTab1" class="nav nav-tabs">
 				</ul>
 				<div class="row">
-					<div class="col-xs-10" >
+					<div class="col-xs-10">
 						<div class="scroll-arrows" style="overflow-x: scroll;">
 							<div class="flex" id="test" style="display: flex;">
-							<% for (var i = 0; i < 12; i++) { %>
-							  <div style="width: 100px;">
-								<a href="#" class="warning-text robot-box loading">
-								  載入中
-								</a>
-							  </div>&nbsp&nbsp&nbsp&nbsp
-							<% } %>
+								<% for (var i=0; i < 12; i++) { %>
+									<div style="width: 100px;">
+										<a href="#" class="warning-text robot-box loading">
+											載入中
+										</a>
+									</div>&nbsp&nbsp&nbsp&nbsp
+									<% } %>
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-2" >
+					<div class="col-xs-2">
 						<div class="scroll-arrows">
-							<button class="robot-box1" id="deliver" style="justify-content: center;
-							align-items: center;" ><span>送餐</span></button>
+							<button class="robot-box1"  id="deliver"  onclick=" "style="justify-content: center; align-items: center;">
+								<span>送餐</span>
+							</button>
 						</div>
 					</div>
-				</div>	
-				
+				</form>
 			</div>
 			<br>
 			<!-- Features -->
@@ -72,44 +72,48 @@
 							<%if (0){ %>
 								<div class="stylerbt">空閒中</div>
 								<%} %>
-							<%if (1){ %>
-								<div id="robotStatus" class="stylerbt warning-text">移動中</div>
-							<%} %>
-							<div style="width:440px; height: 305px;">
-								
-							</div>
-							<br><br><br>
-							<!-- Feature -->
-							<header>
-								<button type="button" class="btnrbt" onclick="alert('已暫停')">緊急暫停</button>
-								<button type="button" class="btnrbt" onclick="alert('機器人回家中')">回到原位</button>
-							</header>
+									<%if (1){ %>
+										<div id="robotStatus" class="stylerbt warning-text">移動中</div>
+										<%} %>
+											<div style="width:440px; height: 305px;">
+
+											</div>
+											<br><br><br>
+											<!-- Feature -->
+											<header>
+												<button type="button" class="btnrbt"
+													onclick="alert('已暫停')">緊急暫停</button>
+												<button type="button" class="btnrbt"
+													onclick="alert('機器人回家中')">回到原位</button>
+											</header>
 						</div>
 						<div class="right ">
 							<div class="scrolling-container" style="height: 500px; overflow-y: scroll;">
 								<% var ring=0 ; %>
 									<% for (var i=0 ; i < 6 ; i++) { %>
-											<div class="button-container"   >
-												<!-- Feature -->
-												<div  id="table<%=i%>" style="width: 45px; " >
-													<a class="warning-text-ring" data-toggle="modal" data-target="Modalring"
-														 >
-														 <div class="loading-icon"></div>
-													</a>
-												</div>
-												
-												<div class="tablestyle3" style="width: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-													<h4>第 <%=i+1%> 桌</h4>
-												</div>
-												<div id="tabledetail<%=i%>" class="flex">
-													<a href="#">
-														<h5>
-															<div href="#" data-toggle="modal"data-target="#Modalrecord" style="width: 110px; ">訂單皆已送餐</div>
-														</h5>
-													</a>
-													<!--<div><button type="button" class="btn">送餐</button></button></div>-->
-												</div>		
+										<div class="button-container">
+											<!-- Feature -->
+											<div id="table<%=i%>" style="width: 45px; ">
+												<a class="warning-text-ring" data-toggle="modal"
+													data-target="Modalring">
+													<div class="loading-icon"></div>
+												</a>
 											</div>
+
+											<div class="tablestyle3"
+												style="width: 130px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+												<h4>第 <%=i+1%> 桌</h4>
+											</div>
+											<div id="tabledetail<%=i%>" class="flex">
+												<a href="#">
+													<h5>
+														<div href="#" data-toggle="modal" data-target="#Modalrecord"
+															style="width: 110px; ">訂單皆已送餐</div>
+													</h5>
+												</a>
+												<!--<div><button type="button" class="btn">送餐</button></button></div>-->
+											</div>
+										</div>
 										<% }%>
 							</div>
 						</div>
@@ -275,29 +279,31 @@
 		var element = document.getElementById('Modalring')
 		element.innerHTML = html;
 	}
-	
+
 </script>
 <style>
 	/* 添加箭頭樣式 */
 	.scroll-arrows::before,
 	.scroll-arrows::after {
-	  content: "";
-	  display: block;
-	  width: 20px;
-	  height: 20px;
-	  background: url("arrow.png") no-repeat center center; /* 箭頭圖片替換為實際圖片的 URL */
+		content: "";
+		display: block;
+		width: 20px;
+		height: 20px;
+		background: url("arrow.png") no-repeat center center;
+		/* 箭頭圖片替換為實際圖片的 URL */
 	}
-  
+
 	/* 左側箭頭 */
 	.scroll-arrows::before {
-	  transform: rotate(180deg); /* 旋轉箭頭方向 */
-	  margin-right: 10px;
+		transform: rotate(180deg);
+		/* 旋轉箭頭方向 */
+		margin-right: 10px;
 	}
-  
+
 	/* 右側箭頭 */
 	.scroll-arrows::after {
-	  margin-left: 10px;
+		margin-left: 10px;
 	}
-  </style>
+</style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../static/js/ring.js"></script>

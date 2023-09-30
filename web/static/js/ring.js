@@ -52,7 +52,7 @@ function fetchData() {
                 console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
                 html += `
                 <div style="text-align: center;">
-                    <button class="robot-box" id="robot-box-${data[i].orderid}" onclick="toggleColor(this)">
+                    <button class="robot-box"type="robot-box-${data[i].orderid}"  name="robot-box-${data[i].orderid}" id="robot-box-${data[i].orderid}" onclick="toggleColor(this)">
                         <span>
                             內用${data[i].table}桌<br>
                             訂單編號<br>${data[i].orderid}
