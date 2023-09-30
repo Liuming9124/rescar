@@ -28,7 +28,6 @@
 					<a href="orderrecord.html">
 						<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
 						<span>&nbsp;&nbsp;訂單狀態</span>
-						<span id="tag">2</span>
 					</a>
 				</li>
 
@@ -41,18 +40,30 @@
 				<h2>待派送餐點</h2>
 				<ul id="myTab1" class="nav nav-tabs">
 				</ul>
-				<div class="scroll-arrows" style="overflow-x: scroll;">
-					<div class="flex" id="test" style="display: flex;">
-					<% for (var i = 0; i < 12; i++) { %>
-					  <div style="width: 100px;">
-						<a href="#" class="warning-text robot-box loading">
-						  載入中
-						</a>
-					  </div>&nbsp&nbsp&nbsp&nbsp
-					<% } %>
+				<div class="row">
+					<div class="col-xs-10" >
+						<div class="scroll-arrows" style="overflow-x: scroll;">
+							<div class="flex" id="test" style="display: flex;">
+							<% for (var i = 0; i < 12; i++) { %>
+							  <div style="width: 100px;">
+								<a href="#" class="warning-text robot-box loading">
+								  載入中
+								</a>
+							  </div>&nbsp&nbsp&nbsp&nbsp
+							<% } %>
+							</div>
+						</div>
 					</div>
-				</div>
+					<div class="col-xs-2" >
+						<div class="scroll-arrows">
+							<button class="robot-box1" id="deliver" style="justify-content: center;
+							align-items: center;" ><span>送餐</span></button>
+						</div>
+					</div>
+				</div>	
+				
 			</div>
+			<br>
 			<!-- Features -->
 			<section id="features">
 				<div class="container">
@@ -264,6 +275,7 @@
 		var element = document.getElementById('Modalring')
 		element.innerHTML = html;
 	}
+	
 </script>
 <style>
 	/* 添加箭頭樣式 */

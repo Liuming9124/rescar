@@ -8252,7 +8252,7 @@ button.close {
     text-align: center;
     display: block;
     margin: 0 auto;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: #ed786a;
     border: none;
     color: #FFFFFF;
@@ -8288,6 +8288,7 @@ button.close {
     opacity: 1;
     right: 0;
 }
+
 
 .buttonsearch {
     text-align: center;
@@ -8656,11 +8657,7 @@ button.close {
     /* 添加陰影效果 */
 }
 
-.robot-box-container {
-    gap: 20px;
-}
-
-.robot-box {
+[id^="robot-box-"] {
     border: 2px solid #ed786a;
     border-radius: 10px;
     width: 100px;
@@ -8669,18 +8666,33 @@ button.close {
     font-family: Arial, sans-serif;
     font-weight: bold;
     color: #ed786a;
-    text-decoration: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #fff;
-    transition: background-color 0.2s ease;
 }
 
-.robot-box:hover {
-    background-color: rgba(237, 120, 106, 0.1);
-}
+[id^="robot-box-"]:active {
+    background-color: #ed786a;
+    color: #fff;
+  }
 
+.robot-box1 {
+    border: 2px solid #ed786a;
+    border-radius: 10px;
+    width: 50px;
+    height: 100px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    background-color: #ed786a; 
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #test::-webkit-scrollbar {
     width: 0;
     /* 隐藏垂直滚动条 */

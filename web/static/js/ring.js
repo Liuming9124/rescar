@@ -49,14 +49,16 @@ function fetchData() {
                     
             for (i = 0; i < data.length; i++) {
                 JSON.stringify(data)
-                console.log(data); 
+                console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
                 html += `
-                        <div style="width: 100px; " >
-                            <a  class="robot-box" onclick=robotRun('${data[i].orderid}','${data[i].table}')>
-                                內用${data[i].table}桌<br>
-                                訂單編號<br>${data[i].orderid}
-                            </a>
-                        </div>&nbsp&nbsp&nbsp&nbsp
+                <div style="text-align: center;">
+                    <button class="robot-box" id="robot-box-${data[i].orderid}" onclick="toggleColor(this)">
+                        <span>
+                            內用${data[i].table}桌<br>
+                            訂單編號<br>${data[i].orderid}
+                        </span>
+                    </button>
+                </div>&nbsp&nbsp&nbsp&nbsp
                         
                 `
             }
@@ -141,7 +143,18 @@ function robotStatus(){
         alert(e);
     }
 }
+function toggleColor(button) {
+    const currentColor = button.style.backgroundColor;
+    const defaultColor = 'rgb(255, 255, 255)';
 
+    if (currentColor === defaultColor || currentColor === '') {
+      button.style.backgroundColor = "#fcb9b1";
+      button.style.color = "#fff";
+    } else {
+      button.style.backgroundColor = defaultColor;
+      button.style.color = "#ed786a";
+    }
+  }
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
 
 // // Event handler for WebSocket messages
