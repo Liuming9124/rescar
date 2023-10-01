@@ -213,6 +213,12 @@ const robotController = {
             console.error(error);
             res.send('Internal Server Error');
         }
+    },
+    deliverFood: (req, res) => {
+        // 獲取從前端發送的訂單編號
+        const selectedOrders = req.body.selectedOrders || [];
+
+        res.status(200).json({ message: 'Delivery successful', selectedOrders });
     }
 }
 

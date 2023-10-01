@@ -8673,10 +8673,6 @@ button.close {
     background-color: #fff;
 }
 
-[id^="robot-box-"]:active {
-    background-color: #ed786a;
-    color: #fff;
-  }
 
 .robot-box1 {
     border: 2px solid #ed786a;
@@ -8903,7 +8899,20 @@ button.close {
     padding-top: 10px;
     /* 可選：設置內容區域的上內邊距 */
 }
-
+[id^="order-"] {
+    /* 添加一些基本的樣式 */
+    margin-right: 5px;
+    transform: scale(1.5); /* 調整大小 */
+    /* 添加一些選中和未選中時的樣式 */
+  }
+  
+  [id^="order-"]:checked {
+    /* 添加選中時的樣式 */
+    background-color: #ed786a;
+    color: #fff;
+    /* 你可以根據需要進行其他樣式設置 */
+  }
+  
 
 .white-space: nowrap;
 overflow-x: auto;

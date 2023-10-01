@@ -52,11 +52,14 @@ function fetchData() {
                 console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
                 html += `
                 <div style="text-align: center;">
-                    <button class="robot-box"type="robot-box-${data[i].orderid}"  name="robot-box-${data[i].orderid}" id="robot-box-${data[i].orderid}" onclick="toggleColor(this)">
-                        <span>
-                            內用${data[i].table}桌<br>
-                            訂單編號<br>${data[i].orderid}
-                        </span>
+                    <input type="checkbox" name="selectedOrders[]" id="order-${data[i].orderid}" value="${data[i].orderid}">
+                    <button class="robot-box"  id="robot-box-${data[i].orderid}" >
+                        <label for="order-${data[i].orderid}">
+                            <span>
+                                內用${data[i].table}桌<br>
+                                訂單編號<br>${data[i].orderid}
+                            </span>
+                        </label>
                     </button>
                 </div>&nbsp&nbsp&nbsp&nbsp
                         
@@ -143,18 +146,18 @@ function robotStatus(){
         alert(e);
     }
 }
-function toggleColor(button) {
-    const currentColor = button.style.backgroundColor;
-    const defaultColor = 'rgb(255, 255, 255)';
-
-    if (currentColor === defaultColor || currentColor === '') {
-      button.style.backgroundColor = "#fcb9b1";
-      button.style.color = "#fff";
-    } else {
-      button.style.backgroundColor = defaultColor;
-      button.style.color = "#ed786a";
-    }
-  }
+    //function toggleColor(button) {
+    //const currentColor = button.style.backgroundColor;
+    //const defaultColor = 'rgb(255, 255, 255)';
+    //console.log(`Clicked on button with orderId: ${orderId}`);
+    //if (currentColor === defaultColor || currentColor === '') {
+    //  button.style.backgroundColor = "#fcb9b1";
+    //  button.style.color = "#fff";
+    //} else {
+    //  button.style.backgroundColor = defaultColor;
+    //  button.style.color = "#ed786a";
+    //}
+    //}
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
 
 // // Event handler for WebSocket messages

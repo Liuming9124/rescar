@@ -10,6 +10,7 @@ router.get('/orderget', robotCtl.orderGet)
 router.post('/robotRun', robotCtl.robotRun);
 router.post('/robotCounter', robotCtl.robotCounter)
 router.get('/robotStatus', robotCtl.robotStatus)
+router.post('/deliverFood', robotCtl.deliverFood)
 
 
 module.exports = router
