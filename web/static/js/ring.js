@@ -39,6 +39,8 @@ function fetchData() {
         .catch(error => {
             console.error('Request failed: ', error);
         });
+}
+function fetchOrder() {
     // fetch orders to deliver
     fetch('/robot/orderGet')
         .then(response => response.json())
@@ -46,10 +48,10 @@ function fetchData() {
             // modify html content 
             var html = '';
             var element = document.getElementById(`test`);
-                    
+
             for (i = 0; i < data.length; i++) {
                 JSON.stringify(data)
-                console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
+                // console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
                 html += `
                 <div style="text-align: center;">
                     <input type="checkbox" name="selectedOrders[]" id="order-${data[i].orderid}" value="${data[i].orderid}">
@@ -75,7 +77,7 @@ function fetchData() {
                 }
             }
             for (var i = 1; i <= 6; i++) {
-                if(a[i] == 1){
+                if (a[i] == 1) {
                     html1 = `
                         <a href="#">
                             <h5>
@@ -84,7 +86,7 @@ function fetchData() {
                         </a>
                 `;
                 }
-                else{
+                else {
                     html1 = `
                         <a href="#">
                             <h5>
@@ -93,7 +95,7 @@ function fetchData() {
                         </a>    
                 `;
                 }
-                var element1 = document.getElementById(`tabledetail${i-1}`); // Replace "your-target-element" with the actual ID of the container where you want to display the generated HTML
+                var element1 = document.getElementById(`tabledetail${i - 1}`); // Replace "your-target-element" with the actual ID of the container where you want to display the generated HTML
                 element1.innerHTML = html1;
             }
         })
@@ -113,18 +115,18 @@ function robotRun(oid, table) {
             console.log(response);
             if (response.status == 200) {
                 alert('成功下達指令')
-            }else{
+            } else {
                 alert('下達指令失敗')
             }
-            
+
         })
         .catch(error => {
             console.error('Error occurred:', error);
             // Handle any errors that occurred during the fetch
         });
 }
-function robotStatus(){
-    try{
+function robotStatus() {
+    try {
         fetch(`/robot/robotStatus`, {
             method: 'Get',
             headers: {
@@ -135,29 +137,29 @@ function robotStatus(){
             .then(response => response.json())
             .then(data => {
                 // console.log(data)
-                document.getElementById('robotStatus').innerHTML= JSON.stringify(data);
+                document.getElementById('robotStatus').innerHTML = JSON.stringify(data);
             })
             .catch(error => {
-                console.log('Error occurred:', error);
-                document.getElementById('robotStatus').innerHTML= '機器人離線中';
+                // console.log('Error occurred:', error);
+                document.getElementById('robotStatus').innerHTML = '機器人離線中';
                 // Handle any errors that occurred during the fetch
             });
-    }catch(e){
+    } catch (e) {
         alert(e);
     }
 }
-    //function toggleColor(button) {
-    //const currentColor = button.style.backgroundColor;
-    //const defaultColor = 'rgb(255, 255, 255)';
-    //console.log(`Clicked on button with orderId: ${orderId}`);
-    //if (currentColor === defaultColor || currentColor === '') {
-    //  button.style.backgroundColor = "#fcb9b1";
-    //  button.style.color = "#fff";
-    //} else {
-    //  button.style.backgroundColor = defaultColor;
-    //  button.style.color = "#ed786a";
-    //}
-    //}
+//function toggleColor(button) {
+//const currentColor = button.style.backgroundColor;
+//const defaultColor = 'rgb(255, 255, 255)';
+//console.log(`Clicked on button with orderId: ${orderId}`);
+//if (currentColor === defaultColor || currentColor === '') {
+//  button.style.backgroundColor = "#fcb9b1";
+//  button.style.color = "#fff";
+//} else {
+//  button.style.backgroundColor = defaultColor;
+//  button.style.color = "#ed786a";
+//}
+//}
 // var socket = new WebSocket('ws://' + window.location.hostname + ':7000');
 
 // // Event handler for WebSocket messages
@@ -170,3 +172,31 @@ function robotStatus(){
 // set interval to call api every 1 seconds
 setInterval(fetchData, 1000);
 setInterval(robotStatus, 500);
+fetchOrder();
+
+
+// set interval to check if any checkbox is selected
+setInterval(function () {
+    // use a flag to indicate whether any checkbox is selected
+    let anySelected = false;
+
+    // run through all checkboxes
+    $("input[name='selectedOrders[]']").each(function () {
+        // check if checkbox is checked
+        if ($(this).is(":checked")) {
+            // checkbox is checked, set flag to true and stop the loop
+            anySelected = true;
+            return false; // stop the loop (break)
+        }
+    });
+
+    // according to the flag, enable/disable the button
+    if (anySelected) {
+        // at least one checkbox is checked
+        $("#selectElement").val("true");
+    } else {
+        // none of the checkboxes is checked
+        $("#selectElement").val("false");
+        fetchOrder();
+    }
+}, 1000); // 每秒执行一次
