@@ -106,8 +106,15 @@ getSales(sttime, endtime, "day")
         var currentMonthRevenue = currentDateData ? currentDateData[1] : 0;
         var lastMonthRevenue = lasttDateData ? lasttDateData[1] : 0;
 
-        var trendArrow = currentMonthRevenue >= lastMonthRevenue ? '↑' : '↓';
-
+        var trendArrow;
+        if (currentMonthRevenue > lastMonthRevenue) {
+            trendArrow = '↑';
+        } else if (currentMonthRevenue < lastMonthRevenue) {
+            trendArrow = '↓';
+        } else {
+            trendArrow = '-';
+        }
+        
         var html = `
             <h4>本日營業額</h4>
             <p>NT$${currentMonthRevenue} 元</p>
@@ -131,7 +138,18 @@ geturls(sttime, endtime, "day")
         var thisData11 = '';
         var temp = dataArray1.findIndex(item => item[0] === currentDate);
         var temp2 = dataArray1.findIndex(item => item[0] === lasttDate);
-
+        var trendArrow;         
+        //if (dataArray1[temp][1] !== 0 && dataArray1[temp2][1] !== 0) {
+        //    if (dataArray1[temp][1] > dataArray1[temp2][1]) {
+        //        trendArrow = '↑';
+        //    } else if (dataArray1[temp][1] < dataArray1[temp2][1]) {
+        //        trendArrow = '↓';
+        //    } else {
+        //       trendArrow = '-';
+        //    }
+        //} else {
+        //    trendArrow = '-'; // or any other default value indicating not applicable
+        //} 
         if (temp !== -1) {
             thisData1 += `<p>${dataArray1[temp][1]} 桌</p>`;
         }
@@ -144,8 +162,8 @@ geturls(sttime, endtime, "day")
         var html = `
             <h4>本日累積來客桌次</h4>
             ${thisData1}
-            <span class="trend-arrow">↑</span>
-        `;
+            <span class="trend-arrow">trendArrow</span>
+            `;
 
         var element = document.getElementById('cusCountDay');
         element.innerHTML = html;
@@ -154,7 +172,7 @@ geturls(sttime, endtime, "day")
         console.error(error); // 處理錯誤
     });
 
-//格子3&5
+//格子3&4
 getSales(sttime, endtime, "month")
     .then(data => {
         //console.log(data); // 處理返回的數據
@@ -188,7 +206,7 @@ getSales(sttime, endtime, "month")
         console.error(error); // 處理錯誤
     });
 
-//格子4
+//格子5
 geturls(sttime, endtime, "month")
     .then(data => {
        // console.log(data); // 處理返回的數據
@@ -577,3 +595,11 @@ var searchButton1 = document.getElementById("search1");
 searchButton1.addEventListener("click", handleButtonClick2);
 
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    // 在頁面載入完成後執行
+    getSalesValue();
+});
+
+
+  

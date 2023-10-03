@@ -54,7 +54,7 @@ function fetchOrder() {
                 // console.log(data);  //onclick=robotRun('${data[i].orderid}','${data[i].table}')
                 html += `
                 <div style="text-align: center;">
-                    <input type="checkbox" name="selectedOrders[]" id="order-${data[i].orderid}" value="${data[i].orderid}">
+                    <input type="checkbox" name="selectedOrders[]" id="order-${data[i].orderid}" value="id:${data[i].orderid},table:${data[i].table}">
                     <button class="robot-box"  id="robot-box-${data[i].orderid}" >
                         <label for="order-${data[i].orderid}">
                             <span>
