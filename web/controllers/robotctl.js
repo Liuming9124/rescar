@@ -207,7 +207,7 @@ const robotController = {
                 console.log(word);
                 res.send(JSON.stringify(word))
             }).catch(error => {
-                console.error('robotStatus error');
+                // console.error('robotStatus error');
             });
         }catch(error){
             console.error(error);
