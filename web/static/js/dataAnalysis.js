@@ -138,18 +138,19 @@ geturls(sttime, endtime, "day")
         var thisData11 = '';
         var temp = dataArray1.findIndex(item => item[0] === currentDate);
         var temp2 = dataArray1.findIndex(item => item[0] === lasttDate);
-        var trendArrow;         
-        //if (dataArray1[temp][1] !== 0 && dataArray1[temp2][1] !== 0) {
-        //    if (dataArray1[temp][1] > dataArray1[temp2][1]) {
-        //        trendArrow = '↑';
-        //    } else if (dataArray1[temp][1] < dataArray1[temp2][1]) {
-        //        trendArrow = '↓';
-        //    } else {
-        //       trendArrow = '-';
-        //    }
-        //} else {
-        //    trendArrow = '-'; // or any other default value indicating not applicable
-        //} 
+        var trendArrow;    
+        //console.log('temp',temp2);
+        if (temp2 !== -1) {
+            if (dataArray1[temp][1] > dataArray1[temp2][1]) {
+                trendArrow = '↑';
+           } else if (dataArray1[temp][1] < dataArray1[temp2][1]) {
+                trendArrow = '↓';
+            } else {
+               trendArrow = '-';
+            }
+        } else {
+            trendArrow = '-'; // or any other default value indicating not applicable
+        } 
         if (temp !== -1) {
             thisData1 += `<p>${dataArray1[temp][1]} 桌</p>`;
         }
@@ -162,7 +163,7 @@ geturls(sttime, endtime, "day")
         var html = `
             <h4>本日累積來客桌次</h4>
             ${thisData1}
-            <span class="trend-arrow">trendArrow</span>
+            <span class="trend-arrow">${trendArrow}</span>
             `;
 
         var element = document.getElementById('cusCountDay');
