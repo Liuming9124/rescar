@@ -76,7 +76,7 @@ const robotController = {
             })
     },
     robotRun: (req, res) => {
-        const jsonData = JSON.stringify({ 'start': 0, 'stop': [req.body.table] });
+        const jsonData = JSON.stringify({ 'start': -1, 'stop': [req.body.table] }); // start -1 means counter
         // read config.json
         const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
         console.log(config.robotport, config.robotip)
@@ -204,7 +204,7 @@ const robotController = {
             });
             promise.then(data => {
                 const word = JSON.parse(data); // extract the word from the response body
-                console.log(word);
+                // console.log(word);
                 res.send(JSON.stringify(word))
             }).catch(error => {
                 // console.error('robotStatus error');
@@ -214,11 +214,81 @@ const robotController = {
             res.send('Internal Server Error');
         }
     },
-    deliverFood: (req, res) => {
+    deliverFood: async (req, res) => {
         // 獲取從前端發送的訂單編號
-        const selectedOrders = req.body.selectedOrders || [];
+        const jsonData = req.body.selectedOrders;// {"message":"Delivery successful","selectedOrders":["id:264,table:1","id:253,table:6"]}
+        const runTable = [];
+        const updateOrder = [];
+        await jsonData.forEach(order => {
+            const parts = order.split(',');
+            const id = parts[0].split(':')[1];
+            const table = parts[1].split(':')[1];
+            // console.log(`ID: ${id}, Table: ${table}`); 
+            runTable.push(table);
+            updateOrder.push(id);
+        });
+        // console.log(runTable, updateOrder);
 
-        res.status(200).json({ message: 'Delivery successful', selectedOrders });
+        const uniqueRunTable = [...new Set(runTable)];
+        const runData = JSON.stringify({ 'start': 0, 'stop': uniqueRunTable }); //start 0 means kitchen
+        // read config.json
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        console.log(config.robotport, config.robotip)
+        const options = {
+            hostname: config.robotip,
+            port: config.robotport,
+            path: '/robotRun',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // Set the content type header for JSON data
+                'Content-Length': runData.length // Set the content length header
+            }
+        };
+        const promise = new Promise((resolve, reject) => {
+            const request = http.request(options, response => {
+                // console.log(`statusCode: ${response.statusCode}`);
+                let data = '';
+                response.on('data', chunk => {
+                    data += chunk;
+                });
+                response.on('end', () => {
+                    resolve(data);
+                });
+            });
+            request.on('error', error => {
+                reject(error);
+                res.status(500).send('Internal Server Error');
+            });
+            request.write(runData);
+            request.end();
+        });
+
+        promise.then(data => {
+            const word = JSON.parse(data); // extract the word from the response body
+            console.log(word);
+        }).catch(error => {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }).then(async () => {
+            console.log(updateOrder)
+            await updateOrder.forEach(id => {
+                console.log('merchant update order :', id)
+                // console.log(req.params.table)
+                var session = db.session()
+                session
+                    .run(`MATCH (o:order) WHERE ID(o) = ${id} SET o.status = o.status+1 return o`)
+                    .catch(error => {
+                        console.log('updateOrder error:', error)
+                    })
+                    .finally(() => {
+                        session.close();
+                    });
+            });
+        }).catch(error => {
+            console.error("Unhandled promise rejection:", error);
+        });
+        // res.status(200).json({ message: 'Delivery successful' });
+        res.redirect('/robot');
     }
 }
 
