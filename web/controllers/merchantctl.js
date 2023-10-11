@@ -30,7 +30,7 @@ const merchantController = {
         let morder = []
         session = db.session()
         session
-            .run(`match(u:url)-[:order]->(o:order) return (o) order by o.time desc`)
+            .run(`match(u:url)-[:order]->(o:order) where o.status!='4' return (o) order by o.time desc`)
             .then(result => {
                 // 依序抓取回傳的節點
                 result.records.forEach(record => {
