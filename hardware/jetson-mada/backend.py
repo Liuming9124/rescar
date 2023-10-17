@@ -29,10 +29,15 @@ class ENV(BaseModel):
     location: LOCATION
 
 
-class Task(BaseModel):
-    start: int
-    stop: list
-    # end: int
+# class Task():
+#     start: int
+#     stop: list
+#     # end: int
+
+class Task:
+    def __init__(self, start, stop):
+        self.start = start
+        self.stop = stop
 
 
 cap = cv2.VideoCapture(0)
@@ -95,8 +100,10 @@ def wait_button():
 async def startup_event():
     signal.signal(signal.SIGINT, signal_handler)
 
+# robotStatus
 
-@app.get("/get_info")
+
+@app.get("/robotStatus")
 async def get_info():
     global current_pos, next_pos, on_task, next_stop
     status = "Moving" if on_task else "Ready"
@@ -104,11 +111,12 @@ async def get_info():
         sr04_active = 1 if sr04.distance < 30 else 0
     else:
         sr04_active = 0
-    return json.dumps({"status": status, "current_position": current_pos, "next_pos": next_pos, "battery": INA219.get_battery_info(),
+    return json.dumps({"status": status, "current_position": current_pos, "next_position": next_pos, "battery": INA219.get_battery_info(),
                        "sr04_active": sr04_active, "next_stop": next_stop})
 
 
-@app.post("/sendmap")
+# @app.post("/sendmap")
+@app.post("/mapSet")
 async def bulid_env(Env: ENV):
     global env, coor_map
     env = Env
@@ -119,21 +127,37 @@ async def bulid_env(Env: ENV):
     print(env.location.table)
     return "OK"
 
+# robotRun
 
-@app.post("/sendtask")
-async def get_task(task: Task):
-    if not env:
-        return "Environment unset, please send the map first"
 
-    now = datetime.datetime.now(
-        tz=datetime.timezone(datetime.timedelta(hours=8)))
-    time = '[%s GMT+0800 (台北標準時間)]' % now.strftime('%a %b %d %Y %H:%M:%S')
-    cmd = {"start": task.start, "stop": task.stop}
-    with open("log.txt", "a") as logfile:
-        logfile.write(
-            time + json.dumps({"logs": "receive", "cmd": cmd}) + "\n")
-    tasks_que.put(task)
-    return "OK"
+@app.post("/robotRun")
+# async def get_task(task:Task):
+async def get_task(request: Request):
+    try:
+        req_json = await request.json()
+        print(req_json.keys())
+        if not env:
+            return "Environment unset, please send the map first"
+
+        now = datetime.datetime.now(
+            tz=datetime.timezone(datetime.timedelta(hours=8)))
+        time = '[%s GMT+0800 (台北標準時間)]' % now.strftime('%a %b %d %Y %H:%M:%S')
+
+        # cmd = {"start": task.start, "stop": task.stop}
+       # print('check1')
+        with open("log.txt", "a") as logfile:
+            logfile.write(
+                time + json.dumps({"logs": "receive", "cmd": req_json}) + "\n")
+       # print('check2')
+        task = Task(req_json['start'], req_json['stop'])
+       # print('check3')
+        print(req_json['stop'])
+        print(req_json['start'])
+
+        tasks_que.put(task)
+        return {"response": "success"}
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
 
 
 def do_task():
@@ -147,6 +171,7 @@ def do_task():
                 # start = (0, 0)
                 start = coor_map[task.start]
                 stops = [tuple(env.location.table[str(_)]) for _ in task.stop]
+                print(stops)
                 next_stop_idx = 0
                 next_stop = stops[next_stop_idx]
 

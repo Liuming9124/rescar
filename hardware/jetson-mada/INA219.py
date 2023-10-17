@@ -205,7 +205,7 @@ def get_battery_info():
         p = 100
     if (p < 0):
         p = 0
-    return "Percent: {:3.1f}%".format(p)
+    return "{:3.1f}%".format(p)
 
 
 if __name__ == '__main__':
