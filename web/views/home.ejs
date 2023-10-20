@@ -41,11 +41,11 @@
 				<A Name="a<%=i%><%=j%>"></A><!--每個餐點-->
 				<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
 				<div class="row itemlist text-container1">
-					<div class="col-xs-4 image-text-container">
-						<img src="images/food/<%=menu.find(item=> item.name === menu[i].name).items[j].image %>" width="100%">
+					<div class="col-xs-5 image-text-container">
+						<img src="images/food/<%=menu.find(item=> item.name === menu[i].name).items[j].image %>" width="80%">
 						<p class="h5 text-left"><%=menu.find(item=> item.name === menu[i].name).items[j].name %></p>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-">
 						&nbsp
 					</div>
 					<div class="col-xs-6">

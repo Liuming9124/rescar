@@ -8717,7 +8717,7 @@ button.close {
 
 /*# sourceMappingURL=bootstrap.min.css.map */
 .rectangle {
-    width: 180px;
+    width: 200px;
     height: 90px;
     background-color: #ffffff;
     border: 1px solid #ccc;
@@ -8916,3 +8916,37 @@ button.close {
 
 .white-space: nowrap;
 overflow-x: auto;
+
+.product {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.highlight {
+    width: 30px;
+    height: 30px;
+    background-color: #ed786a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .white-text {
+    color: white;
+  }
+  .highlight2 {
+    height: 30px;
+    background-color: #fac0b9;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px; /* 調整內邊距的數值，上下左右都是10px，你可以根據需要調整 */
+    width: auto; /* 根據內容自動調整寬度 */
+  }
+  .dark-text {
+    color: #25243f;
+  }

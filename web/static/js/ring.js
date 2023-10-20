@@ -81,7 +81,7 @@ function fetchOrder() {
                     html1 = `
                         <a href="#">
                             <h5>
-                            <div href="#" class="warning-text" data-toggle="modal"data-target="#Modalrecord" style="width: 110px;">尚有未送餐</div>
+                            <div href="#" class="warning-text" style="width: 110px;">尚有未送餐</div>
                             </h5>
                         </a>
                 `;
@@ -90,7 +90,7 @@ function fetchOrder() {
                     html1 = `
                         <a href="#">
                             <h5>
-                                <div href="#" data-toggle="modal"data-target="#Modalrecord" style="width: 110px;">訂單皆已送餐</div>
+                                <div href="#" style="width: 110px;">訂單皆已送餐</div>
                             </h5>
                         </a>    
                 `;

@@ -208,27 +208,27 @@ getSales(sttime, endtime, "month")
     });
 
 //格子5
-geturls(sttime, endtime, "month")
+getObjectSales(sttime, endtime, "month")
     .then(data => {
-       // console.log(data); // 處理返回的數據
-        show = data
-        var dataArray1 = Object.entries(show);
-        //console.log('格子3',dataArray1);
-        var thisData1 = '';
-        var thisData11 = '';
-        var temp = dataArray1.findIndex(item => item[0] === currentMonth);
-        var temp2 = dataArray1.findIndex(item => item[0] === lastMonth);
-
-        if (temp !== -1) {
-            thisData1 += `<p>${dataArray1[temp][1]} 桌</p>`;
-        }
-
-        thisData11 += `<span class="trend-arrow">${dataArray1[temp][1] >= dataArray1[temp2][1] ? '↑' : '↓'}</span>`;
-
+        //console.log(data); 
+        let saleOctober = data[currentMonth];
+        let saleTop = Object.entries(saleOctober).map(([item, quantity]) => [item, quantity]);
+        saleTop.sort((a, b) => b[1] - a[1]);
+        //console.log('sale',saleTop);
+        let topThreeItems = saleTop.slice(0, 5);
+        console.log(topThreeItems);
         var html = `
-            <h4>本月累積來客桌次</h4>
-            ${thisData1}
-            ${thisData11}
+            <h4>本月熱銷商品</h4>
+            <br>
+            <div style="display: flex; align-items: center;">
+            <div class="highlight"><span class="  glyphicon glyphicon-king white-text" aria-hidden="true"></span></div>&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[0][0]}:${topThreeItems[0][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="highlight"><span class="white-text">2</span></div>&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[1][0]}:${topThreeItems[1][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="highlight"><span class="white-text">3</span></div>&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[2][0]}:${topThreeItems[2][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <br><br>
         `;
 
         var element = document.getElementById('cusCount');
