@@ -72,19 +72,15 @@
 							<A Name="a<%=i%><%=j%>"></A><!--每個餐點-->
 							<a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>">
 								<div class="row itemlist text-container1">
-									<div class="col-xs-5 image-text-container">
+									<div class="col-xs-4 image-text-container">
 										<img src="images/food/<%=menu.find(item=> item.name === menu[i].name).items[j].image %>"
-											width="80%">
+											width="100%">
+										<p class="h5">NT$<%= menu.find(item=> item.name===menu[i].name).items[j].price.low %></p>
+									</div>
+									<div class="col-xs-7">
 										<p class="h5 text-left">
 											<%=menu.find(item=> item.name === menu[i].name).items[j].name %>
 										</p>
-									</div>
-									<div class="col-xs-1">
-										&nbsp
-									</div>
-									<div class="col-xs-6">
-										<p class="h5 text-right">NT$<%= menu.find(item=> item.name
-												===menu[i].name).items[j].price.low %></p>
 									</div>
 								</div>
 								<br>

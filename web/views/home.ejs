@@ -45,7 +45,7 @@
 						<img src="images/food/<%=menu.find(item=> item.name === menu[i].name).items[j].image %>" width="80%">
 						<p class="h5 text-left"><%=menu.find(item=> item.name === menu[i].name).items[j].name %></p>
 					</div>
-					<div class="col-xs-">
+					<div class="col-xs-1">
 						&nbsp
 					</div>
 					<div class="col-xs-6">
@@ -65,7 +65,7 @@
 								</button>
 								<h4 class="modal-title itemname" id="myModalLabel"><%=menu.find(item=> item.name === menu[i].name).items[j].name %></h4>
 								<p class="itemprice">NT$<%= menu.find(item=> item.name ===menu[i].name).items[j].price.low %></p>
-								<img src="images/food/<%=menu.find(item=> item.name ===menu[i].name).items[j].image %>" style="width: 100%; height: 100%;" alt="...">
+								<img src="images/food/<%=menu.find(item=> item.name ===menu[i].name).items[j].image %>" style=" border-radius: 10px;width: 100%; height: 100%;" alt="...">
 							</div>
 							<div class="modal-body">
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

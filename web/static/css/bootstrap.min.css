@@ -8198,7 +8198,7 @@ button.close {
     height: auto;
     border-radius: 10px;
     /* 給圖片添加輕微的圓角效果 */
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     /* 為圖片添加一些底部間距，以控制圖片和文本之間的距離 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* 添加陰影效果 */
