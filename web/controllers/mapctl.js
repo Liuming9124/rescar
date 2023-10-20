@@ -44,6 +44,23 @@ function processData(inputArray) {
 async function robotProcessData(data) {
     const reversedMaps = data.maps.map(row => row.map(value => (value === 0 ? 1 : 0)));
     data.maps = reversedMaps;
+
+    // Convert Obstacle to 1
+    var location = data.location;
+    var maps = data.maps;
+    for (const key in location) {
+        if (Array.isArray(location[key])) {
+            const [x, y] = location[key];
+            maps[x][y] = 1;
+        } else if (typeof location[key] === 'object') {
+            for (const tableKey in location[key]) {
+                const [x, y] = location[key][tableKey];
+                maps[x][y] = 1;
+            }
+        }
+    }
+    console.log(data);
+
     return data;
 }
 // 建立一個函式來執行寫入操作   
@@ -111,9 +128,9 @@ const mapController = {
         var maps = await functl.getDataFromNeo4j()
         // console.log('afterData:', maps)
         var showMaps = await functl.convertDataToInputArray(maps)
-        console.log('convertData:', showMaps)   
+        console.log('convertData:', showMaps)
         res.render('map', {
-            "maps":showMaps 
+            "maps": showMaps
         })
     },
     mapUpload: async (req, res) => {
@@ -166,7 +183,7 @@ const mapController = {
                 console.error(error);
                 res.send('{"status": "robot connect error: maps upload"}');
             });
-        }catch(error){
+        } catch (error) {
             console.error('mapupload error:', error);
             res.send('{"status": "robot not connected"}');
         }
