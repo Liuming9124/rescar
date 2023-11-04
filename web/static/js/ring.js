@@ -152,10 +152,10 @@ function robotStatus() {
                 // console.log('Error occurred:', error);
                 document.getElementById('robotStatus').innerHTML = '機器人離線中';
                 document.getElementById('robotStatus').innerHTML    = "機器人狀態:none";
-                document.getElementById('cur_pos').innerHTML        = "機器人目前位置:none";
-                document.getElementById('nex_pos').innerHTML        = "機器人前往位置:none" 
-                document.getElementById('battery').innerHTML        = "電量:none"
-                document.getElementById('obstacle').innerHTML       = "順暢:none";
+                document.getElementById('cur_pos').innerHTML        = "目前位置:<br><br>none";
+                document.getElementById('nex_pos').innerHTML        = "前往位置:<br><br>none" 
+                document.getElementById('battery').innerHTML        = "電量:<br><br>none"
+                document.getElementById('obstacle').innerHTML       = "順暢:<br><br>none";
                 // Handle any errors that occurred during the fetch
             });
     } catch (e) {
