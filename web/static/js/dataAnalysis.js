@@ -14,7 +14,7 @@ console.log(currentDate);
 var dataG = {};
 // 注意: timeInterval只能有以下幾種值: day, month, season, year
 var sttime = "2023-06-29";
-var endtime = "2023-10-29";
+var endtime = "2023-12-29";
 function geturls(stime, etime, timeInterval) {
     return new Promise((resolve, reject) => {
         fetch(`/dataanalysis/getUrlCounts`, {
@@ -214,7 +214,7 @@ getObjectSales(sttime, endtime, "month")
         let saleOctober = data[currentMonth];
         let saleTop = Object.entries(saleOctober).map(([item, quantity]) => [item, quantity]);
         saleTop.sort((a, b) => b[1] - a[1]);
-        //console.log('sale',saleTop);
+        console.log('sale',saleTop);
         let topThreeItems = saleTop.slice(0, 5);
         console.log(topThreeItems);
         var html = `
@@ -222,11 +222,17 @@ getObjectSales(sttime, endtime, "month")
             <br>
             <div style="display: flex; align-items: center;">
             <div class="highlight"><span class="  glyphicon glyphicon-king white-text" aria-hidden="true"></span></div>&nbsp;&nbsp;
-            <div class="highlight2"><span class="product dark-text">${topThreeItems[0][0]}:${topThreeItems[0][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[0][0]}:</span></div>&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[0][1]}</span></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="highlight"><span class="white-text">2</span></div>&nbsp;&nbsp;
-            <div class="highlight2"><span class="product dark-text">${topThreeItems[1][0]}:${topThreeItems[1][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[1][0]}:</span></div>&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[1][1]}</span></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="highlight"><span class="white-text">3</span></div>&nbsp;&nbsp;
-            <div class="highlight2"><span class="product dark-text">${topThreeItems[2][0]}:${topThreeItems[2][1]}</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[2][0]}:</span></div>&nbsp;
+            <div class="highlight2"><span class="product dark-text">${topThreeItems[2][1]}</span></div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <br><br>
         `;
