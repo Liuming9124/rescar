@@ -8632,13 +8632,13 @@ button.close {
 
 .stylerbt {
     font-size: 24px;
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 15px 20px;
+    border-radius: 20px;
     /* 使用圓弧狀的邊角 */
     color: #fff;
     background-color: #ed786a;
     /* 使用主色系的顏色 */
-    margin: 5px;
+    margin: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -8950,3 +8950,13 @@ overflow-x: auto;
   .dark-text {
     color: #25243f;
   }
+
+  .stylerara {
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #664a47;
+    background-color: rgba(237, 120, 106, 0.5); /* 調整這裡的透明度，數值範圍是 0 到 1 */
+    margin: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

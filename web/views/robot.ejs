@@ -63,32 +63,45 @@
 					</div>
 				</form>
 			</div>
-			<br>
+			
 			<!-- Features -->
 			<section id="features">
 				<div class="container">
 					<div class="containerlr">
-						<div class="left  button-container3">
+						<div class="left  button-container3" style="justify-content: center; align-items: center;">
 							<%if (0){ %>
 								<div class="stylerbt">空閒中</div>
 								<%} %>
-									<%if (1){ %>
-										<div id="robotStatus" class="stylerbt warning-text">移動中</div>
+									<%if (1){ %><br>
+										<div id="robotStatus" class="stylerbt warning-text" style="width:95%;">移動中</div><br>
 										<%} %>
-											<div style="width:440px; height: 305px;">
-												<p id="cur_pos">機器人目前位置</p>
-												<p id="nex_pos">機器人前往位置</p>
-												<p id="battery">電量:</p>
-												<p id="obstacle">障礙:</p>
+											<div  style="width:440px; height: 350px;">
+												<div  class="flex"style="height: 50%;">
+													<div style="width:2.5%;height: 80%;"></div>
+													<div  class="stylerara" style="width:45%;height: 80%;">
+														<b id="cur_pos" style="font-size: larger;">目前位置<br></b>
+													</div>
+													<div  class="stylerara" style="width:45%;height: 80%;">
+														<b id="nex_pos" style="font-size: larger;">前往位置</b>
+													</div>
+												</div>
+												<div  class="flex" style="height: 50%;">
+													<div style="width:2.5%;height: 80%;"></div>
+													<div  class="stylerara" style="width:45%;height: 80%;">
+														<b id="battery" style="font-size: larger;">電量:</b>
+													</div>
+													<div  class="stylerara" style="width:45%;height: 80%;">
+														<b id="obstacle" style="font-size: larger;">障礙:</b>
+													</div>
+												</div>
 											</div>
-											<br><br><br>
-											<!-- Feature -->
+											<!-- Feature 
 											<header>
 												<button type="button" class="btnrbt"
 													onclick="alert('已暫停')">緊急暫停</button>
 												<button type="button" class="btnrbt"
 													onclick="alert('機器人回家中')">回到原位</button>
-											</header>
+											</header>-->
 						</div>
 						<div class="right ">
 							<div class="scrolling-container" style="height: 500px; overflow-y: scroll;">

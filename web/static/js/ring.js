@@ -138,14 +138,14 @@ function robotStatus() {
             .then(data => {
                 // console.log(data)
                 document.getElementById('robotStatus').innerHTML    = "機器人狀態:" + JSON.stringify(data.status);
-                document.getElementById('cur_pos').innerHTML        = "機器人目前位置" + JSON.stringify(data.current_position);
-                document.getElementById('nex_pos').innerHTML        = "機器人前往位置" + JSON.stringify(data.next_position); 
-                document.getElementById('battery').innerHTML        = "電量" + JSON.stringify(data.battery);
+                document.getElementById('cur_pos').innerHTML        = "目前位置:<br><br>" + JSON.stringify(data.current_position);
+                document.getElementById('nex_pos').innerHTML        = "前往位置:<br><br>" + JSON.stringify(data.next_position); 
+                document.getElementById('battery').innerHTML        = "電量:<br><br>" + JSON.stringify(data.battery);
                 if (!data.sr04_active){
-                    document.getElementById('obstacle').innerHTML       = "順暢:無障礙物";
+                    document.getElementById('obstacle').innerHTML       = "順暢:<br><br>無障礙物";
                 }
                 else {
-                    document.getElementById('obstacle').innerHTML       = "障礙:有障礙物";
+                    document.getElementById('obstacle').innerHTML       = "障礙:<br><br>有障礙物";
                 }
             })
             .catch(error => {
