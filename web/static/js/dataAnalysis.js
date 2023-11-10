@@ -275,13 +275,23 @@ function getSalesValue() {
         .then(data => {
             //console.log(data); // 處理返回的數據
             show = data
-            var dataArray2 = Object.entries(show);
-            dataArray2.sort(function (a, b) {
-                var dateA = new Date(a[0]);
-                var dateB = new Date(b[0]);
+            var dataArray1 = Object.entries(show);
+            var dataArray2 = dataArray1.sort(function (a, b) {
+                // 正則表達式，用來根據'-'分割日期字符串
+                var reg = /-/;
+            
+                // 將'a'和'b'的日期字符串分割為數組
+                var parsedA = a[0].split(reg);
+                var parsedB = b[0].split(reg);
+            
+                // 基於解析的日期部分為'a'和'b'創建日期對象
+                var dateA = new Date(parsedA[0], parsedA[1] - 1); // 月份需要減去1，因為月份是從0開始的
+                var dateB = new Date(parsedB[0], parsedB[1] - 1);
+            
+                // 比較日期對象以確定排序順序
                 return dateA - dateB;
             });
-           // console.log('ary', dataArray2);
+           console.log('ary', dataArray2);
             var thisData2 = '';
             for (var i = 0; i < dataArray2.length; i++) {
                 thisData2 += `<tr>

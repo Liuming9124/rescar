@@ -8961,3 +8961,11 @@ overflow-x: auto;
     margin: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.gray-button2 {
+    width: 140px;
+    height: 60px;
+    border-radius: 10px;
+    color: #664a47;
+    background-color: rgba(237, 120, 106, 0.5); /* 調整這裡的透明度，數值範圍是 0 到 1 */
+    margin: 5px;
+}
