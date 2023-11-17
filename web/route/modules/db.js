@@ -4,7 +4,7 @@ const fs = require('fs');
 const dbfile = JSON.parse(fs.readFileSync('config.json', 'utf8')).dbFile;
 const dbpwd  = JSON.parse(fs.readFileSync(dbfile, 'utf8')).dbpwd;
 
-const uri = 'bolt://125.229.139.63:7687';
+const uri = 'bolt://220.133.151.2:7687';
 const user = 'neo4j';
 const password = dbpwd;
 
