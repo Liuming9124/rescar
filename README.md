@@ -1,7 +1,8 @@
 # rescar
 ### 本專題旨在研究與開發一套結合點餐系統和送餐機器人的智慧餐飲服務解決方案。隨著科技的不斷進步，餐飲業也需要不斷創新以滿足消費者的需求。傳統的點餐送餐方式存在著效率低下、人力成本高昂和溝通不順等問題。因此，我們的專題旨在利用科技的力量改進現有的餐飲服務流程，提供更快速、更便捷的點餐和送餐體驗。
 ## 專案架構圖
-![arch](https://github.com/Liuming9124/rescar/assets/80050536/3e341c0e-bbad-499a-80fe-fac668b61761)
+![arch](https://github.com/Liuming9124/rescar/assets/80050536/d75bc50f-5b5e-4d16-9dfc-8a994ffa8317)
+
 ### 軟硬體架構圖
 ![專題點餐系統](https://github.com/Liuming9124/rescar/assets/80050536/a64760a4-cafc-4486-832e-085665ceb809)
 ![專題機器人系統](https://github.com/Liuming9124/rescar/assets/80050536/217129ee-011c-4697-bfd3-c6c158305194)
